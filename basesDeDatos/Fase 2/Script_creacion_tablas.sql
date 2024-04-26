@@ -46,7 +46,7 @@ DROP TABLE Patrocinadores CASCADE CONSTRAINTS;
     );
 
     CREATE TABLE Equipos (
-        Cod NUMBER(10),
+        Cod NUMBER(10) GENERATED ALWAYS AS IDENTITY,
         Nombre VARCHAR2(100),
         Fecha_Fundacion DATE,
         CONSTRAINT Equip_Cod_Jornada_PK PRIMARY KEY (Cod)
@@ -73,7 +73,7 @@ DROP TABLE Patrocinadores CASCADE CONSTRAINTS;
 
     
     CREATE TABLE Jugadores (
-        Cod NUMBER(10),
+        Cod NUMBER(10) GENERATED ALWAYS AS IDENTITY,
         Nombre VARCHAR2(100),
         Apellido VARCHAR2(100),
         Rol VARCHAR2(100),
@@ -88,7 +88,7 @@ DROP TABLE Patrocinadores CASCADE CONSTRAINTS;
 
     
     CREATE TABLE Staffs (
-        Cod NUMBER(10),
+        Cod NUMBER(10) GENERATED ALWAYS AS IDENTITY,
         Nombre VARCHAR2(100),
         Apellido VARCHAR2(100),
         Puesto VARCHAR2(50),
@@ -105,7 +105,7 @@ DROP TABLE Patrocinadores CASCADE CONSTRAINTS;
 
     
     CREATE TABLE Usuarios (
-        Cod_Usuario NUMBER(10),
+        Cod_Usuario NUMBER(10) GENERATED ALWAYS AS IDENTITY,
         Nickname VARCHAR2(100),
         Contraseña VARCHAR2(100),
         Es_Admin Number(1) DEFAULT(0),
