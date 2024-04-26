@@ -1,4 +1,3 @@
--- Creación de Juegos
 INSERT INTO Juegos (cod, nombre, desarrolladora, fecha_lanzamiento)
 VALUES (01, 'League of Legends', 'Riot Games', TO_DATE('27/10/2009','DD/MM/YYYY'));
 INSERT INTO Juegos (cod, nombre, desarrolladora, fecha_lanzamiento)
@@ -95,16 +94,16 @@ VALUES (04, 0302, 3);
 commit;
 
 -- Creación de Equipos
-INSERT INTO Equipos (cod, nombre, fecha_fundacion)
-VALUES(01, 'Koi', TO_DATE('05/12/2021','DD/MM/YYYY'));
-INSERT INTO Equipos (cod, nombre, fecha_fundacion)
-VALUES(02, 'G2', TO_DATE('31/07/2015','DD/MM/YYYY'));
-INSERT INTO Equipos (cod, nombre, fecha_fundacion)
-VALUES(03, 'Fanatic', TO_DATE('02/01/2017','DD/MM/YYYY'));
-INSERT INTO Equipos (cod, nombre, fecha_fundacion)
-VALUES(04, 'Liquid', TO_DATE('17/10/2012','DD/MM/YYYY'));
-INSERT INTO Equipos (cod, nombre, fecha_fundacion)
-VALUES(05, 'Astralis', TO_DATE('29/08/2020','DD/MM/YYYY'));
+INSERT INTO Equipos ( nombre, fecha_fundacion)
+VALUES('Koi', TO_DATE('05/12/2021','DD/MM/YYYY'));
+INSERT INTO Equipos ( nombre, fecha_fundacion)
+VALUES( 'G2', TO_DATE('31/07/2015','DD/MM/YYYY'));
+INSERT INTO Equipos ( nombre, fecha_fundacion)
+VALUES('Fanatic', TO_DATE('02/01/2017','DD/MM/YYYY'));
+INSERT INTO Equipos ( nombre, fecha_fundacion)
+VALUES( 'Liquid', TO_DATE('17/10/2012','DD/MM/YYYY'));
+INSERT INTO Equipos ( nombre, fecha_fundacion)
+VALUES( 'Astralis', TO_DATE('29/08/2020','DD/MM/YYYY'));
 
 commit;
 
@@ -125,57 +124,57 @@ VALUES (06, 'Eroski', 02);
 commit;
 
 -- Creación de Jugadores
-INSERT INTO Jugadores (cod, nombre, apellido, salario, nacionalidad, fecha_nacimiento, nickname, rol, cod_Equipo)
-VALUES (01, 'Erik', 'Ranea', 1131, 'España', TO_DATE('03/12/2000','DD/MM/YYYY'), 'Dele', 'Suport', 01);
-INSERT INTO Jugadores (cod, nombre, apellido, salario, nacionalidad, fecha_nacimiento, nickname, rol, cod_Equipo)
-VALUES (02, 'Oskar', 'Perez', 1600, 'Euskadi', TO_DATE('13/01/2004','DD/MM/YYYY'), 'Osrez', 'Carry', 01);
-INSERT INTO Jugadores (cod, nombre, apellido, salario, nacionalidad, fecha_nacimiento, nickname, rol, cod_Equipo)
-VALUES (03, 'Joaquin', 'Caparros', 1200, 'Argentina', TO_DATE('13/06/1998','DD/MM/YYYY'), 'Furto', 'Flex', 02);
-INSERT INTO Jugadores (cod, nombre, apellido, salario, nacionalidad, fecha_nacimiento, nickname, rol, cod_Equipo)
-VALUES (04, 'Dereck', 'Fisher', 1400, 'EEUU', TO_DATE('24/07/1996','DD/MM/YYYY'), 'Date', 'Carry', 03);
-INSERT INTO Jugadores (cod, nombre, apellido, salario, nacionalidad, fecha_nacimiento, nickname, rol, cod_Equipo)
-VALUES (05, 'Susana', 'Oria', 1427, 'Peru', TO_DATE('23/04/2003','DD/MM/YYYY'), 'Cric', 'Flex', 02);
-INSERT INTO Jugadores (cod, nombre, apellido, salario, nacionalidad, fecha_nacimiento, nickname, rol, cod_Equipo)
-VALUES (06, 'Paco', 'Gerla', 1238, 'Chile', TO_DATE('24/07/1996','DD/MM/YYYY'), 'Cogela', 'Carry', 03);
-INSERT INTO Jugadores (cod, nombre, apellido, salario, nacionalidad, fecha_nacimiento, nickname, rol, cod_Equipo)
-VALUES (07, 'Ainhoa', 'Gaspis', 1612, 'Francia', TO_DATE('24/07/1996','DD/MM/YYYY'), 'Meona', 'Carry', 04);
-INSERT INTO Jugadores (cod, nombre, apellido, salario, nacionalidad, fecha_nacimiento, nickname, rol, cod_Equipo)
-VALUES (08, 'Elton', 'Tito', 1932, 'España', TO_DATE('24/07/1996','DD/MM/YYYY'), 'Listillo', 'Carry', 04);
-INSERT INTO Jugadores (cod, nombre, apellido, salario, nacionalidad, fecha_nacimiento, nickname, rol, cod_Equipo)
-VALUES (09, 'Dolores', 'Delano', 1529, 'Venezuela', TO_DATE('24/07/1996','DD/MM/YYYY'), 'Curate', 'Carry', 05);
-INSERT INTO Jugadores (cod, nombre, apellido, salario, nacionalidad, fecha_nacimiento, nickname, rol, cod_Equipo)
-VALUES (10, 'Zoyla', 'Vaca', 1712, 'Mexico', TO_DATE('24/07/1996','DD/MM/YYYY'), 'LaBurra', 'Carry', 05);
+INSERT INTO Jugadores ( nombre, apellido, salario, nacionalidad, fecha_nacimiento, nickname, rol, cod_Equipo)
+VALUES ('Erik', 'Ranea', 1131, 'España', TO_DATE('03/12/2000','DD/MM/YYYY'), 'Dele', 'Suport', 01);
+INSERT INTO Jugadores ( nombre, apellido, salario, nacionalidad, fecha_nacimiento, nickname, rol, cod_Equipo)
+VALUES ( 'Oskar', 'Perez', 1600, 'Euskadi', TO_DATE('13/01/2004','DD/MM/YYYY'), 'Osrez', 'Carry', 01);
+INSERT INTO Jugadores ( nombre, apellido, salario, nacionalidad, fecha_nacimiento, nickname, rol, cod_Equipo)
+VALUES ( 'Joaquin', 'Caparros', 1200, 'Argentina', TO_DATE('13/06/1998','DD/MM/YYYY'), 'Furto', 'Flex', 02);
+INSERT INTO Jugadores ( nombre, apellido, salario, nacionalidad, fecha_nacimiento, nickname, rol, cod_Equipo)
+VALUES ( 'Dereck', 'Fisher', 1400, 'EEUU', TO_DATE('24/07/1996','DD/MM/YYYY'), 'Date', 'Carry', 03);
+INSERT INTO Jugadores ( nombre, apellido, salario, nacionalidad, fecha_nacimiento, nickname, rol, cod_Equipo)
+VALUES ( 'Susana', 'Oria', 1427, 'Peru', TO_DATE('23/04/2003','DD/MM/YYYY'), 'Cric', 'Flex', 02);
+INSERT INTO Jugadores ( nombre, apellido, salario, nacionalidad, fecha_nacimiento, nickname, rol, cod_Equipo)
+VALUES ('Paco', 'Gerla', 1238, 'Chile', TO_DATE('24/07/1996','DD/MM/YYYY'), 'Cogela', 'Carry', 03);
+INSERT INTO Jugadores (nombre, apellido, salario, nacionalidad, fecha_nacimiento, nickname, rol, cod_Equipo)
+VALUES ('Ainhoa', 'Gaspis', 1612, 'Francia', TO_DATE('24/07/1996','DD/MM/YYYY'), 'Meona', 'Carry', 04);
+INSERT INTO Jugadores (nombre, apellido, salario, nacionalidad, fecha_nacimiento, nickname, rol, cod_Equipo)
+VALUES ('Elton', 'Tito', 1932, 'España', TO_DATE('24/07/1996','DD/MM/YYYY'), 'Listillo', 'Carry', 04);
+INSERT INTO Jugadores (nombre, apellido, salario, nacionalidad, fecha_nacimiento, nickname, rol, cod_Equipo)
+VALUES ('Dolores', 'Delano', 1529, 'Venezuela', TO_DATE('24/07/1996','DD/MM/YYYY'), 'Curate', 'Carry', 05);
+INSERT INTO Jugadores (nombre, apellido, salario, nacionalidad, fecha_nacimiento, nickname, rol, cod_Equipo)
+VALUES ('Zoyla', 'Vaca', 1712, 'Mexico', TO_DATE('24/07/1996','DD/MM/YYYY'), 'LaBurra', 'Carry', 05);
 
 commit;
 
 -- Creación de Staffs
-INSERT INTO Staffs (cod, nombre, apellido, salario, puesto, cod_Equipo)
-VALUES(01, 'Ibai', 'Lopez de Lapuente', '1453', 'Entrenador', 01);
-INSERT INTO Staffs (cod, nombre, apellido, salario, puesto, cod_Equipo)
-VALUES(02, 'Rodrigo', 'Urbina', '1353', 'Entrenador asistente', 01);
-INSERT INTO Staffs (cod, nombre, apellido, salario, puesto, cod_Equipo)
-VALUES(03, 'Sofia', 'Ugarte', '1343', 'Entrenador asistente', 04);
-INSERT INTO Staffs (cod, nombre, apellido, salario, puesto, cod_Equipo)
-VALUES(04, 'Carla', 'Rodriguez', '1567', 'Entrenador', 04);
-INSERT INTO Staffs (cod, nombre, apellido, salario, puesto, cod_Equipo)
-VALUES(05, 'Juan Alberto', 'Domenech', '1197', 'Entrenador', 02);
-INSERT INTO Staffs (cod, nombre, apellido, salario, puesto, cod_Equipo)
-VALUES(06, 'Maria Luisa', 'Garcia', '1837', 'Entrenador', 03);
-INSERT INTO Staffs (cod, nombre, apellido, salario, puesto, cod_Equipo)
-VALUES(07, 'Jorge', 'Cremades', '1934', 'Entrenador', 05);
+INSERT INTO Staffs (nombre, apellido, salario, puesto, cod_Equipo)
+VALUES('Ibai', 'Lopez de Lapuente', '1453', 'Entrenador', 01);
+INSERT INTO Staffs (nombre, apellido, salario, puesto, cod_Equipo)
+VALUES('Rodrigo', 'Urbina', '1353', 'Entrenador asistente', 01);
+INSERT INTO Staffs (nombre, apellido, salario, puesto, cod_Equipo)
+VALUES('Sofia', 'Ugarte', '1343', 'Entrenador asistente', 04);
+INSERT INTO Staffs (nombre, apellido, salario, puesto, cod_Equipo)
+VALUES('Carla', 'Rodriguez', '1567', 'Entrenador', 04);
+INSERT INTO Staffs (nombre, apellido, salario, puesto, cod_Equipo)
+VALUES('Juan Alberto', 'Domenech', '1197', 'Entrenador', 02);
+INSERT INTO Staffs (nombre, apellido, salario, puesto, cod_Equipo)
+VALUES('Maria Luisa', 'Garcia', '1837', 'Entrenador', 03);
+INSERT INTO Staffs (nombre, apellido, salario, puesto, cod_Equipo)
+VALUES('Jorge', 'Cremades', '1934', 'Entrenador', 05);
 
 commit;
 
 -- Creación de Usuarios
-INSERT INTO Usuarios (cod_usuario, nickname, contraseña, es_admin)
-VALUES (01, 'Admin', 'admin123', 1);
-INSERT INTO Usuarios (cod_usuario, nickname, contraseña, es_admin)
-VALUES (02, 'Erik', 'erik123', 1);
-INSERT INTO Usuarios (cod_usuario, nickname, contraseña, es_admin)
-VALUES (03, 'Ibai', 'ibai123', 0);
-INSERT INTO Usuarios (cod_usuario, nickname, contraseña, es_admin)
-VALUES (04, 'Rodrigo', 'rodigo123', 0);
-INSERT INTO Usuarios (cod_usuario, nickname, contraseña, es_admin)
-VALUES (05, 'Oskar', 'oskar123', 0);
+INSERT INTO Usuarios (nickname, contraseña, es_admin)
+VALUES ('Admin', 'admin123', 1);
+INSERT INTO Usuarios (nickname, contraseña, es_admin)
+VALUES ('Erik', 'erik123', 1);
+INSERT INTO Usuarios (nickname, contraseña, es_admin)
+VALUES ('Ibai', 'ibai123', 0);
+INSERT INTO Usuarios (nickname, contraseña, es_admin)
+VALUES ('Rodrigo', 'rodigo123', 0);
+INSERT INTO Usuarios (nickname, contraseña, es_admin)
+VALUES ('Oskar', 'oskar123', 0);
 
 commit;
