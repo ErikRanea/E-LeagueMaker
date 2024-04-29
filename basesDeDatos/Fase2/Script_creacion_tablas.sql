@@ -107,7 +107,7 @@ DROP TABLE Patrocinadores CASCADE CONSTRAINTS;
     CREATE TABLE Usuarios (
         Cod_Usuario NUMBER(10) GENERATED ALWAYS AS IDENTITY,
         Nickname VARCHAR2(100),
-        Contraseña VARCHAR2(100),
+        password VARCHAR2(100),
         Es_Admin Number(1) DEFAULT(0),
         CONSTRAINT Usu_Cod_Usuario_PK PRIMARY KEY (Cod_Usuario),
         CONSTRAINT Usu_Es_Admin_CK CHECK (Es_Admin IN (0, 1))
@@ -156,7 +156,7 @@ DROP TABLE Patrocinadores CASCADE CONSTRAINTS;
     );
     
     CREATE TABLE Patrocinadores (
-        Cod_Patrocinador NUMBER(10),
+        Cod_Patrocinador NUMBER(10) GENERATED ALWAYS AS IDENTITY,
         Nombre VARCHAR2(50),
         Cod_Equipo NUMBER(10),
         CONSTRAINT Patro_Cod_Euqipo_FK FOREIGN KEY (Cod_Equipo) REFERENCES Equipos(Cod),
