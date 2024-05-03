@@ -10,6 +10,20 @@ VALUES (04, 'Rainbow six siege', 'Ubisoft', TO_DATE('01/12/2015','DD/MM/YYYY'));
 
 commit;
 
+-- Creación de Equipos
+INSERT INTO Equipos (cod, nombre, fecha_fundacion)
+VALUES(01, 'Koi', TO_DATE('05/12/2021','DD/MM/YYYY'));
+INSERT INTO Equipos (cod, nombre, fecha_fundacion)
+VALUES(02, 'G2', TO_DATE('31/07/2015','DD/MM/YYYY'));
+INSERT INTO Equipos (cod, nombre, fecha_fundacion)
+VALUES(03, 'Fanatic', TO_DATE('02/01/2017','DD/MM/YYYY'));
+INSERT INTO Equipos (cod, nombre, fecha_fundacion)
+VALUES(04, 'Liquid', TO_DATE('17/10/2012','DD/MM/YYYY'));
+INSERT INTO Equipos (cod, nombre, fecha_fundacion)
+VALUES(05, 'Astralis', TO_DATE('29/08/2020','DD/MM/YYYY'));
+
+commit;
+
 -- Creación de Competiciones
 INSERT INTO Competiciones (cod, nombre, fecha_inicio, fecha_fin, estado_abierto, cod_Juego)
 VALUES (0101, 'European League', TO_DATE('01/06/2024','DD/MM/YYYY') , TO_DATE('01/12/2024','DD/MM/YYYY'), 1, 01);
@@ -94,20 +108,6 @@ VALUES (04, 0302, 3);
 
 commit;
 
--- Creación de Equipos
-INSERT INTO Equipos (cod, nombre, fecha_fundacion)
-VALUES(01, 'Koi', TO_DATE('05/12/2021','DD/MM/YYYY'));
-INSERT INTO Equipos (cod, nombre, fecha_fundacion)
-VALUES(02, 'G2', TO_DATE('31/07/2015','DD/MM/YYYY'));
-INSERT INTO Equipos (cod, nombre, fecha_fundacion)
-VALUES(03, 'Fanatic', TO_DATE('02/01/2017','DD/MM/YYYY'));
-INSERT INTO Equipos (cod, nombre, fecha_fundacion)
-VALUES(04, 'Liquid', TO_DATE('17/10/2012','DD/MM/YYYY'));
-INSERT INTO Equipos (cod, nombre, fecha_fundacion)
-VALUES(05, 'Astralis', TO_DATE('29/08/2020','DD/MM/YYYY'));
-
-commit;
-
 -- Creación de Patrocinadores
 INSERT INTO Patrocinadores (cod_patrocinador, nombre, cod_Equipo)
 VALUES (01, 'Egibide', 01);
@@ -149,20 +149,20 @@ VALUES (10, 'Zoyla', 'Vaca', 1712, 'Mexico', TO_DATE('24/07/1996','DD/MM/YYYY'),
 commit;
 
 -- Creación de Staffs
-INSERT INTO Staffs (cod, nombre, apellido, salario, puesto, cod_Equipo)
-VALUES(01, 'Ibai', 'Lopez de Lapuente', '1453', 'Entrenador', 01);
-INSERT INTO Staffs (cod, nombre, apellido, salario, puesto, cod_Equipo)
-VALUES(02, 'Rodrigo', 'Urbina', '1353', 'Entrenador asistente', 01);
-INSERT INTO Staffs (cod, nombre, apellido, salario, puesto, cod_Equipo)
-VALUES(03, 'Sofia', 'Ugarte', '1343', 'Entrenador asistente', 04);
-INSERT INTO Staffs (cod, nombre, apellido, salario, puesto, cod_Equipo)
-VALUES(04, 'Carla', 'Rodriguez', '1567', 'Entrenador', 04);
-INSERT INTO Staffs (cod, nombre, apellido, salario, puesto, cod_Equipo)
-VALUES(05, 'Juan Alberto', 'Domenech', '1197', 'Entrenador', 02);
-INSERT INTO Staffs (cod, nombre, apellido, salario, puesto, cod_Equipo)
-VALUES(06, 'Maria Luisa', 'Garcia', '1837', 'Entrenador', 03);
-INSERT INTO Staffs (cod, nombre, apellido, salario, puesto, cod_Equipo)
-VALUES(07, 'Jorge', 'Cremades', '1934', 'Entrenador', 05);
+INSERT INTO Staffs (nombre, apellido, salario, puesto, cod_Equipo)
+VALUES('Ibai', 'Lopez de Lapuente', '1453', 'Entrenador', 01);
+INSERT INTO Staffs (nombre, apellido, salario, puesto, cod_Equipo)
+VALUES('Rodrigo', 'Urbina', '1353', 'Entrenador asistente', 01);
+INSERT INTO Staffs (nombre, apellido, salario, puesto, cod_Equipo)
+VALUES('Sofia', 'Ugarte', '1343', 'Entrenador asistente', 04);
+INSERT INTO Staffs (nombre, apellido, salario, puesto, cod_Equipo)
+VALUES('Carla', 'Rodriguez', '1567', 'Entrenador', 04);
+INSERT INTO Staffs (nombre, apellido, salario, puesto, cod_Equipo)
+VALUES('Juan Alberto', 'Domenech', '1197', 'Entrenador', 02);
+INSERT INTO Staffs (nombre, apellido, salario, puesto, cod_Equipo)
+VALUES('Maria Luisa', 'Garcia', '1837', 'Entrenador', 03);
+INSERT INTO Staffs (nombre, apellido, salario, puesto, cod_Equipo)
+VALUES('Jorge', 'Cremades', '1934', 'Entrenador', 05);
 
 commit;
 
