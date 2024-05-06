@@ -1,6 +1,6 @@
 SET SERVEROUTPUT ON
 
--- Comprobación de crud_Juegos
+-- Comprobacion de crud_Juegos
 
 -- Consultar un juego
 CREATE OR REPLACE PROCEDURE pedir_juegos (p_cod IN Juegos.cod%TYPE) AS
@@ -21,10 +21,11 @@ END pedir_juegos;
 /
 
 DECLARE
-    v_cod juegos.cod%TYPE := 14;
+    v_cod juegos.cod%TYPE;
 BEGIN
     -- Insertar un juego
-    crud_Juegos.insertar_juego(v_cod, 'Super Mario Bros', 'Nintendo', TO_DATE('13/09/1985', 'DD/MM/YYYY'));
+    crud_Juegos.insertar_juego('Super Mario Bros', 'Nintendo', TO_DATE('13/09/1985', 'DD/MM/YYYY'));
+    SELECT cod INTO v_cod FROM juegos WHERE UPPER(nombre) = 'SUPER MARIO BROS';
     pedir_juegos(v_cod);
 
     -- Modificar un juego
@@ -33,13 +34,12 @@ BEGIN
     
     -- Borrar un juego
     crud_Juegos.borrar_juego(v_cod);
-    pedir_juegos(v_cod);
 END;
 /
 
 ---------------------------------------------------------------------------------------------------------------------------------
 
--- Comprobación de crud_Equipos
+-- Comprobacion de crud_Equipos
 
 -- Consultar un Equipo
 CREATE OR REPLACE PROCEDURE pedir_equipos (p_cod IN Equipos.cod%TYPE) AS
@@ -50,7 +50,7 @@ BEGIN
     LOOP
         FETCH v_cursor INTO v_equipo;
         EXIT WHEN v_cursor%NOTFOUND;
-        DBMS_OUTPUT.PUT_LINE('Nombre: ' || v_equipo.nombre || ', Fecha de fundación: ' || TO_CHAR(v_equipo.fecha_fundacion, 'DD/MM/YYYY'));
+        DBMS_OUTPUT.PUT_LINE('Nombre: ' || v_equipo.nombre || ', Fecha de fundaciÃ³n: ' || TO_CHAR(v_equipo.fecha_fundacion, 'DD/MM/YYYY'));
     END LOOP;
     CLOSE v_cursor;
 EXCEPTION
@@ -60,10 +60,11 @@ END pedir_equipos;
 /
 
 DECLARE
-    v_cod equipos.cod%TYPE := 21;
+    v_cod equipos.cod%TYPE;
 BEGIN
     -- Insertar un equipo
     crud_Equipos.insertar_equipo('Vodafone Giants', TO_DATE('31/08/2017', 'DD/MM/YYYY'));
+    SELECT cod INTO v_cod FROM equipos WHERE UPPER(nombre) = 'Vodafone Giants';
     pedir_equipos(v_cod);
     
     -- Modificar un equipo
@@ -72,13 +73,12 @@ BEGIN
     
     -- Borrar un equipo
     crud_Equipos.borrar_equipo(v_cod);
-    pedir_equipos(v_cod);
 END;
 /
 
 ---------------------------------------------------------------------------------------------------------------------------------
 
--- Comprobación de crud_Patrocinadores
+-- Comprobacion de crud_Patrocinadores
 
 -- Consultar un Patrocinador
 CREATE OR REPLACE PROCEDURE pedir_patrocinadores (p_cod IN patrocinadores.cod_patrocinador%TYPE) AS
@@ -99,10 +99,11 @@ END pedir_patrocinadores;
 /
 
 DECLARE
-    v_cod patrocinadores.cod_patrocinador%TYPE := 21;
+    v_cod patrocinadores.cod_patrocinador%TYPE;
 BEGIN
     -- Insertar un Patrocinadores
     crud_Patrocinadores.insertar_Patrocinadores('Netflix', 01);
+    SELECT cod_patrocinador INTO v_cod FROM patrocinadores WHERE UPPER(nombre) = 'Netflix';
     pedir_patrocinadores(v_cod);
     
     -- Modificar un Patrocinadores
@@ -111,7 +112,6 @@ BEGIN
 
     -- Borrar un Patrocinadores
     crud_Patrocinadores.borrar_Patrocinadores(v_cod);
-    pedir_patrocinadores(v_cod);
 END;
 /
 
@@ -138,10 +138,11 @@ END pedir_jugadores;
 /
 
 DECLARE
-    v_cod juagadores.cod%TYPE := 13;
+    v_cod juagadores.cod%TYPE;
 BEGIN
     -- Insertar un Jugadores
     crud_Jugadores.insertar_Jugadores('Manolo', 'Vargas', 'Delantero', 1400, 'Hungria', TO_DATE('31/08/1995', 'DD/MM/YYYY'), 'L0leTe', 2);
+    SELECT cod INTO v_cod FROM jugadores WHERE UPPER(nombre) = 'MANOLO' AND UPPER(apellido) = 'VARGAS';   
     pedir_jugadores(v_cod);
     
     -- Modificar un Jugadores
@@ -150,7 +151,6 @@ BEGIN
 
     -- Borrar un Jugadores
     crud_Jugadores.borrar_Jugadores(v_cod);
-    pedir_jugadores(v_cod);
 END;
 /
 
@@ -177,10 +177,11 @@ END pedir_staffs;
 /
 
 DECLARE
-    v_cod staffs.cod%TYPE := 13;
+    v_cod staffs.cod%TYPE;
 BEGIN
     -- Insertar un Staffs
     crud_Staffs.insertar_Staffs('Manolo', 'Vargas', 'Entrenador asistente', 1400, 01);
+    SELECT cod INTO v_cod FROM staffs WHERE UPPER(nombre) = 'MANOLO' AND UPPER(apellido) = 'VARGAS';   
     pedir_staffs(v_cod);
     
     -- Modificar un Staffs
@@ -189,7 +190,6 @@ BEGIN
 
     -- Borrar un Staffs
     crud_Staffs.borrar_Staffs(v_cod);
-    pedir_staffs(v_cod);
 END;
 /
 
@@ -220,15 +220,16 @@ BEGIN
     CLOSE v_cursor;
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
-        DBMS_OUTPUT.PUT_LINE('Esta competición no existe');
+        DBMS_OUTPUT.PUT_LINE('Esta competiciÃ³n no existe');
 END pedir_competiciones;
 /
 
 DECLARE
-    v_cod competiciones.cod%TYPE := 305;
+    v_cod competiciones.cod%TYPE;
 BEGIN
     -- Insertar un Competiciones
-    crud_Competiciones.insertar_Competiciones(v_cod, 'Liga', TO_DATE('31/08/2024', 'DD/MM/YYYY'), TO_DATE('31/12/2024', 'DD/MM/YYYY'), 03, 01);
+    crud_Competiciones.insertar_Competiciones('Liga', TO_DATE('31/08/2024', 'DD/MM/YYYY'), TO_DATE('31/12/2024', 'DD/MM/YYYY'), 03, 01);
+    SELECT cod INTO v_cod FROM competiciones WHERE UPPER(nombre) = 'LIGA';
     pedir_competiciones(v_cod);
     
     -- Modificar un Competiciones
@@ -237,7 +238,6 @@ BEGIN
 
     -- Borrar un Competiciones
     crud_Competiciones.borrar_Competiciones(v_cod);
-    pedir_competiciones(v_cod);
 END;
 /
 
@@ -265,19 +265,19 @@ END pedir_jornadas;
 /
 
 DECLARE
-    v_cod jornadas.cod%TYPE := 30501;
+    v_cod jornadas.cod%TYPE;
 BEGIN
     -- Insertar un Jornadas
-    crud_Jornadas.insertar_Jornadas(v_cod, '1',  TO_DATE('31/07/2024', 'DD/MM/YYYY'), 0305);
+    crud_Jornadas.insertar_Jornadas('1',  TO_DATE('31/07/2024', 'DD/MM/YYYY'), 01);
+    SELECT cod INTO v_cod FROM jornadas WHERE fecha = TO_DATE('31/07/2024', 'DD/MM/YYYY');
     pedir_jornadas(v_cod);
     
     -- Modificar un Jornadas
-    crud_Jornadas.modificar_Jornadas(v_cod, '1',  TO_DATE('31/07/2024', 'DD/MM/YYYY'));
+    crud_Jornadas.modificar_Jornadas(v_cod, '1',  TO_DATE('31/12/2024', 'DD/MM/YYYY'));
     pedir_jornadas(v_cod);
 
     -- Borrar un Jornadas
     crud_Jornadas.borrar_Jornadas(v_cod);
-    pedir_jornadas(v_cod);
 END;
 /
 
@@ -313,10 +313,11 @@ END pedir_enfrentamientos;
 /
 
 DECLARE
-    v_cod enfrentamientos.cod%TYPE := 3050101;
+    v_cod enfrentamientos.cod%TYPE;
 BEGIN
     -- Insertar un Enfrentamientos
-    crud_Enfrentamientos.insertar_Enfrentamientos(v_cod, TO_DATE('19:00','HH24:MI'), 01,  030901, 01, 02);
+    crud_Enfrentamientos.insertar_Enfrentamientos(TO_DATE('19:00','HH24:MI'), 01,  05, 01, 02);
+    SELECT cod INTO v_cod FROM competiciones WHERE gaan_local = 1;
     pedir_enfrentamientos(v_cod);
     
     -- Modificar un Enfrentamientos
@@ -325,7 +326,6 @@ BEGIN
 
     -- Borrar un Enfrentamientos
     crud_Enfrentamientos.borrar_Enfrentamientos(v_cod);
-    pedir_enfrentamientos(v_cod);
 END;
 /
 
@@ -361,10 +361,11 @@ END pedir_usuarios;
 /
 
 DECLARE
-    v_cod usuarios.cod_usuario%TYPE := 41;
+    v_cod usuarios.cod_usuario%TYPE;
 BEGIN
     -- Insertar un Usuarios
     crud_Usuarios.insertar_Usuarios('ManoloElFiera', 'Nolete', 01);
+    SELECT cod_usuario INTO v_cod FROM usuarios WHERE UPPER(nickname) = 'MANOLOELFIERA';
     pedir_usuarios(v_cod);
     
     -- Modificar un Usuarios
@@ -373,7 +374,6 @@ BEGIN
 
     -- Borrar un Usuarios
     crud_Usuarios.borrar_Usuarios(v_cod);
-    pedir_usuarios(v_cod);
 END;
 /
 
@@ -395,16 +395,17 @@ BEGIN
     CLOSE v_cursor;
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
-        DBMS_OUTPUT.PUT_LINE('Error al seleccionar este equipo en esta competición');
+        DBMS_OUTPUT.PUT_LINE('Error al seleccionar este equipo en esta competiciÃ³n');
 END pedir_puntos_equipos;
 /
 
 DECLARE
-    v_cod_competicion puntos_equipos.cod_competicion%TYPE := 301;
-    v_cod_equipo puntos_equipos.cod_equipo%TYPE := 2;
+    v_cod_competicion puntos_equipos.cod_competicion%TYPE;
+    v_cod_equipo puntos_equipos.cod_equipo%TYPE;
 BEGIN
     -- Insertar un Puntos_equipos
     crud_Puntos_equipos.insertar_Puntos_equipos( v_cod_equipo, v_cod_competicion, 10);
+    SELECT cod_competicion, cod_equipo INTO v_cod_competicion, v_cod_equipo FROM puntos_equipos WHERE cod_competicion = v_cod_competicion AND cod_equipo = v_cod_equipo;
     pedir_puntos_equipos(v_cod_competicion, v_cod_equipo);
 
     -- Modificar un Puntos_equipos
@@ -413,5 +414,4 @@ BEGIN
 
     -- Borrar un Puntos_equipos
     crud_Puntos_equipos.borrar_Puntos_equipos(v_cod_equipo, v_cod_competicion);
-    pedir_puntos_equipos(v_cod_competicion, v_cod_equipo);
 END;
