@@ -63,9 +63,7 @@ DROP TABLE Patrocinadores CASCADE CONSTRAINTS;
         CONSTRAINT Enfren_Cod_Jornada_FK FOREIGN KEY (Cod_Jornada) REFERENCES Jornadas(Cod),
         CONSTRAINT Enfren_Gana_local_CK CHECK (Gana_local IN (0, 1)),
         CONSTRAINT Enfren_Cod_Equipo_Visitante_FK FOREIGN KEY (Cod_Equipo_Visitante) REFERENCES Equipos(Cod),
-        CONSTRAINT Enfren_Cod_Equipo_Local_FK FOREIGN KEY (Cod_Equipo_Local) REFERENCES Equipos(Cod),
-        CONSTRAINT Enfren_Cod_Equipo_Visitante_UN UNIQUE (Cod_Equipo_Visitante),
-        CONSTRAINT Enfren_Cod_Equipo_Local_UN UNIQUE (Cod_Equipo_Local)
+        CONSTRAINT Enfren_Cod_Equipo_Local_FK FOREIGN KEY (Cod_Equipo_Local) REFERENCES Equipos(Cod)
     );
 
     
