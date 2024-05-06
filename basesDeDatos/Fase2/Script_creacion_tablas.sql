@@ -36,7 +36,7 @@ DROP TABLE Patrocinadores CASCADE CONSTRAINTS;
 
     
     CREATE TABLE Jornadas (
-        Cod NUMBER(6) GENERATED ALWAYS AS IDENTITY,
+        Cod NUMBER(6),
         N_Jornada NUMBER,
         Fecha DATE,
         Cod_Competicion NUMBER(4),
@@ -53,7 +53,7 @@ DROP TABLE Patrocinadores CASCADE CONSTRAINTS;
     
     
     CREATE TABLE Enfrentamientos (
-        Cod NUMBER(8) GENERATED ALWAYS AS IDENTITY,
+        Cod NUMBER(8),
         Hora DATE,
         Gana_local NUMBER(1),
         Cod_Jornada NUMBER(6),
@@ -63,9 +63,7 @@ DROP TABLE Patrocinadores CASCADE CONSTRAINTS;
         CONSTRAINT Enfren_Cod_Jornada_FK FOREIGN KEY (Cod_Jornada) REFERENCES Jornadas(Cod),
         CONSTRAINT Enfren_Gana_local_CK CHECK (Gana_local IN (0, 1)),
         CONSTRAINT Enfren_Cod_Equipo_Visitante_FK FOREIGN KEY (Cod_Equipo_Visitante) REFERENCES Equipos(Cod),
-        CONSTRAINT Enfren_Cod_Equipo_Local_FK FOREIGN KEY (Cod_Equipo_Local) REFERENCES Equipos(Cod),
-        CONSTRAINT Enfren_Cod_Equipo_Visitante_UN UNIQUE (Cod_Equipo_Visitante),
-        CONSTRAINT Enfren_Cod_Equipo_Local_UN UNIQUE (Cod_Equipo_Local)
+        CONSTRAINT Enfren_Cod_Equipo_Local_FK FOREIGN KEY (Cod_Equipo_Local) REFERENCES Equipos(Cod)
     );
 
     
@@ -101,7 +99,7 @@ DROP TABLE Patrocinadores CASCADE CONSTRAINTS;
     CREATE TABLE Usuarios (
         Cod_Usuario NUMBER(10) GENERATED ALWAYS AS IDENTITY,
         Nickname VARCHAR2(100),
-        Contraseña VARCHAR2(100),
+        Contraseï¿½a VARCHAR2(100),
         Es_Admin Number(1) DEFAULT(0),
         CONSTRAINT Usu_Cod_Usuario_PK PRIMARY KEY (Cod_Usuario),
         CONSTRAINT Usu_Es_Admin_CK CHECK (Es_Admin IN (0, 1))
