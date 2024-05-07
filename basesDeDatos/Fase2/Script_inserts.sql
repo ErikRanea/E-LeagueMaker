@@ -1,80 +1,80 @@
 -- Creaci�n de Juegos
-INSERT INTO Juegos ( nombre, desarrolladora, fecha_lanzamiento)
-VALUES ('League of Legends', 'Riot Games', TO_DATE('27/10/2009','DD/MM/YYYY'));
-INSERT INTO Juegos ( nombre, desarrolladora, fecha_lanzamiento)
-VALUES ('Counter Strike', 'Valbe', TO_DATE('27/09/2023','DD/MM/YYYY'));
-INSERT INTO Juegos ( nombre, desarrolladora, fecha_lanzamiento)
-VALUES ('Valorant', 'Riot Games', TO_DATE('02/06/2020','DD/MM/YYYY'));
-INSERT INTO Juegos ( nombre, desarrolladora, fecha_lanzamiento)
-VALUES ('Rainbow six siege', 'Ubisoft', TO_DATE('01/12/2015','DD/MM/YYYY'));
+INSERT INTO Juegos (cod, nombre, desarrolladora, fecha_lanzamiento)
+VALUES (1, 'League of Legends', 'Riot Games', TO_DATE('27/10/2009','DD/MM/YYYY'));
+INSERT INTO Juegos (cod, nombre, desarrolladora, fecha_lanzamiento)
+VALUES (2, 'Counter Strike', 'Valbe', TO_DATE('27/09/2023','DD/MM/YYYY'));
+INSERT INTO Juegos (cod, nombre, desarrolladora, fecha_lanzamiento)
+VALUES (3, 'Valorant', 'Riot Games', TO_DATE('02/06/2020','DD/MM/YYYY'));
+INSERT INTO Juegos (cod, nombre, desarrolladora, fecha_lanzamiento)
+VALUES (4, 'Rainbow six siege', 'Ubisoft', TO_DATE('01/12/2015','DD/MM/YYYY'));
 
 commit;
 
 -- Creaci�n de Competiciones
-INSERT INTO Competiciones ( nombre, fecha_inicio, fecha_fin, estado_abierto, cod_Juego)
-VALUES ('LOL_League', TO_DATE('01/06/2024','DD/MM/YYYY') , TO_DATE('01/12/2024','DD/MM/YYYY'), 0,1);
-INSERT INTO Competiciones ( nombre, fecha_inicio, fecha_fin, estado_abierto, cod_Juego)
-VALUES ('CS_go_League', TO_DATE('01/10/2024','DD/MM/YYYY') , TO_DATE('01/02/2025','DD/MM/YYYY'), 0, 2);
-INSERT INTO Competiciones ( nombre, fecha_inicio, fecha_fin, estado_abierto, cod_Juego)
-VALUES ('Valorant_league', TO_DATE('28/12/2023','DD/MM/YYYY') , TO_DATE('09/05/2024','DD/MM/YYYY'), 0, 3);
-INSERT INTO Competiciones ( nombre, fecha_inicio, fecha_fin, estado_abierto, cod_Juego)
-VALUES ('R6_league', TO_DATE('30/03/2024','DD/MM/YYYY') , TO_DATE('01/07/2024','DD/MM/YYYY'), 0, 4);
+INSERT INTO Competiciones (cod, nombre, fecha_inicio, fecha_fin, estado_abierto, cod_Juego)
+VALUES (1, 'LOL_League', TO_DATE('01/06/2024','DD/MM/YYYY') , TO_DATE('01/12/2024','DD/MM/YYYY'), 0,1);
+INSERT INTO Competiciones (cod, nombre, fecha_inicio, fecha_fin, estado_abierto, cod_Juego)
+VALUES (2, 'CS_go_League', TO_DATE('01/10/2024','DD/MM/YYYY') , TO_DATE('01/02/2025','DD/MM/YYYY'), 0, 2);
+INSERT INTO Competiciones (cod, nombre, fecha_inicio, fecha_fin, estado_abierto, cod_Juego)
+VALUES (3, 'Valorant_league', TO_DATE('28/12/2023','DD/MM/YYYY') , TO_DATE('09/05/2024','DD/MM/YYYY'), 0, 3);
+INSERT INTO Competiciones (cod, nombre, fecha_inicio, fecha_fin, estado_abierto, cod_Juego)
+VALUES (4, 'R6_league', TO_DATE('30/03/2024','DD/MM/YYYY') , TO_DATE('01/07/2024','DD/MM/YYYY'), 0, 4);
 
 commit;
 
 
 -- Creacion de Equipos
 -- Para League of Legends
-INSERT INTO Equipos (nombre, fecha_fundacion)
-VALUES ('Equipo LoL 1', TO_DATE('05/12/2021', 'DD/MM/YYYY'));
+INSERT INTO Equipos (cod, nombre, fecha_fundacion)
+VALUES (1, 'Equipo LoL 1', TO_DATE('05/12/2021', 'DD/MM/YYYY'));
 
-INSERT INTO Equipos (nombre, fecha_fundacion)
-VALUES ('Equipo LoL 2', TO_DATE('06/12/2021', 'DD/MM/YYYY'));
+INSERT INTO Equipos (cod, nombre, fecha_fundacion)
+VALUES (2, 'Equipo LoL 2', TO_DATE('06/12/2021', 'DD/MM/YYYY'));
 
-INSERT INTO Equipos (nombre, fecha_fundacion)
-VALUES ('Equipo LoL 3', TO_DATE('07/12/2021', 'DD/MM/YYYY'));
+INSERT INTO Equipos (cod, nombre, fecha_fundacion)
+VALUES (3, 'Equipo LoL 3', TO_DATE('07/12/2021', 'DD/MM/YYYY'));
 
-INSERT INTO Equipos (nombre, fecha_fundacion)
-VALUES ('Equipo LoL 4', TO_DATE('08/12/2021', 'DD/MM/YYYY'));
+INSERT INTO Equipos (cod, nombre, fecha_fundacion)
+VALUES (4, 'Equipo LoL 4', TO_DATE('08/12/2021', 'DD/MM/YYYY'));
 
 -- Para Counter Strike
-INSERT INTO Equipos (nombre, fecha_fundacion)
-VALUES ('Equipo CS 1', TO_DATE('05/12/2021', 'DD/MM/YYYY'));
+INSERT INTO Equipos (cod,nombre, fecha_fundacion)
+VALUES (5, 'Equipo CS 1', TO_DATE('05/12/2021', 'DD/MM/YYYY'));
 
-INSERT INTO Equipos (nombre, fecha_fundacion)
-VALUES ('Equipo CS 2', TO_DATE('06/12/2021', 'DD/MM/YYYY'));
+INSERT INTO Equipos (cod,nombre, fecha_fundacion)
+VALUES (6, 'Equipo CS 2', TO_DATE('06/12/2021', 'DD/MM/YYYY'));
 
-INSERT INTO Equipos (nombre, fecha_fundacion)
-VALUES ('Equipo CS 3', TO_DATE('07/12/2021', 'DD/MM/YYYY'));
+INSERT INTO Equipos (cod,nombre, fecha_fundacion)
+VALUES (7, 'Equipo CS 3', TO_DATE('07/12/2021', 'DD/MM/YYYY'));
 
-INSERT INTO Equipos (nombre, fecha_fundacion)
-VALUES ('Equipo CS 4', TO_DATE('08/12/2021', 'DD/MM/YYYY'));
+INSERT INTO Equipos (cod,nombre, fecha_fundacion)
+VALUES (8, 'Equipo CS 4', TO_DATE('08/12/2021', 'DD/MM/YYYY'));
 
 -- Para Valorant
-INSERT INTO Equipos (nombre, fecha_fundacion)
-VALUES ('Equipo Valorant 1', TO_DATE('05/12/2021', 'DD/MM/YYYY'));
+INSERT INTO Equipos (cod,nombre, fecha_fundacion)
+VALUES (9, 'Equipo Valorant 1', TO_DATE('05/12/2021', 'DD/MM/YYYY'));
 
-INSERT INTO Equipos (nombre, fecha_fundacion)
-VALUES ('Equipo Valorant 2', TO_DATE('06/12/2021', 'DD/MM/YYYY'));
+INSERT INTO Equipos (cod,nombre, fecha_fundacion)
+VALUES (10, 'Equipo Valorant 2', TO_DATE('06/12/2021', 'DD/MM/YYYY'));
 
-INSERT INTO Equipos (nombre, fecha_fundacion)
-VALUES ('Equipo Valorant 3', TO_DATE('07/12/2021', 'DD/MM/YYYY'));
+INSERT INTO Equipos (cod,nombre, fecha_fundacion)
+VALUES (11, 'Equipo Valorant 3', TO_DATE('07/12/2021', 'DD/MM/YYYY'));
 
-INSERT INTO Equipos (nombre, fecha_fundacion)
-VALUES ('Equipo Valorant 4', TO_DATE('08/12/2021', 'DD/MM/YYYY'));
+INSERT INTO Equipos (cod,nombre, fecha_fundacion)
+VALUES (12, 'Equipo Valorant 4', TO_DATE('08/12/2021', 'DD/MM/YYYY'));
 
 -- Para Rainbow six siege
-INSERT INTO Equipos (nombre, fecha_fundacion)
-VALUES ('Equipo Rainbow 1', TO_DATE('05/12/2021', 'DD/MM/YYYY'));
+INSERT INTO Equipos (cod,nombre, fecha_fundacion)
+VALUES (13, 'Equipo Rainbow 1', TO_DATE('05/12/2021', 'DD/MM/YYYY'));
 
-INSERT INTO Equipos (nombre, fecha_fundacion)
-VALUES ('Equipo Rainbow 2', TO_DATE('06/12/2021', 'DD/MM/YYYY'));
+INSERT INTO Equipos (cod,nombre, fecha_fundacion)
+VALUES (14, 'Equipo Rainbow 2', TO_DATE('06/12/2021', 'DD/MM/YYYY'));
 
-INSERT INTO Equipos (nombre, fecha_fundacion)
-VALUES ('Equipo Rainbow 3', TO_DATE('07/12/2021', 'DD/MM/YYYY'));
+INSERT INTO Equipos (cod,nombre, fecha_fundacion)
+VALUES (15, 'Equipo Rainbow 3', TO_DATE('07/12/2021', 'DD/MM/YYYY'));
 
-INSERT INTO Equipos (nombre, fecha_fundacion)
-VALUES ('Equipo Rainbow 4', TO_DATE('08/12/2021', 'DD/MM/YYYY'));
+INSERT INTO Equipos (cod,nombre, fecha_fundacion)
+VALUES (16, 'Equipo Rainbow 4', TO_DATE('08/12/2021', 'DD/MM/YYYY'));
 
 
 commit;
@@ -248,15 +248,15 @@ VALUES('Jorge', 'Cremades', '1934', 'Entrenador', 16);
 commit;
 
 -- Creaci�n de Usuarios
-INSERT INTO Usuarios ( nickname, contrase�a, es_admin)
+INSERT INTO Usuarios ( nickname, password, es_admin)
 VALUES ( 'Admin', 'admin123', 1);
-INSERT INTO Usuarios ( nickname, contrase�a, es_admin)
+INSERT INTO Usuarios ( nickname, password, es_admin)
 VALUES ( 'Erik', 'erik123', 1);
-INSERT INTO Usuarios (nickname, contrase�a, es_admin)
+INSERT INTO Usuarios (nickname, password, es_admin)
 VALUES ( 'Ibai', 'ibai123', 0);
-INSERT INTO Usuarios (nickname, contrase�a, es_admin)
+INSERT INTO Usuarios (nickname, password, es_admin)
 VALUES ( 'Rodrigo', 'rodigo123', 0);
-INSERT INTO Usuarios (nickname, contrase�a, es_admin)
+INSERT INTO Usuarios (nickname, password, es_admin)
 VALUES ( 'Oskar', 'oskar123', 0);
 
 commit;
