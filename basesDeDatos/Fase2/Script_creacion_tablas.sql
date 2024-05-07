@@ -1,7 +1,6 @@
+-- alter session set ddl_lock_timeout = 500;
+
 DROP TABLE Puntos_Equipos CASCADE CONSTRAINTS;
-DROP TABLE Clasificacion_Final CASCADE CONSTRAINTS;
-DROP TABLE Resultado_Jornadas CASCADE CONSTRAINTS;
-DROP TABLE Resultado_Ultima_Jornada CASCADE CONSTRAINTS;
 DROP TABLE Usuarios CASCADE CONSTRAINTS;
 DROP TABLE Jugadores CASCADE CONSTRAINTS;
 DROP TABLE Staffs CASCADE CONSTRAINTS;
@@ -14,7 +13,7 @@ DROP TABLE Juegos CASCADE CONSTRAINTS;
 DROP TABLE Patrocinadores CASCADE CONSTRAINTS;
 
     CREATE TABLE Juegos (
-        Cod NUMBER(2) GENERATED ALWAYS AS IDENTITY,
+        Cod NUMBER(2),
         Nombre VARCHAR2(100),
         Desarrolladora VARCHAR2(100),
         Fecha_Lanzamiento DATE,
@@ -23,7 +22,7 @@ DROP TABLE Patrocinadores CASCADE CONSTRAINTS;
 
     
     CREATE TABLE Competiciones (
-        Cod NUMBER(4) GENERATED ALWAYS AS IDENTITY,
+        Cod NUMBER(4),
         Nombre VARCHAR2(100),
         Fecha_Inicio DATE,
         Fecha_Fin DATE,
@@ -45,7 +44,7 @@ DROP TABLE Patrocinadores CASCADE CONSTRAINTS;
     );
 
     CREATE TABLE Equipos (
-        Cod NUMBER(10) GENERATED ALWAYS AS IDENTITY,
+        Cod NUMBER(10),
         Nombre VARCHAR2(100),
         Fecha_Fundacion DATE,
         CONSTRAINT Equip_Cod_Jornada_PK PRIMARY KEY (Cod)
@@ -99,47 +98,12 @@ DROP TABLE Patrocinadores CASCADE CONSTRAINTS;
     CREATE TABLE Usuarios (
         Cod_Usuario NUMBER(10) GENERATED ALWAYS AS IDENTITY,
         Nickname VARCHAR2(100),
-        Contrase�a VARCHAR2(100),
+        Password VARCHAR2(100),
         Es_Admin Number(1) DEFAULT(0),
         CONSTRAINT Usu_Cod_Usuario_PK PRIMARY KEY (Cod_Usuario),
         CONSTRAINT Usu_Es_Admin_CK CHECK (Es_Admin IN (0, 1))
     );
 
-
-    
-    CREATE TABLE Clasificacion_Final (
-        ID_Expo NUMBER GENERATED ALWAYS AS IDENTITY,
-        Cod_Competicion NUMBER(4),
-        Cod_Jornada NUMBER(6),
-        Posicion VARCHAR2(10),
-        Equipo VARCHAR(100),
-        Puntos NUMBER,
-        CONSTRAINT Clasifi_Final_ID_Expo_PK PRIMARY KEY (ID_Expo) 
-    );
-
-    
-    CREATE TABLE Resultado_Jornadas (
-        ID_Expo NUMBER GENERATED ALWAYS AS IDENTITY,
-        Cod_Jornada NUMBER(6),
-        Numero_Jornada VARCHAR2(10),
-        Nombre_Equipo_Local VARCHAR2(50),
-        Nombre_Equipo_Visitante VARCHAR2(50),
-        Nombre_Ganador VARCHAR2(50),
-        CONSTRAINT Result_Jor_ID_Expo_PK PRIMARY KEY (ID_Expo)
-    );
-
-    
-    CREATE TABLE Resultado_Ultima_Jornada (
-        ID_Expo NUMBER GENERATED ALWAYS AS IDENTITY,
-        Cod_Enfrentamiento NUMBER(8),
-        Cod_Jornada NUMBER(6),
-        Nombre_Equipo_Local VARCHAR2(50),
-        Nombre_Equipo_Visitante VARCHAR2(50),
-        Nombre_Ganador VARCHAR2(50),
-        CONSTRAINT Result_Ult_Jor_ID_Expo_PK PRIMARY KEY (ID_Expo)
-    );
-    
-    
     CREATE TABLE Puntos_Equipos (
         Cod_Competicion NUMBER(4),
         Cod_Equipo NUMBER(10),

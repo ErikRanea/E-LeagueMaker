@@ -13,18 +13,27 @@ ORDER BY
 
 ---2. Vista para enfrentamientos p
 
+-- competiciones, juegos, equipos
+
 CREATE OR REPLACE VIEW Enfrentamientos_Por_Jornada AS
 SELECT
-    ruj.Cod_Enfrentamiento,
-    ruj.Cod_Jornada,
-    ruj.Nombre_Equipo_Local,
-    ruj.Nombre_Equipo_Visitante,
-    ruj.Nombre_Ganador
+    enf.Cod,  -- Código del enfrentamiento
+    enf.Cod_Jornada,  -- Jornada asociada
+    jorn.N_Jornada,  -- Número de la jornada
+    enf.Cod_Equipo_Local,  -- Código del equipo local
+    enf.Cod_Equipo_Visitante,  -- Código del equipo visitante
+    CASE
+        WHEN enf.Gana_local = 1 THEN 'Local'  -- Si gana local
+        ELSE 'Visitante'  -- Si gana visitante
+    END AS Ganador  -- Ganador basado en Gana_local
 FROM
-    Resultado_Ultima_Jornada ruj
+    Enfrentamientos enf
+    JOIN Jornadas jorn  -- Unir con Jornadas por Cod_Jornada
+        ON enf.Cod_Jornada = jorn.Cod
 ORDER BY
-    ruj.Cod_Jornada,
-    ruj.Cod_Enfrentamiento;
+    jorn.N_Jornada,  -- Ordenar por número de jornada
+    enf.Cod;  -- Ordenar por código de enfrentamiento
+
 
 
 
@@ -32,7 +41,6 @@ ORDER BY
 
 ---Sinonimos-----
 CREATE SYNONYM COMPETI FOR COMPETICIONES;
-CREATE SYNONYM CLASIFI FOR CLASIFICACION_FINAL;
 CREATE SYNONYM ENFRE FOR ENFRENTAMIENTOS;
 CREATE SYNONYM PATRO FOR PATROCINADORES;
 
@@ -47,6 +55,21 @@ CREATE SEQUENCE seq_jornadas
     NOCYCLE;
 CREATE SEQUENCE seq_enfrentamientos
     START WITH 1
+    INCREMENT BY 1
+    NOCACHE
+    NOCYCLE;
+    CREATE SEQUENCE seq_juegos
+    START WITH 100
+    INCREMENT BY 1
+    NOCACHE
+    NOCYCLE;
+    CREATE SEQUENCE seq_competiciones
+    START WITH 100
+    INCREMENT BY 1
+    NOCACHE
+    NOCYCLE;
+    CREATE SEQUENCE seq_equipos
+    START WITH 100
     INCREMENT BY 1
     NOCACHE
     NOCYCLE;
