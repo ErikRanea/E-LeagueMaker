@@ -10,8 +10,22 @@ DROP TABLE Jornadas CASCADE CONSTRAINTS;
 DROP TABLE Competiciones CASCADE CONSTRAINTS;
 DROP TABLE Juegos CASCADE CONSTRAINTS;
 DROP TABLE Temp_clob_tab CASCADE CONSTRAINTS;
-
 DROP TABLE Patrocinadores CASCADE CONSTRAINTS;
+
+
+DROP SYNONYM  COMPETI;
+DROP SYNONYM  ENFRE;
+DROP SYNONYM  PATRO;
+
+DROP SEQUENCE seq_jornadas;
+DROP SEQUENCE seq_enfrentamientos;
+DROP SEQUENCE seq_juegos;
+DROP SEQUENCE seq_competiciones;
+DROP SEQUENCE seq_equipos;
+
+
+
+
 
     CREATE TABLE temp_clob_tab(
     ID NUMBER GENERATED ALWAYS AS IDENTITY,
@@ -157,9 +171,9 @@ SELECT
 
     enf.Cod_Jornada,
     enf.Cod AS Cod_Enfrentamiento,  -- Jornada asociada
-    jorn.N_Jornada,  -- Número de la jornada
-    enf.Cod_Equipo_Local,  -- Código del equipo local
-    enf.Cod_Equipo_Visitante,  -- Código del equipo visitante
+    jorn.N_Jornada,  -- Nï¿½mero de la jornada
+    enf.Cod_Equipo_Local,  -- Cï¿½digo del equipo local
+    enf.Cod_Equipo_Visitante,  -- Cï¿½digo del equipo visitante
     CASE
         WHEN enf.Gana_local = 1 THEN 'Local'  -- Si gana local
         ELSE 'Visitante'  -- Si gana visitante
@@ -169,10 +183,10 @@ FROM
     JOIN Jornadas jorn  -- Unir con Jornadas por Cod_Jornada
         ON enf.Cod_Jornada = jorn.Cod
 ORDER BY
-    jorn.N_Jornada,  -- Ordenar por número de jornada
+    jorn.N_Jornada,  -- Ordenar por nï¿½mero de jornada
     enf.Cod;
     
--- Ordenar por código de enfrentamiento
+-- Ordenar por cï¿½digo de enfrentamiento
 
 ---Sinonimos-----
 CREATE SYNONYM COMPETI FOR COMPETICIONES;
