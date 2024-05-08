@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clasificacion>
+    <competicion id="1">
+        <equipo id="1">
+            <nombre>Equipo LoL 1</nombre>
+            <puntos>0</puntos>
+            <posicion>1</posicion>
+        </equipo>
+        <equipo id="4">
+            <nombre>Equipo LoL 4</nombre>
+            <puntos>0</puntos>
+            <posicion>2</posicion>
+        </equipo>
+        <equipo id="3">
+            <nombre>Equipo LoL 3</nombre>
+            <puntos>0</puntos>
+            <posicion>3</posicion>
+        </equipo>
+        <equipo id="2">
+            <nombre>Equipo LoL 2</nombre>
+            <puntos>0</puntos>
+            <posicion>4</posicion>
+        </equipo>
+    </competicion>
+</clasificacion>

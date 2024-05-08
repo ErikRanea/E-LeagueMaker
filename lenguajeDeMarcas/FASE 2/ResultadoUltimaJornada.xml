@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resultados_jornadas>
+    <jornada id="16">
+        <numero_jornada>1</numero_jornada>
+        <enfrentamiento id="31">
+            <cod_equipo_local>1</cod_equipo_local>
+            <cod_equipo_visitante>4</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+        </enfrentamiento>
+        <enfrentamiento id="32">
+            <cod_equipo_local>2</cod_equipo_local>
+            <cod_equipo_visitante>3</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+        </enfrentamiento>
+    </jornada>
+</resultados_jornadas>
