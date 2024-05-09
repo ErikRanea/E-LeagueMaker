@@ -1,0 +1,10 @@
+<!ELEMENT clasificacion (competicion+)>
+<!ELEMENT competicion (equipo+)>
+<!ATTLIST competicion
+  id CDATA #REQUIRED>
+<!ELEMENT equipo (nombre, puntos, posicion)>
+<!ATTLIST equipo
+  id CDATA #REQUIRED>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT puntos (#PCDATA)>
+<!ELEMENT posicion (#PCDATA)>

@@ -1,4 +1,14 @@
 -- alter session set ddl_lock_timeout = 500;
+DROP SEQUENCE seq_equipos;
+DROP SEQUENCE seq_competiciones;
+DROP SEQUENCE seq_juegos;
+DROP SEQUENCE seq_enfrentamientos;
+DROP SEQUENCE seq_jornadas;
+
+DROP SYNONYM competi;
+DROP SYNONYM enfre;
+DROP SYNONYM patro;
+
 
 DROP TABLE Puntos_Equipos CASCADE CONSTRAINTS;
 DROP TABLE Usuarios CASCADE CONSTRAINTS;
@@ -156,6 +166,7 @@ CREATE OR REPLACE VIEW Resultados_Jornadas AS
 SELECT
 
     enf.Cod_Jornada,
+    jorn.Cod_competicion,
     enf.Cod AS Cod_Enfrentamiento,  -- Jornada asociada
     jorn.N_Jornada,  -- Número de la jornada
     enf.Cod_Equipo_Local,  -- Código del equipo local

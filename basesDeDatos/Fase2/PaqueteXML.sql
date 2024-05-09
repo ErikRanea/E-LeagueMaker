@@ -56,7 +56,7 @@ CREATE OR REPLACE PACKAGE BODY Paquete_XML AS
     -- Generar el XML a partir de la vista 'Resultados_Jornadas'
     SELECT
       XMLELEMENT(
-        "resultados_jornadas",  -- Elemento raíz
+        "resultado_jornada",  -- Elemento raíz
         XMLAGG(
           XMLELEMENT(
             "jornada",
@@ -134,7 +134,7 @@ PROCEDURE GenerarResultadoJornadas IS
             )
       ).getClobVal() INTO result  -- Obtener el resultado como CLOB
     FROM Resultados_Jornadas rj
-    WHERE rj.cod_competicion= 1   -- Filtrar por competición válida
+    WHERE rj.cod_competicion IS NOT NULL   -- Filtrar por competición válida
     GROUP BY rj.cod_competicion, rj.Cod_Jornada, rj.N_Jornada, rj.Cod_enfrentamiento, rj.Cod_Equipo_Local, rj.Cod_Equipo_Visitante, rj.Ganador;
 
     -- Insertar el XML en la tabla con fecha de expiración
