@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resultado_jornada xmlns:xs = "http://www.w3.org/2001/XMLSchema-instance"
+xs:noNamespaceSchemaLocation = "ResultadoUltimaJornada.xsd">
+    <jornada id="13">
+        <numero_jornada>1</numero_jornada>
+        <enfrentamiento id="25">
+            <cod_equipo_local>1</cod_equipo_local>
+            <cod_equipo_visitante>4</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+        </enfrentamiento>
+        <enfrentamiento id="26">
+            <cod_equipo_local>2</cod_equipo_local>
+            <cod_equipo_visitante>3</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+        </enfrentamiento>
+    </jornada>
+</resultado_jornada>
