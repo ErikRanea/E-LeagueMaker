@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resultado_jornadas SYSTEM "ResultadoJornadas.dtd">
+
+<resultado_jornadas>
+    <jornada id_competicion="1" id_jornada="13">
+        <numero_jornada>1</numero_jornada>
+        <enfrentamiento id="25">
+            <cod_equipo_local>1</cod_equipo_local>
+            <cod_equipo_visitante>4</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+        </enfrentamiento>
+        <enfrentamiento id="26">
+            <cod_equipo_local>2</cod_equipo_local>
+            <cod_equipo_visitante>3</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+        </enfrentamiento>
+    </jornada>
+
+    <jornada id_competicion="1" id_jornada="14">
+        <numero_jornada>2</numero_jornada>
+        <enfrentamiento id="27">
+            <cod_equipo_local>1</cod_equipo_local>
+            <cod_equipo_visitante>4</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+        </enfrentamiento>
+        <enfrentamiento id="28">
+            <cod_equipo_local>2</cod_equipo_local>
+            <cod_equipo_visitante>3</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+        </enfrentamiento>
+    </jornada>
+
+    <jornada id_competicion="1" id_jornada="15">
+        <numero_jornada>3</numero_jornada>
+        <enfrentamiento id="29">
+            <cod_equipo_local>1</cod_equipo_local>
+            <cod_equipo_visitante>4</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+        </enfrentamiento>
+        <enfrentamiento id="30">
+            <cod_equipo_local>2</cod_equipo_local>
+            <cod_equipo_visitante>3</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+        </enfrentamiento>
+    </jornada>
+
+    <jornada id_competicion="1" id_jornada="25">
+        <numero_jornada>1</numero_jornada>
+        <enfrentamiento id="49">
+            <cod_equipo_local>1</cod_equipo_local>
+            <cod_equipo_visitante>4</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+        </enfrentamiento>
+        <enfrentamiento id="50">
+            <cod_equipo_local>2</cod_equipo_local>
+            <cod_equipo_visitante>3</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+        </enfrentamiento>
+    </jornada>
+
+    <jornada id_competicion="1" id_jornada="26">
+        <numero_jornada>2</numero_jornada>
+        <enfrentamiento id="51">
+            <cod_equipo_local>1</cod_equipo_local>
+            <cod_equipo_visitante>4</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+        </enfrentamiento>
+        <enfrentamiento id="52">
+            <cod_equipo_local>2</cod_equipo_local>
+            <cod_equipo_visitante>3</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+        </enfrentamiento>
+    </jornada>
+
+    <jornada id_competicion="1" id_jornada="27">
+        <numero_jornada>3</numero_jornada>
+        <enfrentamiento id="53">
+            <cod_equipo_local>1</cod_equipo_local>
+            <cod_equipo_visitante>4</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+        </enfrentamiento>
+        <enfrentamiento id="54">
+            <cod_equipo_local>2</cod_equipo_local>
+            <cod_equipo_visitante>3</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+        </enfrentamiento>
+    </jornada>
+</resultado_jornadas>
