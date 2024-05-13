@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f6b3a080-3865-4c01-9fd8-09ea76f749a4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/E-league .iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/E-league Maker.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src /Controlador/ControladorPrincipal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-league.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladorPrincipal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorBD.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorTCompeticiones.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorTEnfrentamientos.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorTEquipos.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorTJornadas.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorTJuegos.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorTJugadores.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorTPatrocinadores.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorTPuntos_Equipos.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorTStaffs.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorTUsuarios.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresVistas/ControladorPaneles.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresVistas/ControladorVLogin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresVistas/ControladorVUsuario.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresVistas/ControladorVentanas.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresVistas/ControlodarVAdmin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Img/100 circulo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Img/100 sin fondo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Img/100.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Img/150 sin fondo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Img/150.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Img/200 sin fondo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Img/200.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Img/Esquema.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Img/Logo mas cerca sin fondo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Img/Logo mas cerca.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Img/Logo.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/Competicion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/Enfrentamiento.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/Equipo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/Jornada.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/Juego.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/Jugador.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/Patrocinador.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/Puntos_Equipos.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/Staff.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/Usuario.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Vista/Registro.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Vista/Registro.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2gQOaFcPKhzrATJaTJnpWEMm3pC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "develop",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/morfeo/idea-IU-233.13135.103/lib/ojdbc11.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src /Vista" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="E-league Maker" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.2-openjdk-21.0.2-f644763e9732-563d888c" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f6b3a080-3865-4c01-9fd8-09ea76f749a4" name="Changes" comment="" />
+      <created>1715626396705</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1715626396705</updated>
+      <workItem from="1715626397782" duration="550000" />
+      <workItem from="1715627007719" duration="309000" />
+      <workItem from="1715627564618" duration="3843000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src /Controlador/ControladoresBD/ControladorBD.java</url>
+          <line>64</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src /Controlador/ControladorPrincipal.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
