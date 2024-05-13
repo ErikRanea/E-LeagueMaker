@@ -24,7 +24,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Juegos IS
         VALUES (seq_juegos.nextval, p_nombre, p_desarrolladora, 
         p_fecha_lanzamiento);
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END insertar_juego;
     
@@ -35,7 +35,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Juegos IS
         DELETE FROM juegos
         WHERE cod = p_cod;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END borrar_juego;
     
@@ -51,7 +51,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Juegos IS
             fecha_lanzamiento = p_fecha_lanzamiento
         WHERE cod = p_cod;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END modificar_juego;
 
@@ -67,7 +67,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Juegos IS
             WHERE cod = p_cod;
         RETURN v_cursor;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END consultar_juego;
     
@@ -97,7 +97,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Equipos IS
         INSERT INTO equipos (cod, nombre, fecha_fundacion)
         VALUES (seq_equipos.nextval, p_nombre, p_fecha_fundacion);
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END insertar_equipo;
     
@@ -108,7 +108,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Equipos IS
         DELETE FROM equipos
         WHERE cod = p_cod;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END borrar_equipo;
     
@@ -122,7 +122,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Equipos IS
             fecha_fundacion = p_fecha_fundacion
         WHERE cod = p_cod;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END modificar_equipo;
 
@@ -138,7 +138,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Equipos IS
             WHERE cod = p_cod;
         RETURN v_cursor;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END consultar_equipo;
     
@@ -171,7 +171,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Patrocinadores IS
         INSERT INTO Patrocinadores (nombre, cod_equipo)
         VALUES (p_nombre, p_cod_equipo);
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END insertar_Patrocinadores;
     
@@ -183,7 +183,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Patrocinadores IS
         DELETE FROM Patrocinadores
         WHERE cod_patrocinador = p_cod;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END borrar_Patrocinadores;
     
@@ -197,7 +197,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Patrocinadores IS
         SET nombre = p_nombre
         WHERE cod_patrocinador = p_cod;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END modificar_Patrocinadores;
 
@@ -214,7 +214,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Patrocinadores IS
             WHERE cod_patrocinador = p_cod;
         RETURN v_cursor;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END consultar_Patrocinadores;
     
@@ -256,7 +256,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Jugadores IS
         VALUES (p_nombre, p_apellido, p_rol, p_salario, p_nacionalidad, 
         p_fecha_nacimiento, p_nickname, p_cod_equipo);
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END insertar_Jugadores;
     
@@ -267,7 +267,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Jugadores IS
         DELETE FROM Jugadores
         WHERE cod = p_cod;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END borrar_Jugadores;
     
@@ -289,7 +289,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Jugadores IS
             nickname = p_nickname
         WHERE cod = p_cod;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END modificar_Jugadores;
 
@@ -305,7 +305,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Jugadores IS
             WHERE cod = p_cod;
         RETURN v_cursor;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END consultar_Jugadores;
     
@@ -338,7 +338,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Staffs IS
         INSERT INTO Staffs (nombre, apellido, puesto, salario, cod_equipo)
         VALUES (p_nombre, p_apellido, p_puesto, p_salario, p_cod_equipo);
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END insertar_Staffs;
     
@@ -349,7 +349,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Staffs IS
         DELETE FROM Staffs
         WHERE cod = p_cod;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END borrar_Staffs;
     
@@ -366,7 +366,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Staffs IS
             salario = p_salario
         WHERE cod = p_cod;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END modificar_Staffs;
 
@@ -382,7 +382,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Staffs IS
             WHERE cod = p_cod;
         RETURN v_cursor;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END consultar_Staffs;
     
@@ -424,7 +424,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Competiciones IS
         VALUES (seq_competiciones.nextval, p_nombre, p_fecha_inicio,
         p_fecha_fin, p_estado_abierto, p_cod_juego);
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END insertar_Competiciones;
     
@@ -435,7 +435,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Competiciones IS
         DELETE FROM Competiciones
         WHERE cod = p_cod;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END borrar_Competiciones;
     
@@ -454,7 +454,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Competiciones IS
             estado_abierto = p_estado_abierto
         WHERE cod = p_cod;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END modificar_Competiciones;
 
@@ -470,7 +470,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Competiciones IS
             WHERE cod = p_cod;
         RETURN v_cursor;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END consultar_Competiciones;
     
@@ -501,7 +501,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Jornadas IS
         INSERT INTO Jornadas (cod, n_jornada, fecha, cod_competicion)
         VALUES (seq_jornadas.nextval, p_n_jornada, p_fecha, p_cod_competicion);
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END insertar_Jornadas;
     
@@ -512,7 +512,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Jornadas IS
         DELETE FROM Jornadas
         WHERE cod = p_cod;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END borrar_Jornadas;
     
@@ -526,7 +526,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Jornadas IS
             fecha = p_fecha
         WHERE cod = p_cod;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END modificar_Jornadas;
 
@@ -542,7 +542,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Jornadas IS
             WHERE cod = p_cod;
         RETURN v_cursor;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END consultar_Jornadas;
     
@@ -582,7 +582,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Enfrentamientos IS
         VALUES (seq_enfrentamientos.nextval, p_hora, p_gana_local, 
         p_cod_jornada, p_cod_equipo_visitante, p_cod_equipo_local);
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END insertar_Enfrentamientos;
     
@@ -593,7 +593,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Enfrentamientos IS
         DELETE FROM Enfrentamientos
         WHERE cod = p_cod;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END borrar_Enfrentamientos;
     
@@ -608,7 +608,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Enfrentamientos IS
             gana_local = p_gana_local
         WHERE cod = p_cod;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END modificar_Enfrentamientos;
 
@@ -624,7 +624,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Enfrentamientos IS
             WHERE cod = p_cod;
         RETURN v_cursor;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END consultar_Enfrentamientos;
     
@@ -656,7 +656,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Usuarios IS
         INSERT INTO Usuarios (nickname, password, es_admin)
         VALUES (p_nickname, p_passwordd, p_es_admin);
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END insertar_Usuarios;
     
@@ -667,7 +667,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Usuarios IS
         DELETE FROM Usuarios
         WHERE cod_usuario = p_cod_usuarios;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END borrar_Usuarios;
     
@@ -683,7 +683,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Usuarios IS
             es_admin = p_es_admin
         WHERE cod_usuario = p_cod_usuarios;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END modificar_Usuarios;
 
@@ -699,7 +699,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Usuarios IS
             WHERE cod_usuario = p_cod_usuarios;
         RETURN v_cursor;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END consultar_Usuarios;
     
@@ -738,7 +738,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Puntos_equipos IS
         INSERT INTO Puntos_equipos (cod_competicion, cod_equipo, puntos)
         VALUES (p_cod_competicion, p_cod_equipo, p_puntos);
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END insertar_Puntos_equipos;
     
@@ -751,7 +751,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Puntos_equipos IS
         DELETE FROM Puntos_equipos
         WHERE cod_equipo = p_cod_equipo AND cod_competicion = cod_competicion;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END borrar_Puntos_equipos;
     
@@ -765,7 +765,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Puntos_equipos IS
         SET puntos = p_puntos
     WHERE cod_equipo = p_cod_equipo AND cod_competicion = cod_competicion;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END modificar_Puntos_equipos;
 
@@ -783,7 +783,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Puntos_equipos IS
           WHERE cod_equipo = p_cod_equipo AND cod_competicion = cod_competicion;
         RETURN v_cursor;
     EXCEPTION
-        WHEN other THEN
+        WHEN others THEN
         raise;
     END consultar_Puntos_equipos;
     
