@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6b3a080-3865-4c01-9fd8-09ea76f749a4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src /Controlador/ControladoresBD/ControladorBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src /Controlador/ControladoresBD/ControladorBD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src /Controlador/ControladoresVista/ControladorVentanas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src /Controlador/ControladoresVista/ControladorVentanas.java" afterDir="false" />
-    </list>
+    <list default="true" id="f6b3a080-3865-4c01-9fd8-09ea76f749a4" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,7 +28,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "develop",
+    "git-widget-placeholder": "feature/creandoVentanaCompeticion",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/morfeo/idea-IU-233.13135.103/lib/ojdbc11.jar",
     "node.js.detected.package.eslint": "true",
@@ -83,7 +79,7 @@
       <workItem from="1715626397782" duration="550000" />
       <workItem from="1715627007719" duration="309000" />
       <workItem from="1715627564618" duration="3843000" />
-      <workItem from="1715667579991" duration="4877000" />
+      <workItem from="1715667579991" duration="5621000" />
     </task>
     <servers />
   </component>
