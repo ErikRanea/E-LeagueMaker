@@ -44,7 +44,7 @@ public class ControladorBD {
     private Connection con;
 
 
-    public ControladorBD(ControladorPrincipal cp) 
+    public ControladorBD(ControladorPrincipal cp)
     {
         this.cp = cp;
         abrirConexion();
