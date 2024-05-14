@@ -6,12 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f6b3a080-3865-4c01-9fd8-09ea76f749a4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src /Controlador/ControladorPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src /Controlador/ControladorPrincipal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src /Controlador/ControladoresBD/ControladorBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src /Controlador/ControladoresBD/ControladorBD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src /Controlador/ControladoresBD/ControladorTCompeticiones.java" beforeDir="false" afterPath="$PROJECT_DIR$/src /Controlador/ControladoresBD/ControladorTCompeticiones.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src /Controlador/ControladoresBD/ControladorTUsuarios.java" beforeDir="false" afterPath="$PROJECT_DIR$/src /Controlador/ControladoresBD/ControladorTUsuarios.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src /Controlador/ControladoresVista/ControladorVLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src /Controlador/ControladoresVista/ControladorVLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src /Vista/VentanaRegistro.form" beforeDir="false" afterPath="$PROJECT_DIR$/src /Vista/VentanaRegistro.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src /Controlador/ControladoresVista/ControladorVentanas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src /Controlador/ControladoresVista/ControladorVentanas.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +83,7 @@
       <workItem from="1715626397782" duration="550000" />
       <workItem from="1715627007719" duration="309000" />
       <workItem from="1715627564618" duration="3843000" />
-      <workItem from="1715667579991" duration="3957000" />
+      <workItem from="1715667579991" duration="4877000" />
     </task>
     <servers />
   </component>
