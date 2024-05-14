@@ -114,7 +114,7 @@ DROP SEQUENCE seq_equipos;
 
     
     CREATE TABLE Staffs (
-        Cod NUMBER(10) GENERATED ALWAYS AS IDENTITY,
+        Cod NUMBER(10),
         Nombre VARCHAR2(100),
         Apellido VARCHAR2(100),
         Puesto VARCHAR2(50),

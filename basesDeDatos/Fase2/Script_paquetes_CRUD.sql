@@ -641,7 +641,7 @@ CREATE OR REPLACE PACKAGE crud_Usuarios AS
     PROCEDURE modificar_Usuarios(p_cod_usuarios IN Usuarios.cod_usuario%TYPE, 
     p_nickname IN Usuarios.nickname%TYPE, p_password IN Usuarios.password%TYPE, 
     p_es_admin IN Usuarios.es_admin%TYPE);
-    FUNCTION consultar_Usuarios(p_cod_usuarios IN Usuarios.cod_usuario%TYPE) 
+    FUNCTION consultar_Usuarios(p_nickname IN Usuarios.nickname%TYPE) 
     RETURN tipo_cursor;
 END crud_Usuarios;
 /
@@ -654,7 +654,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Usuarios IS
     IS
     BEGIN
         INSERT INTO Usuarios (nickname, password, es_admin)
-        VALUES (p_nickname, p_passwordd, p_es_admin);
+        VALUES (p_nickname, p_password, p_es_admin);
     EXCEPTION
         WHEN others THEN
         raise;
@@ -688,7 +688,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Usuarios IS
     END modificar_Usuarios;
 
     -- Consultar Usuarios
-    FUNCTION consultar_Usuarios(p_cod_usuarios IN Usuarios.cod_usuario%TYPE) 
+    FUNCTION consultar_Usuarios(p_nickname IN Usuarios.nickname%TYPE) 
     RETURN tipo_cursor
     IS
         v_cursor tipo_cursor;
@@ -696,7 +696,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Usuarios IS
         OPEN v_cursor FOR
             SELECT *
             FROM Usuarios
-            WHERE cod_usuario = p_cod_usuarios;
+            WHERE nickname = p_nickname;
         RETURN v_cursor;
     EXCEPTION
         WHEN others THEN
@@ -704,7 +704,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Usuarios IS
     END consultar_Usuarios;
     
 END crud_Usuarios;
-
+/
 --------------------------------------------------------------------------------
 
 -- Definir paquete Crud_Puntos_equipos
@@ -789,4 +789,3 @@ CREATE OR REPLACE PACKAGE BODY crud_Puntos_equipos IS
     
 END crud_Puntos_equipos;
 /
-

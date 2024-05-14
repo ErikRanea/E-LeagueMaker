@@ -146,7 +146,8 @@ BEGIN
                         INSERT INTO Enfrentamientos (Cod, Hora, Cod_Jornada, 
                         cod_equipo_visitante,cod_equipo_local)
                         VALUES (seq_enfrentamientos.NEXTVAL , fecha_jornada, 
-                        v_cod_jornada,equipo_visitante, equipo_local);
+                        v_cod_jornada,l_equipos(equipo_visitante),
+                        l_equipos(equipo_local));
                         
                         DBMS_OUTPUT.PUT_LINE('  Enfrentamiento: ' ||
                         l_equipos(equipo_local) || ' vs ' || 

@@ -212,38 +212,38 @@ END;
 commit;
 
 -- Creaci�n de Staffs
-INSERT INTO Staffs ( nombre, apellido, salario, puesto, cod_Equipo)
-VALUES('Ibai', 'Lopez de Lapuente', '1453', 'Entrenador', 1);
-INSERT INTO Staffs ( nombre, apellido, salario, puesto, cod_Equipo)
-VALUES('Rodrigo', 'Urbina', '1353', 'Entrenador asistente', 2);
-INSERT INTO Staffs ( nombre, apellido, salario, puesto, cod_Equipo)
-VALUES('Sofia', 'Ugarte', '1343', 'Entrenador asistente', 3);
-INSERT INTO Staffs ( nombre, apellido, salario, puesto, cod_Equipo)
-VALUES('Carla', 'Rodriguez', '1567', 'Entrenador', 4);
-INSERT INTO Staffs ( nombre, apellido, salario, puesto, cod_Equipo)
-VALUES('Juan Alberto', 'Domenech', '1197', 'Entrenador', 5);
-INSERT INTO Staffs ( nombre, apellido, salario, puesto, cod_Equipo)
-VALUES('Maria Luisa', 'Garcia', '1837', 'Entrenador', 6);
-INSERT INTO Staffs ( nombre, apellido, salario, puesto, cod_Equipo)
-VALUES('Jorge', 'Cremades', '1934', 'Entrenador', 7);
-INSERT INTO Staffs ( nombre, apellido, salario, puesto, cod_Equipo)
-VALUES('Ibai', 'Lopez de Lapuente', '1453', 'Entrenador', 8);
-INSERT INTO Staffs ( nombre, apellido, salario, puesto, cod_Equipo)
-VALUES('Rodrigo', 'Urbina', '1353', 'Entrenador asistente', 9);
-INSERT INTO Staffs ( nombre, apellido, salario, puesto, cod_Equipo)
-VALUES('Sofia', 'Ugarte', '1343', 'Entrenador asistente', 10);
-INSERT INTO Staffs ( nombre, apellido, salario, puesto, cod_Equipo)
-VALUES('Carla', 'Rodriguez', '1567', 'Entrenador', 11);
-INSERT INTO Staffs ( nombre, apellido, salario, puesto, cod_Equipo)
-VALUES('Juan Alberto', 'Domenech', '1197', 'Entrenador', 12);
-INSERT INTO Staffs ( nombre, apellido, salario, puesto, cod_Equipo)
-VALUES('Maria Luisa', 'Garcia', '1837', 'Entrenador', 13);
-INSERT INTO Staffs ( nombre, apellido, salario, puesto, cod_Equipo)
-VALUES('Jorge', 'Cremades', '1934', 'Entrenador', 14);
-INSERT INTO Staffs ( nombre, apellido, salario, puesto, cod_Equipo)
-VALUES('Maria Luisa', 'Garcia', '1837', 'Entrenador', 15);
-INSERT INTO Staffs ( nombre, apellido, salario, puesto, cod_Equipo)
-VALUES('Jorge', 'Cremades', '1934', 'Entrenador', 16);
+INSERT INTO Staffs (cod, nombre, apellido, salario, puesto, cod_Equipo)
+VALUES(1,'Ibai', 'Lopez de Lapuente', '1453', 'Entrenador', 1);
+INSERT INTO Staffs (cod, nombre, apellido, salario, puesto, cod_Equipo)
+VALUES(2,'Rodrigo', 'Urbina', '1353', 'Entrenador asistente', 2);
+INSERT INTO Staffs ( cod, nombre, apellido, salario, puesto, cod_Equipo)
+VALUES(3,'Sofia', 'Ugarte', '1343', 'Entrenador asistente', 3);
+INSERT INTO Staffs ( cod, nombre, apellido, salario, puesto, cod_Equipo)
+VALUES(4,'Carla', 'Rodriguez', '1567', 'Entrenador', 4);
+INSERT INTO Staffs ( cod, nombre, apellido, salario, puesto, cod_Equipo)
+VALUES(5,'Juan Alberto', 'Domenech', '1197', 'Entrenador', 5);
+INSERT INTO Staffs ( cod, nombre, apellido, salario, puesto, cod_Equipo)
+VALUES(6,'Maria Luisa', 'Garcia', '1837', 'Entrenador', 6);
+INSERT INTO Staffs ( cod, nombre, apellido, salario, puesto, cod_Equipo)
+VALUES(7,'Jorge', 'Cremades', '1934', 'Entrenador', 7);
+INSERT INTO Staffs ( cod, nombre, apellido, salario, puesto, cod_Equipo)
+VALUES(8,'Ibai', 'Lopez de Lapuente', '1453', 'Entrenador', 8);
+INSERT INTO Staffs ( cod, nombre, apellido, salario, puesto, cod_Equipo)
+VALUES(9,'Rodrigo', 'Urbina', '1353', 'Entrenador asistente', 9);
+INSERT INTO Staffs ( cod, nombre, apellido, salario, puesto, cod_Equipo)
+VALUES(10,'Sofia', 'Ugarte', '1343', 'Entrenador asistente', 10);
+INSERT INTO Staffs ( cod, nombre, apellido, salario, puesto, cod_Equipo)
+VALUES(11,'Carla', 'Rodriguez', '1567', 'Entrenador', 11);
+INSERT INTO Staffs ( cod, nombre, apellido, salario, puesto, cod_Equipo)
+VALUES(12,'Juan Alberto', 'Domenech', '1197', 'Entrenador', 12);
+INSERT INTO Staffs ( cod, nombre, apellido, salario, puesto, cod_Equipo)
+VALUES(13,'Maria Luisa', 'Garcia', '1837', 'Entrenador', 13);
+INSERT INTO Staffs ( cod, nombre, apellido, salario, puesto, cod_Equipo)
+VALUES(14,'Jorge', 'Cremades', '1934', 'Entrenador', 14);
+INSERT INTO Staffs ( cod, nombre, apellido, salario, puesto, cod_Equipo)
+VALUES(15,'Maria Luisa', 'Garcia', '1837', 'Entrenador', 15);
+INSERT INTO Staffs ( cod, nombre, apellido, salario, puesto, cod_Equipo)
+VALUES(16,'Jorge', 'Cremades', '1934', 'Entrenador', 16);
 
 commit;
 
