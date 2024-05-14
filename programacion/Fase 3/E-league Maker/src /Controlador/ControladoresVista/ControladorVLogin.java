@@ -46,13 +46,13 @@ public class ControladorVLogin {
                     r.getPfContra().setText("");
                 }
             }
-            catch (ClassNotFoundException | SQLException eSQL)
+            catch (Exception ex)
             {
                 r.getTfUsuario().setText("El usuario o la contraseña está mal");
 
                 r.getTfUsuario().setForeground(Color.RED);
                 r.getPfContra().setText("");
-                System.out.println(eSQL.getMessage());
+                System.out.println(ex.getMessage());
             }
 
 
