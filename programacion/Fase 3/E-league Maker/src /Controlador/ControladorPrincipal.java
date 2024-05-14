@@ -9,6 +9,9 @@
 package Controlador;
 import Controlador.ControladoresBD.*;
 import Controlador.ControladoresVista.*;
+
+import java.sql.SQLException;
+
 public class ControladorPrincipal {
 
     /**
@@ -29,4 +32,11 @@ public class ControladorPrincipal {
         cbd = new ControladorBD(this);
         cv = new ControladorVentanas();
     }
+
+
+
+
+
 }
+
+

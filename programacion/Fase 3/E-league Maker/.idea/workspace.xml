@@ -5,56 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6b3a080-3865-4c01-9fd8-09ea76f749a4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/E-league .iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/E-league Maker.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src /Controlador/ControladorPrincipal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-league.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladorPrincipal.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorBD.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorTCompeticiones.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorTEnfrentamientos.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorTEquipos.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorTJornadas.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorTJuegos.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorTJugadores.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorTPatrocinadores.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorTPuntos_Equipos.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorTStaffs.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresBD/ControladorTUsuarios.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresVistas/ControladorPaneles.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresVistas/ControladorVLogin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresVistas/ControladorVUsuario.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresVistas/ControladorVentanas.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controlador/ControladoresVistas/ControlodarVAdmin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Img/100 circulo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Img/100 sin fondo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Img/100.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Img/150 sin fondo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Img/150.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Img/200 sin fondo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Img/200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Img/Esquema.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Img/Logo mas cerca sin fondo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Img/Logo mas cerca.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Img/Logo.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/Competicion.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/Enfrentamiento.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/Equipo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/Jornada.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/Juego.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/Jugador.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/Patrocinador.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/Puntos_Equipos.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/Staff.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/Usuario.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Vista/Registro.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Vista/Registro.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src /Controlador/ControladorPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src /Controlador/ControladorPrincipal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src /Controlador/ControladoresBD/ControladorBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src /Controlador/ControladoresBD/ControladorBD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src /Controlador/ControladoresBD/ControladorTCompeticiones.java" beforeDir="false" afterPath="$PROJECT_DIR$/src /Controlador/ControladoresBD/ControladorTCompeticiones.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src /Controlador/ControladoresBD/ControladorTUsuarios.java" beforeDir="false" afterPath="$PROJECT_DIR$/src /Controlador/ControladoresBD/ControladorTUsuarios.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src /Controlador/ControladoresVista/ControladorVLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src /Controlador/ControladoresVista/ControladorVLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src /Vista/VentanaRegistro.form" beforeDir="false" afterPath="$PROJECT_DIR$/src /Vista/VentanaRegistro.form" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +32,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.Main.executor": "Debug",
+    "Application.Main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -130,26 +87,11 @@
       <workItem from="1715626397782" duration="550000" />
       <workItem from="1715627007719" duration="309000" />
       <workItem from="1715627564618" duration="3843000" />
+      <workItem from="1715667579991" duration="3957000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src /Controlador/ControladoresBD/ControladorBD.java</url>
-          <line>64</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src /Controlador/ControladorPrincipal.java</url>
-          <line>28</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
