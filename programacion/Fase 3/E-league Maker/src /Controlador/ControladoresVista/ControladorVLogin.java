@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.SQLException;
 
 public class ControladorVLogin {
 
@@ -34,13 +35,27 @@ public class ControladorVLogin {
     {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (r.getTfUsuario().getText().isEmpty())
+
+            try
+            {
+                if (r.getTfUsuario().getText().isEmpty())
+                {
+                    r.getTfUsuario().setText("El usuario o la contraseña está mal");
+
+                    r.getTfUsuario().setForeground(Color.RED);
+                    r.getPfContra().setText("");
+                }
+            }
+            catch (ClassNotFoundException | SQLException eSQL)
             {
                 r.getTfUsuario().setText("El usuario o la contraseña está mal");
 
                 r.getTfUsuario().setForeground(Color.RED);
                 r.getPfContra().setText("");
+                System.out.println(eSQL.getMessage());
             }
+
+
 
         }
     }

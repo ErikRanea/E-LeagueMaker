@@ -2,6 +2,7 @@ package Controlador.ControladoresBD;
 
 import Controlador.ControladorPrincipal;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -43,11 +44,11 @@ public class ControladorBD {
     private Connection con;
 
 
-    public ControladorBD(ControladorPrincipal cp)
+    public ControladorBD(ControladorPrincipal cp) 
     {
         this.cp = cp;
         abrirConexion();
-
+        inicializarTablas();
     }
 
     public void abrirConexion()
@@ -56,11 +57,11 @@ public class ControladorBD {
         {
             //Registrar el driver
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            String url = "jdbc:oracle:thin:@a8150ad3dbd3.sn.mynetname.net:33150:xe";
+            String url = "jdbc:oracle:thin:@172.20.225.114:1521:orcl";
 
 
-            String login="proyecto1"; // usuario
-            String password = "MasTrabajo24"; // Preguntar a Eider como guardar una password de manera segura
+            String login="eqdaw05"; // usuario
+            String password = "eqdaw05"; // Preguntar a Eider como guardar una password de manera segura
 
             this.con = DriverManager.getConnection (url ,login , password );
             System.out.print("Conexión realizada");
@@ -70,8 +71,14 @@ public class ControladorBD {
         catch (ClassNotFoundException | SQLException e)
         {
            // cp.mostrarMensajeVP(e.getMessage());
-            System.out.print("Ha salido un error "+e.getMessage() );
+
+            System.out.print("Ha salido un error\n "+e.getMessage());
         }
+    }
+
+
+    public void cerrarConexion() throws SQLException {
+        con.close();
     }
     public void inicializarTablas()
     {
@@ -86,5 +93,15 @@ public class ControladorBD {
         ctStaffs = new ControladorTStaffs();
         ctUsuarios = new ControladorTUsuarios();
     }
+
+
+
+
+
+
+
+
+
+
 
 }

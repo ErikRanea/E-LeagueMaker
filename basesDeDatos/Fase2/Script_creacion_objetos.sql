@@ -129,7 +129,7 @@ DROP SEQUENCE seq_equipos;
     
     CREATE TABLE Usuarios (
         Cod_Usuario NUMBER(10) GENERATED ALWAYS AS IDENTITY,
-        Nickname VARCHAR2(100),
+        Nickname VARCHAR2(100) UNIQUE,
         Password VARCHAR2(100),
         Es_Admin Number(1) DEFAULT(0),
         CONSTRAINT Usu_Cod_Usuario_PK PRIMARY KEY (Cod_Usuario),
