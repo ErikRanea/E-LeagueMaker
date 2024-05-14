@@ -4,7 +4,68 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6b3a080-3865-4c01-9fd8-09ea76f749a4" name="Changes" comment="" />
+    <list default="true" id="f6b3a080-3865-4c01-9fd8-09ea76f749a4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ .idea/ (1).gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ .idea/misc (1).xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ .idea/modules (1).xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ .idea/uiDesigner (1).xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ .idea/workspace (1).xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Controlador/ControladorPrincipal.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Controlador/ControladoresBD/ControladorBD.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Controlador/ControladoresBD/ControladorTCompeticiones.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Controlador/ControladoresBD/ControladorTEnfrentamientos.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Controlador/ControladoresBD/ControladorTEquipos.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Controlador/ControladoresBD/ControladorTJornadas.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Controlador/ControladoresBD/ControladorTJuegos.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Controlador/ControladoresBD/ControladorTJugadores.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Controlador/ControladoresBD/ControladorTPatrocinadores.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Controlador/ControladoresBD/ControladorTPuntos_Equipos.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Controlador/ControladoresBD/ControladorTStaffs.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Controlador/ControladoresBD/ControladorTUsuarios.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Controlador/ControladoresVista/ControladorVLogin$BAceptarAL.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Controlador/ControladoresVista/ControladorVLogin$TfUsuarioFL.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Controlador/ControladoresVista/ControladorVLogin.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Controlador/ControladoresVista/ControladorVUsuario.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Controlador/ControladoresVista/ControladorVentanas.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Controlador/ControladoresVista/ControlodarVAdmin.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Img /100 sin fondo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Img /100.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Img /100circulo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Img /150 sin fondo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Img /150.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Img /200 sin fondo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Img /200.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Img /Esquema.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Img /Logo mas cerca sin fondo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Img /Logo mas cerca.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Img /Logo.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Modelo/Competicion.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Modelo/Enfrentamiento.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Modelo/Equipo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Modelo/Jornada.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Modelo/Juego.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Modelo/Jugador.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Modelo/Patrocinador.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Modelo/Puntos_Equipos.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Modelo/Staff.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Modelo/Usuario.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Vista/VentanaInscripcion.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/Vista/VentanaRegistro.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/com/intellij/uiDesigner/core/AbstractLayout.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/com/intellij/uiDesigner/core/DimensionInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/com/intellij/uiDesigner/core/GridConstraints.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/com/intellij/uiDesigner/core/GridLayoutManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/com/intellij/uiDesigner/core/HorizontalInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/com/intellij/uiDesigner/core/LayoutState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/com/intellij/uiDesigner/core/Spacer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/com/intellij/uiDesigner/core/SupportCode$TextWithMnemonic.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/com/intellij/uiDesigner/core/SupportCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/com/intellij/uiDesigner/core/Util.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/E-league Maker/com/intellij/uiDesigner/core/VerticalInfo.class" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,7 +140,7 @@
       <workItem from="1715626397782" duration="550000" />
       <workItem from="1715627007719" duration="309000" />
       <workItem from="1715627564618" duration="3843000" />
-      <workItem from="1715667579991" duration="6100000" />
+      <workItem from="1715667579991" duration="6583000" />
     </task>
     <servers />
   </component>
