@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Elemento raíz -->
+  <xs:element name="resultado_jornadas">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="jornada" type="jornadaType" minOccurs="1" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Tipo complejo para 'jornada' -->
+  <xs:complexType name="jornadaType">
+    <xs:sequence>
+      <xs:element name="numero_jornada" type="xs:integer" />
+      <xs:element name="enfrentamiento" type="enfrentamientoType" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="id_competicion" type="xs:integer" use="required" />
+    <xs:attribute name="id_jornada" type="xs:integer" use="required" />
+  </xs:complexType>
+
+  <!-- Tipo complejo para 'enfrentamiento' -->
+  <xs:complexType name="enfrentamientoType">
+    <xs:sequence>
+      <xs:element name="cod_equipo_local" type="xs:integer" />
+      <xs:element name="cod_equipo_visitante" type="xs:integer" />
+      <xs:element name="ganador" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:integer" use="required" />
+  </xs:complexType>
+
+</xs:schema>

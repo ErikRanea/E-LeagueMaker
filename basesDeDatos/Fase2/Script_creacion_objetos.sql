@@ -1,4 +1,14 @@
 -- alter session set ddl_lock_timeout = 500;
+DROP SEQUENCE seq_equipos;
+DROP SEQUENCE seq_competiciones;
+DROP SEQUENCE seq_juegos;
+DROP SEQUENCE seq_enfrentamientos;
+DROP SEQUENCE seq_jornadas;
+
+DROP SYNONYM competi;
+DROP SYNONYM enfre;
+DROP SYNONYM patro;
+
 
 DROP TABLE Puntos_Equipos CASCADE CONSTRAINTS;
 DROP TABLE Usuarios CASCADE CONSTRAINTS;
@@ -119,7 +129,7 @@ DROP SEQUENCE seq_equipos;
     
     CREATE TABLE Usuarios (
         Cod_Usuario NUMBER(10) GENERATED ALWAYS AS IDENTITY,
-        Nickname VARCHAR2(100),
+        Nickname VARCHAR2(100) UNIQUE,
         Password VARCHAR2(100),
         Es_Admin Number(1) DEFAULT(0),
         CONSTRAINT Usu_Cod_Usuario_PK PRIMARY KEY (Cod_Usuario),
@@ -170,6 +180,7 @@ CREATE OR REPLACE VIEW Resultados_Jornadas AS
 SELECT
 
     enf.Cod_Jornada,
+    jorn.Cod_competicion,
     enf.Cod AS Cod_Enfrentamiento,  -- Jornada asociada
     jorn.N_Jornada,  -- N�mero de la jornada
     enf.Cod_Equipo_Local,  -- C�digo del equipo local
