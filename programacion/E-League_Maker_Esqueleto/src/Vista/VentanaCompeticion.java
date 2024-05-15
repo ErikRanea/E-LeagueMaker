@@ -6,6 +6,7 @@
 package Vista;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class VentanaCompeticion extends JFrame{
     private JPanel pPrincipal;
@@ -13,12 +14,13 @@ public class VentanaCompeticion extends JFrame{
     private JPanel pAcciones;
     private JPanel pvisualizar;
     private JPanel pBotones;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JButton button4;
-    private JButton button5;
     private JPanel pDatos;
+    private JButton bVerClasifi;
+    private JButton bVerResultado;
+    private JButton bIntroResult;
+    private JComboBox cbCompeti;
+    private JComboBox cbJornada;
+    private JButton bLogOut;
 
 
     public VentanaCompeticion()
@@ -26,8 +28,21 @@ public class VentanaCompeticion extends JFrame{
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setContentPane(pPrincipal);
         setLocationRelativeTo(null);
+        iniciarComponentes();
+
     }
 
 
+    public void iniciarComponentes()
+    {
+        setImagenLogOutBoton(bLogOut,"Img/log-out-icon.png");
+    }
 
+    public void setImagenLogOutBoton(JButton botton, String ruta)
+    {
+        ImageIcon imagen = new ImageIcon(ruta);
+        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(botton.getWidth(),botton.getHeight(), Image.SCALE_DEFAULT));
+        botton.setIcon(icono);
+
+    }
 }
