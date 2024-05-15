@@ -6,6 +6,7 @@
 package Vista;
 
 import javax.swing.*;
+//import org.imgscalr.Scalr;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
@@ -14,16 +15,15 @@ import java.awt.event.ComponentEvent;
 public class VentanaCompeticion extends JFrame{
     private JPanel pPrincipal;
     private JPanel pCabecera;
-    private JPanel pAcciones;
     private JPanel pvisualizar;
-    private JPanel pBotones;
-    private JPanel pDatos;
     private JButton bVerClasifi;
     private JButton bVerResultado;
     private JButton bIntroResult;
-    private JComboBox cbCompeti;
-    private JComboBox cbJornada;
     private JButton bLogOut;
+    private JPanel pLogOut;
+    private JPanel pLogo;
+    private JPanel pIzqCabeVacio;
+    private JPanel pLateralIzq;
 
 
     public VentanaCompeticion()
@@ -41,6 +41,8 @@ public class VentanaCompeticion extends JFrame{
         bLogOut.setFocusPainted(false);
         bLogOut.setBorderPainted(false);
         bLogOut.setContentAreaFilled(false);
+
+
         bLogOut.setPressedIcon(new ImageIcon("/Img/logOutBlanco30x30.png"));
 
     }
