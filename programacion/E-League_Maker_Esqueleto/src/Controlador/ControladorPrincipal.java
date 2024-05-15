@@ -13,7 +13,7 @@ public class ControladorPrincipal {
     public ControladorPrincipal()
     {
         cbd = new ControladorBD(this);
-       // cv = new ControladorVista(this);
+        cv = new ControladorVista(this);
     }
 
 }

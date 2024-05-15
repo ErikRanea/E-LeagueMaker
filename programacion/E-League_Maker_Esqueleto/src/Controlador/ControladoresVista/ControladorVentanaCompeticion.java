@@ -34,6 +34,7 @@ public class ControladorVentanaCompeticion {
         vCompeti = new VentanaCompeticion();
 
         vCompeti.setVisible(true);
+        //vCompeti.iniciarComponentes();
     }
 
 }

@@ -59,6 +59,7 @@
                 <properties>
                   <background color="-57266"/>
                   <foreground color="-57266"/>
+                  <icon value="Img/logOutBlanco.png"/>
                   <text value=""/>
                 </properties>
               </component>
@@ -89,7 +90,7 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints border-constraint="Center"/>
             <properties>
-              <background color="-57266"/>
+              <background color="-1"/>
               <borderPainted value="false"/>
             </properties>
             <border type="none"/>
