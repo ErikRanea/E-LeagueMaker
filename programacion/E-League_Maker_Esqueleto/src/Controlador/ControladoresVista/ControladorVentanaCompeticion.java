@@ -47,7 +47,7 @@ public class ControladorVentanaCompeticion {
         }
         catch (Exception ex)
         {
-            System.out.println(ex.getMessage());
+            System.out.println("\n"+ex.getMessage());
         }
     }
 
