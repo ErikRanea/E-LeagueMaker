@@ -31,11 +31,11 @@ public class ControladorBD {
         {
             //Registrar el driver
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            String url = "jdbc:oracle:thin:@172.20.225.114:1521:orcl";
+            String url = "jdbc:oracle:thin:@a8150ad3dbd3.sn.mynetname.net:33150:xe";
 
 
-            String login="eqdaw05"; // usuario
-            String password = "eqdaw05"; // Preguntar a Eider como guardar una password de manera segura
+            String login="proyecto1"; // usuario
+            String password = "MasTrabajo24"; // Preguntar a Eider como guardar una password de manera segura
 
             this.con = DriverManager.getConnection (url ,login , password );
             System.out.print("Conexión realizada");
