@@ -6,7 +6,9 @@
  */
 package Controlador.ControladoresVista;
 
+import Vista.VentanaAMano;
 import Vista.VentanaCompeticion;
+import Vista.VentanaTrasteo;
 
 public class ControladorVentanaCompeticion {
 
@@ -22,7 +24,7 @@ public class ControladorVentanaCompeticion {
      * @param vCompeti
      */
     private VentanaCompeticion vCompeti;
-
+    private VentanaTrasteo vTrasteo;
 
     public ControladorVentanaCompeticion(ControladorVista cv)
     {
@@ -31,10 +33,22 @@ public class ControladorVentanaCompeticion {
 
     public void crearMostrar()
     {
-        vCompeti = new VentanaCompeticion();
+        try
+        {
+            //vCompeti = new VentanaCompeticion();
 
-        vCompeti.setVisible(true);
-        //vCompeti.iniciarComponentes();
+            //vCompeti.setVisible(true);
+            // vCompeti.iniciarComponentes();
+
+            vTrasteo = new VentanaTrasteo();
+
+            vTrasteo.setVisible(true);
+
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
     }
 
 }
