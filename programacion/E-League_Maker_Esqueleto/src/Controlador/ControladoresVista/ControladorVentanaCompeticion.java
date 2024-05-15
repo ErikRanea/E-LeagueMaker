@@ -42,6 +42,8 @@ public class ControladorVentanaCompeticion {
 
             vTrasteo = new VentanaTrasteo();
 
+
+            vTrasteo.pack();
             vTrasteo.setVisible(true);
 
         }

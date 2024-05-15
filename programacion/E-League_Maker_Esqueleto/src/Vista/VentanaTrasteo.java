@@ -23,6 +23,9 @@ public class VentanaTrasteo extends JFrame{
     private JButton bVerClasifi;
     private JButton bIntroResult;
     private JPanel pDatos;
+    private JPanel pEspaciador;
+    private JComboBox comboBox1;
+    private JComboBox comboBox2;
 
 
     public VentanaTrasteo() throws IOException
