@@ -23,8 +23,16 @@ public class ControladorVentanaRegistro {
 
     public void crearMostrar()
     {
-        vRegistro = new VentanaRegistro();
+        try
+        {
+            vRegistro = new VentanaRegistro();
 
-        vRegistro.setVisible(true);
+            vRegistro.setVisible(true);
+        }
+        catch (Exception ex)
+        {
+            System.out.println("\n Ha salido el siguiente error: \n"+ex.getMessage());
+        }
+
     }
 }

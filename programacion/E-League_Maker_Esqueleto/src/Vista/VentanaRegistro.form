@@ -88,7 +88,7 @@
               <foreground color="-14995655"/>
             </properties>
           </component>
-          <component id="929ab" class="javax.swing.JLabel">
+          <component id="929ab" class="javax.swing.JLabel" binding="lIcono">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="2" indent="0" use-parent-layout="false">
                 <minimum-size width="300" height="100"/>
@@ -99,7 +99,6 @@
             <properties>
               <font size="28"/>
               <foreground color="-853001"/>
-              <icon value="Img/100_circulo.png"/>
               <text value="  Iniciar Sesión"/>
             </properties>
           </component>
