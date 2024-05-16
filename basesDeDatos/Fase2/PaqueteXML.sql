@@ -50,8 +50,9 @@ CREATE OR REPLACE PACKAGE BODY Paquete_XML AS
   -- Procedimiento resultados ultima jornada xml
   
 
-  PROCEDURE GenerarUltimaJornada (p_cod_jornada in jornadas.cod%type) IS
-    result CLOB;  -- Para almacenar el resultado XML
+  PROCEDURE GenerarUltimaJornada  (p_cod_jornada in jornadas.cod%type) IS
+    result CLOB;
+    r_xml CLOB;-- Para almacenar el resultado XML
   BEGIN
     -- Generar el XML a partir de la vista 'Resultados_Jornadas'
     SELECT
@@ -60,10 +61,12 @@ CREATE OR REPLACE PACKAGE BODY Paquete_XML AS
         XMLAGG(
           XMLELEMENT(
             "jornada",
-            XMLATTRIBUTES(rj.Cod_Jornada AS "id"),  -- Atributo 'id' para la jornada
+            XMLATTRIBUTES(j.Cod AS "id"),  -- Atributo 'id' para la jornada
             XMLFOREST(
-              rj.N_Jornada AS "numero_jornada"  -- Elemento del número de la jornada
+              j.N_Jornada AS "numero_jornada",  -- Elemento del número de la jornada
+              j.fecha AS "Fecha_jornada"
             ),
+            (SELECT
             XMLAGG(
               XMLELEMENT(
                 "enfrentamiento",
@@ -76,13 +79,17 @@ CREATE OR REPLACE PACKAGE BODY Paquete_XML AS
               )
               ORDER BY rj.Cod_enfrentamiento  -- Ordenar por código de enfrentamiento
             )
+            FROM resultados_jornadas rj
+            WHERE rj.cod_jornada=j.cod
+            )
           )
         )
-      ).getClobVal() INTO result  -- Obtener el resultado como CLOB
-    FROM Resultados_Jornadas rj
-    WHERE rj.Cod_Jornada = p_cod_jornada  -- Filtrar por jornada específica
-    GROUP BY rj.Cod_Jornada, rj.N_Jornada, rj.Cod_enfrentamiento, rj.Cod_Equipo_Local, rj.Cod_Equipo_Visitante, rj.Ganador;
-
+      ).getClobVal() INTO r_xml  -- Obtener el resultado como CLOB
+    FROM jornadas j
+    WHERE j.cod=p_cod_jornada;
+    
+    result:=  '<?xml version=''1.0'' encoding=''UTF-8'' ?>' || '<!DOCTYPE resultado_jornada SYSTEM "ResultadoUltimaJornada.dtd">' || r_xml;
+    
     -- Insertar el XML en la tabla con fecha de expiración
     INSERT INTO temp_clob_tab (xml_data, fecha_expiracion)
     VALUES (result, SYSTIMESTAMP + INTERVAL '7' DAY);  -- Inserción con fecha de expiración
@@ -101,52 +108,66 @@ CREATE OR REPLACE PACKAGE BODY Paquete_XML AS
   
   
 PROCEDURE GenerarResultadoJornadas IS
-    result CLOB;  -- Para almacenar el resultado XML
-  BEGIN
-    -- Generar el XML a partir de la vista 'Resultados_Jornadas'
+    result CLOB;
+    r_xml CLOB;-- Para almacenar el resultado XML
+BEGIN
+    -- Generar el XML a partir de las tablas
     SELECT
-          XMLELEMENT(
-            "resultado_jornadas",  -- Atributo 'id' para competición
+        XMLELEMENT(
+            "competiciones",
             XMLAGG(
-              XMLELEMENT(
-                "jornada",
-                XMLATTRIBUTES(
-                rj.cod_competicion AS "id_competicion", 
-                rj.Cod_Jornada AS "id_ jornada"
-                ),
-                XMLFOREST(
-                  rj.N_Jornada AS "numero_jornada"  -- Número de la jornada
-                ),
-                XMLAGG(
-                  XMLELEMENT(
-                    "enfrentamiento",
-                    XMLATTRIBUTES(rj.Cod_enfrentamiento AS "id"),  -- Atributo 'id' para enfrentamiento
-                    XMLFOREST(
-                      rj.Cod_Equipo_Local AS "cod_equipo_local",
-                      rj.Cod_Equipo_Visitante AS "cod_equipo_visitante",
-                      rj.Ganador AS "ganador"
+                XMLELEMENT(
+                    "competicion",
+                    XMLATTRIBUTES(c.cod AS "id_competicion"),
+                    XMLELEMENT("nombre_competicion", c.nombre),
+                    (SELECT
+                    XMLAGG(
+                        XMLELEMENT(
+                            "jornada",
+                            XMLATTRIBUTES(j.cod AS "id_jornada"),
+                            XMLELEMENT("numero_jornada", j.n_jornada),
+                            XMLELEMENT("fecha_jornada", j.fecha),
+                            (
+                                SELECT
+                                    XMLAGG(
+                                        XMLELEMENT(
+                                            "enfrentamiento",
+                                            XMLATTRIBUTES(rj.cod_enfrentamiento AS "id"),
+                                            XMLFOREST(
+                                                rj.cod_equipo_local AS "cod_equipo_local",
+                                                rj.cod_equipo_visitante AS "cod_equipo_visitante",
+                                                rj.ganador AS "ganador"
+                                            )
+                                        )
+                                    )
+                                FROM resultados_jornadas rj
+                                WHERE rj.cod_jornada = j.cod
+                            )
+                        )
                     )
-                  )
-                  ORDER BY rj.Cod_enfrentamiento  -- Ordenar por código de enfrentamiento
+                    FROM jornadas j
+                    WHERE j.cod_competicion = c.cod
+                    )
                 )
-              )
-              ORDER BY rj.Cod_Jornada  -- Ordenar por código de jornada
             )
-      ).getClobVal() INTO result  -- Obtener el resultado como CLOB
-    FROM Resultados_Jornadas rj
-    WHERE rj.cod_competicion IS NOT NULL   -- Filtrar por competición válida
-    GROUP BY rj.cod_competicion, rj.Cod_Jornada, rj.N_Jornada, rj.Cod_enfrentamiento, rj.Cod_Equipo_Local, rj.Cod_Equipo_Visitante, rj.Ganador;
+        ).getClobVal()
+    INTO r_xml
+    FROM competiciones c;
+    
+    result:=  '<?xml version=''1.0'' encoding=''UTF-8'' ?>' || '<!DOCTYPE competiciones SYSTEM "ResultadoJornadas.dtd">' || r_xml;
 
     -- Insertar el XML en la tabla con fecha de expiración
     INSERT INTO temp_clob_tab (xml_data, fecha_expiracion)
     VALUES (result, SYSTIMESTAMP + INTERVAL '7' DAY);  -- Inserción con fecha de expiración
 
     DBMS_OUTPUT.PUT_LINE('XML generado correctamente');  -- Confirmación de éxito
+    DBMS_OUTPUT.PUT_LINE(result);
     
-  EXCEPTION
+EXCEPTION
     WHEN OTHERS THEN
-      DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);  -- Manejo de errores
-  END GenerarResultadoJornadas;
+        DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);  -- Manejo de errores
+END GenerarResultadoJornadas;
+
 END Paquete_XML;
 
 

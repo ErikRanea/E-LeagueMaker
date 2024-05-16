@@ -1,5 +1,5 @@
 ---1.----Prueba del trigger de maximo de jugadores----
-INSERT INTO jugadores (cod, nombre,apellido, rol, salario, nacionalidad, fecha_nacimiento, nickname, cod_equipo) VALUES (1, 'jugador1', 'apellido1', 'entrenador', 2000, 'peru', '10-11-2020', 'shadow', 1 );
+update jugadores set cod_equipo =2 where cod=5;
 INSERT INTO jugadores (cod, nombre,apellido, rol, salario, nacionalidad, fecha_nacimiento, nickname, cod_equipo) VALUES (2, 'jugador2', 'apellido2', 'entrenador', 3000, 'venezuela', '10-11-1999', 'sombra', 1 );
 INSERT INTO jugadores (cod, nombre,apellido, rol, salario, nacionalidad, fecha_nacimiento, nickname, cod_equipo) VALUES (3, 'jugador3', 'apellido3', 'entrenador', 2000, 'colombia', '10-10-2020', 'sembra', 1 );
 INSERT INTO jugadores (cod, nombre,apellido, rol, salario, nacionalidad, fecha_nacimiento, nickname, cod_equipo) VALUES (11, 'jugador4', 'apellido4', 'entrenador', 1000, 'irlanda', '10-11-2020', 'shadow', 1 );
@@ -20,16 +20,16 @@ Error SQL: ORA-20001: Debe haber al menos dos jugadores en un
         equipo para realizar esta operaci�n
 ORA-06512: en "EQDAW05.CONTROLAR_MIN_JUGADOR_EQUIPO", l�nea 9
 ORA-04088: error durante la ejecuci�n del disparador 'EQDAW05.CONTROLAR_MIN_JUGADOR_EQUIPO'*/
-INSERT INTO puntos_equipos (cod_competicion, cod_equipo, puntos) VALUES (102, 6, 3);
+INSERT INTO puntos_equipos (cod_competicion, cod_equipo, puntos) VALUES (1, 6, 3);
 
 
 /*3. Controlar que cuando empiece la competici�n no se puedan modificar ni equipos ni jugadores*/
 ---nos dar� error de que no se puede insertar por que ya esta iniciado ----
-INSERT INTO puntos_equipos (cod_competicion, cod_equipo, puntos) VALUES(101, 90, 4);
+INSERT INTO puntos_equipos (cod_competicion, cod_equipo, puntos) VALUES(1, 90, 4);
 
 
 /*4 TRIIGER DE NUMEROS IMPARES*/
-INSERT INTO jornadas (cod, n_jornada, fecha, cod_competicion, cod_juego) VALUES (8, 2, TO_DATE('2024/04/27', 'YYYY/MM/DD'),302, 3 );
+INSERT INTO jornadas (cod, n_jornada, fecha, cod_competicion, cod_juego) VALUES (8, 2, TO_DATE('2024/04/27', 'YYYY/MM/DD'),2, 3 );
 
 /*Error que empieza en la l�nea: 20 del comando -
 INSERT INTO jornadas (cod, n_jornada, fecha, cod_competicion, cod_juego) VALUES (8, 2, TO_DATE('2024/04/27', 'YYYY/MM/DD'),302, 3 )
@@ -48,7 +48,7 @@ INSERT INTO jugadores (nombre, apellido, rol, salario, nacionalidad, fecha_nacim
 
 INSERT INTO jugadores (nombre, apellido, rol, salario, nacionalidad, fecha_nacimiento, nickname, cod_equipo) VALUES ('Remolacha', 'Juarez', 'remo', 1250, 'Francia',TO_DATE('2001/04/27', 'YYYY/MM/DD'),'Remojua', 7);
 
-INSERT INTO puntos_equipos(cod_competicion, cod_equipo, puntos) VALUES(202, 7, 3 );
+INSERT INTO puntos_equipos(cod_competicion, cod_equipo, puntos) VALUES(2, 7, 3 );
 /*Error que empieza en la l�nea: 51 del comando -
 INSERT INTO puntos_equipos(cod_competicion, cod_equipo, puntos) VALUES(202, 7, 3 )
 Error en la l�nea de comandos : 51 Columna : 13
