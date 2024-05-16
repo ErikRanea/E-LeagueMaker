@@ -12,13 +12,15 @@ public class VentanaRegistro extends JDialog {
     /**
      * Constructor del diálogo de registro
      * @author Oskar
-     * @version 1.0
-     * @since 10/05/2024
+     * @version 2.0
+     * @since 16/05/2024
      */
     public VentanaRegistro() {
         setContentPane(contentPane);
+        setSize(300,400);
         setModal(true);
         getRootPane().setDefaultButton(bAceptar);
+        setLocationRelativeTo(null);
     }
 
     /**

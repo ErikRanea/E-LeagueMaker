@@ -22,18 +22,21 @@ public class ControladorVista {
      * @param cvCometi
      */
     private ControladorVentanaCompeticion cvCompeti;
+    private ControladorVentanaRegistro cvRegistro;
 
     public ControladorVista(ControladorPrincipal cp)
     {
         this.cp = cp;
+        cvRegistro = new ControladorVentanaRegistro(this);
         cvCompeti = new ControladorVentanaCompeticion(this);
-        mostrarVentanaCompeti();
+        mostrarVentanaRegistro();
     }
 
     public void mostrarVentanaCompeti()
     {
         cvCompeti.crearMostrar();
     }
+    public void mostrarVentanaRegistro(){cvRegistro.crearMostrar();}
 
 
 
