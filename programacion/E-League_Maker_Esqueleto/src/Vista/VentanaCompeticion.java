@@ -7,28 +7,29 @@ package Vista;
 
 import javax.swing.*;
 //import org.imgscalr.Scalr;
-import javax.swing.border.Border;
-import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+
 
 public class VentanaCompeticion extends JFrame{
     private JPanel pPrincipal;
     private JPanel pCabecera;
-    private JPanel pvisualizar;
-    private JButton bVerClasifi;
-    private JButton bVerResultado;
-    private JButton bIntroResult;
+    private JPanel pCuerpo;
+    private JPanel pBotones;
+    private JPanel pVisualizar;
+    private JPanel pFooter;
+    private JComboBox cbCompeti;
+    private JComboBox cbJornadas;
+    private JPanel pIzqCabeVacio;
     private JButton bLogOut;
     private JPanel pLogOut;
-    private JPanel pLogo;
-    private JPanel pIzqCabeVacio;
-    private JPanel pLateralIzq;
+    private JButton introducirResultadosButton;
+    private JButton verClasificaciónButton;
+    private JButton verResultadoJornadasButton;
+    private JButton button1;
 
 
     public VentanaCompeticion()
     {
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+       // setExtendedState(JFrame.MAXIMIZED_BOTH);
         setContentPane(pPrincipal);
         setLocationRelativeTo(null);
         iniciarComponentes();

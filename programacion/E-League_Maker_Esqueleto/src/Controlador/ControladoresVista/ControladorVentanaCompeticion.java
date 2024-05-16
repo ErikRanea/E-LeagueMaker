@@ -35,16 +35,16 @@ public class ControladorVentanaCompeticion {
     {
         try
         {
-            //vCompeti = new VentanaCompeticion();
+            vCompeti = new VentanaCompeticion();
 
-            //vCompeti.setVisible(true);
-            // vCompeti.iniciarComponentes();
+            vCompeti.setVisible(true);
+            vCompeti.iniciarComponentes();
 
-            vTrasteo = new VentanaTrasteo();
+            //vTrasteo = new VentanaTrasteo();
 
 
-            vTrasteo.pack();
-            vTrasteo.setVisible(true);
+            //vTrasteo.pack();
+            //vTrasteo.setVisible(true);
 
         }
         catch (Exception ex)
