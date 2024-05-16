@@ -9,6 +9,7 @@
 package Controlador.ControladoresBD;
 
 import Controlador.ControladorPrincipal;
+import Modelo.Equipo;
 import Modelo.Juego;
 
 import java.sql.Connection;
@@ -22,6 +23,7 @@ public class ControladorBD {
 
 
     private ControladorTJuegos ctJuegos;
+    private ControladorTEquipos ctEquipos;
 
 
     public ControladorBD(ControladorPrincipal cp)
@@ -64,6 +66,7 @@ public class ControladorBD {
     public void inicializarTablas()
     {
         ctJuegos = new ControladorTJuegos(this);
+        ctEquipos = new ControladorTEquipos(this);
     }
 
 
@@ -73,6 +76,15 @@ public class ControladorBD {
     public String insertarJuego(Juego juego) throws Exception { return ctJuegos.insertarJuego(juego);}
     public String borrarJuego() throws Exception{ return ctJuegos.borrarJuego();}
     public String modificarJuego(Juego juego) throws Exception{return ctJuegos.modificarJuego(juego);}
+
+
+
+    //Equipos
+    public Equipo buscarEquipo(int cod) throws Exception{return ctEquipos.buscarEquipo(cod);}
+    public Equipo buscarEquipo(String nombre) throws Exception{return ctEquipos.buscarEquipo(nombre);}
+    public String borrarEquipo() throws Exception {return ctEquipos.borrarEquipo();}
+    public String modificarEquipo(Equipo equipo) throws Exception{return ctEquipos.modificarEquipo(equipo);}
+    public String insertarEquipo(Equipo equipo) throws Exception{return ctEquipos.insertarEquipo(equipo);}
 
 
 }
