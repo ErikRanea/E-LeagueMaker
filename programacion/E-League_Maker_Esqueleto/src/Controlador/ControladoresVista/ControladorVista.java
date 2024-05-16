@@ -7,6 +7,9 @@
 package Controlador.ControladoresVista;
 
 import Controlador.ControladorPrincipal;
+import Modelo.Juego;
+
+import java.time.LocalDate;
 
 public class ControladorVista {
 
@@ -22,20 +25,72 @@ public class ControladorVista {
      * @param cvCometi
      */
     private ControladorVentanaCompeticion cvCompeti;
+    private ControladorVentanaRegistro cvRegistro;
 
     public ControladorVista(ControladorPrincipal cp)
     {
         this.cp = cp;
+        cvRegistro = new ControladorVentanaRegistro(this);
         cvCompeti = new ControladorVentanaCompeticion(this);
-        mostrarVentanaCompeti();
+        probarTablas();
+        mostrarVentanaRegistro();
+
     }
 
     public void mostrarVentanaCompeti()
     {
         cvCompeti.crearMostrar();
     }
+    public void mostrarVentanaRegistro(){cvRegistro.crearMostrar();}
 
 
+
+    public void probarTablas()
+    {
+        probarCrudJuegos();
+    }
+
+    public void probarCrudJuegos()
+    {
+        try
+        {
+            //Busco juego
+            Juego juego = buscarJuego("Valorant");
+            System.out.println("\nEl juego a "+ juego.getNombre()+" es de "+ juego.getDesarrolladora());
+
+            //Inserto juego
+            Juego juego2 = new Juego();
+            juego2.setNombre("Fifa");
+            juego2.setDesarrolladora("EA");
+            juego2.setFechaLanzamiento(LocalDate.now());
+            System.out.println("\n"+insertarJuego(juego2));
+
+            //Modifico el juego
+            juego2 = buscarJuego(juego2.getNombre());
+            juego2.setNombre("Battlefield");
+            modificarJuego(juego2);
+
+            //Borro Juego
+
+            System.out.println("\n"+borrarJuego());
+
+
+
+
+        }
+        catch (Exception ex)
+        {
+            System.out.println("\nHa salido el siguiente error:\n"+ex.getMessage());
+        }
+
+    }
+
+
+
+    public Juego buscarJuego(String nombre) throws Exception { return cp.buscarJuego(nombre);}
+    public String insertarJuego(Juego juego) throws Exception { return cp.insertarJuego(juego);}
+    public String borrarJuego() throws Exception{ return cp.borrarJuego();}
+    public String modificarJuego(Juego juego) throws Exception{return cp.modificarJuego(juego);}
 
 
 

@@ -8,7 +8,7 @@ CREATE OR REPLACE PACKAGE crud_Juegos AS
     PROCEDURE modificar_juego(p_cod IN juegos.cod%TYPE, p_nombre 
     IN juegos.nombre%TYPE, p_desarrolladora IN juegos.desarrolladora%TYPE, 
     p_fecha_lanzamiento IN juegos.fecha_lanzamiento%TYPE);
-    FUNCTION consultar_juego(p_cod IN juegos.cod%TYPE) RETURN tipo_cursor;
+    FUNCTION consultar_juego(p_nombre IN juegos.nombre%TYPE) RETURN tipo_cursor;
 END crud_Juegos;
 /
 -- Cuerpo del paquete Crud_Juegos
@@ -56,7 +56,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Juegos IS
     END modificar_juego;
 
     -- Consultar juegos
-    FUNCTION consultar_juego(p_cod IN juegos.cod%TYPE) 
+    FUNCTION consultar_juego(p_nombre IN juegos.nombre%TYPE) 
     RETURN tipo_cursor
     IS
         v_cursor tipo_cursor;
@@ -64,7 +64,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Juegos IS
         OPEN v_cursor FOR
             SELECT cod, nombre, desarrolladora, fecha_lanzamiento
             FROM juegos
-            WHERE cod = p_cod;
+            WHERE UPPER(nombre) = UPPER(p_nombre);
         RETURN v_cursor;
     EXCEPTION
         WHEN others THEN
@@ -316,7 +316,8 @@ END crud_Jugadores;
 -- Definir paquete Crud_Staffs
 CREATE OR REPLACE PACKAGE crud_Staffs AS 
     TYPE tipo_cursor IS REF CURSOR;
-    PROCEDURE insertar_Staffs(p_nombre IN Staffs.nombre%TYPE, p_apellido IN 
+    PROCEDURE insertar_Staffs(p_cod IN STAFFS.cod%TYPE,
+    p_nombre IN Staffs.nombre%TYPE, p_apellido IN 
     Staffs.apellido%TYPE, p_puesto IN Staffs.puesto%TYPE, p_salario IN 
     Staffs.salario%TYPE, p_cod_equipo IN Staffs.cod_equipo%TYPE);
     PROCEDURE borrar_Staffs(p_cod IN Staffs.cod%TYPE);
@@ -330,13 +331,14 @@ END crud_Staffs;
 CREATE OR REPLACE PACKAGE BODY crud_Staffs IS
 
     -- Alta de Staffs
-    PROCEDURE insertar_Staffs (p_nombre IN Staffs.nombre%TYPE, p_apellido IN 
+    PROCEDURE insertar_Staffs (p_cod IN STAFFS.cod%TYPE,
+    p_nombre IN Staffs.nombre%TYPE, p_apellido IN 
     Staffs.apellido%TYPE, p_puesto IN Staffs.puesto%TYPE, p_salario IN 
     Staffs.salario%TYPE,  p_cod_equipo IN Staffs.cod_equipo%TYPE)
     IS
     BEGIN
-        INSERT INTO Staffs (nombre, apellido, puesto, salario, cod_equipo)
-        VALUES (p_nombre, p_apellido, p_puesto, p_salario, p_cod_equipo);
+        INSERT INTO Staffs (cod,nombre, apellido, puesto, salario, cod_equipo)
+        VALUES (p_cod,p_nombre, p_apellido, p_puesto, p_salario, p_cod_equipo);
     EXCEPTION
         WHEN others THEN
         raise;
@@ -581,6 +583,8 @@ CREATE OR REPLACE PACKAGE BODY crud_Enfrentamientos IS
         cod_equipo_visitante, cod_equipo_local)
         VALUES (seq_enfrentamientos.nextval, p_hora, p_gana_local, 
         p_cod_jornada, p_cod_equipo_visitante, p_cod_equipo_local);
+        DBMS_OUTPUT.PUT_LINE('Hora: '||p_hora||' Gana_Local: '|| p_gana_local||
+        ' Cod_jornada: '||p_cod_jornada);
     EXCEPTION
         WHEN others THEN
         raise;

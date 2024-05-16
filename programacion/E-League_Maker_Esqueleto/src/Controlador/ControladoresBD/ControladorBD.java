@@ -9,6 +9,7 @@
 package Controlador.ControladoresBD;
 
 import Controlador.ControladorPrincipal;
+import Modelo.Juego;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,15 +18,20 @@ import java.sql.SQLException;
 public class ControladorBD {
 
     final ControladorPrincipal cp;
-    private Connection con;
+
+
+
+    private ControladorTJuegos ctJuegos;
+
 
     public ControladorBD(ControladorPrincipal cp)
     {
         this.cp = cp;
-        abrirConexion();
+        inicializarTablas();
+
     }
 
-    public void abrirConexion()
+    public Connection  abrirConexion()
     {
         try
         {
@@ -37,9 +43,9 @@ public class ControladorBD {
             String login="proyecto1"; // usuario
             String password = "MasTrabajo24"; // Preguntar a Eider como guardar una password de manera segura
 
-            this.con = DriverManager.getConnection (url ,login , password );
-            System.out.print("Conexión realizada");
 
+            System.out.print("\nConexión realizada");
+            return DriverManager.getConnection (url ,login , password );
 
         }
         catch (ClassNotFoundException | SQLException e)
@@ -48,14 +54,25 @@ public class ControladorBD {
 
             System.out.print("Ha salido un error\n "+e.getMessage());
         }
+        return null;
     }
 
 
-    public void cerrarConexion() throws SQLException {
+    public void cerrarConexion(Connection con) throws SQLException {
         con.close();
     }
-    /*public void inicializarTablas()
+    public void inicializarTablas()
     {
-    }*/
+        ctJuegos = new ControladorTJuegos(this);
+    }
+
+
+
+
+    public Juego buscarJuego(String nombre) throws Exception { return ctJuegos.buscarJuego(nombre);}
+    public String insertarJuego(Juego juego) throws Exception { return ctJuegos.insertarJuego(juego);}
+    public String borrarJuego() throws Exception{ return ctJuegos.borrarJuego();}
+    public String modificarJuego(Juego juego) throws Exception{return ctJuegos.modificarJuego(juego);}
+
 
 }

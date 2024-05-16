@@ -6,24 +6,24 @@
 package Vista;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 //import org.imgscalr.Scalr;
-import javax.swing.border.Border;
-import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+
 
 public class VentanaCompeticion extends JFrame{
     private JPanel pPrincipal;
-    private JPanel pCabecera;
-    private JPanel pvisualizar;
-    private JButton bVerClasifi;
-    private JButton bVerResultado;
-    private JButton bIntroResult;
+    private JPanel pHead;
+    private JPanel pMenu;
+    private JPanel pBody;
+    private JPanel pBotones;
+    private JPanel pVisualizar;
+    private JComboBox cbCompeticiones;
+    private JComboBox cbJornadas;
     private JButton bLogOut;
-    private JPanel pLogOut;
-    private JPanel pLogo;
-    private JPanel pIzqCabeVacio;
-    private JPanel pLateralIzq;
+    private JButton bInsertarResult;
+    private JButton bVerClasificaciones;
+    private JButton bVerTodosLosResultados;
 
 
     public VentanaCompeticion()
@@ -33,43 +33,40 @@ public class VentanaCompeticion extends JFrame{
         setLocationRelativeTo(null);
         iniciarComponentes();
 
-    }
 
-
- public void iniciarComponentes()
-    {
-        bLogOut.setFocusPainted(false);
-        bLogOut.setBorderPainted(false);
-        bLogOut.setContentAreaFilled(false);
-
-
-        bLogOut.setPressedIcon(new ImageIcon("/Img/logOutBlanco30x30.png"));
 
     }
 
 
-
- /*   public void setImagenLogOutBoton(JButton botton, String ruta)
+     public void iniciarComponentes()
     {
-        ImageIcon imagen = new ImageIcon(ruta);
-        System.out.println("\nAncho del boton"+ botton.getWidth() +"\n Alto "+ botton.getHeight() +"\n último parametro"+ Image.SCALE_DEFAULT);
-        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(100,100, Image.SCALE_DEFAULT));
-        botton.setIcon(icono);
-        this.repaint();
-
+        pBotones.setVisible(false);
     }
 
 
-    public Icon setIcono (String url, JButton boton)
+    /**
+     * En este apartado creamos los listener para cada uno de los botones
+     * @param listener
+     */
+    public void addBLogOutAL(ActionListener listener){bLogOut.addActionListener(listener);}
+    public void addBInsertarResultAL(ActionListener listener){bInsertarResult.addActionListener(listener);}
+    public void addBVerClasifiAL(ActionListener listener){bVerClasificaciones.addActionListener(listener);}
+    public void addVerResultadosAL(ActionListener listener){bVerTodosLosResultados.addActionListener(listener);}
+
+
+    /**
+     * Las siguientes funciones interactuan directamente con acciones de la ventana
+     */
+
+    public void verPanelBotonesLateralIzq()
     {
-        ImageIcon icon = new ImageIcon(getClass().getResource(url));
-
-        int ancho = boton.getWidth();
-        int alto = boton.getHeight();
-
-        ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho,alto,Image.SCALE_DEFAULT));
-        return icono;
-
-    }*/
-
+        if(pBotones.isVisible())
+        {
+            pBotones.setVisible(false);
+        }
+        else
+        {
+            pBotones.setVisible(true);
+        }
+    }
 }

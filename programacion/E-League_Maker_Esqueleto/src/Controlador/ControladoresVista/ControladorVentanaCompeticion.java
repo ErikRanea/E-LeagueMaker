@@ -6,9 +6,10 @@
  */
 package Controlador.ControladoresVista;
 
-import Vista.VentanaAMano;
 import Vista.VentanaCompeticion;
-import Vista.VentanaTrasteo;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ControladorVentanaCompeticion {
 
@@ -24,7 +25,6 @@ public class ControladorVentanaCompeticion {
      * @param vCompeti
      */
     private VentanaCompeticion vCompeti;
-    private VentanaTrasteo vTrasteo;
 
     public ControladorVentanaCompeticion(ControladorVista cv)
     {
@@ -35,22 +35,31 @@ public class ControladorVentanaCompeticion {
     {
         try
         {
-            //vCompeti = new VentanaCompeticion();
-
-            //vCompeti.setVisible(true);
-            // vCompeti.iniciarComponentes();
-
-            vTrasteo = new VentanaTrasteo();
+            vCompeti = new VentanaCompeticion();
 
 
-            vTrasteo.pack();
-            vTrasteo.setVisible(true);
-
+            vCompeti.addBInsertarResultAL(new BIntroResult());
+            vCompeti.setVisible(true);
         }
         catch (Exception ex)
         {
             System.out.println("\n"+ex.getMessage());
         }
     }
+
+
+    /**
+     * Las siguientes interfaces son las correspondientes a los listener relacionados con insertar resultados
+     */
+
+
+    public class BIntroResult implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            vCompeti.verPanelBotonesLateralIzq();
+        }
+    }
+
 
 }
