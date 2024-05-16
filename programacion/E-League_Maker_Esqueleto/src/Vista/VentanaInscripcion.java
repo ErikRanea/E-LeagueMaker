@@ -6,14 +6,15 @@ import java.awt.*;
 public class VentanaInscripcion extends JFrame{
     private JPanel pPrincipal;
     private JPanel pCabecera;
-    private JPanel pAcciones;
-    private JPanel pBotones;
+    private JPanel pIzqCabeVacio;
+    private JPanel pLogOut;
+    private JButton bLogOut;
+    private JPanel pLogo;
+    private JButton bVerResultado;
+    private JButton bVerClasifi;
+    private JButton bIntroResult;
     private JPanel pDatos;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JButton button4;
-    private JButton button5;
+    private JPanel pAcciones;
     private JPanel pvisualizar;
 
     public VentanaInscripcion(){
