@@ -8,7 +8,7 @@ CREATE OR REPLACE PACKAGE crud_Juegos AS
     PROCEDURE modificar_juego(p_cod IN juegos.cod%TYPE, p_nombre 
     IN juegos.nombre%TYPE, p_desarrolladora IN juegos.desarrolladora%TYPE, 
     p_fecha_lanzamiento IN juegos.fecha_lanzamiento%TYPE);
-    FUNCTION consultar_juego(p_cod IN juegos.cod%TYPE) RETURN tipo_cursor;
+    FUNCTION consultar_juego(p_nombre IN juegos.nombre%TYPE) RETURN tipo_cursor;
 END crud_Juegos;
 /
 -- Cuerpo del paquete Crud_Juegos
@@ -56,7 +56,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Juegos IS
     END modificar_juego;
 
     -- Consultar juegos
-    FUNCTION consultar_juego(p_cod IN juegos.cod%TYPE) 
+    FUNCTION consultar_juego(p_nombre IN juegos.nombre%TYPE) 
     RETURN tipo_cursor
     IS
         v_cursor tipo_cursor;
@@ -64,7 +64,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Juegos IS
         OPEN v_cursor FOR
             SELECT cod, nombre, desarrolladora, fecha_lanzamiento
             FROM juegos
-            WHERE cod = p_cod;
+            WHERE UPPER(nombre) = UPPER(p_nombre);
         RETURN v_cursor;
     EXCEPTION
         WHEN others THEN

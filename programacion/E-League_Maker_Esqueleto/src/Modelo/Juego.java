@@ -8,16 +8,16 @@ public class Juego {
     private String nombre;
     private String desarrolladora;
     private LocalDate fechaLanzamiento;
-    private List<Equipo> listaEquipos;
+
 
     // Constructores
-    public Juego(int cod, String nombre, String desarrolladora, LocalDate fechaLanzamiento, List<Equipo> listaEquipos) {
+    public Juego(int cod, String nombre, String desarrolladora, LocalDate fechaLanzamiento) {
         this.cod = cod;
         this.nombre = nombre;
         this.desarrolladora = desarrolladora;
         this.fechaLanzamiento = fechaLanzamiento;
-        this.listaEquipos = listaEquipos;
     }
+    public Juego() {}
 
     // Getters & Setters
     public int getCod() {
@@ -52,11 +52,5 @@ public class Juego {
         this.fechaLanzamiento = fechaLanzamiento;
     }
 
-    public List<Equipo> getListaEquipos() {
-        return listaEquipos;
-    }
 
-    public void setListaEquipos(List<Equipo> listaEquipos) {
-        this.listaEquipos = listaEquipos;
-    }
 }

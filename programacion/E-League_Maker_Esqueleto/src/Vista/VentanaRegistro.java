@@ -58,13 +58,7 @@ public class VentanaRegistro extends JDialog {
         this.pfContra = pfContra;
     }
 
-    /**
-     * Listeners de los atributos de registro
-     *
-     * @author Oskar
-     * @version 1.0
-     * @since 10/05/2024
-     */
+
     public void bAceptarAL(ActionListener al) {
         bAceptar.addActionListener(al);
     }
@@ -80,14 +74,14 @@ public class VentanaRegistro extends JDialog {
 
 
     public void addIconoBotoLogOut() throws IOException {
-        URL iLogOut = new URL("https://github.com/ErikRanea/E-LeagueMaker/blob/develop/programacion/" +
-                "E-League_Maker_Esqueleto/src/Img/logOutBlanco.png?raw=true");
+        URL iLogOut = new URL("https://github.com/ErikRanea/E-LeagueMaker/blob/main/programacion/" +
+                "E-League_Maker_Esqueleto/src/Img/100_circulo.png?raw=true");
 
         System.out.println("\n" + "URL de la imagen: " + iLogOut);
 
         BufferedImage imagenOriginal = ImageIO.read(iLogOut);
 
-        BufferedImage bufferedImage = Scalr.resize(imagenOriginal, 25);
+        BufferedImage bufferedImage = Scalr.resize(imagenOriginal, 40);
 
         ImageIcon iconoEscalado = new ImageIcon(bufferedImage);
 
