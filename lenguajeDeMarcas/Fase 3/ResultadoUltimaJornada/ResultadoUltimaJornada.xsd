@@ -5,28 +5,38 @@
   <xs:element name="resultado_jornada">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="jornada" type="jornadaType" minOccurs="1" maxOccurs="1" />
+        <xs:element name="competicion" type="competicionType" minOccurs="1" maxOccurs="unbounded"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
 
+  <!-- Tipo complejo para 'competicion' -->
+  <xs:complexType name="competicionType">
+    <xs:sequence>
+      <xs:element name="nombre_competicion" type="xs:string"/>
+      <xs:element name="jornada" type="jornadaType" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+  </xs:complexType>
+
   <!-- Tipo complejo para 'jornada' -->
   <xs:complexType name="jornadaType">
     <xs:sequence>
-      <xs:element name="numero_jornada" type="xs:integer" />
-      <xs:element name="enfrentamiento" type="enfrentamientoType" minOccurs="1" maxOccurs="unbounded" />
+      <xs:element name="numero_jornada" type="xs:integer"/>
+      <xs:element name="Fecha_jornada" type="xs:date"/>
+      <xs:element name="enfrentamiento" type="enfrentamientoType" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="id" type="xs:integer" use="required" />
+    <xs:attribute name="id" type="xs:integer" use="required"/>
   </xs:complexType>
 
   <!-- Tipo complejo para 'enfrentamiento' -->
   <xs:complexType name="enfrentamientoType">
     <xs:sequence>
-      <xs:element name="cod_equipo_local" type="xs:integer" />
-      <xs:element name="cod_equipo_visitante" type="xs:integer" />
-      <xs:element name="ganador" type="xs:string" />
+      <xs:element name="cod_equipo_local" type="xs:integer"/>
+      <xs:element name="cod_equipo_visitante" type="xs:integer"/>
+      <xs:element name="ganador" type="xs:string"/>
     </xs:sequence>
-    <xs:attribute name="id" type="xs:integer" use="required" />
+    <xs:attribute name="id" type="xs:integer" use="required"/>
   </xs:complexType>
 
 </xs:schema>

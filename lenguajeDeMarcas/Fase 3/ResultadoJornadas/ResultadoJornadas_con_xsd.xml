@@ -1,87 +1,184 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resultado_jornadas xmlns:xs = "http://www.w3.org/2001/XMLSchema-instance"
+<competiciones xmlns:xs = "http://www.w3.org/2001/XMLSchema-instance"
 xs:noNamespaceSchemaLocation = "ResultadoJornadas.xsd">
-    <jornada id_competicion="1" id_jornada="13">
-        <numero_jornada>1</numero_jornada>
-        <enfrentamiento id="25">
-            <cod_equipo_local>1</cod_equipo_local>
-            <cod_equipo_visitante>4</cod_equipo_visitante>
+   <competicion id_competicion="1">
+      <nombre_competicion>LOL_League</nombre_competicion>
+      <jornada id_jornada="37">
+         <numero_jornada>1</numero_jornada>
+         <fecha_jornada>2024-01-01</fecha_jornada>
+         <enfrentamiento id="73">
+            <cod_equipo_local>4</cod_equipo_local>
+            <cod_equipo_visitante>1</cod_equipo_visitante>
             <ganador>Visitante</ganador>
-        </enfrentamiento>
-        <enfrentamiento id="26">
+         </enfrentamiento>
+         <enfrentamiento id="74">
             <cod_equipo_local>2</cod_equipo_local>
             <cod_equipo_visitante>3</cod_equipo_visitante>
             <ganador>Visitante</ganador>
-        </enfrentamiento>
-    </jornada>
-
-    <jornada id_competicion="1" id_jornada="14">
-        <numero_jornada>2</numero_jornada>
-        <enfrentamiento id="27">
-            <cod_equipo_local>1</cod_equipo_local>
-            <cod_equipo_visitante>4</cod_equipo_visitante>
-            <ganador>Visitante</ganador>
-        </enfrentamiento>
-        <enfrentamiento id="28">
-            <cod_equipo_local>2</cod_equipo_local>
+         </enfrentamiento>
+      </jornada>
+      <jornada id_jornada="38">
+         <numero_jornada>2</numero_jornada>
+         <fecha_jornada>2024-01-08</fecha_jornada>
+         <enfrentamiento id="75">
+            <cod_equipo_local>4</cod_equipo_local>
             <cod_equipo_visitante>3</cod_equipo_visitante>
             <ganador>Visitante</ganador>
-        </enfrentamiento>
-    </jornada>
-
-    <jornada id_competicion="1" id_jornada="15">
-        <numero_jornada>3</numero_jornada>
-        <enfrentamiento id="29">
+         </enfrentamiento>
+         <enfrentamiento id="76">
             <cod_equipo_local>1</cod_equipo_local>
-            <cod_equipo_visitante>4</cod_equipo_visitante>
+            <cod_equipo_visitante>2</cod_equipo_visitante>
             <ganador>Visitante</ganador>
-        </enfrentamiento>
-        <enfrentamiento id="30">
-            <cod_equipo_local>2</cod_equipo_local>
-            <cod_equipo_visitante>3</cod_equipo_visitante>
+         </enfrentamiento>
+      </jornada>
+      <jornada id_jornada="39">
+         <numero_jornada>3</numero_jornada>
+         <fecha_jornada>2024-01-15</fecha_jornada>
+         <enfrentamiento id="77">
+            <cod_equipo_local>4</cod_equipo_local>
+            <cod_equipo_visitante>2</cod_equipo_visitante>
             <ganador>Visitante</ganador>
-        </enfrentamiento>
-    </jornada>
-
-    <jornada id_competicion="1" id_jornada="25">
-        <numero_jornada>1</numero_jornada>
-        <enfrentamiento id="49">
-            <cod_equipo_local>1</cod_equipo_local>
-            <cod_equipo_visitante>4</cod_equipo_visitante>
+         </enfrentamiento>
+         <enfrentamiento id="78">
+            <cod_equipo_local>3</cod_equipo_local>
+            <cod_equipo_visitante>1</cod_equipo_visitante>
             <ganador>Visitante</ganador>
-        </enfrentamiento>
-        <enfrentamiento id="50">
-            <cod_equipo_local>2</cod_equipo_local>
-            <cod_equipo_visitante>3</cod_equipo_visitante>
+         </enfrentamiento>
+      </jornada>
+   </competicion>
+   <competicion id_competicion="2">
+      <nombre_competicion>CS_go_League</nombre_competicion>
+      <jornada id_jornada="40">
+         <numero_jornada>1</numero_jornada>
+         <fecha_jornada>2024-01-01</fecha_jornada>
+         <enfrentamiento id="79">
+            <cod_equipo_local>8</cod_equipo_local>
+            <cod_equipo_visitante>7</cod_equipo_visitante>
             <ganador>Visitante</ganador>
-        </enfrentamiento>
-    </jornada>
-
-    <jornada id_competicion="1" id_jornada="26">
-        <numero_jornada>2</numero_jornada>
-        <enfrentamiento id="51">
-            <cod_equipo_local>1</cod_equipo_local>
-            <cod_equipo_visitante>4</cod_equipo_visitante>
+         </enfrentamiento>
+         <enfrentamiento id="80">
+            <cod_equipo_local>5</cod_equipo_local>
+            <cod_equipo_visitante>6</cod_equipo_visitante>
             <ganador>Visitante</ganador>
-        </enfrentamiento>
-        <enfrentamiento id="52">
-            <cod_equipo_local>2</cod_equipo_local>
-            <cod_equipo_visitante>3</cod_equipo_visitante>
+         </enfrentamiento>
+      </jornada>
+      <jornada id_jornada="41">
+         <numero_jornada>2</numero_jornada>
+         <fecha_jornada>2024-01-08</fecha_jornada>
+         <enfrentamiento id="81">
+            <cod_equipo_local>8</cod_equipo_local>
+            <cod_equipo_visitante>6</cod_equipo_visitante>
             <ganador>Visitante</ganador>
-        </enfrentamiento>
-    </jornada>
-
-    <jornada id_competicion="1" id_jornada="27">
-        <numero_jornada>3</numero_jornada>
-        <enfrentamiento id="53">
-            <cod_equipo_local>1</cod_equipo_local>
-            <cod_equipo_visitante>4</cod_equipo_visitante>
+         </enfrentamiento>
+         <enfrentamiento id="82">
+            <cod_equipo_local>7</cod_equipo_local>
+            <cod_equipo_visitante>5</cod_equipo_visitante>
             <ganador>Visitante</ganador>
-        </enfrentamiento>
-        <enfrentamiento id="54">
-            <cod_equipo_local>2</cod_equipo_local>
-            <cod_equipo_visitante>3</cod_equipo_visitante>
+         </enfrentamiento>
+      </jornada>
+      <jornada id_jornada="42">
+         <numero_jornada>3</numero_jornada>
+         <fecha_jornada>2024-01-15</fecha_jornada>
+         <enfrentamiento id="83">
+            <cod_equipo_local>8</cod_equipo_local>
+            <cod_equipo_visitante>5</cod_equipo_visitante>
             <ganador>Visitante</ganador>
-        </enfrentamiento>
-    </jornada>
-</resultado_jornadas>
+         </enfrentamiento>
+         <enfrentamiento id="84">
+            <cod_equipo_local>6</cod_equipo_local>
+            <cod_equipo_visitante>7</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+         </enfrentamiento>
+      </jornada>
+   </competicion>
+   <competicion id_competicion="3">
+      <nombre_competicion>Valorant_league</nombre_competicion>
+      <jornada id_jornada="43">
+         <numero_jornada>1</numero_jornada>
+         <fecha_jornada>2024-01-01</fecha_jornada>
+         <enfrentamiento id="85">
+            <cod_equipo_local>12</cod_equipo_local>
+            <cod_equipo_visitante>10</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+         </enfrentamiento>
+         <enfrentamiento id="86">
+            <cod_equipo_local>9</cod_equipo_local>
+            <cod_equipo_visitante>11</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+         </enfrentamiento>
+      </jornada>
+      <jornada id_jornada="44">
+         <numero_jornada>2</numero_jornada>
+         <fecha_jornada>2024-01-08</fecha_jornada>
+         <enfrentamiento id="87">
+            <cod_equipo_local>12</cod_equipo_local>
+            <cod_equipo_visitante>11</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+         </enfrentamiento>
+         <enfrentamiento id="88">
+            <cod_equipo_local>10</cod_equipo_local>
+            <cod_equipo_visitante>9</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+         </enfrentamiento>
+      </jornada>
+      <jornada id_jornada="45">
+         <numero_jornada>3</numero_jornada>
+         <fecha_jornada>2024-01-15</fecha_jornada>
+         <enfrentamiento id="89">
+            <cod_equipo_local>12</cod_equipo_local>
+            <cod_equipo_visitante>9</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+         </enfrentamiento>
+         <enfrentamiento id="90">
+            <cod_equipo_local>11</cod_equipo_local>
+            <cod_equipo_visitante>10</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+         </enfrentamiento>
+      </jornada>
+   </competicion>
+   <competicion id_competicion="4">
+      <nombre_competicion>R6_league</nombre_competicion>
+      <jornada id_jornada="46">
+         <numero_jornada>1</numero_jornada>
+         <fecha_jornada>2024-01-01</fecha_jornada>
+         <enfrentamiento id="91">
+            <cod_equipo_local>16</cod_equipo_local>
+            <cod_equipo_visitante>13</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+         </enfrentamiento>
+         <enfrentamiento id="92">
+            <cod_equipo_local>15</cod_equipo_local>
+            <cod_equipo_visitante>14</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+         </enfrentamiento>
+      </jornada>
+      <jornada id_jornada="47">
+         <numero_jornada>2</numero_jornada>
+         <fecha_jornada>2024-01-08</fecha_jornada>
+         <enfrentamiento id="93">
+            <cod_equipo_local>16</cod_equipo_local>
+            <cod_equipo_visitante>14</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+         </enfrentamiento>
+         <enfrentamiento id="94">
+            <cod_equipo_local>13</cod_equipo_local>
+            <cod_equipo_visitante>15</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+         </enfrentamiento>
+      </jornada>
+      <jornada id_jornada="48">
+         <numero_jornada>3</numero_jornada>
+         <fecha_jornada>2024-01-15</fecha_jornada>
+         <enfrentamiento id="95">
+            <cod_equipo_local>16</cod_equipo_local>
+            <cod_equipo_visitante>15</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+         </enfrentamiento>
+         <enfrentamiento id="96">
+            <cod_equipo_local>14</cod_equipo_local>
+            <cod_equipo_visitante>13</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+         </enfrentamiento>
+      </jornada>
+   </competicion>
+</competiciones>

@@ -1,3 +1,4 @@
+-- Updated upstream
 DROP TRIGGER CONTROLAR_MAX_JUGADOR;
 DROP TRIGGER CONTROLAR_MIN_JUGADOR_EQUIPO;
 DROP TRIGGER CONTROLAR_MOD_EQUIPO;
@@ -10,19 +11,25 @@ DROP TRIGGER CONTROLAR_SALARIO_MAX_EQUIPO;
 
 ----------1. Minimo controlar que no haya mas de 6 jugadores en un equipo.----
 CREATE OR REPLACE TRIGGER controlar_max_jugador
-BEFORE INSERT ON jugadores
-FOR EACH ROW
-DECLARE
+FOR INSERT OR UPDATE ON jugadores
+COMPOUND TRIGGER
     num_jugadores INTEGER;
+    equipo_cod NUMBER;
+BEFORE EACH ROW IS
 BEGIN
+equipo_cod := :NEW.cod_equipo;
+END BEFORE EACH ROW;
+AFTER STATEMENT IS
+    BEGIN
     SELECT COUNT(*) INTO num_jugadores 
     FROM jugadores
-    WHERE cod_equipo = :NEW.cod_equipo;
+    WHERE cod_equipo = equipo_cod;
     
-    IF num_jugadores >= 6 THEN
+    IF num_jugadores > 6 THEN
         RAISE_APPLICATION_ERROR
         (-20001, 'No se pueden agregar m?s de 6 jugadores a un equipo');
     END IF;
+    END AFTER STATEMENT;
 END;
 
 
@@ -40,7 +47,7 @@ BEGIN
     FROM jugadores
     WHERE cod_equipo = :NEW.cod_equipo;
     
-        IF num_jugadores < 2 THEN
+        IF num_jugadores <= 2 THEN
         RAISE_APPLICATION_ERROR
         (-20001, 'Debe haber al menos dos jugadores en un 
         equipo para realizar esta operaci?n');
@@ -62,12 +69,12 @@ DECLARE
     comp_iniciada INTEGER;
 BEGIN
     IF DELETING THEN
-        SELECT COUNT(*) INTO comp_iniciada 
+        SELECT count(*) INTO comp_iniciada 
         FROM competiciones 
         WHERE estado_abierto = 1 AND
               :OLD.COD_COMPETICION = cod;
         
-        IF comp_iniciada > 0 THEN
+        IF comp_iniciada = 0 THEN
             RAISE_APPLICATION_ERROR
             (-20001, 'No se pueden modificar los equipos una vez que la competicion ha comenzado');
         END IF;
@@ -77,7 +84,7 @@ BEGIN
         WHERE estado_abierto = 1 AND
               :NEW.COD_COMPETICION = cod;
         
-        IF comp_iniciada > 0 THEN
+        IF comp_iniciada = 0 THEN
             RAISE_APPLICATION_ERROR
             (-20001, 'No se pueden modificar los equipos una vez que la competicion ha comenzado');
         END IF;
@@ -95,7 +102,7 @@ FOR EACH ROW
 DECLARE
     v_cont_equipo INTEGER;
 BEGIN
-    SELECT COUNT(cod_competicion) INTO v_cont_equipo 
+    SELECT COUNT(cod_equipo) INTO v_cont_equipo 
     FROM puntos_equipos
     WHERE cod_competicion = :NEW.cod_competicion;
 ----------- Ver si es impar----
@@ -138,7 +145,7 @@ END;
 /*6 .Cuando hay insert de enfrentamiento, condicional if ganalocal suma a local
 !ganaLocal suma a visitante en puntos-equipos -------falta verificar--------*/
 CREATE OR REPLACE TRIGGER actualizar_puntos_equipos
-BEFORE UPDATE ON enfrentamientos
+BEFORE INSERT OR UPDATE ON enfrentamientos
 FOR EACH ROW
 DECLARE
     v_new_gana_local ENFRENTAMIENTOS.gana_local%type := :NEW.gana_local;  -- Variable para almacenar una fila de la tabla enfrentamientos
@@ -190,24 +197,32 @@ BEGIN
 END;
 
 /
-/*8. Salario maximo de equipo 200000*/
-CREATE OR REPLACE TRIGGER controlar_salario_max_equipo
-BEFORE INSERT OR UPDATE ON jugadores
-FOR EACH ROW
-DECLARE
-    v_salario_equipo NUMBER;
+/*8. Salario maximo de equipo 200000*/ 
+CREATE OR REPLACE TRIGGER controlar_salario_max_equipo 
+FOR INSERT OR UPDATE ON jugadores
+COMPOUND TRIGGER
+v_salario_equipo NUMBER;
+equipo_cod NUMBER;
+salario_nuevo NUMBER;
+BEFORE EACH ROW IS
+    BEGIN
+    equipo_cod := :NEW.cod_equipo;
+    salario_nuevo := :NEW.salario;
+END BEFORE EACH ROW;
+AFTER STATEMENT IS
+    
 BEGIN
     SELECT SUM(salario) INTO v_salario_equipo
     FROM jugadores
-    WHERE cod_equipo = :NEW.cod_equipo;
+    WHERE cod_equipo = equipo_cod;
 
-    IF NVL(v_salario_equipo, 0) + :NEW.salario > 200000 THEN
+    IF NVL(v_salario_equipo, 0) + salario_nuevo > 200000 THEN
         RAISE_APPLICATION_ERROR
         (-20001, 'El salario total del equipo excede el limite de 200,000.');
     END IF;
+END AFTER STATEMENT;
 END;
 
 
 
-
-
+/

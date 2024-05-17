@@ -1,10 +1,16 @@
 <!ELEMENT clasificacion (competicion+)>
-<!ELEMENT competicion (equipo+)>
-<!ATTLIST competicion
-  id CDATA #REQUIRED>
+<!ELEMENT competicion (nombre_competicion, fecha_inicio_competicion, fecha_fin_competicion, nombre_juego, equipo+)>
+
+<!ATTLIST competicion id NMTOKEN #REQUIRED>
+
+<!ELEMENT nombre_competicion (#PCDATA)>
+<!ELEMENT fecha_inicio_competicion (#PCDATA)>
+<!ELEMENT fecha_fin_competicion (#PCDATA)>
+<!ELEMENT nombre_juego (#PCDATA)>
 <!ELEMENT equipo (nombre, puntos, posicion)>
-<!ATTLIST equipo
-  id CDATA #REQUIRED>
+
+<!ATTLIST equipo id NMTOKEN #REQUIRED>
+
 <!ELEMENT nombre (#PCDATA)>
 <!ELEMENT puntos (#PCDATA)>
 <!ELEMENT posicion (#PCDATA)>
