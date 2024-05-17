@@ -7,15 +7,12 @@ public class Staff {
     private String nombre;
     private String apellido;
     private String puesto;
+    private int salario;
     private Equipo equipo;
     // Constructor
-    public Staff(int cod, String nombre, String apellido, String puesto, Equipo equipo) {
-        this.cod = cod;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.puesto = puesto;
-        this.equipo = equipo;
-    }
+
+
+    public Staff(){equipo = new Equipo();}
 
     // Getters & Setters
     public int getCod() {
@@ -56,5 +53,13 @@ public class Staff {
 
     public void setEquipo(Equipo equipo) {
         this.equipo = equipo;
+    }
+
+    public int getSalario() {
+        return salario;
+    }
+
+    public void setSalario(int salario) {
+        this.salario = salario;
     }
 }

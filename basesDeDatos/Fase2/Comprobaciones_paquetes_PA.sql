@@ -66,7 +66,7 @@ CREATE OR REPLACE PROCEDURE pedir_juegos (p_cod IN Juegos.cod%TYPE) AS
     v_cursor crud_Juegos.tipo_cursor;
     v_juego juegos%ROWTYPE;
 BEGIN
-    v_cursor := crud_Juegos.consultar_juego(p_cod);
+    v_cursor := crud_Juegos.consultar_juego_cod(p_cod);
     LOOP
         FETCH v_cursor INTO v_juego;
         EXIT WHEN v_cursor%NOTFOUND;
@@ -110,7 +110,7 @@ CREATE OR REPLACE PROCEDURE pedir_equipos (p_cod IN Equipos.cod%TYPE) AS
     v_cursor crud_Equipos.tipo_cursor;
     v_equipo equipos%ROWTYPE;
 BEGIN
-    v_cursor := crud_equipos.consultar_equipo(p_cod);
+    v_cursor := crud_equipos.consultar_equipo_cod(p_cod);
     LOOP
         FETCH v_cursor INTO v_equipo;
         EXIT WHEN v_cursor%NOTFOUND;
@@ -154,7 +154,7 @@ patrocinadores.cod_patrocinador%TYPE) AS
     v_cursor crud_patrocinadores.tipo_cursor;
     v_patrocinador patrocinadores%ROWTYPE;
 BEGIN
-    v_cursor := crud_patrocinadores.consultar_patrocinadores(p_cod);
+    v_cursor := crud_patrocinadores.consultar_patrocinadores_cod(p_cod);
     LOOP
         FETCH v_cursor INTO v_patrocinador;
         EXIT WHEN v_cursor%NOTFOUND;
@@ -194,7 +194,7 @@ CREATE OR REPLACE PROCEDURE pedir_jugadores (p_cod IN jugadores.cod%TYPE) AS
     v_cursor crud_jugadores.tipo_cursor;
     v_jugador jugadores%ROWTYPE;
 BEGIN
-    v_cursor := crud_jugadores.consultar_jugadores(p_cod);
+    v_cursor := crud_jugadores.consultar_jugadores_cod(p_cod);
     LOOP
         FETCH v_cursor INTO v_jugador;
         EXIT WHEN v_cursor%NOTFOUND;
@@ -240,7 +240,7 @@ CREATE OR REPLACE PROCEDURE pedir_staffs (p_cod IN staffs.cod%TYPE) AS
     v_cursor crud_staffs.tipo_cursor;
     v_staff staffs%ROWTYPE;
 BEGIN
-    v_cursor := crud_staffs.consultar_staffs(p_cod);
+    v_cursor := crud_staffs.consultar_staffs_cod(p_cod);
     LOOP
         FETCH v_cursor INTO v_staff;
         EXIT WHEN v_cursor%NOTFOUND;
