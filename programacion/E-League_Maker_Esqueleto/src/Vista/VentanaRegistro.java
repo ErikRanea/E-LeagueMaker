@@ -12,7 +12,8 @@ public class VentanaRegistro extends JDialog {
     /**
      * Constructor del diálogo de registro
      * @author Oskar
-     * @version 1.0 10/05/2024
+     * @version 1.0
+     * @since 10/05/2024
      */
     public VentanaRegistro() {
         setContentPane(contentPane);
@@ -23,7 +24,8 @@ public class VentanaRegistro extends JDialog {
     /**
      * Getters y setters de los atributos de de registro
      * @author Oskar
-     * @version 1.0 10/05/2024
+     * @version 1.0
+     * @since 10/05/2024
      */
     public JButton getbAceptar() {
         return bAceptar;
@@ -52,7 +54,8 @@ public class VentanaRegistro extends JDialog {
     /**
      * Listeners de los atributos de registro
      * @author Oskar
-     * @version 1.0 10/05/2024
+     * @version 1.0
+     * @since 10/05/2024
      */
     public void bAceptarAL(ActionListener al)
     {

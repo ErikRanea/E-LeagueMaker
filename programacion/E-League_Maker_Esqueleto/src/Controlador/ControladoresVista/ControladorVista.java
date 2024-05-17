@@ -19,16 +19,21 @@ public class ControladorVista {
 
     /**
      * Los siguientes atributos serán objetos de cada uno de los controladores de la vista
+     * @param cvCometi
      */
-    private ControladorVentanaInscripcion cVIncrip;
+    private ControladorVentanaCompeticion cvCompeti;
 
     public ControladorVista(ControladorPrincipal cp)
     {
         this.cp = cp;
-
+        cvCompeti = new ControladorVentanaCompeticion(this);
+        mostrarVentanaCompeti();
     }
 
-
+    public void mostrarVentanaCompeti()
+    {
+        cvCompeti.crearMostrar();
+    }
 
 
 

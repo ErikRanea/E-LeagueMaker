@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Vista.VentanaCompeticion">
+  <grid id="27dc6" binding="pPrincipal" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="1920" height="1080"/>
+    </constraints>
+    <properties>
+      <background color="-57266"/>
+      <inheritsPopupMenu value="false"/>
+      <maximumSize width="1920" height="1080"/>
+      <minimumSize width="1920" height="1080"/>
+      <preferredSize width="1920" height="1080"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="55e0d" binding="pHead" layout-manager="GridLayoutManager" row-count="2" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="true">
+            <minimum-size width="1920" height="200"/>
+            <preferred-size width="1920" height="200"/>
+            <maximum-size width="1920" height="200"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-57266"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="aa4ca" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="28"/>
+              <foreground color="-853001"/>
+              <icon value="Img/100_circulo.png"/>
+              <text value="E-League Maker"/>
+            </properties>
+          </component>
+          <component id="64192" class="javax.swing.JButton" binding="bLogOut">
+            <constraints>
+              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-57266"/>
+              <borderPainted value="false"/>
+              <focusPainted value="false"/>
+              <focusTraversalPolicyProvider value="false"/>
+              <foreground color="-57266"/>
+              <icon value="Img/logOutBlanco.png"/>
+              <opaque value="false"/>
+              <requestFocusEnabled value="false"/>
+              <rolloverEnabled value="false"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <hspacer id="a0418">
+            <constraints>
+              <grid row="0" column="2" row-span="2" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </hspacer>
+          <hspacer id="1943e">
+            <constraints>
+              <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </hspacer>
+          <vspacer id="5183d">
+            <constraints>
+              <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </vspacer>
+        </children>
+      </grid>
+      <grid id="a8b62" binding="pMenu" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="true">
+            <minimum-size width="1920" height="80"/>
+            <preferred-size width="1920" height="80"/>
+            <maximum-size width="1920" height="80"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-57266"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="a65c7" class="javax.swing.JButton" binding="bInsertarResult">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="274" height="30"/>
+                <preferred-size width="274" height="30"/>
+                <maximum-size width="274" height="30"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-9509587"/>
+              <borderPainted value="false"/>
+              <contentAreaFilled value="true"/>
+              <focusPainted value="false"/>
+              <opaque value="true"/>
+              <requestFocusEnabled value="true"/>
+              <text value="Insertar resultados"/>
+              <verifyInputWhenFocusTarget value="false"/>
+            </properties>
+          </component>
+          <component id="19cb5" class="javax.swing.JButton" binding="bVerClasificaciones">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="274" height="30"/>
+                <preferred-size width="274" height="30"/>
+                <maximum-size width="274" height="30"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-9509587"/>
+              <borderPainted value="false"/>
+              <contentAreaFilled value="true"/>
+              <focusPainted value="false"/>
+              <text value="Ver clasificaciones"/>
+              <verifyInputWhenFocusTarget value="false"/>
+            </properties>
+          </component>
+          <component id="60c00" class="javax.swing.JButton" binding="bVerTodosLosResultados">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="274" height="30"/>
+                <preferred-size width="274" height="30"/>
+                <maximum-size width="274" height="30"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-9509587"/>
+              <borderPainted value="false"/>
+              <focusPainted value="false"/>
+              <text value="Ver todos los resultados"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="cb9fa" binding="pBody" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="true">
+            <minimum-size width="1920" height="800"/>
+            <preferred-size width="1920" height="800"/>
+            <maximum-size width="1920" height="800"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-57266"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <grid id="c9ac0" binding="pBotones" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="true">
+                <minimum-size width="300" height="800"/>
+                <preferred-size width="300" height="800"/>
+                <maximum-size width="300" height="800"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-15395563"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="9cd49" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font size="20"/>
+                  <foreground color="-524305"/>
+                  <text value="Competiciones"/>
+                </properties>
+              </component>
+              <component id="8baa0" class="javax.swing.JComboBox" binding="cbCompeticiones">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="3264a" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font size="20"/>
+                  <foreground color="-524305"/>
+                  <text value="Jornadas"/>
+                </properties>
+              </component>
+              <component id="23f29" class="javax.swing.JComboBox" binding="cbJornadas">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+              </component>
+              <vspacer id="e1567">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
+              <vspacer id="a6e86">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
+            </children>
+          </grid>
+          <grid id="d8e8d" binding="pVisualizar" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="1" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="true">
+                <minimum-size width="1620" height="800"/>
+                <preferred-size width="1620" height="800"/>
+                <maximum-size width="1620" height="800"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-524305"/>
+            </properties>
+            <border type="none"/>
+            <children/>
+          </grid>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
