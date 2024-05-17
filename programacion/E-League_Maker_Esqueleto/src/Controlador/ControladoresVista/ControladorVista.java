@@ -270,7 +270,32 @@ public class ControladorVista {
 
     public void probarCrudUsuarios()
     {
-        //Consultar Usua
+        try
+        {
+            //Buscar Usuario
+            Usuario usuario = buscarUsuario("Erik");
+            System.out.println("\nEl usuario  "+ usuario.getNickname()+" con password "+ usuario.getPassword());
+
+            //Inserto Competi
+            Usuario usuario2 = new Usuario();
+            usuario2.setNickname("Pepe");
+            usuario2.setPassword("PepeMeGustas22");
+            usuario2.setAdmin(false);
+            System.out.println("\n"+insertarUsuario(usuario2));
+
+            usuario2 = buscarUsuario(usuario2.getNickname());
+            usuario2.setNickname("Popo");
+            System.out.println("\n"+modificarUsuario(usuario2));
+
+
+            usuario2 = buscarUsuario(usuario2.getNickname());
+            System.out.println("\n"+borrarUsuario());
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex);
+        }
+
     }
 
     public Juego buscarJuego(String nombre) throws Exception { return cp.buscarJuego(nombre);}

@@ -823,7 +823,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Usuarios IS
         OPEN v_cursor FOR
             SELECT *
             FROM Usuarios
-            WHERE nickname = p_nickname;
+            WHERE UPPER(nickname) = UPPER(p_nickname);
         RETURN v_cursor;
     EXCEPTION
         WHEN others THEN

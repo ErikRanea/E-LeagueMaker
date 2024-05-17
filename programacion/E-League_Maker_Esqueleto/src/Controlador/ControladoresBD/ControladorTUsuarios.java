@@ -54,7 +54,7 @@ public class ControladorTUsuarios {
             ResultSet rs = (ResultSet) cs.getObject(1);
 
             if (rs.next()) {
-                usuario.setCod(rs.getInt("cod"));
+                usuario.setCod(rs.getInt("cod_usuario"));
                 usuario.setNickname(rs.getString("nickname"));
                 usuario.setPassword(rs.getString("password"));
                 usuario.setAdmin(rs.getBoolean("es_admin"));
@@ -172,7 +172,7 @@ public class ControladorTUsuarios {
         con = cbd.abrirConexion();
         System.out.println("\nInsertando usuario con nombre" + usuario.getNickname());
         try {
-            String llamada = "{ call crud_Usuario.insertar_Usuario(?,?,?) }";
+            String llamada = "{ call crud_Usuarios.insertar_Usuarios(?,?,?) }";
             CallableStatement cs = con.prepareCall(llamada);
 
             this.usuario = usuario;
