@@ -86,4 +86,13 @@ public class ControladorPrincipal {
     {return cbd.pedirListaCompeticiones();}
 
 
+
+    //Usuario
+    public Usuario buscarUsuario(String nickname) throws Exception{return cbd.buscarUsuario(nickname);}
+    public String borrarUsuario() throws Exception{return cbd.borrarUsuario();}
+    public String modificarUsuario(Usuario usuario) throws Exception{return cbd.modificarUsuario(usuario);}
+    public String insertarUsuario(Usuario usuario) throws Exception{return cbd.insertarUsuario(usuario);}
+
+
+
 }

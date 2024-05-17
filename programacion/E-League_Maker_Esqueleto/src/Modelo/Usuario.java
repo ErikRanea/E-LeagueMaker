@@ -14,6 +14,7 @@ public class Usuario {
         this.admin = admin;
     }
 
+    public Usuario() {}
     // Getters & Setters
     public int getCod() {
         return cod;
@@ -43,6 +44,13 @@ public class Usuario {
         return admin;
     }
 
+    public int isEstadoAbiertoInt()
+    {
+        int abierto = 0;
+        if(isAdmin())
+            abierto = 1;
+        return abierto;
+    }
     public void setAdmin(boolean admin) {
         this.admin = admin;
     }

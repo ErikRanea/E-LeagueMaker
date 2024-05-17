@@ -168,7 +168,7 @@ BEGIN
         v_cod_equipo_ganador := :NEW.cod_equipo_visitante;  -- Asigna al equipo visitante
     ELSE
         -- Si el resultado no est? definido, no se actualiza
-        DBMS_OUTPUT.PUT_LINE('No se define ganador, no se actualiza');
+        --DBMS_OUTPUT.PUT_LINE('No se define ganador, no se actualiza');
         RETURN;
     END IF;
 

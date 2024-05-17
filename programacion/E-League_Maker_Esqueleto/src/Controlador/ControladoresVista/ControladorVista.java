@@ -53,7 +53,8 @@ public class ControladorVista {
        // probarCrudPatrocinadores();
        // probarCrudJugadores();
         //probarCrudStaffs();
-        probarCrudCompeticiones();
+        //probarCrudCompeticiones();
+        probarCrudUsuarios();
     }
 
     public void probarCrudJuegos()
@@ -239,7 +240,8 @@ public class ControladorVista {
             //Busco Competi
             Competicion competicion = buscarCompeticion(1);
             String juego = competicion.getJuego().getNombre();
-            System.out.println("\nLa competicion  "+ competicion.getNombre()+" es del juego "+ juego);
+            System.out.println("\nLa competicion  "+ competicion.getNombre()+" es del juego "+ juego +" esta es estado" +
+                    " "+competicion.isEstadoAbierto());
 
             //Inserto Competi
             Competicion competicion2 = new Competicion();
@@ -264,6 +266,36 @@ public class ControladorVista {
         {
             System.out.println("\nHa salido el siguiente error:\n"+ex.getMessage());
         }
+    }
+
+    public void probarCrudUsuarios()
+    {
+        try
+        {
+            //Buscar Usuario
+            Usuario usuario = buscarUsuario("Erik");
+            System.out.println("\nEl usuario  "+ usuario.getNickname()+" con password "+ usuario.getPassword());
+
+            //Inserto Competi
+            Usuario usuario2 = new Usuario();
+            usuario2.setNickname("Pepe");
+            usuario2.setPassword("PepeMeGustas22");
+            usuario2.setAdmin(false);
+            System.out.println("\n"+insertarUsuario(usuario2));
+
+            usuario2 = buscarUsuario(usuario2.getNickname());
+            usuario2.setNickname("Popo");
+            System.out.println("\n"+modificarUsuario(usuario2));
+
+
+            usuario2 = buscarUsuario(usuario2.getNickname());
+            System.out.println("\n"+borrarUsuario());
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex);
+        }
+
     }
 
     public Juego buscarJuego(String nombre) throws Exception { return cp.buscarJuego(nombre);}
@@ -325,6 +357,13 @@ public class ControladorVista {
 
     public ArrayList<Competicion> pedirListaCompeticiones() throws Exception
     {return cp.pedirListaCompeticiones();}
+
+
+    //Usuario
+    public Usuario buscarUsuario(String nickname) throws Exception{return cp.buscarUsuario(nickname);}
+    public String borrarUsuario() throws Exception{return cp.borrarUsuario();}
+    public String modificarUsuario(Usuario usuario) throws Exception{return cp.modificarUsuario(usuario);}
+    public String insertarUsuario(Usuario usuario) throws Exception{return cp.insertarUsuario(usuario);}
 
 
 }

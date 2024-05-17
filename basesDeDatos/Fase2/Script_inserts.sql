@@ -12,13 +12,13 @@ commit;
 
 -- Creaci�n de Competiciones
 INSERT INTO Competiciones (cod, nombre, fecha_inicio, fecha_fin, estado_abierto, cod_Juego)
-VALUES (1, 'LOL_League', TO_DATE('01/06/2024','DD/MM/YYYY') , TO_DATE('01/12/2024','DD/MM/YYYY'), 0,1);
+VALUES (1, 'LOL_League', TO_DATE('01/06/2024','DD/MM/YYYY') , TO_DATE('01/12/2024','DD/MM/YYYY'), 1,1);
 INSERT INTO Competiciones (cod, nombre, fecha_inicio, fecha_fin, estado_abierto, cod_Juego)
-VALUES (2, 'CS_go_League', TO_DATE('01/10/2024','DD/MM/YYYY') , TO_DATE('01/02/2025','DD/MM/YYYY'), 0, 2);
+VALUES (2, 'CS_go_League', TO_DATE('01/10/2024','DD/MM/YYYY') , TO_DATE('01/02/2025','DD/MM/YYYY'), 1, 2);
 INSERT INTO Competiciones (cod, nombre, fecha_inicio, fecha_fin, estado_abierto, cod_Juego)
-VALUES (3, 'Valorant_league', TO_DATE('28/12/2023','DD/MM/YYYY') , TO_DATE('09/05/2024','DD/MM/YYYY'), 0, 3);
+VALUES (3, 'Valorant_league', TO_DATE('28/12/2023','DD/MM/YYYY') , TO_DATE('09/05/2024','DD/MM/YYYY'), 1, 3);
 INSERT INTO Competiciones (cod, nombre, fecha_inicio, fecha_fin, estado_abierto, cod_Juego)
-VALUES (4, 'R6_league', TO_DATE('30/03/2024','DD/MM/YYYY') , TO_DATE('01/07/2024','DD/MM/YYYY'), 0, 4);
+VALUES (4, 'R6_league', TO_DATE('30/03/2024','DD/MM/YYYY') , TO_DATE('01/07/2024','DD/MM/YYYY'), 1, 4);
 
 commit;
 
