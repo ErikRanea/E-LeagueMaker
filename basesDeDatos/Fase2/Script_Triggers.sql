@@ -83,7 +83,7 @@ BEGIN
         FROM competiciones 
         WHERE estado_abierto = 1 AND
               :NEW.COD_COMPETICION = cod;
-
+        
         IF comp_iniciada = 0 THEN
             RAISE_APPLICATION_ERROR
             (-20001, 'No se pueden modificar los equipos una vez que la competicion ha comenzado');
@@ -222,3 +222,7 @@ BEGIN
     END IF;
 END AFTER STATEMENT;
 END;
+
+
+
+/
