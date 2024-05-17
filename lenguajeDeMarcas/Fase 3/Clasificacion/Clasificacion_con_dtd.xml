@@ -1,27 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE clasificacion SYSTEM "Clasificacion.dtd">
-
 <clasificacion>
-    <competicion id="1">
-        <equipo id="1">
-            <nombre>Equipo LoL 1</nombre>
-            <puntos>0</puntos>
-            <posicion>1</posicion>
-        </equipo>
-        <equipo id="4">
-            <nombre>Equipo LoL 4</nombre>
-            <puntos>0</puntos>
-            <posicion>2</posicion>
-        </equipo>
-        <equipo id="3">
-            <nombre>Equipo LoL 3</nombre>
-            <puntos>0</puntos>
-            <posicion>3</posicion>
-        </equipo>
-        <equipo id="2">
-            <nombre>Equipo LoL 2</nombre>
-            <puntos>0</puntos>
-            <posicion>4</posicion>
-        </equipo>
-    </competicion>
+   <competicion id="1">
+      <nombre_competicion>LOL_League</nombre_competicion>
+      <fecha_inicio_competicion>2024-06-01</fecha_inicio_competicion>
+      <fecha_fin_competicion>2024-12-01</fecha_fin_competicion>
+      <nombre_juego>League of Legends</nombre_juego>
+      <equipo id="1">
+         <nombre>Equipo LoL 1</nombre>
+         <puntos>0</puntos>
+         <posicion>1</posicion>
+      </equipo>
+      <equipo id="4">
+         <nombre>Equipo LoL 4</nombre>
+         <puntos>0</puntos>
+         <posicion>2</posicion>
+      </equipo>
+      <equipo id="3">
+         <nombre>Equipo LoL 3</nombre>
+         <puntos>0</puntos>
+         <posicion>3</posicion>
+      </equipo>
+      <equipo id="2">
+         <nombre>Equipo LoL 2</nombre>
+         <puntos>0</puntos>
+         <posicion>4</posicion>
+      </equipo>
+   </competicion>
+   <competicion id="2">
+      <nombre_competicion>CS_go_League</nombre_competicion>
+      <fecha_inicio_competicion>2024-10-01</fecha_inicio_competicion>
+      <fecha_fin_competicion>2025-02-01</fecha_fin_competicion>
+      <nombre_juego>Counter Strike</nombre_juego>
+      <equipo id="5">
+         <nombre>Equipo CS 1</nombre>
+         <puntos>0</puntos>
+         <posicion>1</posicion>
+      </equipo>
+      <equipo id="8">
+         <nombre>Equipo CS 4</nombre>
+         <puntos>0</puntos>
+         <posicion>2</posicion>
+      </equipo>
+      <equipo id="7">
+         <nombre>Equipo CS 3</nombre>
+         <puntos>0</puntos>
+         <posicion>3</posicion>
+      </equipo>
+      <equipo id="6">
+         <nombre>Equipo CS 2</nombre>
+         <puntos>0</puntos>
+         <posicion>4</posicion>
+      </equipo>
+   </competicion>
+   <competicion id="3">
+      <nombre_competicion>Valorant_league</nombre_competicion>
+      <fecha_inicio_competicion>2023-12-28</fecha_inicio_competicion>
+      <fecha_fin_competicion>2024-05-09</fecha_fin_competicion>
+      <nombre_juego>Valorant</nombre_juego>
+      <equipo id="9">
+         <nombre>Equipo Valorant 1</nombre>
+         <puntos>0</puntos>
+         <posicion>1</posicion>
+      </equipo>
+      <equipo id="12">
+         <nombre>Equipo Valorant 4</nombre>
+         <puntos>0</puntos>
+         <posicion>2</posicion>
+      </equipo>
+      <equipo id="11">
+         <nombre>Equipo Valorant 3</nombre>
+         <puntos>0</puntos>
+         <posicion>3</posicion>
+      </equipo>
+      <equipo id="10">
+         <nombre>Equipo Valorant 2</nombre>
+         <puntos>0</puntos>
+         <posicion>4</posicion>
+      </equipo>
+   </competicion>
+   <competicion id="4">
+      <nombre_competicion>R6_league</nombre_competicion>
+      <fecha_inicio_competicion>2024-03-30</fecha_inicio_competicion>
+      <fecha_fin_competicion>2024-07-01</fecha_fin_competicion>
+      <nombre_juego>Rainbow six siege</nombre_juego>
+      <equipo id="13">
+         <nombre>Equipo Rainbow 1</nombre>
+         <puntos>0</puntos>
+         <posicion>1</posicion>
+      </equipo>
+      <equipo id="16">
+         <nombre>Equipo Rainbow 4</nombre>
+         <puntos>0</puntos>
+         <posicion>2</posicion>
+      </equipo>
+      <equipo id="15">
+         <nombre>Equipo Rainbow 3</nombre>
+         <puntos>0</puntos>
+         <posicion>3</posicion>
+      </equipo>
+      <equipo id="14">
+         <nombre>Equipo Rainbow 2</nombre>
+         <puntos>0</puntos>
+         <posicion>4</posicion>
+      </equipo>
+   </competicion>
 </clasificacion>

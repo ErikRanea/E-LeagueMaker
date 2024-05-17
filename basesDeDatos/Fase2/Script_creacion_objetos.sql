@@ -149,12 +149,14 @@ CREATE TABLE Patrocinadores (
     --1. Vista clasificacion-----
 CREATE OR REPLACE VIEW Clasificacion AS
 SELECT
-    Cod_competicion,
-    cod_equipo,
+    cf.Cod_competicion,
+    cf.cod_equipo,
+    e.nombre,
     ROW_NUMBER() OVER (PARTITION BY cf.Cod_Competicion ORDER BY cf.Puntos DESC) AS Posicion,
-    Puntos
+    cf.Puntos
 FROM
     PUNTOS_EQUIPOS cf
+    JOIN equipos e ON e.cod = cf.cod_equipo
 ORDER BY
     cf.Cod_Competicion,
     cf.Puntos DESC;
@@ -167,24 +169,36 @@ ORDER BY
 
 CREATE OR REPLACE VIEW Resultados_Jornadas AS
 SELECT
-
-    enf.Cod_Jornada,
     jorn.Cod_competicion,
+
     enf.Cod AS Cod_Enfrentamiento,  -- Jornada asociada
     jorn.N_Jornada,  -- N�mero de la jornada
     enf.Cod_Equipo_Local,  -- C�digo del equipo local
     enf.Cod_Equipo_Visitante,  -- C�digo del equipo visitante
+
+    comp.Nombre AS Nombre_Competicion,
+    enf.Cod_Jornada,
+    enf.Cod AS Cod_Enfrentamiento,
+    jorn.N_Jornada,
+    enf.Cod_Equipo_Local,
+    enf.Cod_Equipo_Visitante,
+
     CASE
-        WHEN enf.Gana_local = 1 THEN 'Local'  -- Si gana local
-        ELSE 'Visitante'  -- Si gana visitante
-    END AS Ganador  -- Ganador basado en Gana_local
+        WHEN enf.Gana_local = 1 THEN 'Local'
+        ELSE 'Visitante'
+    END AS Ganador
 FROM
     Enfrentamientos enf
-    JOIN Jornadas jorn  -- Unir con Jornadas por Cod_Jornada
-        ON enf.Cod_Jornada = jorn.Cod
+    JOIN Jornadas jorn ON enf.Cod_Jornada = jorn.Cod
+    JOIN Competiciones comp ON jorn.Cod_Competicion = comp.Cod
 ORDER BY
+
     jorn.N_Jornada,  -- Ordenar por n�mero de jornada
+
+    jorn.N_Jornada,
+
     enf.Cod;
+
     
 -- Ordenar por c�digo de enfrentamiento
 

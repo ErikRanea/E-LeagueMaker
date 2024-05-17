@@ -1,18 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE resultado_jornada SYSTEM "ResultadoUltimaJornada.dtd">
-
 <resultado_jornada>
-    <jornada id="13">
-        <numero_jornada>1</numero_jornada>
-        <enfrentamiento id="25">
-            <cod_equipo_local>1</cod_equipo_local>
-            <cod_equipo_visitante>4</cod_equipo_visitante>
+   <competicion id="1">
+      <nombre_competicion>LOL_League</nombre_competicion>
+      <jornada id="304">
+         <numero_jornada>1</numero_jornada>
+         <Fecha_jornada>2024-06-01</Fecha_jornada>
+         <enfrentamiento id="685">
+            <cod_equipo_local>4</cod_equipo_local>
+            <cod_equipo_visitante>2</cod_equipo_visitante>
             <ganador>Visitante</ganador>
-        </enfrentamiento>
-        <enfrentamiento id="26">
-            <cod_equipo_local>2</cod_equipo_local>
+         </enfrentamiento>
+         <enfrentamiento id="686">
+            <cod_equipo_local>1</cod_equipo_local>
             <cod_equipo_visitante>3</cod_equipo_visitante>
             <ganador>Visitante</ganador>
-        </enfrentamiento>
-    </jornada>
+         </enfrentamiento>
+      </jornada>
+   </competicion>
+   <competicion id="2">
+      <nombre_competicion>CS_go_League</nombre_competicion>
+      <jornada id="307">
+         <numero_jornada>1</numero_jornada>
+         <Fecha_jornada>2024-06-01</Fecha_jornada>
+         <enfrentamiento id="691">
+            <cod_equipo_local>8</cod_equipo_local>
+            <cod_equipo_visitante>5</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+         </enfrentamiento>
+         <enfrentamiento id="692">
+            <cod_equipo_local>6</cod_equipo_local>
+            <cod_equipo_visitante>7</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+         </enfrentamiento>
+      </jornada>
+   </competicion>
+   <competicion id="3">
+      <nombre_competicion>Valorant_league</nombre_competicion>
+      <jornada id="310">
+         <numero_jornada>1</numero_jornada>
+         <Fecha_jornada>2024-06-01</Fecha_jornada>
+         <enfrentamiento id="697">
+            <cod_equipo_local>12</cod_equipo_local>
+            <cod_equipo_visitante>11</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+         </enfrentamiento>
+         <enfrentamiento id="698">
+            <cod_equipo_local>9</cod_equipo_local>
+            <cod_equipo_visitante>10</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+         </enfrentamiento>
+      </jornada>
+   </competicion>
+   <competicion id="4">
+      <nombre_competicion>R6_league</nombre_competicion>
+      <jornada id="313">
+         <numero_jornada>1</numero_jornada>
+         <Fecha_jornada>2024-06-01</Fecha_jornada>
+         <enfrentamiento id="703">
+            <cod_equipo_local>13</cod_equipo_local>
+            <cod_equipo_visitante>14</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+         </enfrentamiento>
+         <enfrentamiento id="704">
+            <cod_equipo_local>15</cod_equipo_local>
+            <cod_equipo_visitante>16</cod_equipo_visitante>
+            <ganador>Visitante</ganador>
+         </enfrentamiento>
+      </jornada>
+   </competicion>
 </resultado_jornada>

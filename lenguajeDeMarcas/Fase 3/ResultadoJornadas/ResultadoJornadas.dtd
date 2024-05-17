@@ -1,19 +1,19 @@
-<!ELEMENT resultado_jornadas (jornada+)>
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT competiciones (competicion+)>
+<!ELEMENT competicion (nombre_competicion, jornada+)>
 
-<!ELEMENT jornada (numero_jornada, enfrentamiento+)>
-<!ATTLIST jornada
-    id_competicion CDATA #REQUIRED
->
-<!ATTLIST 
-    jornada id_jornada CDATA #REQUIRED
->
+<!ATTLIST competicion id_competicion NMTOKEN #REQUIRED>
+
+<!ELEMENT nombre_competicion (#PCDATA)>
+<!ELEMENT jornada (numero_jornada, fecha_jornada, enfrentamiento+)>
+
+<!ATTLIST jornada id_jornada NMTOKEN #REQUIRED>
 
 <!ELEMENT numero_jornada (#PCDATA)>
-
+<!ELEMENT fecha_jornada (#PCDATA)>
 <!ELEMENT enfrentamiento (cod_equipo_local, cod_equipo_visitante, ganador)>
-<!ATTLIST enfrentamiento
-    id CDATA #REQUIRED
->
+
+<!ATTLIST enfrentamiento id NMTOKEN #REQUIRED>
 
 <!ELEMENT cod_equipo_local (#PCDATA)>
 <!ELEMENT cod_equipo_visitante (#PCDATA)>
