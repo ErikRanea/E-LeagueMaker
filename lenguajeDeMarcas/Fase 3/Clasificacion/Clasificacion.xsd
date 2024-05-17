@@ -5,7 +5,7 @@
   <xs:element name="clasificacion">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="competicion" type="competicionType" minOccurs="1" maxOccurs="unbounded" />
+        <xs:element name="competicion" type="competicionType" minOccurs="1" maxOccurs="unbounded"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -13,19 +13,23 @@
   <!-- Tipo complejo para 'competicion' -->
   <xs:complexType name="competicionType">
     <xs:sequence>
-      <xs:element name="equipo" type="equipoType" minOccurs="1" maxOccurs="unbounded" />
+      <xs:element name="nombre_competicion" type="xs:string"/>
+      <xs:element name="fecha_inicio_competicion" type="xs:date"/>
+      <xs:element name="fecha_fin_competicion" type="xs:date"/>
+      <xs:element name="nombre_juego" type="xs:string"/>
+      <xs:element name="equipo" type="equipoType" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="id" type="xs:integer" use="required" />
+    <xs:attribute name="id" type="xs:integer" use="required"/>
   </xs:complexType>
 
   <!-- Tipo complejo para 'equipo' -->
   <xs:complexType name="equipoType">
     <xs:sequence>
-      <xs:element name="nombre" type="xs:string" />
-      <xs:element name="puntos" type="xs:integer" />
-      <xs:element name="posicion" type="xs:integer" />
+      <xs:element name="nombre" type="xs:string"/>
+      <xs:element name="puntos" type="xs:integer"/>
+      <xs:element name="posicion" type="xs:integer"/>
     </xs:sequence>
-    <xs:attribute name="id" type="xs:integer" use="required" />
+    <xs:attribute name="id" type="xs:integer" use="required"/>
   </xs:complexType>
 
 </xs:schema>

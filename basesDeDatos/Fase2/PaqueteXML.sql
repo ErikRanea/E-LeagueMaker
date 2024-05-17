@@ -1,40 +1,51 @@
 CREATE OR REPLACE PACKAGE Paquete_XML AS
   PROCEDURE GenerarResultadoJornadas; 
-  PROCEDURE GenerarClasificacionXML (p_cod_competi in competiciones.cod%type);
-  PROCEDURE GenerarUltimaJornada (p_cod_jornada in jornadas.cod%type);
+  PROCEDURE GenerarClasificacionXML ;
+  PROCEDURE GenerarUltimaJornada (p_n_jornada in jornadas.cod%type);
   -- Definir el procedimiento
 END Paquete_XML;
 /
 CREATE OR REPLACE PACKAGE BODY Paquete_XML AS
-  PROCEDURE GenerarClasificacionXML (p_cod_competi in competiciones.cod%type) IS
-    result CLOB;  -- Para almacenar el resultado XML
+  PROCEDURE GenerarClasificacionXML IS
+    result CLOB;
+    
+    -- Para almacenar el resultado XML
   BEGIN
     -- Generar el XML a partir de la vista 'clasificacion'
+    
+    
     SELECT
       XMLELEMENT(
         "clasificacion",  -- Elemento raíz
         XMLELEMENT(
           "competicion",  -- Competición
-          XMLATTRIBUTES(c.cod_competicion AS "id"),  -- Atributo 'id' para competición
+          XMLATTRIBUTES(c.cod AS "id"),
+          XMLFOREST(
+                c.nombre AS "nombre_competicion",
+                c.fecha_inicio AS "fecha_inicio_competicion",
+                c.fecha_fin AS "fecha_fin_competicion",
+                (SELECT nombre from juegos j where j.cod= (SELECT cod_juego
+                                                                    FROM COMPETICIONES
+                                                                    WHERE cod = c.cod)) AS "nombre_juego_competicion"
+          ),-- Atributo 'id' para competición
+          (SELECT
           XMLAGG(
             XMLELEMENT(
               "equipo",  -- Elemento 'equipo'
-              XMLATTRIBUTES(c.cod_equipo AS "id"),  -- Atributo 'id' del equipo
+              XMLATTRIBUTES(cf.cod_equipo AS "id"),  -- Atributo 'id' del equipo
               XMLFOREST(
-                e.nombre AS "nombre",  -- Elemento 'nombre'
-                c.puntos AS "puntos",  -- Elemento 'puntos'
-                c.posicion AS "posicion"  -- Elemento 'posición'
+                cf.nombre AS "nombre",  -- Elemento 'nombre'
+                cf.puntos AS "puntos",  -- Elemento 'puntos'
+                cf.posicion AS "posicion"  -- Elemento 'posición'
               )
             )
-            ORDER BY c.posicion  -- Ordenar equipos por posición
-          )  -- Fin de XMLAGG para equipos
-        )  -- Fin de XMLELEMENT para competición
+            )
+            FROM clasificacion cf
+            where cf.cod_competicion = c.cod
+        )
+        )
       ).getClobVal() INTO result  -- Obtener el resultado como CLOB
-    FROM clasificacion c
-    JOIN EQUIPOS e
-      ON e.cod = c.cod_equipo  -- Unir con equipos
-    WHERE c.cod_competicion = p_cod_competi  -- Filtrar por competición específica
-    GROUP BY c.cod_competicion;  -- Agrupar para evitar duplicados
+    FROM competiciones c;  -- Agrupar para evitar duplicados
 
     -- Insertar el XML en la tabla con fecha de expiración
     INSERT INTO temp_clob_tab (xml_data, fecha_expiracion)
@@ -50,15 +61,23 @@ CREATE OR REPLACE PACKAGE BODY Paquete_XML AS
   -- Procedimiento resultados ultima jornada xml
   
 
-  PROCEDURE GenerarUltimaJornada  (p_cod_jornada in jornadas.cod%type) IS
+  PROCEDURE GenerarUltimaJornada  (p_n_jornada in jornadas.cod%type) IS
     result CLOB;
     r_xml CLOB;-- Para almacenar el resultado XML
   BEGIN
     -- Generar el XML a partir de la vista 'Resultados_Jornadas'
     SELECT
       XMLELEMENT(
-        "resultado_jornada",  -- Elemento raíz
+        "resultado_jornada",-- Elemento raíz
         XMLAGG(
+        XMLELEMENT(
+        "competicion",
+        XMLATTRIBUTES(c.cod AS "id"),
+        XMLFOREST(
+            c.nombre AS "nombre_competicion"
+            ),
+            (SELECT
+            XMLAGG(
           XMLELEMENT(
             "jornada",
             XMLATTRIBUTES(j.Cod AS "id"),  -- Atributo 'id' para la jornada
@@ -84,9 +103,14 @@ CREATE OR REPLACE PACKAGE BODY Paquete_XML AS
             )
           )
         )
+        FROM jornadas j
+        WHERE j.n_jornada=p_n_jornada
+        AND j.cod_competicion=c.cod
+        )
+        )
+        )
       ).getClobVal() INTO r_xml  -- Obtener el resultado como CLOB
-    FROM jornadas j
-    WHERE j.cod=p_cod_jornada;
+    FROM competiciones c;
     
     result:=  '<?xml version=''1.0'' encoding=''UTF-8'' ?>' || '<!DOCTYPE resultado_jornada SYSTEM "ResultadoUltimaJornada.dtd">' || r_xml;
     
@@ -94,7 +118,8 @@ CREATE OR REPLACE PACKAGE BODY Paquete_XML AS
     INSERT INTO temp_clob_tab (xml_data, fecha_expiracion)
     VALUES (result, SYSTIMESTAMP + INTERVAL '7' DAY);  -- Inserción con fecha de expiración
 
-    DBMS_OUTPUT.PUT_LINE('XML generado correctamente');  -- Confirmación de éxito
+    DBMS_OUTPUT.PUT_LINE('XML generado correctamente');
+    DBMS_OUTPUT.PUT_LINE(result);
     
   EXCEPTION
     WHEN OTHERS THEN
