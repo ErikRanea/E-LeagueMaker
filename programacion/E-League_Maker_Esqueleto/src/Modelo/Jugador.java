@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Jugador {
-    private int codigo;
+    private int cod;
     private String nombre;
     private String apellido;
     private String rol;
@@ -16,8 +16,8 @@ public class Jugador {
 
     // Controlador
 
-    public Jugador(int codigo, String nombre, String apellido, String rol, int salario, String nacionalidad, LocalDate fechaNacimiento, String nickname, Equipo equipo) {
-        this.codigo = codigo;
+    public Jugador(int cod, String nombre, String apellido, String rol, int salario, String nacionalidad, LocalDate fechaNacimiento, String nickname, Equipo equipo) {
+        this.cod = cod;
         this.nombre = nombre;
         this.apellido = apellido;
         this.rol = rol;
@@ -28,13 +28,20 @@ public class Jugador {
         this.equipo = equipo;
     }
 
+    /**
+     * Este constructor permite crear instancias del objeto sin necesidad de no tener ningún dato
+     * @author Erik
+     *
+     */
+    public Jugador(){equipo = new Equipo();}
+
     // Getters & Setters
-    public int getCodigo() {
-        return codigo;
+    public int getCod() {
+        return cod;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setCod(int cod) {
+        this.cod = cod;
     }
 
     public String getNombre() {

@@ -14,6 +14,8 @@ public class Patrocinador {
         this.equipo = equipo;
     }
 
+    public Patrocinador(){equipo = new Equipo();}
+
     // Getters & Setters
     public int getCod() {
         return cod;

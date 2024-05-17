@@ -101,7 +101,9 @@ CREATE OR REPLACE PACKAGE crud_Equipos AS
     PROCEDURE borrar_equipo(p_cod IN equipos.cod%TYPE);
     PROCEDURE modificar_equipo(p_cod IN equipos.cod%TYPE, p_nombre IN 
     equipos.nombre%TYPE, p_fecha_fundacion IN equipos.fecha_fundacion%TYPE);
-    FUNCTION consultar_equipo(p_cod IN equipos.cod%TYPE) RETURN tipo_cursor;
+    FUNCTION consultar_equipo_cod(p_cod IN equipos.cod%TYPE) RETURN tipo_cursor;
+    FUNCTION consultar_equipo_nombre(p_nombre IN equipos.nombre%TYPE)
+    RETURN tipo_cursor;
 END crud_Equipos;
 /
 -- Cuerpo del paquete Crud_Equipos
@@ -145,7 +147,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Equipos IS
     END modificar_equipo;
 
     -- Consultar equipos
-    FUNCTION consultar_equipo(p_cod IN equipos.cod%TYPE) 
+    FUNCTION consultar_equipo_cod(p_cod IN equipos.cod%TYPE) 
     RETURN tipo_cursor
     IS
         v_cursor tipo_cursor;
@@ -158,7 +160,22 @@ CREATE OR REPLACE PACKAGE BODY crud_Equipos IS
     EXCEPTION
         WHEN others THEN
         raise;
-    END consultar_equipo;
+    END consultar_equipo_cod;
+    
+    FUNCTION consultar_equipo_nombre(p_nombre IN equipos.nombre%TYPE) 
+    RETURN tipo_cursor
+    IS
+        v_cursor tipo_cursor;
+    BEGIN
+        OPEN v_cursor FOR
+            SELECT cod, nombre, fecha_fundacion
+            FROM equipos
+            WHERE UPPER(nombre) = UPPER(p_nombre);
+        RETURN v_cursor;
+    EXCEPTION
+        WHEN others THEN
+        raise;
+    END consultar_equipo_nombre;
     
 END crud_Equipos;
 /
@@ -173,9 +190,11 @@ CREATE OR REPLACE PACKAGE crud_Patrocinadores AS
     patrocinadores.cod_patrocinador%TYPE);
     PROCEDURE modificar_Patrocinadores(p_cod IN 
     patrocinadores.cod_patrocinador%TYPE, p_nombre IN
-    patrocinadores.nombre%TYPE);
-    FUNCTION consultar_Patrocinadores(p_cod IN 
+    patrocinadores.nombre%TYPE,p_cod_equipo IN patrocinadores.cod_equipo%type);
+    FUNCTION consultar_Patrocinadores_cod(p_cod IN 
     patrocinadores.cod_patrocinador%TYPE) RETURN tipo_cursor;
+    FUNCTION consultar_Patrocinadores_nombre(p_nombre IN 
+    patrocinadores.nombre%TYPE) RETURN tipo_cursor;
 END crud_Patrocinadores;
 /
 -- Cuerpo del paquete Crud_Patrocinadores
@@ -206,13 +225,16 @@ CREATE OR REPLACE PACKAGE BODY crud_Patrocinadores IS
     END borrar_Patrocinadores;
     
     -- Modificar Patrocinadores
-    PROCEDURE modificar_Patrocinadores(p_cod IN 
-    patrocinadores.cod_patrocinador%TYPE, 
-    p_nombre IN patrocinadores.nombre%TYPE) 
+    PROCEDURE modificar_Patrocinadores(
+    p_cod IN patrocinadores.cod_patrocinador%TYPE, 
+    p_nombre IN patrocinadores.nombre%TYPE,
+    p_cod_equipo IN patrocinadores.cod_equipo%type) 
     IS
     BEGIN
         UPDATE Patrocinadores
-        SET nombre = p_nombre
+        SET 
+        nombre = p_nombre,
+        cod_equipo = p_cod_equipo
         WHERE cod_patrocinador = p_cod;
     EXCEPTION
         WHEN others THEN
@@ -220,7 +242,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Patrocinadores IS
     END modificar_Patrocinadores;
 
     -- Consultar Patrocinadores
-    FUNCTION consultar_Patrocinadores(p_cod IN 
+    FUNCTION consultar_Patrocinadores_cod(p_cod IN 
     patrocinadores.cod_patrocinador%TYPE) 
     RETURN tipo_cursor
     IS
@@ -234,7 +256,24 @@ CREATE OR REPLACE PACKAGE BODY crud_Patrocinadores IS
     EXCEPTION
         WHEN others THEN
         raise;
-    END consultar_Patrocinadores;
+    END consultar_Patrocinadores_cod;
+    
+    FUNCTION consultar_Patrocinadores_nombre(p_nombre IN 
+    patrocinadores.nombre%TYPE) 
+    RETURN tipo_cursor
+    IS
+        v_cursor tipo_cursor;
+    BEGIN
+        OPEN v_cursor FOR
+            SELECT cod_patrocinador, nombre, cod_equipo
+            FROM Patrocinadores
+            WHERE UPPER(nombre) = UPPER(nombre);
+        RETURN v_cursor;
+    EXCEPTION
+        WHEN others THEN
+        raise;
+    END consultar_Patrocinadores_nombre;
+    
     
 END crud_Patrocinadores;
 /
@@ -254,7 +293,9 @@ CREATE OR REPLACE PACKAGE crud_Jugadores AS
     jugadores.rol%TYPE, p_salario IN jugadores.salario%TYPE, p_nacionalidad IN 
     jugadores.nacionalidad%TYPE, p_fecha_nacimiento IN 
     jugadores.fecha_nacimiento%TYPE, p_nickname IN jugadores.nickname%TYPE);
-    FUNCTION consultar_Jugadores(p_cod IN jugadores.cod%TYPE) 
+    FUNCTION consultar_Jugadores_cod(p_cod IN jugadores.cod%TYPE) 
+    RETURN tipo_cursor;
+    FUNCTION consultar_Jugadores_nickname(p_nickname IN jugadores.nickname%TYPE) 
     RETURN tipo_cursor;
 END crud_Jugadores;
 /
@@ -312,7 +353,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Jugadores IS
     END modificar_Jugadores;
 
     -- Consultar Jugadores
-    FUNCTION consultar_Jugadores(p_cod IN jugadores.cod%TYPE) 
+    FUNCTION consultar_Jugadores_cod(p_cod IN jugadores.cod%TYPE) 
     RETURN tipo_cursor
     IS
         v_cursor tipo_cursor;
@@ -325,7 +366,22 @@ CREATE OR REPLACE PACKAGE BODY crud_Jugadores IS
     EXCEPTION
         WHEN others THEN
         raise;
-    END consultar_Jugadores;
+    END consultar_Jugadores_cod;
+    
+    FUNCTION consultar_Jugadores_nickname(p_nickname IN jugadores.nickname%TYPE) 
+    RETURN tipo_cursor
+    IS
+        v_cursor tipo_cursor;
+    BEGIN
+        OPEN v_cursor FOR
+            SELECT *
+            FROM jugadores
+            WHERE UPPER(nickname) = UPPER(nickname);
+        RETURN v_cursor;
+    EXCEPTION
+        WHEN others THEN
+        raise;
+    END consultar_Jugadores_nickname;
     
 END crud_Jugadores;
 /
@@ -342,7 +398,9 @@ CREATE OR REPLACE PACKAGE crud_Staffs AS
     PROCEDURE modificar_Staffs(p_cod IN Staffs.cod%TYPE, p_nombre IN 
     Staffs.nombre%TYPE, p_apellido IN Staffs.apellido%TYPE, p_puesto IN 
     Staffs.puesto%TYPE, p_salario IN Staffs.salario%TYPE);
-    FUNCTION consultar_Staffs(p_cod IN Staffs.cod%TYPE) RETURN tipo_cursor;
+    FUNCTION consultar_Staffs_cod(p_cod IN Staffs.cod%TYPE) 
+    RETURN tipo_cursor;
+    FUNCTION consultar_Staffs_nombre(p_nombre IN Staffs.nombre%TYPE) RETURN tipo_cursor;
 END crud_Staffs;
 /
 -- Cuerpo del paquete Crud_Staffs
@@ -391,7 +449,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Staffs IS
     END modificar_Staffs;
 
     -- Consultar Staffs
-    FUNCTION consultar_Staffs(p_cod IN Staffs.cod%TYPE) 
+    FUNCTION consultar_Staffs_cod(p_cod IN Staffs.cod%TYPE) 
     RETURN tipo_cursor
     IS
         v_cursor tipo_cursor;
@@ -404,67 +462,98 @@ CREATE OR REPLACE PACKAGE BODY crud_Staffs IS
     EXCEPTION
         WHEN others THEN
         raise;
-    END consultar_Staffs;
+    END consultar_Staffs_cod;
+    
+    FUNCTION consultar_Staffs_nombre(p_nombre IN Staffs.nombre%TYPE) 
+    RETURN tipo_cursor
+    IS
+        v_cursor tipo_cursor;
+    BEGIN
+        OPEN v_cursor FOR
+            SELECT *
+            FROM Staffs
+            WHERE UPPER(nombre) = UPPER(nombre);
+        RETURN v_cursor;
+    EXCEPTION
+        WHEN others THEN
+        raise;
+    END consultar_Staffs_nombre;
     
 END crud_Staffs;
 /
 --------------------------------------------------------------------------------
 
 -- Definir paquete Crud_Competiciones
-CREATE OR REPLACE PACKAGE crud_Competiciones AS 
+CREATE OR REPLACE PACKAGE crud_Competiciones AS
     TYPE tipo_cursor IS REF CURSOR;
-    PROCEDURE insertar_Competiciones(p_nombre IN Competiciones.nombre%TYPE, 
-    p_fecha_inicio IN Competiciones.fecha_inicio%TYPE, p_fecha_fin IN 
-    Competiciones.fecha_fin%TYPE, p_estado_abierto IN 
-    Competiciones.estado_abierto%TYPE, p_cod_juego IN 
-    Competiciones.cod_juego%TYPE);
+   
+    PROCEDURE insertar_Competiciones(
+        p_nombre IN Competiciones.nombre%TYPE,
+        p_fecha_inicio IN Competiciones.fecha_inicio%TYPE,
+        p_fecha_fin IN Competiciones.fecha_fin%TYPE,
+        p_estado_abierto IN Competiciones.estado_abierto%TYPE,
+        p_cod_juego IN Competiciones.cod_juego%TYPE
+    );
+   
     PROCEDURE borrar_Competiciones(p_cod IN Competiciones.cod%TYPE);
-    PROCEDURE modificar_Competiciones(p_cod IN Competiciones.cod%TYPE, p_nombre 
-    IN Competiciones.nombre%TYPE, p_fecha_inicio IN 
-    Competiciones.fecha_inicio%TYPE, p_fecha_fin IN 
-    Competiciones.fecha_fin%TYPE, p_estado_abierto IN 
-    Competiciones.estado_abierto%TYPE);
-    FUNCTION consultar_Competiciones(p_cod IN Competiciones.cod%TYPE) 
-    RETURN tipo_cursor;
+   
+    PROCEDURE modificar_Competiciones(
+        p_cod IN Competiciones.cod%TYPE,
+        p_nombre IN Competiciones.nombre%TYPE,
+        p_fecha_inicio IN Competiciones.fecha_inicio%TYPE,
+        p_fecha_fin IN Competiciones.fecha_fin%TYPE,
+        p_estado_abierto IN Competiciones.estado_abierto%TYPE
+    );
+   
+    FUNCTION consultar_Competiciones(p_cod IN Competiciones.cod%TYPE)
+        RETURN tipo_cursor;
+   
+    FUNCTION todas_Competiciones
+        RETURN tipo_cursor;
 END crud_Competiciones;
 /
--- Cuerpo del paquete Crud_Competiciones
 CREATE OR REPLACE PACKAGE BODY crud_Competiciones IS
 
     -- Alta de Competiciones
-    PROCEDURE insertar_Competiciones (p_nombre IN Competiciones.nombre%TYPE, 
-    p_fecha_inicio IN Competiciones.fecha_inicio%TYPE, p_fecha_fin IN 
-    Competiciones.fecha_fin%TYPE, p_estado_abierto IN 
-    Competiciones.estado_abierto%TYPE,  p_cod_juego IN 
-    Competiciones.cod_juego%TYPE)
+    PROCEDURE insertar_Competiciones (
+        p_nombre IN Competiciones.nombre%TYPE,
+        p_fecha_inicio IN Competiciones.fecha_inicio%TYPE,
+        p_fecha_fin IN Competiciones.fecha_fin%TYPE,
+        p_estado_abierto IN Competiciones.estado_abierto%TYPE,
+        p_cod_juego IN Competiciones.cod_juego%TYPE
+    )
     IS
     BEGIN
         INSERT INTO Competiciones (cod, nombre, fecha_inicio, fecha_fin, 
         estado_abierto, cod_juego)
-        VALUES (seq_competiciones.nextval, p_nombre, p_fecha_inicio,
-        p_fecha_fin, p_estado_abierto, p_cod_juego);
+        VALUES (seq_competiciones.nextval, p_nombre, p_fecha_inicio, p_fecha_fin
+        , p_estado_abierto, p_cod_juego);
     EXCEPTION
         WHEN others THEN
-        raise;
+            RAISE_APPLICATION_ERROR(-20001, 'Error en insertar_Competiciones: '
+            || SQLERRM);
     END insertar_Competiciones;
-    
+   
     -- Baja de Competiciones
     PROCEDURE borrar_Competiciones (p_cod IN Competiciones.cod%TYPE)
     IS
     BEGIN
-        DELETE FROM Competiciones
-        WHERE cod = p_cod;
+        DELETE FROM Competiciones WHERE cod = p_cod;
+        commit;
     EXCEPTION
         WHEN others THEN
-        raise;
+            RAISE_APPLICATION_ERROR(-20002, 'Error en borrar_Competiciones: ' 
+            || SQLERRM);
     END borrar_Competiciones;
-    
+   
     -- Modificar Competiciones
-    PROCEDURE modificar_Competiciones(p_cod IN Competiciones.cod%TYPE, p_nombre 
-    IN Competiciones.nombre%TYPE, p_fecha_inicio IN 
-    Competiciones.fecha_inicio%TYPE, p_fecha_fin IN 
-    Competiciones.fecha_fin%TYPE, p_estado_abierto IN 
-    Competiciones.estado_abierto%TYPE) 
+    PROCEDURE modificar_Competiciones(
+        p_cod IN Competiciones.cod%TYPE,
+        p_nombre IN Competiciones.nombre%TYPE,
+        p_fecha_inicio IN Competiciones.fecha_inicio%TYPE,
+        p_fecha_fin IN Competiciones.fecha_fin%TYPE,
+        p_estado_abierto IN Competiciones.estado_abierto%TYPE
+    )
     IS
     BEGIN
         UPDATE Competiciones
@@ -475,12 +564,13 @@ CREATE OR REPLACE PACKAGE BODY crud_Competiciones IS
         WHERE cod = p_cod;
     EXCEPTION
         WHEN others THEN
-        raise;
+            RAISE_APPLICATION_ERROR(-20003, 'Error en modificar_Competiciones:
+            ' || SQLERRM);
     END modificar_Competiciones;
 
     -- Consultar Competiciones
-    FUNCTION consultar_Competiciones(p_cod IN Competiciones.cod%TYPE) 
-    RETURN tipo_cursor
+    FUNCTION consultar_Competiciones(p_cod IN Competiciones.cod%TYPE)
+        RETURN tipo_cursor
     IS
         v_cursor tipo_cursor;
     BEGIN
@@ -491,9 +581,24 @@ CREATE OR REPLACE PACKAGE BODY crud_Competiciones IS
         RETURN v_cursor;
     EXCEPTION
         WHEN others THEN
-        raise;
+            RAISE_APPLICATION_ERROR(-20004, 'Error en consultar_Competiciones: 
+            ' || SQLERRM);
     END consultar_Competiciones;
-    
+   
+    FUNCTION todas_Competiciones
+        RETURN tipo_cursor
+    IS
+        v_cursor tipo_cursor;
+    BEGIN
+        OPEN v_cursor FOR
+            SELECT * FROM Competiciones;
+        RETURN v_cursor;
+    EXCEPTION
+        WHEN others THEN
+            RAISE_APPLICATION_ERROR(-20005, 'Error en todas_Competiciones: '
+            || SQLERRM);
+    END todas_Competiciones;
+   
 END crud_Competiciones;
 /
 --------------------------------------------------------------------------------
