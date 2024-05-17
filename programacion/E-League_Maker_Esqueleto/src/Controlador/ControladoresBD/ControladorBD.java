@@ -28,6 +28,7 @@ public class ControladorBD {
     private ControladorTJugadores ctJugadores;
     private ControladorTStaffs ctStaffs;
     private ControladorTCompeticiones ctCompeticiones;
+    private ControladorTUsuarios ctUsuarios;
 
 
     public ControladorBD(ControladorPrincipal cp)
@@ -77,6 +78,7 @@ public class ControladorBD {
         ctJugadores = new ControladorTJugadores(this);
         ctStaffs = new ControladorTStaffs(this);
         ctCompeticiones = new ControladorTCompeticiones(this);
+        ctUsuarios = new ControladorTUsuarios(this);
     }
 
 
@@ -142,6 +144,12 @@ public class ControladorBD {
     public ArrayList<Competicion> pedirListaCompeticiones() throws Exception
     {return ctCompeticiones.pedirListaCompeticiones();}
 
+    //Usuario
+
+    public Usuario buscarUsuario(String nickname) throws Exception{return ctUsuarios.buscarUsuario(nickname);}
+    public String borrarUsuario() throws Exception{return ctUsuarios.borrarUsuario();}
+    public String modificarUsuario(Usuario usuario) throws Exception{return ctUsuarios.modificarUsuario(usuario);}
+    public String insertarUsuario(Usuario usuario) throws Exception{return ctUsuarios.insertarUsuario(usuario);}
 
 
 }
