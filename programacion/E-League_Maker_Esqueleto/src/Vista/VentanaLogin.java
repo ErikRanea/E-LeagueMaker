@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -40,21 +41,23 @@ public class VentanaLogin extends JFrame {
     }
 
 
-
+    /**
+     * Con este metodo iniciamos las funciones necesarias para la estética de la ventana
+     */
     public void iniciarComponentes()
     {
         meterImagen();
+        ponerIconoPrograma();
     }
 
+    /**
+     * Este metodo se encarga de redimensionar la imagen del login e introducirla dentro del labelImagen
+     */
     public void meterImagen()
     {
         try {
-            URL iLogOut = new URL("https://github.com/ErikRanea/E-LeagueMaker/blob/develop/programacion/" +
-                    "E-League_Maker_Esqueleto/src/Img/iLogin.jpg?raw=true");
 
-            System.out.println("\n" + "URL de la imagen: " + iLogOut);
-
-            BufferedImage imagenOriginal = ImageIO.read(iLogOut);
+            BufferedImage imagenOriginal = ImageIO.read(new File("./src/Img/iLogin.jpg"));
 
             BufferedImage bufferedImage = Scalr.resize(imagenOriginal, 700,10);
 
@@ -68,6 +71,14 @@ public class VentanaLogin extends JFrame {
         }
     }
 
+    /**
+     * Este metodo se encarga de ponerle la imagen de marca a la aplicación
+     */
+    public void ponerIconoPrograma()
+    {
+        ImageIcon icono = new ImageIcon("./src/Img/Logo_mas_cerca.jpg");
+        super.setIconImage(icono.getImage());
+    }
 
     public JTextField getTfUsuario() {
         return tfUsuario;

@@ -81,9 +81,10 @@ public class ControladorPrincipal {
     {return cbd.modificarCompeticion(competicion);}
     public String insertarCompeticion(Competicion competicion) throws Exception
     {return cbd.insertarCompeticion(competicion);}
-
     public ArrayList<Competicion> pedirListaCompeticiones() throws Exception
     {return cbd.pedirListaCompeticiones();}
+    public ArrayList<Competicion> pedirCompeticionesCerradas()throws Exception
+    {return cbd.pedirCompeticionesCerradas();}
 
 
 

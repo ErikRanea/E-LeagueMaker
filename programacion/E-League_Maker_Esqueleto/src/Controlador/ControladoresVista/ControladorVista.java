@@ -109,6 +109,8 @@ public class ControladorVista {
     {return cp.modificarCompeticion(competicion);}
     public String insertarCompeticion(Competicion competicion) throws Exception
     {return cp.insertarCompeticion(competicion);}
+    public ArrayList<Competicion> pedirCompeticionesCerradas()throws Exception
+    {return cp.pedirCompeticionesCerradas();}
 
     public ArrayList<Competicion> pedirListaCompeticiones() throws Exception
     {return cp.pedirListaCompeticiones();}
