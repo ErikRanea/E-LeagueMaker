@@ -1,11 +1,19 @@
+/**
+ * Clase creada para almenacenar un JFrame encargado de el inicio de sesión de los usuarios.
+ * @author Erik
+ * @since 18/05/2024
+ */
 package Vista;
+
+import org.imgscalr.Scalr;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class VentanaLogin extends JFrame {
     private JPanel panelPrincipal;
@@ -13,11 +21,12 @@ public class VentanaLogin extends JFrame {
     private JPanel pBody;
     private JPanel pFooter;
     private JPanel pDatos;
-    private JTextField tfNombre;
-    private JPasswordField passwordField1;
-    private JButton logInButton;
-    private JButton salirButton;
+    private JTextField tfUsuario;
+    private JPasswordField tfPassword;
+    private JButton bLogin;
+    private JButton bSalir;
     private JLabel labelImagen;
+    private JLabel lError;
 
 
     public VentanaLogin()
@@ -26,6 +35,8 @@ public class VentanaLogin extends JFrame {
         setSize(900,400);
         setLocationRelativeTo(null);
         iniciarComponentes();
+        setResizable(false);
+
     }
 
 
@@ -38,20 +49,58 @@ public class VentanaLogin extends JFrame {
     public void meterImagen()
     {
         try {
-            // Cargar la imagen utilizando ClassLoader
-            BufferedImage originalImage = ImageIO.read(getClass().getResourceAsStream("src/Img/iLogin.jpeg"));
-            if (originalImage == null) {
-                throw new IOException("No se pudo cargar la imagen desde el recurso especificado.");
-            }
+            URL iLogOut = new URL("https://github.com/ErikRanea/E-LeagueMaker/blob/develop/programacion/" +
+                    "E-League_Maker_Esqueleto/src/Img/iLogin.jpg?raw=true");
 
-            // Crear una imagen redimensionada
-            Image resizedImage = originalImage.getScaledInstance(600, 400, Image.SCALE_SMOOTH);
+            System.out.println("\n" + "URL de la imagen: " + iLogOut);
 
-            // Establecer la imagen redimensionada como ícono de un JLabel ya existente
-            labelImagen.setIcon(new ImageIcon(resizedImage));
+            BufferedImage imagenOriginal = ImageIO.read(iLogOut);
+
+            BufferedImage bufferedImage = Scalr.resize(imagenOriginal, 700,10);
+
+            ImageIcon iconoEscalado = new ImageIcon(bufferedImage);
+
+            labelImagen.setIcon(iconoEscalado);
+            //labelImagen.setSize(new Dimension(600, 500));
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
+    public JTextField getTfUsuario() {
+        return tfUsuario;
+    }
+
+    public void setTfUsuario(JTextField tfUsuario) {
+        this.tfUsuario = tfUsuario;
+    }
+
+    public JPasswordField getTfPassword() {
+        return tfPassword;
+    }
+
+    public void setTfPassword(JPasswordField tfPassword) {
+        this.tfPassword = tfPassword;
+    }
+
+
+    public void addBLogInAL(ActionListener listener){bLogin.addActionListener(listener);}
+    public void addBSalirAL(ActionListener listener){bSalir.addActionListener(listener);}
+
+
+
+    //Metodos propios
+
+    public void mensajeErrorUsuario(String mensaje)
+    {
+        lError.setText(mensaje);
+        lError.setVisible(true);
+    }
+    public void quitarMensajeError()
+    {
+        lError.setVisible(false);
+    }
+
 }

@@ -56,8 +56,10 @@ public class ControladorVentanaCompeticion {
     public class BIntroResult implements ActionListener
     {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent e)
+        {
             vCompeti.verPanelBotonesLateralIzq();
+            
         }
     }
 
