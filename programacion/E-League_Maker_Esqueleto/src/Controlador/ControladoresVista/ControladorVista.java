@@ -26,7 +26,6 @@ public class ControladorVista {
      * @param cvCometi
      */
     private ControladorVentanaCompeticion cvCompeti;
-    private ControladorVentanaRegistro cvRegistro;
     private ControladorVentanaLogin cvLogin;
 
     public ControladorVista(ControladorPrincipal cp)
@@ -42,7 +41,6 @@ public class ControladorVista {
     {
         cvCompeti.crearMostrar();
     }
-    public void mostrarVentanaRegistro(){cvRegistro.crearMostrar();}
 
     public void mostrarVentanaLogin(){cvLogin.crearMostrar();}
 

@@ -1,3 +1,8 @@
+/**
+ * Clase encargada de controlar to do el apartado lógico de la ventana de logon
+ * @author Erik
+ * @since 18/05/2024
+ */
 package Controlador.ControladoresVista;
 
 import Excepciones.ExcepcionErrorUsuario;
@@ -10,13 +15,22 @@ import java.util.Arrays;
 
 public class ControladorVentanaLogin {
 
-
+    /**
+     * Atributo que conecta la clase con el conector superior
+     * @param cv
+     */
     private ControladorVista cv;
 
-
+    /**
+     * Atributo de la ventana
+     * @param vLogin
+     */
     private VentanaLogin vLogin;
 
-
+    /**
+     * Atriburo para instaciar objetos de la base de datos
+     * @param usuario
+     */
     private Usuario usuario;
 
 
@@ -25,13 +39,17 @@ public class ControladorVentanaLogin {
         this.cv = cv;
     }
 
+    /**
+     * Metodo encargado de crear la ventana y mostrarla
+     * @author Erik
+     */
     public void crearMostrar()
     {
         try
         {
             vLogin = new VentanaLogin();
 
-
+            vLogin.addBSalirAL(new BSalir());
             vLogin.addBLogInAL(new BLogIn());
             vLogin.setVisible(true);
         }
@@ -42,7 +60,11 @@ public class ControladorVentanaLogin {
     }
 
 
-
+    /**
+     * Interfaz utilizada utiliza para detectar la acción sobre el botón de lógin y verificar si el usuario y contraseña
+     * introducido son correctos.
+     * @author Erik
+     */
     public class BLogIn implements ActionListener
     {
         @Override
@@ -58,7 +80,7 @@ public class ControladorVentanaLogin {
                 }
                 else
                 {
-                    throw new ExcepcionErrorUsuario("Usuario o contraseña no validos.");
+                    throw new ExcepcionErrorUsuario("Datos incorrectos");
                 }
             }
             catch (ExcepcionErrorUsuario eUsuario)
@@ -72,9 +94,21 @@ public class ControladorVentanaLogin {
         }
     }
 
+    public class BSalir implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            vLogin.dispose();
+        }
+    }
 
     //Metodos propios
 
+    /**
+     * Este metedo sirve para validar los datos introducidos por el usuario.Tanto si el usuario no es correcto o la
+     * contraseña ponen un mensaje de error
+     * @return boolean si es true todos los datos son correctos. Si no, no te permite acceder
+     * @throws Exception
+     */
     public boolean validarTF() throws Exception
     {
         boolean esCorrecto = false;
@@ -84,7 +118,7 @@ public class ControladorVentanaLogin {
         {
             String nickname = vLogin.getTfUsuario().getText();
             usuario = cv.buscarUsuario(nickname);
-            if(usuario != null)
+            if(usuario.getPassword() != null)
             {
                 char[] passwordArray = vLogin.getTfPassword().getPassword();
                 StringBuilder password = new StringBuilder("");
