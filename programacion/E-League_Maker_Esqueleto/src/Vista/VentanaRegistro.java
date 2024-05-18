@@ -16,6 +16,7 @@ public class VentanaRegistro extends JDialog {
     private JTextField tfUsuario;
     private JPasswordField pfContra;
     private JLabel lIcono;
+    private JButton button1;
 
     /**
      * Constructor del diálogo de registro
@@ -26,7 +27,7 @@ public class VentanaRegistro extends JDialog {
      */
     public VentanaRegistro() throws IOException {
         setContentPane(contentPane);
-        setSize(300, 400);
+        setSize(500, 600);
         setModal(true);
         getRootPane().setDefaultButton(bAceptar);
         setLocationRelativeTo(null);
