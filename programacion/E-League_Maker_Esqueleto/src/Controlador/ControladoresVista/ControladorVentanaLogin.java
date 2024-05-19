@@ -75,8 +75,11 @@ public class ControladorVentanaLogin {
                 vLogin.quitarMensajeError();
                 if (validarTF())
                 {
-                    vLogin.dispose();
-                    cv.mostrarVentanaCompeti();
+                    if(usuario.isAdmin())
+                    {
+                        vLogin.dispose();
+                        cv.mostrarVentanaCompeti();
+                    }
                 }
                 else
                 {
