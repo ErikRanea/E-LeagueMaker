@@ -57,7 +57,7 @@ public class VentanaLogin extends JFrame {
     {
         try {
 
-            BufferedImage imagenOriginal = ImageIO.read(new File("./src/Img/iLogin.jpg"));
+            BufferedImage imagenOriginal = ImageIO.read(new File("./src/Img/iLogin2.jpg"));
 
             BufferedImage bufferedImage = Scalr.resize(imagenOriginal, 700,10);
 

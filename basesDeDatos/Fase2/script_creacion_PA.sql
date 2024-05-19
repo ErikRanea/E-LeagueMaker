@@ -5,7 +5,11 @@
 CREATE OR REPLACE PROCEDURE generar_calendario  AS
     --Competicion
     CURSOR c_cod_competi IS
-        SELECT cod_competicion FROM PUNTOS_EQUIPOS;
+        SELECT p.cod_competicion FROM PUNTOS_EQUIPOS p
+        JOIN COMPETICIONES c
+        ON p.cod_competicion = c.cod
+        WHERE c.estado_abierto = 0;
+    --Hacemos un where que solo generé de las competiciones cerradas
     v_cod_competicion PUNTOS_EQUIPOS.cod_competicion%type;
 
 
@@ -106,10 +110,10 @@ BEGIN
                          -- Imprimir la jornada actual
                          DBMS_OUTPUT.PUT_LINE('Competicion '|| v_cod_competicion 
                          ||' Jornada ' || v_jornada_actual || ':'); 
+                         
 
                     -- Insertar la jornada en la tabla Jornadas
                     v_cod_jornada := seq_jornadas.NEXTVAL; 
-                    fecha_jornada := v_fecha_inicio;
                     /*Al meter el cod jornada en una variable hago que no 
                     salte el nextval hasta que lo vuelva a declarar y asi puedo 
                     saber cual es el codigo de la jornada*/
@@ -165,6 +169,9 @@ BEGIN
                 
              -- Colocar el ultimo equipo en la segunda posicion para la rotacion
                     l_equipos(2) := temp;
+            
+            --Saltar de semana para la siguiente jornada 
+                     fecha_jornada := fecha_jornada + INTERVAL '7' DAY;
                 
                 if v_jornada_actual = l_equipos.COUNT -1 THEN
                     todas_jornadas_hechas := 1;
