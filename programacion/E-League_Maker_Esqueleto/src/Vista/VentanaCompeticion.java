@@ -94,4 +94,12 @@ public class VentanaCompeticion extends JFrame{
     public void setCbJornadas(JComboBox cbJornadas) {
         this.cbJornadas = cbJornadas;
     }
+
+    public JPanel getpVisualizar() {
+        return pVisualizar;
+    }
+
+    public void setpVisualizar(JPanel pVisualizar) {
+        this.pVisualizar = pVisualizar;
+    }
 }

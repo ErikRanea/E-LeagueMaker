@@ -1,5 +1,32 @@
 --SCRIPT PARA GENERAR LOS PROCEDIMIENTOS ALMACENADOS
+--***************** PA Resetear secuencias de jornadas y enfrentamientos********
+CREATE OR REPLACE PROCEDURE reset_seq_jornadas_enfrentamientos
+AS
+BEGIN
+        -- Eliminar las secuencias existentes
+    EXECUTE IMMEDIATE 'DROP SEQUENCE seq_enfrentamientos';
+    EXECUTE IMMEDIATE 'DROP SEQUENCE seq_jornadas';
+    
+    -- Crear de nuevo la secuencia seq_jornadas
+    EXECUTE IMMEDIATE '
+        CREATE SEQUENCE seq_jornadas
+        START WITH 1
+        INCREMENT BY 1
+        NOCACHE
+        NOCYCLE';
+        
+    -- Crear de nuevo la secuencia seq_enfrentamientos
+    EXECUTE IMMEDIATE '
+        CREATE SEQUENCE seq_enfrentamientos
+        START WITH 1
+        INCREMENT BY 1
+        NOCACHE
+        NOCYCLE';
 
+END;
+/
+
+--****************reset secuencias enfren jor  FINAL****************************
 
 --***************** PA Generar Calendario **************************************
 CREATE OR REPLACE PROCEDURE generar_calendario  AS
@@ -37,6 +64,9 @@ CREATE OR REPLACE PROCEDURE generar_calendario  AS
     
     todas_jornadas_hechas NUMBER := 0;
 BEGIN
+    RESET_SEQ_JORNADAS_ENFRENTAMIENTOS;
+    DELETE ENFRENTAMIENTOS;
+    DELETE JORNADAS;
     
     OPEN c_cod_competi;
    ---ABRIR CURSOR COMPETICIONES 
@@ -136,8 +166,7 @@ BEGIN
                     Cod_Competicion)
                     VALUES (v_cod_jornada, v_jornada_actual, fecha_jornada,
                     v_cod_competicion);
-                    
-                    
+
                     
                     
                     
@@ -235,3 +264,35 @@ BEGIN
     
 END abrir_cerrar_competicion;
 --***********************Fin abrir cerrar competiciones*************************
+
+--******************************************************************************
+CREATE OR REPLACE PROCEDURE CONSULTAR_ENFRENTAMIENTOS_SIN_RESULTADOS
+(
+    p_cod_jornada IN JORNADAS.cod%TYPE,
+    c_enfrentamientos OUT SYS_REFCURSOR
+)
+AS
+
+BEGIN
+     OPEN p_enfrentamientos FOR
+        SELECT Cod,
+               Hora,
+               Cod_Jornada,
+               cod_equipo_visitante,
+               cod_equipo_local
+        FROM ENFRENTAMIENTOS 
+        WHERE cod_enfrentamiento IS NULL;
+END;
+
+--******************************************************************************
+
+CREATE OR REPLACE PROCEDURE insertar_resultado
+(
+    p_cod_competicion IN COMPETICIONES.cod%TYPE,
+    p_cod_jornada IN 
+)
+AS
+
+BEGIN
+
+END;
