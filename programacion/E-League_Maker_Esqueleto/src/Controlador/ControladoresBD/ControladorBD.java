@@ -143,6 +143,10 @@ public class ControladorBD {
     {return ctCompeticiones.insertarCompeticion(competicion);}
     public ArrayList<Competicion> pedirListaCompeticiones() throws Exception
     {return ctCompeticiones.pedirListaCompeticiones();}
+    public ArrayList<Competicion> pedirCompeticionesCerradas()throws Exception
+    {return ctCompeticiones.pedirCompeticionesCerradas();}
+
+
 
     //Usuario
 

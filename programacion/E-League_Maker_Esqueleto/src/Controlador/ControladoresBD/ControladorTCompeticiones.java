@@ -225,7 +225,7 @@ public class ControladorTCompeticiones {
      * @author Erik
      */
     public ArrayList<Competicion> pedirListaCompeticiones() throws Exception {
-        Connection con = null;
+
 
 
         try {
@@ -267,6 +267,49 @@ public class ControladorTCompeticiones {
 
         return listaCompeticiones;
     }
+
+    public ArrayList<Competicion> pedirCompeticionesCerradas()throws Exception
+    {
+        try {
+            con = cbd.abrirConexion();
+            String llamada = "{ ? = call crud_Competiciones.competiciones_cerradas }";
+            CallableStatement cs = con.prepareCall(llamada);
+
+            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+
+            cs.execute();
+
+            ResultSet rs = (ResultSet) cs.getObject(1);
+
+            while (rs.next()) {
+                Competicion competi = new Competicion();
+                competi.setCod(rs.getInt("cod"));
+                competi.setNombre(rs.getString("nombre"));
+                competi.setFechaInicio(rs.getDate("fecha_inicio").toLocalDate());
+                competi.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
+                competi.setEstadoAbierto(rs.getBoolean("estado_abierto"));
+                competi.setJuego(cbd.buscarJuego(rs.getInt("cod_juego")));
+                listaCompeticiones.add(competi);
+            }
+
+            rs.close();
+            cs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error al consultar las competiciones", e);
+        } finally {
+            if (con != null) {
+                try {
+                    cbd.cerrarConexion(con);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return listaCompeticiones;
+    }
+
 
 
 }

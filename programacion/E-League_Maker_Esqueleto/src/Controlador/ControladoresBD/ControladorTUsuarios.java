@@ -52,7 +52,7 @@ public class ControladorTUsuarios {
             cs.execute();
 
             ResultSet rs = (ResultSet) cs.getObject(1);
-
+            System.out.println("\n Buscando");
             if (rs.next()) {
                 usuario.setCod(rs.getInt("cod_usuario"));
                 usuario.setNickname(rs.getString("nickname"));

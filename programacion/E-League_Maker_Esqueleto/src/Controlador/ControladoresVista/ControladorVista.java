@@ -26,15 +26,14 @@ public class ControladorVista {
      * @param cvCometi
      */
     private ControladorVentanaCompeticion cvCompeti;
-    private ControladorVentanaRegistro cvRegistro;
+    private ControladorVentanaLogin cvLogin;
 
     public ControladorVista(ControladorPrincipal cp)
     {
         this.cp = cp;
-        cvRegistro = new ControladorVentanaRegistro(this);
-        cvCompeti = new ControladorVentanaCompeticion(this);
-        probarTablas();
-        //mostrarVentanaRegistro();
+
+        crearControladoresVista();
+        mostrarVentanaLogin();
 
     }
 
@@ -42,261 +41,17 @@ public class ControladorVista {
     {
         cvCompeti.crearMostrar();
     }
-    public void mostrarVentanaRegistro(){cvRegistro.crearMostrar();}
 
+    public void mostrarVentanaLogin(){cvLogin.crearMostrar();}
 
-
-    public void probarTablas()
+    public void crearControladoresVista()
     {
-        //probarCrudJuegos();
-        //probarCrudEquipos();
-       // probarCrudPatrocinadores();
-       // probarCrudJugadores();
-        //probarCrudStaffs();
-        //probarCrudCompeticiones();
-        probarCrudUsuarios();
-    }
-
-    public void probarCrudJuegos()
-    {
-        try
-        {
-            //Busco juego
-            Juego juego = buscarJuego(1);
-            System.out.println("\nEl juego a "+ juego.getNombre()+" es de "+ juego.getDesarrolladora());
-
-            //Inserto juego
-            Juego juego2 = new Juego();
-            juego2.setNombre("Fifa");
-            juego2.setDesarrolladora("EA");
-            juego2.setFechaLanzamiento(LocalDate.now());
-            System.out.println("\n"+insertarJuego(juego2));
-
-            //Modifico el juego
-            juego2 = buscarJuego(juego2.getNombre());
-            juego2.setNombre("Battlefield");
-            modificarJuego(juego2);
-
-            //Borro Juego
-
-            System.out.println("\n"+borrarJuego());
-
-
-
-
-        }
-        catch (Exception ex)
-        {
-            System.out.println("\nHa salido el siguiente error:\n"+ex.getMessage());
-        }
-
-    }
-
-    public void probarCrudEquipos()
-    {
-        try
-        {
-            //Busco Equipo
-            Equipo equipo = buscarEquipo(1);
-            System.out.println("\nEl equipo a "+ equipo.getNombre()+" es del "+ equipo.getFechaFundacion());
-
-            //Inserto equipo
-            Equipo equipo2 = new Equipo();
-            equipo2.setNombre("Los fiferos");
-            equipo2.setFechaFundacion(LocalDate.now());
-            System.out.println("\n"+insertarEquipo(equipo2));
-
-            //Modifico el equipo
-            equipo2 = buscarEquipo(equipo2.getNombre());
-            equipo2.setNombre("Wow enjoyer");
-            modificarEquipo(equipo2);
-
-            //Borro Equipo
-
-            System.out.println("\n"+borrarEquipo());
-
-
-
-
-        }
-        catch (Exception ex)
-        {
-            System.out.println("\nHa salido el siguiente error:\n"+ex.getMessage());
-        }
+        cvLogin = new ControladorVentanaLogin(this);
+        cvCompeti = new ControladorVentanaCompeticion(this);
 
     }
 
 
-    public void probarCrudPatrocinadores()
-    {
-        try
-        {
-            //Busco Patrocinador
-            Patrocinador patrocinador =buscarPatrocinador(1);
-            System.out.println("\nEl patrocinador a "+ patrocinador.getNombre()+" es del "+ patrocinador.getEquipo().getNombre());
-
-            //Inserto equipo
-            Patrocinador patrocinador2 = new Patrocinador();
-            patrocinador2.setNombre("Inca cola");
-            patrocinador2.setEquipo(buscarEquipo(1));
-            System.out.println("\n"+insertarEPatrocinador(patrocinador2));
-
-            //Modifico el equipo
-            patrocinador2 = buscarPatrocinador(patrocinador2.getNombre());
-            patrocinador2.setNombre("Pepsi");
-            modificarPatrocinador(patrocinador2);
-
-            //Borro Equipo
-
-            System.out.println("\n"+borrarPatrocinador());
-
-
-
-
-        }
-        catch (Exception ex)
-        {
-            System.out.println("\nHa salido el siguiente error:\n"+ex.getMessage());
-        }
-    }
-
-
-    public void probarCrudJugadores()
-    {
-        try
-        {
-            //Busco jugador
-            Jugador jugador =buscarJugador(1);
-            String equipoS = jugador.getEquipo().getNombre();
-            System.out.println("\nEl jugador  "+ jugador.getNombre()+" es del "+ equipoS);
-
-            //Inserto jugador
-            Jugador jugador2 = new Jugador();
-            jugador2.setNombre("Rodrigo ");
-            jugador2.setEquipo(buscarEquipo(1));
-            jugador2.setNickname("ShadowP");
-            jugador2.setSalario(1135);
-            System.out.println("\n"+insertarJugador(jugador2));
-
-            //Modifico el jugador
-            jugador2 = buscarJugador(jugador2.getNickname());
-            jugador2.setNombre("Rodrigo goes");
-            modificarJugador(jugador2);
-
-            //Borro Equipo
-
-            System.out.println("\n"+borrarJugador());
-
-
-
-
-        }
-        catch (Exception ex)
-        {
-            System.out.println("\nHa salido el siguiente error:\n"+ex.getMessage());
-        }
-    }
-
-    public void probarCrudStaffs()
-    {
-        try
-        {
-            //Busco STAFF
-            Staff staff =buscarStaff(1);
-            String equipoS = staff.getEquipo().getNombre();
-            System.out.println("\nEl jugador  "+ staff.getNombre()+" es del "+ equipoS);
-
-            //Inserto STAFF
-            Staff staff2 = new Staff();
-            staff2.setCod(150);
-            staff2.setNombre("Ancelloti");
-            staff2.setEquipo(buscarEquipo(1));
-            staff2.setSalario(1135);
-            System.out.println("\n"+insertarJStaff(staff2));
-
-            //Modifico STAFF
-            staff2 = buscarStaff(staff2.getNombre());
-            staff2.setNombre("Pep Guardiola");
-            modificarStaff(staff2);
-
-            //Borro Staff
-
-            System.out.println("\n"+borrarStaff());
-
-
-
-
-        }
-        catch (Exception ex)
-        {
-            System.out.println("\nHa salido el siguiente error:\n"+ex.getMessage());
-        }
-    }
-
-    public void probarCrudCompeticiones()
-    {
-        try
-        {
-            //Busco Competi
-            Competicion competicion = buscarCompeticion(1);
-            String juego = competicion.getJuego().getNombre();
-            System.out.println("\nLa competicion  "+ competicion.getNombre()+" es del juego "+ juego +" esta es estado" +
-                    " "+competicion.isEstadoAbierto());
-
-            //Inserto Competi
-            Competicion competicion2 = new Competicion();
-            competicion2.setNombre("La liga genuine");
-            competicion2.setJuego(buscarJuego(1));
-            competicion2.setFechaInicio(LocalDate.now().plusWeeks(1));
-            competicion2.setFechaFin(LocalDate.now().plusMonths(1));
-            competicion2.setEstadoAbierto(false);
-            System.out.println("\n"+insertarCompeticion(competicion2));
-
-            System.out.println("\n"+borrarCompeticion());
-
-            String lista = "";
-            for(Competicion com : pedirListaCompeticiones())
-            {
-                lista= lista + "\n" + com.getNombre();
-            }
-
-            System.out.println("\nLista de competiciones: "+lista);
-        }
-        catch (Exception ex)
-        {
-            System.out.println("\nHa salido el siguiente error:\n"+ex.getMessage());
-        }
-    }
-
-    public void probarCrudUsuarios()
-    {
-        try
-        {
-            //Buscar Usuario
-            Usuario usuario = buscarUsuario("Erik");
-            System.out.println("\nEl usuario  "+ usuario.getNickname()+" con password "+ usuario.getPassword());
-
-            //Inserto Competi
-            Usuario usuario2 = new Usuario();
-            usuario2.setNickname("Pepe");
-            usuario2.setPassword("PepeMeGustas22");
-            usuario2.setAdmin(false);
-            System.out.println("\n"+insertarUsuario(usuario2));
-
-            usuario2 = buscarUsuario(usuario2.getNickname());
-            usuario2.setNickname("Popo");
-            System.out.println("\n"+modificarUsuario(usuario2));
-
-
-            usuario2 = buscarUsuario(usuario2.getNickname());
-            System.out.println("\n"+borrarUsuario());
-        }
-        catch (Exception ex)
-        {
-            System.out.println(ex);
-        }
-
-    }
 
     public Juego buscarJuego(String nombre) throws Exception { return cp.buscarJuego(nombre);}
     public Juego buscarJuego(int cod) throws Exception{return cp.buscarJuego(cod);}
@@ -354,6 +109,8 @@ public class ControladorVista {
     {return cp.modificarCompeticion(competicion);}
     public String insertarCompeticion(Competicion competicion) throws Exception
     {return cp.insertarCompeticion(competicion);}
+    public ArrayList<Competicion> pedirCompeticionesCerradas()throws Exception
+    {return cp.pedirCompeticionesCerradas();}
 
     public ArrayList<Competicion> pedirListaCompeticiones() throws Exception
     {return cp.pedirListaCompeticiones();}

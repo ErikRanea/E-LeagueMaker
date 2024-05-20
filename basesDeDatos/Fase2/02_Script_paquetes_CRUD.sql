@@ -510,6 +510,10 @@ CREATE OR REPLACE PACKAGE crud_Competiciones AS
    
     FUNCTION todas_Competiciones
         RETURN tipo_cursor;
+        
+    FUNCTION competiciones_cerradas
+    RETURN tipo_cursor;
+    
 END crud_Competiciones;
 /
 CREATE OR REPLACE PACKAGE BODY crud_Competiciones IS
@@ -586,7 +590,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Competiciones IS
     END consultar_Competiciones;
    
     FUNCTION todas_Competiciones
-        RETURN tipo_cursor
+    RETURN tipo_cursor
     IS
         v_cursor tipo_cursor;
     BEGIN
@@ -598,6 +602,24 @@ CREATE OR REPLACE PACKAGE BODY crud_Competiciones IS
             RAISE_APPLICATION_ERROR(-20005, 'Error en todas_Competiciones: '
             || SQLERRM);
     END todas_Competiciones;
+    
+    FUNCTION competiciones_cerradas
+    RETURN tipo_cursor
+    IS
+        v_cursor tipo_cursor;
+    BEGIN
+        OPEN v_cursor FOR
+            SELECT * FROM Competiciones
+            WHERE estado_abierto = 0;
+        RETURN v_cursor;
+    EXCEPTION
+        WHEN others THEN
+            RAISE_APPLICATION_ERROR(-20005, 'Error en todas_Competiciones: '
+            || SQLERRM);
+    END competiciones_cerradas;
+    
+    
+    
    
 END crud_Competiciones;
 /

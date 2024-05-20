@@ -1,11 +1,42 @@
 --SCRIPT PARA GENERAR LOS PROCEDIMIENTOS ALMACENADOS
+--***************** PA Resetear secuencias de jornadas y enfrentamientos********
+CREATE OR REPLACE PROCEDURE reset_seq_jornadas_enfrentamientos
+AS
+BEGIN
+        -- Eliminar las secuencias existentes
+    EXECUTE IMMEDIATE 'DROP SEQUENCE seq_enfrentamientos';
+    EXECUTE IMMEDIATE 'DROP SEQUENCE seq_jornadas';
+    
+    -- Crear de nuevo la secuencia seq_jornadas
+    EXECUTE IMMEDIATE '
+        CREATE SEQUENCE seq_jornadas
+        START WITH 1
+        INCREMENT BY 1
+        NOCACHE
+        NOCYCLE';
+        
+    -- Crear de nuevo la secuencia seq_enfrentamientos
+    EXECUTE IMMEDIATE '
+        CREATE SEQUENCE seq_enfrentamientos
+        START WITH 1
+        INCREMENT BY 1
+        NOCACHE
+        NOCYCLE';
 
+END;
+/
+
+--****************reset secuencias enfren jor  FINAL****************************
 
 --***************** PA Generar Calendario **************************************
 CREATE OR REPLACE PROCEDURE generar_calendario  AS
     --Competicion
     CURSOR c_cod_competi IS
-        SELECT cod_competicion FROM PUNTOS_EQUIPOS;
+        SELECT p.cod_competicion FROM PUNTOS_EQUIPOS p
+        JOIN COMPETICIONES c
+        ON p.cod_competicion = c.cod
+        WHERE c.estado_abierto = 0;
+    --Hacemos un where que solo generé de las competiciones cerradas
     v_cod_competicion PUNTOS_EQUIPOS.cod_competicion%type;
 
 
@@ -33,6 +64,9 @@ CREATE OR REPLACE PROCEDURE generar_calendario  AS
     
     todas_jornadas_hechas NUMBER := 0;
 BEGIN
+    RESET_SEQ_JORNADAS_ENFRENTAMIENTOS;
+    DELETE ENFRENTAMIENTOS;
+    DELETE JORNADAS;
     
     OPEN c_cod_competi;
    ---ABRIR CURSOR COMPETICIONES 
@@ -106,10 +140,10 @@ BEGIN
                          -- Imprimir la jornada actual
                          DBMS_OUTPUT.PUT_LINE('Competicion '|| v_cod_competicion 
                          ||' Jornada ' || v_jornada_actual || ':'); 
+                         
 
                     -- Insertar la jornada en la tabla Jornadas
                     v_cod_jornada := seq_jornadas.NEXTVAL; 
-                    fecha_jornada := v_fecha_inicio;
                     /*Al meter el cod jornada en una variable hago que no 
                     salte el nextval hasta que lo vuelva a declarar y asi puedo 
                     saber cual es el codigo de la jornada*/
@@ -132,8 +166,7 @@ BEGIN
                     Cod_Competicion)
                     VALUES (v_cod_jornada, v_jornada_actual, fecha_jornada,
                     v_cod_competicion);
-                    
-                    
+
                     
                     
                     
@@ -165,6 +198,9 @@ BEGIN
                 
              -- Colocar el ultimo equipo en la segunda posicion para la rotacion
                     l_equipos(2) := temp;
+            
+            --Saltar de semana para la siguiente jornada 
+                     fecha_jornada := fecha_jornada + INTERVAL '7' DAY;
                 
                 if v_jornada_actual = l_equipos.COUNT -1 THEN
                     todas_jornadas_hechas := 1;
@@ -228,3 +264,35 @@ BEGIN
     
 END abrir_cerrar_competicion;
 --***********************Fin abrir cerrar competiciones*************************
+
+--******************************************************************************
+CREATE OR REPLACE PROCEDURE CONSULTAR_ENFRENTAMIENTOS_SIN_RESULTADOS
+(
+    p_cod_jornada IN JORNADAS.cod%TYPE,
+    c_enfrentamientos OUT SYS_REFCURSOR
+)
+AS
+
+BEGIN
+     OPEN p_enfrentamientos FOR
+        SELECT Cod,
+               Hora,
+               Cod_Jornada,
+               cod_equipo_visitante,
+               cod_equipo_local
+        FROM ENFRENTAMIENTOS 
+        WHERE cod_enfrentamiento IS NULL;
+END;
+
+--******************************************************************************
+
+CREATE OR REPLACE PROCEDURE insertar_resultado
+(
+    p_cod_competicion IN COMPETICIONES.cod%TYPE,
+    p_cod_jornada IN 
+)
+AS
+
+BEGIN
+
+END;

@@ -41,9 +41,17 @@ public class VentanaCompeticion extends JFrame{
      public void iniciarComponentes()
     {
         pBotones.setVisible(false);
+        ponerIconoPrograma();
     }
 
-
+    /**
+     * Este metodo se encarga de ponerle la imagen de marca a la aplicación
+     */
+    public void ponerIconoPrograma()
+    {
+        ImageIcon icono = new ImageIcon("./src/Img/Logo_mas_cerca.jpg");
+        super.setIconImage(icono.getImage());
+    }
     /**
      * En este apartado creamos los listener para cada uno de los botones
      * @param listener
@@ -68,5 +76,30 @@ public class VentanaCompeticion extends JFrame{
         {
             pBotones.setVisible(true);
         }
+    }
+
+
+    public JComboBox getCbCompeticiones() {
+        return cbCompeticiones;
+    }
+
+    public void setCbCompeticiones(JComboBox cbCompeticiones) {
+        this.cbCompeticiones = cbCompeticiones;
+    }
+
+    public JComboBox getCbJornadas() {
+        return cbJornadas;
+    }
+
+    public void setCbJornadas(JComboBox cbJornadas) {
+        this.cbJornadas = cbJornadas;
+    }
+
+    public JPanel getpVisualizar() {
+        return pVisualizar;
+    }
+
+    public void setpVisualizar(JPanel pVisualizar) {
+        this.pVisualizar = pVisualizar;
     }
 }
