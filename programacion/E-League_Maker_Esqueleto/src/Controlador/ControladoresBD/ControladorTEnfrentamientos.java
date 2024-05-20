@@ -9,11 +9,10 @@ package Controlador.ControladoresBD;
 
 import Modelo.Competicion;
 import Modelo.Enfrentamiento;
+import Modelo.Jornada;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ControladorTEnfrentamientos {
@@ -27,28 +26,32 @@ public class ControladorTEnfrentamientos {
 
     public ControladorTEnfrentamientos(ControladorBD cbd){this.cbd = cbd;}
 
-    public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado()throws Exception
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(int codJornada)throws Exception
     {
         try {
             con = cbd.abrirConexion();
-            String llamada = "{ ? = call  }";
+            String llamada = "{ ? = call  CONSULTAR_ENFRENTAMIENTOS_SIN_RESULTADOS(?)}";
             CallableStatement cs = con.prepareCall(llamada);
 
             cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+            cs.setInt(2,codJornada);
 
             cs.execute();
 
             ResultSet rs = (ResultSet) cs.getObject(1);
 
             while (rs.next()) {
-                Competicion competi = new Competicion();
-                competi.setCod(rs.getInt("cod"));
-                competi.setNombre(rs.getString("nombre"));
-                competi.setFechaInicio(rs.getDate("fecha_inicio").toLocalDate());
-                competi.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
-                competi.setEstadoAbierto(rs.getBoolean("estado_abierto"));
-                competi.setJuego(cbd.buscarJuego(rs.getInt("cod_juego")));
-      //          listaEnfrentamientos.add();
+                Enfrentamiento enfre = new Enfrentamiento();
+                enfre.setCod(rs.getInt("cod"));
+                enfre.setEquipoLocal(cbd.buscarEquipo(rs.getInt("cod_equipo_local")));
+                // Convertir Date a LocalDateTime
+                Timestamp timestamp = rs.getTimestamp("hora");
+                if (timestamp != null) {
+                    LocalDateTime hora = timestamp.toLocalDateTime();
+                    enfre.setHora(hora);
+                }
+                enfre.setEquipoVisitante(cbd.buscarEquipo(rs.getInt("cod_equipo_visitante")));
+                listaEnfrentamientos.add(enfre);
             }
 
             rs.close();

@@ -6,7 +6,6 @@
 package Vista;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 //import org.imgscalr.Scalr;
 
@@ -24,6 +23,8 @@ public class VentanaCompeticion extends JFrame{
     private JButton bInsertarResult;
     private JButton bVerClasificaciones;
     private JButton bVerTodosLosResultados;
+    private JButton bBuscar;
+    private JButton bInsertar;
 
 
     public VentanaCompeticion()
@@ -31,6 +32,7 @@ public class VentanaCompeticion extends JFrame{
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setContentPane(pPrincipal);
         setLocationRelativeTo(null);
+        setResizable(false); //Este parametro no permite redimensionar la ventana
         iniciarComponentes();
 
 
@@ -60,6 +62,8 @@ public class VentanaCompeticion extends JFrame{
     public void addBInsertarResultAL(ActionListener listener){bInsertarResult.addActionListener(listener);}
     public void addBVerClasifiAL(ActionListener listener){bVerClasificaciones.addActionListener(listener);}
     public void addVerResultadosAL(ActionListener listener){bVerTodosLosResultados.addActionListener(listener);}
+    public void addBInsertarAL(ActionListener listener){bInsertar.addActionListener(listener);}
+    public void addBBuscarAL(ActionListener listener){bBuscar.addActionListener(listener);}
 
 
     /**

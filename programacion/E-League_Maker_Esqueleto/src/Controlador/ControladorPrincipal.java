@@ -96,4 +96,22 @@ public class ControladorPrincipal {
 
 
 
+    //Jornadas
+    public ArrayList<Jornada> consultarTablaJornadas(int codCompeticion)throws Exception
+    {
+        return cbd.consultarTablaJornadas(codCompeticion);
+    }
+
+
+
+    //Enfrentamientos
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(int codJornada)throws Exception
+    {
+        return cbd.consultarEnfrentamientosSinResultado(codJornada);
+    }
+
+
+
+
+
 }

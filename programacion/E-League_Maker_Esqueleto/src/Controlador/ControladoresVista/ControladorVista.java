@@ -133,5 +133,21 @@ public class ControladorVista {
     public String modificarUsuario(Usuario usuario) throws Exception{return cp.modificarUsuario(usuario);}
     public String insertarUsuario(Usuario usuario) throws Exception{return cp.insertarUsuario(usuario);}
 
+    //Jornadas
+    public ArrayList<Jornada> consultarTablaJornadas(int codCompeticion)throws Exception
+    {
+        return cp.consultarTablaJornadas(codCompeticion);
+    }
+
+
+
+
+    //Enfrentamientos
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(int codJornada)throws Exception
+    {
+        return cp.consultarEnfrentamientosSinResultado(codJornada);
+    }
+
+
 
 }
