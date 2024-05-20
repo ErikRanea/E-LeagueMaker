@@ -78,7 +78,7 @@ public class ControladorVentanaLogin {
                     if(usuario.isAdmin())
                     {
                         vLogin.dispose();
-                        cv.mostrarVentanaCompeti();
+                        cv.mostrarVentanaSeleccion();
                     }
                 }
                 else

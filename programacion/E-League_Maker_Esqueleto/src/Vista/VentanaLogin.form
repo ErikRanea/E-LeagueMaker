@@ -145,6 +145,7 @@
             </constraints>
             <properties>
               <background color="-15395563"/>
+              <focusPainted value="false"/>
               <foreground color="-14156949"/>
               <text value="Log in"/>
             </properties>
@@ -155,6 +156,7 @@
             </constraints>
             <properties>
               <background color="-15395563"/>
+              <focusPainted value="false"/>
               <foreground color="-4"/>
               <text value="Salir"/>
             </properties>
