@@ -10,6 +10,7 @@ import Modelo.Enfrentamiento;
 import Modelo.Jornada;
 
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ public class ControladorTJornadas {
      * @param cbd
      */
     private ControladorBD cbd;
+
+    private Connection con;
 
     /**
      * Este atributo sirve para instanciar el objeto de la tabla
@@ -59,7 +62,7 @@ public class ControladorTJornadas {
                 competi.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
                 competi.setEstadoAbierto(rs.getBoolean("estado_abierto"));
                 competi.setJuego(cbd.buscarJuego(rs.getInt("cod_juego")));
-                listaCompeticiones.add(competi);
+               // listaJornadas.add(competi);
             }
 
             rs.close();

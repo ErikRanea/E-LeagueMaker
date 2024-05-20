@@ -48,7 +48,7 @@ public class ControladorTEnfrentamientos {
                 competi.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
                 competi.setEstadoAbierto(rs.getBoolean("estado_abierto"));
                 competi.setJuego(cbd.buscarJuego(rs.getInt("cod_juego")));
-                listaEnfrentamientos.add(competi);
+      //          listaEnfrentamientos.add();
             }
 
             rs.close();
