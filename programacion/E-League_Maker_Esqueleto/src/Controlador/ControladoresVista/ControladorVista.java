@@ -28,6 +28,8 @@ public class ControladorVista {
     private ControladorVentanaCompeticion cvCompeti;
     private ControladorVentanaLogin cvLogin;
 
+    private ControladorVentanaSeleccion cvSeleccion;
+
     public ControladorVista(ControladorPrincipal cp)
     {
         this.cp = cp;
@@ -43,13 +45,22 @@ public class ControladorVista {
     }
 
     public void mostrarVentanaLogin(){cvLogin.crearMostrar();}
+    public void mostrarVentanaSeleccion(){cvSeleccion.crearMostrar();}
 
     public void crearControladoresVista()
     {
         cvLogin = new ControladorVentanaLogin(this);
         cvCompeti = new ControladorVentanaCompeticion(this);
+        cvSeleccion = new ControladorVentanaSeleccion(this);
 
     }
+
+
+
+
+
+
+
 
 
 

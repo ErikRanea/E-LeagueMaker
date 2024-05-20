@@ -36,7 +36,7 @@ public class VentanaLogin extends JFrame {
         setSize(900,400);
         setLocationRelativeTo(null);
         iniciarComponentes();
-        setResizable(false);
+        setResizable(false); //Este parametro no permite redimensionar la ventana
 
     }
 

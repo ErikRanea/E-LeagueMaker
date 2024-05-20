@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Vista.VentanaSeleccionAdmin">
+  <grid id="27dc6" binding="panelPrincipal" layout-manager="GridLayoutManager" row-count="4" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="700" height="700"/>
+    </constraints>
+    <properties>
+      <background color="-14995655"/>
+      <maximumSize width="700" height="700"/>
+      <minimumSize width="700" height="700"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="91eea" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-14995655"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="9ef7a" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="48"/>
+              <foreground color="-24804"/>
+              <text value="Seleccion de modo"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="35ab7" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="200"/>
+            <preferred-size width="200" height="200"/>
+            <maximum-size width="200" height="200"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-14995655"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="bc6d1" class="javax.swing.JButton" binding="bCompeti">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="200" height="200"/>
+                <preferred-size width="200" height="200"/>
+                <maximum-size width="200" height="200"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-14995655"/>
+              <focusPainted value="false"/>
+              <foreground color="-24804"/>
+              <text value="Modo competición"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="da6e4" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="200"/>
+            <preferred-size width="200" height="200"/>
+            <maximum-size width="200" height="200"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-14995655"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="b3459" class="javax.swing.JButton" binding="bInscrip">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="200" height="200"/>
+                <preferred-size width="200" height="200"/>
+                <maximum-size width="200" height="200"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-14995655"/>
+              <focusPainted value="false"/>
+              <foreground color="-24804"/>
+              <text value="Modo inscripción"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <hspacer id="6c12b">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <hspacer id="29c88">
+        <constraints>
+          <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <vspacer id="44745">
+        <constraints>
+          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <vspacer id="965b">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <hspacer id="41cff">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+    </children>
+  </grid>
+</form>
