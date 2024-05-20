@@ -263,7 +263,6 @@ BEGIN
     END IF;
     
 END abrir_cerrar_competicion;
-/
 --***********************Fin abrir cerrar competiciones*************************
 
 --******************************************************************************
@@ -275,28 +274,25 @@ CREATE OR REPLACE PROCEDURE CONSULTAR_ENFRENTAMIENTOS_SIN_RESULTADOS
 AS
 
 BEGIN
-     OPEN c_enfrentamientos FOR
+     OPEN p_enfrentamientos FOR
         SELECT Cod,
                Hora,
                Cod_Jornada,
                cod_equipo_visitante,
                cod_equipo_local
         FROM ENFRENTAMIENTOS 
-        WHERE gana_local IS NULL;
+        WHERE cod_enfrentamiento IS NULL;
 END;
-/
+
 --******************************************************************************
 
 CREATE OR REPLACE PROCEDURE insertar_resultado
 (
-    p_cod_enfrentamiento IN ENFRENTAMIENTOS.cod%TYPE,
-    p_gana_local IN ENFRENTAMIENTOS.gana_local%TYPE
+    p_cod_competicion IN COMPETICIONES.cod%TYPE,
+    p_cod_jornada IN 
 )
 AS
+
 BEGIN
-    UPDATE ENFRENTAMIENTOS
-    SET
-        gana_local = p_gana_local
-    WHERE cod = p_cod_enfrentamiento;
+
 END;
-/
