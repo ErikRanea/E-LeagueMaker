@@ -27,7 +27,7 @@ AFTER STATEMENT IS
     
     IF num_jugadores > 6 THEN
         RAISE_APPLICATION_ERROR
-        (-20001, 'No se pueden agregar m?s de 6 jugadores a un equipo');
+        (-20001, 'No se pueden agregar mas de 6 jugadores a un equipo');
     END IF;
     END AFTER STATEMENT;
 END;
@@ -50,7 +50,7 @@ BEGIN
         IF num_jugadores <= 2 THEN
         RAISE_APPLICATION_ERROR
         (-20001, 'Debe haber al menos dos jugadores en un 
-        equipo para realizar esta operaci?n');
+        equipo para realizar esta operacion');
     END IF;
 END;
 
@@ -63,7 +63,7 @@ END;
 -----de lo contrario caundo lo hice sin el count----
 ------a pesar de que estaba en 0 el trigger seguia disparandose ----
 CREATE OR REPLACE TRIGGER controlar_mod_equipo
-BEFORE INSERT OR UPDATE OR DELETE ON puntos_equipos
+BEFORE INSERT OR DELETE ON puntos_equipos
 FOR EACH ROW
 DECLARE
     comp_iniciada INTEGER;
@@ -76,7 +76,8 @@ BEGIN
         
         IF comp_iniciada = 0 THEN
             RAISE_APPLICATION_ERROR
-            (-20001, 'No se pueden modificar los equipos una vez que la competicion ha comenzado');
+            (-20001, 'No se pueden modificar los equipos una vez que la
+                        competicion ha comenzado');
         END IF;
     ELSE
         SELECT COUNT(*) INTO comp_iniciada 
@@ -86,7 +87,8 @@ BEGIN
         
         IF comp_iniciada = 0 THEN
             RAISE_APPLICATION_ERROR
-            (-20001, 'No se pueden modificar los equipos una vez que la competicion ha comenzado');
+            (-20001, 'No se pueden modificar los equipos una vez que la
+                        competicion ha comenzado');
         END IF;
     END IF;
 END;
@@ -148,7 +150,7 @@ CREATE OR REPLACE TRIGGER actualizar_puntos_equipos
 BEFORE INSERT OR UPDATE ON enfrentamientos
 FOR EACH ROW
 DECLARE
-    v_new_gana_local ENFRENTAMIENTOS.gana_local%type := :NEW.gana_local;  -- Variable para almacenar una fila de la tabla enfrentamientos
+    v_new_gana_local ENFRENTAMIENTOS.gana_local%type := :NEW.gana_local;  
     v_cod_equipo_ganador equipos.cod%type; -- Variable para el equipo ganador
     v_cod_competicion JORNADAS.cod_competicion%type;
 BEGIN
@@ -163,9 +165,9 @@ BEGIN
 
     -- Determinar qu? equipo ha ganado usando gana_local desde v_enfre
     IF v_new_gana_local = 1 THEN
-        v_cod_equipo_ganador := :NEW.cod_equipo_local;  -- Asigna al equipo local
+        v_cod_equipo_ganador := :NEW.cod_equipo_local;  --Asigna al equipo local
     ELSIF v_new_gana_local= 0 THEN
-        v_cod_equipo_ganador := :NEW.cod_equipo_visitante;  -- Asigna al equipo visitante
+        v_cod_equipo_ganador := :NEW.cod_equipo_visitante;
     ELSE
         -- Si el resultado no est? definido, no se actualiza
         --DBMS_OUTPUT.PUT_LINE('No se define ganador, no se actualiza');
@@ -180,11 +182,13 @@ BEGIN
 
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al actualizar puntos: ' || SQLERRM);  -- Manejo de errores
+        DBMS_OUTPUT.PUT_LINE('Error al actualizar puntos: ' || SQLERRM);  
 END;
+
+/
 /*7. trigger salario minimo de jugadores 1134   
     falta verificar auqneu mas seguro que estï¿½ bien :)*/
-/
+
 CREATE OR REPLACE TRIGGER con_sala_min_jugadores
 BEFORE INSERT OR UPDATE ON jugadores 
 FOR EACH ROW 
@@ -224,5 +228,96 @@ END AFTER STATEMENT;
 END;
 
 
+
+/
+
+/*9. Controlar que no se puedan modificar jugadores cuando cuando una 
+competicion este cerrada*/
+CREATE OR REPLACE TRIGGER controlar_mod_jugadores
+BEFORE INSERT OR UPDATE ON jugadores
+FOR EACH ROW 
+DECLARE 
+    comp_iniciada INTEGER;
+    cod_competicion INTEGER;
+BEGIN 
+    -- Obtener la competición del equipo del jugador
+    SELECT cod_competicion
+    INTO cod_competicion
+    FROM puntos_equipos
+    WHERE cod_equipo = :NEW.cod_equipo; 
+
+    -- Verificar si la competición está iniciada
+    SELECT COUNT(*)
+    INTO comp_iniciada 
+    FROM competiciones 
+    WHERE estado_abierto = 1 
+      AND cod = cod_competicion;
+        
+    IF comp_iniciada = 0 THEN
+        RAISE_APPLICATION_ERROR(
+          -20001, 
+          'No se pueden modificar los equipos una vez que la competicion ha 
+          comenzado'
+        );
+    END IF;
+END;
+
+/
+
+/*10. Controlar que no se puedan modificar equipos cuando una competicion este
+cerrada*/
+
+CREATE OR REPLACE TRIGGER controlar_mod_equipos
+BEFORE UPDATE ON equipos
+FOR EACH ROW 
+DECLARE 
+    comp_iniciada INTEGER;
+BEGIN 
+    -- Verificar si hay alguna competición iniciada relacionada con el equipo
+    SELECT COUNT(*)
+    INTO comp_iniciada
+    FROM puntos_equipos pe
+    JOIN competiciones c ON pe.cod_competicion = c.cod
+    WHERE pe.cod_equipo = :NEW.cod
+      AND c.estado_abierto = 1;
+
+    -- Lanzar error si alguna competición está iniciada
+    IF comp_iniciada =  0 THEN
+        RAISE_APPLICATION_ERROR(
+          -20001, 
+          'No se pueden modificar los equipos una vez que la competición ha
+          comenzado'
+        );
+    END IF;
+END;
+/
+
+/*11. Controlar que no se puedan modificar miembros del staff cuando la 
+competicion ha empezado*/
+
+
+CREATE OR REPLACE TRIGGER controlar_mod_staffs
+BEFORE UPDATE ON staffs
+FOR EACH ROW 
+DECLARE 
+    comp_iniciada INTEGER;
+BEGIN 
+--Verificar si hay competición iniciada relacionada con el equipo del staff
+    SELECT COUNT(*)
+    INTO comp_iniciada
+    FROM puntos_equipos pe
+    JOIN competiciones c ON pe.cod_competicion = c.cod
+    WHERE pe.cod_equipo = :NEW.cod_equipo
+      AND c.estado_abierto = 1;
+
+    -- Lanzar error si alguna competición está iniciada
+    IF comp_iniciada = 0 THEN
+        RAISE_APPLICATION_ERROR(
+          -20001, 
+          'No se pueden modificar los staffs una vez que la competición ha
+          comenzado'
+        );
+    END IF;
+END;
 
 /
