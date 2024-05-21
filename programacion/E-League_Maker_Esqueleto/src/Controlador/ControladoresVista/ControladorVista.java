@@ -125,6 +125,11 @@ public class ControladorVista {
 
     public ArrayList<Competicion> pedirListaCompeticiones() throws Exception
     {return cp.pedirListaCompeticiones();}
+    public String generarCalendario() throws Exception
+    {
+        return cp.generarCalendario();
+    }
+
 
 
     //Usuario
@@ -132,6 +137,22 @@ public class ControladorVista {
     public String borrarUsuario() throws Exception{return cp.borrarUsuario();}
     public String modificarUsuario(Usuario usuario) throws Exception{return cp.modificarUsuario(usuario);}
     public String insertarUsuario(Usuario usuario) throws Exception{return cp.insertarUsuario(usuario);}
+
+    //Jornadas
+    public ArrayList<Jornada> consultarTablaJornadas(int codCompeticion)throws Exception
+    {
+        return cp.consultarTablaJornadas(codCompeticion);
+    }
+
+
+
+
+    //Enfrentamientos
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(int codJornada)throws Exception
+    {
+        return cp.consultarEnfrentamientosSinResultado(codJornada);
+    }
+
 
 
 }

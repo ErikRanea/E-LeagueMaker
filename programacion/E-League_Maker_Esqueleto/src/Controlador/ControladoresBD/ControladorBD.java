@@ -30,6 +30,8 @@ public class ControladorBD {
     private ControladorTCompeticiones ctCompeticiones;
     private ControladorTUsuarios ctUsuarios;
 
+    private ControladorTJornadas ctJornadas;
+    private ControladorTEnfrentamientos ctEnfrentamientos;
 
     public ControladorBD(ControladorPrincipal cp)
     {
@@ -79,6 +81,8 @@ public class ControladorBD {
         ctStaffs = new ControladorTStaffs(this);
         ctCompeticiones = new ControladorTCompeticiones(this);
         ctUsuarios = new ControladorTUsuarios(this);
+        ctJornadas = new ControladorTJornadas(this);
+        ctEnfrentamientos = new ControladorTEnfrentamientos(this);
     }
 
 
@@ -145,6 +149,10 @@ public class ControladorBD {
     {return ctCompeticiones.pedirListaCompeticiones();}
     public ArrayList<Competicion> pedirCompeticionesCerradas()throws Exception
     {return ctCompeticiones.pedirCompeticionesCerradas();}
+    public String generarCalendario() throws Exception
+    {
+        return ctCompeticiones.generarCalendario();
+    }
 
 
 
@@ -155,5 +163,17 @@ public class ControladorBD {
     public String modificarUsuario(Usuario usuario) throws Exception{return ctUsuarios.modificarUsuario(usuario);}
     public String insertarUsuario(Usuario usuario) throws Exception{return ctUsuarios.insertarUsuario(usuario);}
 
+
+    //Jornadas
+    public ArrayList<Jornada> consultarTablaJornadas(int codCompeticion)throws Exception
+    {
+        return ctJornadas.consultarTablaJornadas(codCompeticion);
+    }
+
+    //Enfrentamientos
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(int codJornada)throws Exception
+    {
+        return ctEnfrentamientos.consultarEnfrentamientosSinResultado(codJornada);
+    }
 
 }

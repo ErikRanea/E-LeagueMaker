@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Juego {
@@ -9,13 +10,17 @@ public class Juego {
     private String desarrolladora;
     private LocalDate fechaLanzamiento;
 
+    private List<Competicion> listaCompeticiones;
+
+
 
     // Constructores
-    public Juego(int cod, String nombre, String desarrolladora, LocalDate fechaLanzamiento) {
+    public Juego(int cod, String nombre, String desarrolladora, LocalDate fechaLanzamiento,List<Competicion> listaCompeticiones) {
         this.cod = cod;
         this.nombre = nombre;
         this.desarrolladora = desarrolladora;
         this.fechaLanzamiento = fechaLanzamiento;
+        this.listaCompeticiones = listaCompeticiones;
     }
     public Juego() {}
 

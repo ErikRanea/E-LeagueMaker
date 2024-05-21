@@ -271,11 +271,15 @@ public class ControladorTCompeticiones {
     public ArrayList<Competicion> pedirCompeticionesCerradas()throws Exception
     {
         try {
+            System.out.println("\nPidiendo Competiciones cerradas");
             con = cbd.abrirConexion();
-            String llamada = "{ ? = call crud_Competiciones.competiciones_cerradas }";
+            String llamada = "{ ? = call crud_Competiciones.Competiciones_cerradas }";
             CallableStatement cs = con.prepareCall(llamada);
 
             cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+
+
+
 
             cs.execute();
 
@@ -311,5 +315,34 @@ public class ControladorTCompeticiones {
     }
 
 
+    public String generarCalendario() throws Exception
+    {
+        String respuesta = "";
+        try {
+            con = cbd.abrirConexion();
+            String llamada = "{ call generar_calendario }";
+            CallableStatement cs = con.prepareCall(llamada);
+
+            cs.execute();
+
+
+            respuesta = "Calendario generado";
+
+            cs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error generar el calendario", e);
+        } finally {
+            if (con != null) {
+                try {
+                    cbd.cerrarConexion(con);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return respuesta;
+    }
 
 }

@@ -85,14 +85,34 @@ public class ControladorPrincipal {
     {return cbd.pedirListaCompeticiones();}
     public ArrayList<Competicion> pedirCompeticionesCerradas()throws Exception
     {return cbd.pedirCompeticionesCerradas();}
-
-
+    public String generarCalendario() throws Exception
+    {
+        return cbd.generarCalendario();
+    }
 
     //Usuario
     public Usuario buscarUsuario(String nickname) throws Exception{return cbd.buscarUsuario(nickname);}
     public String borrarUsuario() throws Exception{return cbd.borrarUsuario();}
     public String modificarUsuario(Usuario usuario) throws Exception{return cbd.modificarUsuario(usuario);}
     public String insertarUsuario(Usuario usuario) throws Exception{return cbd.insertarUsuario(usuario);}
+
+
+
+    //Jornadas
+    public ArrayList<Jornada> consultarTablaJornadas(int codCompeticion)throws Exception
+    {
+        return cbd.consultarTablaJornadas(codCompeticion);
+    }
+
+
+
+    //Enfrentamientos
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(int codJornada)throws Exception
+    {
+        return cbd.consultarEnfrentamientosSinResultado(codJornada);
+    }
+
+
 
 
 
