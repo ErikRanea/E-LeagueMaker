@@ -125,6 +125,11 @@ public class ControladorVista {
 
     public ArrayList<Competicion> pedirListaCompeticiones() throws Exception
     {return cp.pedirListaCompeticiones();}
+    public String generarCalendario() throws Exception
+    {
+        return cp.generarCalendario();
+    }
+
 
 
     //Usuario

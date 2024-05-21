@@ -85,8 +85,10 @@ public class ControladorPrincipal {
     {return cbd.pedirListaCompeticiones();}
     public ArrayList<Competicion> pedirCompeticionesCerradas()throws Exception
     {return cbd.pedirCompeticionesCerradas();}
-
-
+    public String generarCalendario() throws Exception
+    {
+        return cbd.generarCalendario();
+    }
 
     //Usuario
     public Usuario buscarUsuario(String nickname) throws Exception{return cbd.buscarUsuario(nickname);}

@@ -149,6 +149,10 @@ public class ControladorBD {
     {return ctCompeticiones.pedirListaCompeticiones();}
     public ArrayList<Competicion> pedirCompeticionesCerradas()throws Exception
     {return ctCompeticiones.pedirCompeticionesCerradas();}
+    public String generarCalendario() throws Exception
+    {
+        return ctCompeticiones.generarCalendario();
+    }
 
 
 

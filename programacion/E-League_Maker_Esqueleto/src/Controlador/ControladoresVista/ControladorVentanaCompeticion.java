@@ -89,9 +89,19 @@ public class ControladorVentanaCompeticion {
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            vCompeti.verPanelBotonesLateralIzq();
-            rellenarCBCompeticiones();
-            rellenarCBJornadas();
+            try
+            {
+                vCompeti.verPanelBotonesLateralIzq();
+                rellenarCBCompeticiones();
+
+
+
+            }
+            catch (Exception ex)
+            {
+                System.out.println("\nHa sucedido el siguiente error:\n\n"+ex.getMessage());
+            }
+
         }
     }
 
@@ -112,6 +122,7 @@ public class ControladorVentanaCompeticion {
                     System.out.println(j.getnJornada()+" es  el número de jornada");
                 }
                 /*todo hay que generar el calendario */
+
             }
             catch (Exception ex)
             {
@@ -122,6 +133,21 @@ public class ControladorVentanaCompeticion {
         }
     }
 
+
+    public class BGenerarCalendario implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            try
+            {
+                cv.generarCalendario();
+                rellenarCBJornadas();
+            }
+            catch (Exception ex){}
+
+        }
+    }
 
 
 
@@ -135,6 +161,7 @@ public class ControladorVentanaCompeticion {
             {
                 vCompeti.getCbCompeticiones().addItem(c.getNombre());
             }
+            competicion = listaCompetis.get(0);
         }
         catch (Exception ex)
         {
@@ -213,6 +240,9 @@ public class ControladorVentanaCompeticion {
 
 
 */
+
+
+
 
 
 }

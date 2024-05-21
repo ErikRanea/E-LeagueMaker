@@ -5,8 +5,14 @@
  */
 package Vista;
 
+import org.imgscalr.Scalr;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 //import org.imgscalr.Scalr;
 
 
@@ -25,6 +31,8 @@ public class VentanaCompeticion extends JFrame{
     private JButton bVerTodosLosResultados;
     private JButton bBuscar;
     private JButton bInsertar;
+    private JButton bCalendario;
+    private JButton generarCalendarioButton;
 
 
     public VentanaCompeticion()
@@ -44,7 +52,28 @@ public class VentanaCompeticion extends JFrame{
     {
         pBotones.setVisible(false);
         ponerIconoPrograma();
+      //  meterImagenCalendario();
     }
+
+
+    public void meterImagenCalendario()
+    {
+        try {
+
+            BufferedImage imagenOriginal = ImageIO.read(new File("./src/Img/logoCalendario.png"));
+
+            BufferedImage bufferedImage = Scalr.resize(imagenOriginal, 100,100);
+
+            ImageIcon iconoEscalado = new ImageIcon(bufferedImage);
+
+            bCalendario.setIcon(iconoEscalado);
+            //labelImagen.setSize(new Dimension(600, 500));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     /**
      * Este metodo se encarga de ponerle la imagen de marca a la aplicación
@@ -64,6 +93,7 @@ public class VentanaCompeticion extends JFrame{
     public void addVerResultadosAL(ActionListener listener){bVerTodosLosResultados.addActionListener(listener);}
     public void addBInsertarAL(ActionListener listener){bInsertar.addActionListener(listener);}
     public void addBBuscarAL(ActionListener listener){bBuscar.addActionListener(listener);}
+    public void addBGenerarCalendarioAL(ActionListener listener){bCalendario.addActionListener(listener);}
 
 
     /**
@@ -82,6 +112,7 @@ public class VentanaCompeticion extends JFrame{
         }
     }
 
+    public void mostrarMensaje(String mensaje){JOptionPane.showMessageDialog(this,mensaje);}
 
     public JComboBox getCbCompeticiones() {
         return cbCompeticiones;
