@@ -10,6 +10,7 @@ package Controlador.ControladoresBD;
 import Modelo.Competicion;
 import Modelo.Enfrentamiento;
 import Modelo.Jornada;
+import oracle.jdbc.OracleTypes;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -24,21 +25,21 @@ public class ControladorTEnfrentamientos {
     private Enfrentamiento enfrentamiento;
     private ArrayList<Enfrentamiento> listaEnfrentamientos;
 
-    public ControladorTEnfrentamientos(ControladorBD cbd){this.cbd = cbd;}
+    public ControladorTEnfrentamientos(ControladorBD cbd){this.cbd = cbd;listaEnfrentamientos = new ArrayList<>();}
 
     public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(int codJornada)throws Exception
     {
         try {
             con = cbd.abrirConexion();
-            String llamada = "{ ? = call  CONSULTAR_ENFRENTAMIENTOS_SIN_RESULTADOS(?)}";
+            String llamada = "{ call  CONSULTAR_ENFRENTAMIENTOS_SIN_RESULTADOS(?,?) }";
             CallableStatement cs = con.prepareCall(llamada);
 
-            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
-            cs.setInt(2,codJornada);
-
+            cs.setInt(1,codJornada);
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
             cs.execute();
 
-            ResultSet rs = (ResultSet) cs.getObject(1);
+            ResultSet rs = (ResultSet) cs.getObject(2);
+
 
             while (rs.next()) {
                 Enfrentamiento enfre = new Enfrentamiento();
@@ -58,7 +59,7 @@ public class ControladorTEnfrentamientos {
             cs.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("Error al consultar las competiciones", e);
+            throw new Exception("Error al consultar los enfrentamientos vacíos\n"+e.getMessage(), e);
         } finally {
             if (con != null) {
                 try {

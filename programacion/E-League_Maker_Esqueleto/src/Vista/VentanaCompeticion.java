@@ -32,7 +32,8 @@ public class VentanaCompeticion extends JFrame{
     private JButton bBuscar;
     private JButton bInsertar;
     private JButton bCalendario;
-    private JButton generarCalendarioButton;
+    private JPanel pCargaDeDatos;
+    private JLabel lCarga;
 
 
     public VentanaCompeticion()
@@ -52,28 +53,27 @@ public class VentanaCompeticion extends JFrame{
     {
         pBotones.setVisible(false);
         ponerIconoPrograma();
-      //  meterImagenCalendario();
+       // cargarGifCarga();
     }
 
 
-    public void meterImagenCalendario()
+  /*  public void cargarGifCarga()
     {
         try {
 
-            BufferedImage imagenOriginal = ImageIO.read(new File("./src/Img/logoCalendario.png"));
+            BufferedImage imagenOriginal = ImageIO.read(new File("./src/Img/cargando.gif"));
 
             BufferedImage bufferedImage = Scalr.resize(imagenOriginal, 100,100);
 
             ImageIcon iconoEscalado = new ImageIcon(bufferedImage);
 
-            bCalendario.setIcon(iconoEscalado);
-            //labelImagen.setSize(new Dimension(600, 500));
+            lCarga.setIcon(iconoEscalado);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
+*/
 
     /**
      * Este metodo se encarga de ponerle la imagen de marca a la aplicación
@@ -94,6 +94,11 @@ public class VentanaCompeticion extends JFrame{
     public void addBInsertarAL(ActionListener listener){bInsertar.addActionListener(listener);}
     public void addBBuscarAL(ActionListener listener){bBuscar.addActionListener(listener);}
     public void addBGenerarCalendarioAL(ActionListener listener){bCalendario.addActionListener(listener);}
+    public void addCBCompeticionAL(ActionListener listener){cbCompeticiones.addActionListener(listener);}
+    public void addCBJornadaAL(ActionListener listener){cbJornadas.addActionListener(listener);}
+
+
+
 
 
     /**
@@ -109,6 +114,20 @@ public class VentanaCompeticion extends JFrame{
         else
         {
             pBotones.setVisible(true);
+        }
+    }
+
+    public void verPanelCarga()
+    {
+        if(pCargaDeDatos.isVisible())
+        {
+            pCargaDeDatos.setVisible(false);
+            pVisualizar.setVisible(true);
+        }
+        else
+        {
+            pVisualizar.setVisible(false);
+            pCargaDeDatos.setVisible(true);
         }
     }
 
@@ -136,5 +155,13 @@ public class VentanaCompeticion extends JFrame{
 
     public void setpVisualizar(JPanel pVisualizar) {
         this.pVisualizar = pVisualizar;
+    }
+
+    public JPanel getpCargaDeDatos() {
+        return pCargaDeDatos;
+    }
+
+    public void setpCargaDeDatos(JPanel pCargaDeDatos) {
+        this.pCargaDeDatos = pCargaDeDatos;
     }
 }

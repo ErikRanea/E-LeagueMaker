@@ -634,7 +634,10 @@ CREATE OR REPLACE PACKAGE crud_Jornadas AS
     PROCEDURE borrar_Jornadas(p_cod IN Jornadas.cod%TYPE);
     PROCEDURE modificar_Jornadas(p_cod IN Jornadas.cod%TYPE, p_n_jornada IN 
     Jornadas.n_jornada%TYPE, p_fecha IN Jornadas.fecha%TYPE);
-    FUNCTION consultar_Jornadas(p_cod IN Jornadas.cod%TYPE) RETURN tipo_cursor;
+    FUNCTION consultar_Jornadas(p_cod_competicion IN Competiciones.cod%TYPE)
+    RETURN tipo_cursor;
+
+    
 END crud_Jornadas;
 /
 -- Cuerpo del paquete Crud_Jornadas
@@ -678,7 +681,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Jornadas IS
     END modificar_Jornadas;
 
     -- Consultar Jornadas
-    FUNCTION consultar_Jornadas(p_cod IN Jornadas.cod%TYPE) 
+    FUNCTION consultar_Jornadas(p_cod_competicion IN Competiciones.cod%TYPE) 
     RETURN tipo_cursor
     IS
         v_cursor tipo_cursor;
@@ -686,7 +689,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Jornadas IS
         OPEN v_cursor FOR
             SELECT *
             FROM Jornadas
-            WHERE cod = p_cod;
+            WHERE cod_competicion = p_cod_competicion;
         RETURN v_cursor;
     EXCEPTION
         WHEN others THEN

@@ -45,9 +45,17 @@ public class ControladorVentanaCompeticion {
     private Jornada jornada;
     private Enfrentamiento enfrentamiento;
 
+    /**
+     * Variables de control
+     * @author Erik
+     */
+    private boolean hayJornadas;
+
+
     public ControladorVentanaCompeticion(ControladorVista cv)
     {
-        this.cv = cv;listaCompetis = new ArrayList<>();
+        this.cv = cv;listaCompetis = new ArrayList<>();listaJornadas = new ArrayList<>();
+        listaEnfrentamientos = new ArrayList<>();
     }
 
     public void crearMostrar()
@@ -56,10 +64,17 @@ public class ControladorVentanaCompeticion {
         {
 
             vCompeti = new VentanaCompeticion();
+            vCompeti.getpCargaDeDatos().setVisible(false);
+
+
 
             vCompeti.addBBuscarAL(new BBuscar());
             vCompeti.addBLogOutAL(new BLogOut());
             vCompeti.addBInsertarResultAL(new BIntroResult());
+            vCompeti.addBGenerarCalendarioAL(new BGenerarCalendario());
+            vCompeti.addCBCompeticionAL(new CBCompeticion());
+            vCompeti.addCBJornadaAL(new CBJornadas());
+
             vCompeti.setVisible(true);
         }
         catch (Exception ex)
@@ -91,8 +106,11 @@ public class ControladorVentanaCompeticion {
         {
             try
             {
+                vCompeti.verPanelCarga();//Primera llamada para poner el panel de carga
+                Thread.sleep(2000);
                 vCompeti.verPanelBotonesLateralIzq();
                 rellenarCBCompeticiones();
+                vCompeti.verPanelCarga(); //Segunda llamada para que tras la carga de las competiciones se quite
 
 
 
@@ -121,18 +139,61 @@ public class ControladorVentanaCompeticion {
                 {
                     System.out.println(j.getnJornada()+" es  el número de jornada");
                 }
-                /*todo hay que generar el calendario */
+
 
             }
             catch (Exception ex)
             {
-                System.out.println("Ha sucedido el siguiente error\n\n"+ex.getMessage());
+                System.out.println("Ha sucedido el siguiente error en BBuscar\n\n"+ex.getMessage());
             }
 
 
         }
     }
 
+    /**
+     * Esta interfaz se crea con la finalidad de no tener que estar constantemente pidiendo la competición a la lista
+     * estonces cada vez que se seleccione alguno, se instanciara en la variable competicion lo indexado en el combobox
+     * de competicion
+     * @author Erik
+     */
+    public class CBCompeticion implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            try
+            {competicion = listaCompetis.get(vCompeti.getCbCompeticiones().getSelectedIndex());}
+            catch (Exception ex)
+            {
+                System.out.println("Ha salido el siguiente error en el ActionListener de la ComboBox de competicion" +
+                        "\n" +ex.getMessage());
+            }
+
+        }
+    }
+
+    /**
+     * Esta interfaz se crea con la finalidad de no tener que estar constantemente pidiendo la competición a la lista
+     * estonces cada vez que se seleccione alguno, se instanciara en la variable jornada lo indexado en el combobox
+     * de jornada
+     * @author Erik
+     */
+    public class CBJornadas implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            try
+            {jornada = listaJornadas.get(vCompeti.getCbJornadas().getSelectedIndex());}
+            catch (Exception ex)
+            {
+                System.out.println("Ha salido el siguiente error en el ActionListener de la ComboBox de jornadas" +
+                        "\n" +ex.getMessage());
+            }
+
+        }
+    }
 
     public class BGenerarCalendario implements ActionListener
     {
@@ -141,10 +202,18 @@ public class ControladorVentanaCompeticion {
         {
             try
             {
+                vCompeti.verPanelCarga();
+                Thread.sleep(2000);
                 cv.generarCalendario();
                 rellenarCBJornadas();
+                Thread.sleep(2000);
+                vCompeti.verPanelCarga();
+
             }
-            catch (Exception ex){}
+            catch (Exception ex)
+            {
+                System.out.println("Ha sucedido el siguiente error:\n\n");
+            }
 
         }
     }
@@ -177,14 +246,18 @@ public class ControladorVentanaCompeticion {
             listaJornadas = cv.consultarTablaJornadas(competicion.getCod());
             for(Jornada j : listaJornadas)
             {
-                vCompeti.getCbCompeticiones().addItem(j.getnJornada());
+                vCompeti.getCbJornadas().addItem(j.getnJornada());
             }
+            jornada = listaJornadas.get(0);
         }
         catch (Exception ex)
         {
             System.out.println("\nHa salido el siguiente error:\n"+ex.getMessage());
         }
     }
+
+
+
 
 /*
   public  void crearEnfrentamientos() {

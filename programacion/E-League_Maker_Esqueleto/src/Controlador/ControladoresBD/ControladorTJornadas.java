@@ -36,7 +36,7 @@ public class ControladorTJornadas {
 
     public ControladorTJornadas(ControladorBD cbd)
     {
-        this.cbd = cbd;
+        this.cbd = cbd;listaJornadas = new ArrayList<>();
     }
 
 
@@ -59,8 +59,8 @@ public class ControladorTJornadas {
                 jor.setCod(rs.getInt("cod"));
                 jor.setnJornada(rs.getInt("n_jornada"));
                 jor.setCompeticion(cbd.buscarCompeticion(rs.getInt("cod_competicion")));
-                jor.setListaEnfrentamientos(cbd.consultarEnfrentamientosSinResultado(jornada.getCod()));
-
+                jor.setListaEnfrentamientos(cbd.consultarEnfrentamientosSinResultado(jor.getCod()));
+                listaJornadas.add(jor);
             }
 
             rs.close();
