@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-//import org.imgscalr.Scalr;
+
 
 
 public class VentanaCompeticion extends JFrame{
@@ -32,8 +32,7 @@ public class VentanaCompeticion extends JFrame{
     private JButton bBuscar;
     private JButton bInsertar;
     private JButton bCalendario;
-    private JPanel pCargaDeDatos;
-    private JLabel lCarga;
+
 
 
     public VentanaCompeticion()
@@ -107,6 +106,7 @@ public class VentanaCompeticion extends JFrame{
 
     public void verPanelBotonesLateralIzq()
     {
+        bCalendario.setVisible(false);
         if(pBotones.isVisible())
         {
             pBotones.setVisible(false);
@@ -117,38 +117,16 @@ public class VentanaCompeticion extends JFrame{
         }
     }
 
-    public void verPanelCarga()
-    {
-        if(pCargaDeDatos.isVisible())
-        {
-            pCargaDeDatos.setVisible(false);
-            pVisualizar.setVisible(true);
-        }
-        else
-        {
-            pVisualizar.setVisible(false);
-            pCargaDeDatos.setVisible(true);
-        }
-    }
+
 
     public void mostrarMensaje(String mensaje){JOptionPane.showMessageDialog(this,mensaje);}
 
     public JComboBox getCbCompeticiones() {
         return cbCompeticiones;
     }
-
-    public void setCbCompeticiones(JComboBox cbCompeticiones) {
-        this.cbCompeticiones = cbCompeticiones;
-    }
-
     public JComboBox getCbJornadas() {
         return cbJornadas;
     }
-
-    public void setCbJornadas(JComboBox cbJornadas) {
-        this.cbJornadas = cbJornadas;
-    }
-
     public JPanel getpVisualizar() {
         return pVisualizar;
     }
@@ -156,12 +134,11 @@ public class VentanaCompeticion extends JFrame{
     public void setpVisualizar(JPanel pVisualizar) {
         this.pVisualizar = pVisualizar;
     }
+    public JButton getbCalendario()
+    {return bCalendario;}
 
-    public JPanel getpCargaDeDatos() {
-        return pCargaDeDatos;
-    }
 
-    public void setpCargaDeDatos(JPanel pCargaDeDatos) {
-        this.pCargaDeDatos = pCargaDeDatos;
-    }
+
+
+
 }

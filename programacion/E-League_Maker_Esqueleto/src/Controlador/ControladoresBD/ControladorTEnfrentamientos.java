@@ -52,8 +52,10 @@ public class ControladorTEnfrentamientos {
                     enfre.setHora(hora);
                 }
                 enfre.setEquipoVisitante(cbd.buscarEquipo(rs.getInt("cod_equipo_visitante")));
+                enfre.setJornada(cbd.buscarJo);
                 listaEnfrentamientos.add(enfre);
             }
+
 
             rs.close();
             cs.close();
@@ -69,7 +71,7 @@ public class ControladorTEnfrentamientos {
                 }
             }
         }
-
+        System.out.println("Lista enfrentamientos en envío\nNumero de elementos "+listaEnfrentamientos.size());
         return listaEnfrentamientos;
     }
 

@@ -9,6 +9,7 @@ package Controlador.ControladoresVista;
 import Controlador.ControladorPrincipal;
 import Modelo.*;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -30,6 +31,9 @@ public class ControladorVista {
 
     private ControladorVentanaSeleccion cvSeleccion;
 
+    private ControladorVentanaCarga cvCarga;
+
+
     public ControladorVista(ControladorPrincipal cp)
     {
         this.cp = cp;
@@ -46,13 +50,17 @@ public class ControladorVista {
 
     public void mostrarVentanaLogin(){cvLogin.crearMostrar();}
     public void mostrarVentanaSeleccion(){cvSeleccion.crearMostrar();}
+    public void mostrarVentanaCarga(int milisegundos,JFrame ventanaPadre)
+    {
+        cvCarga.crearMostrar(milisegundos,ventanaPadre);
+    }
 
     public void crearControladoresVista()
     {
         cvLogin = new ControladorVentanaLogin(this);
         cvCompeti = new ControladorVentanaCompeticion(this);
         cvSeleccion = new ControladorVentanaSeleccion(this);
-
+        cvCarga = new ControladorVentanaCarga(this);
     }
 
 

@@ -636,6 +636,8 @@ CREATE OR REPLACE PACKAGE crud_Jornadas AS
     Jornadas.n_jornada%TYPE, p_fecha IN Jornadas.fecha%TYPE);
     FUNCTION consultar_Jornadas(p_cod_competicion IN Competiciones.cod%TYPE)
     RETURN tipo_cursor;
+    FUNCTION buscar_jornada(P_cod IN JORNADAS.cod%TYPE)
+    RETURN tipo_cursor;
 
     
 END crud_Jornadas;
@@ -695,6 +697,22 @@ CREATE OR REPLACE PACKAGE BODY crud_Jornadas IS
         WHEN others THEN
         raise;
     END consultar_Jornadas;
+    
+    
+    FUNCTION buscar_jornada(P_cod IN JORNADAS.cod%TYPE)
+    RETURN tipo_cursor
+    IS
+        v_cursor tipo_cursor;
+    BEGIN
+        OPEN v_cursor FOR
+            SELECT *
+            FROM Jornadas
+            WHERE cod = p_cod;
+        RETURN v_cursor;
+    EXCEPTION
+        WHEN others THEN
+        raise;
+    END buscar_jornada;
     
 END crud_Jornadas;
 /

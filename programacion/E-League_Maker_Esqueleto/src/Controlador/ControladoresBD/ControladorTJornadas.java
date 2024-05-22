@@ -7,6 +7,7 @@ package Controlador.ControladoresBD;
 
 import Modelo.Competicion;
 import Modelo.Enfrentamiento;
+import Modelo.Equipo;
 import Modelo.Jornada;
 
 import java.sql.CallableStatement;
@@ -81,6 +82,45 @@ public class ControladorTJornadas {
         return listaJornadas;
     }
 
+    public Jornada buscarJornada(int cod)
+    {
+        con = cbd.abrirConexion();
+        System.out.println("\nBuscando Jornada con código "+cod);
+        jornada = new Jornada();
+        try {
+            String llamada = "{ ? = call crud_Equipos.consultar_Equipo_cod(?) }";
+            CallableStatement cs = con.prepareCall(llamada);
+
+            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+            cs.setInt(2, cod);
+
+            cs.execute();
+
+            ResultSet rs = (ResultSet) cs.getObject(1);
+
+            if (rs.next()) {
+                equipo.setCod(rs.getInt("cod"));
+                equipo.setNombre(rs.getString("nombre"));
+                equipo.setFechaFundacion(rs.getDate("fecha_fundacion").toLocalDate());
+            }
+
+            rs.close();
+            cs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error al consultar el equipo", e);
+        } finally {
+            if (con != null) {
+                try {
+                    cbd.cerrarConexion(con);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return equipo;
+    }
 }
 
 
