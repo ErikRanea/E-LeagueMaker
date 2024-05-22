@@ -52,10 +52,11 @@ public class ControladorTEnfrentamientos {
                     enfre.setHora(hora);
                 }
                 enfre.setEquipoVisitante(cbd.buscarEquipo(rs.getInt("cod_equipo_visitante")));
-                enfre.setJornada(cbd.buscarJo);
+                enfre.setJornada(cbd.buscarJornada(rs.getInt("cod_jornada")));
                 listaEnfrentamientos.add(enfre);
             }
-
+            System.out.println("En tabla enfrentamientos devuelve "+listaEnfrentamientos.size()+
+                    " elementos");
 
             rs.close();
             cs.close();

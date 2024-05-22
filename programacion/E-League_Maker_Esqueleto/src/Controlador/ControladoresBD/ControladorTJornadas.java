@@ -62,7 +62,9 @@ public class ControladorTJornadas {
                 jor.setCompeticion(cbd.buscarCompeticion(rs.getInt("cod_competicion")));
                 jor.setListaEnfrentamientos(cbd.consultarEnfrentamientosSinResultado(jor.getCod()));
                 listaJornadas.add(jor);
+                jornada = jor;
             }
+            System.out.println("El tamaño de las listas de las jornadas es "+ jornada.getListaEnfrentamientos().size());
 
             rs.close();
             cs.close();
@@ -82,13 +84,13 @@ public class ControladorTJornadas {
         return listaJornadas;
     }
 
-    public Jornada buscarJornada(int cod)
+    public Jornada buscarJornada(int cod) throws Exception
     {
         con = cbd.abrirConexion();
         System.out.println("\nBuscando Jornada con código "+cod);
         jornada = new Jornada();
         try {
-            String llamada = "{ ? = call crud_Equipos.consultar_Equipo_cod(?) }";
+            String llamada = "{ ? = call crud_jornadas.buscar_jornada(?) }";
             CallableStatement cs = con.prepareCall(llamada);
 
             cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
@@ -99,16 +101,18 @@ public class ControladorTJornadas {
             ResultSet rs = (ResultSet) cs.getObject(1);
 
             if (rs.next()) {
-                equipo.setCod(rs.getInt("cod"));
-                equipo.setNombre(rs.getString("nombre"));
-                equipo.setFechaFundacion(rs.getDate("fecha_fundacion").toLocalDate());
+                Jornada jor = new Jornada();
+                jor.setCod(rs.getInt("cod"));
+                jor.setnJornada(rs.getInt("n_jornada"));
+                jor.setCompeticion(cbd.buscarCompeticion(rs.getInt("cod_competicion")));
+
             }
 
             rs.close();
             cs.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("Error al consultar el equipo", e);
+            throw new Exception("Error al buscar la jornada\n\n", e);
         } finally {
             if (con != null) {
                 try {
@@ -119,7 +123,7 @@ public class ControladorTJornadas {
             }
         }
 
-        return equipo;
+        return jornada;
     }
 }
 

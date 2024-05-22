@@ -138,7 +138,4 @@ public class VentanaCompeticion extends JFrame{
     {return bCalendario;}
 
 
-
-
-
 }

@@ -277,7 +277,8 @@ BEGIN
      OPEN c_enfrentamientos FOR
         SELECT *
         FROM ENFRENTAMIENTOS 
-        WHERE gana_local IS NULL;
+        WHERE gana_local IS NULL
+        AND cod_jornada = p_cod_jornada;
 END;
 /
 --******************************************************************************

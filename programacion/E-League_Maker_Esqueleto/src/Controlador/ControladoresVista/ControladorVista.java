@@ -151,7 +151,7 @@ public class ControladorVista {
     {
         return cp.consultarTablaJornadas(codCompeticion);
     }
-
+    public Jornada buscarJornada(int cod) throws Exception{ return cp.buscarJornada(cod);}
 
 
 

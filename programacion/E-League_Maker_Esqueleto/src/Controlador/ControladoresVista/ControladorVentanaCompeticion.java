@@ -100,42 +100,56 @@ public class ControladorVentanaCompeticion {
         }
     }
 
-    public class BIntroResult implements ActionListener
-    {
+    /**
+     * En esta interfaz, debido al gran volumen de carga de datos. Se genera una ventana de carga de datos.
+     * Al generar error de asincronia, se decide hacer un segundo hilo de ejecución para que trabajen a la vez.
+     * Por una parte la ventana de carga. Y por otro lado el controlador de la base de datos.
+     * @author Erik
+     */
+    public class BIntroResult implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e)
-        {
-            try
-            {
-                //Pregunta BD competis
-                listaCompetis = cv.pedirCompeticionesCerradas();
-                cv.mostrarVentanaCarga(2000,vCompeti);
-                rellenarCBCompeticiones();
-                cv.mostrarVentanaCarga(2000,vCompeti);
-                listaJornadas = cv.consultarTablaJornadas(competicion.getCod());
-                cv.mostrarVentanaCarga(5000,vCompeti);
-                rellenarCBJornadas();
-                cv.mostrarVentanaCarga(2000,vCompeti);
-                vCompeti.verPanelBotonesLateralIzq();
+        public void actionPerformed(ActionEvent e) {
+            // Muestra la ventana de carga
+            cv.mostrarVentanaCarga(15000, vCompeti);
 
+            // Ejecuta la tarea en segundo plano
+            SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+                @Override
+                protected Void doInBackground()  {
+                    try
+                    {
+                        // Realiza las consultas a la base de datos
+                        listaCompetis = cv.pedirCompeticionesCerradas();
+                        rellenarCBCompeticiones();
+                        listaJornadas = cv.consultarTablaJornadas(competicion.getCod());
+                        
+                    }
+                    catch (Exception ex)
+                    {
+                        System.out.println("Ha salido el siguento error en el segundo hilo: \n "+
+                                ex.getMessage());
+                    }
 
-
-                if(!hayJornadas)
-                {
-                    vCompeti.getbCalendario().setVisible(true);
+                    return null;
                 }
-                else
-                {
-                    vCompeti.getbCalendario().setVisible(false);
+
+                @Override
+                protected void done() {
+                    try {
+                        // Oculta la ventana de carga después de que se completan las consultas
+
+
+                        // Rellena los combobox y realiza otras operaciones de interfaz de usuario
+                        rellenarCBJornadas();
+                        vCompeti.verPanelBotonesLateralIzq();
+                    } catch (Exception ex) {
+                        System.out.println("\nHa sucedido el siguiente error:\n\n" + ex.getMessage());
+                    }
                 }
+            };
 
-
-            }
-            catch (Exception ex)
-            {
-                System.out.println("\nHa sucedido el siguiente error:\n\n"+ex.getMessage());
-            }
-
+            // Ejecuta el worker
+            worker.execute();
         }
     }
 
@@ -272,6 +286,14 @@ public class ControladorVentanaCompeticion {
     public void mostrarEnfrentamientos() {
         vCompeti.getpVisualizar().removeAll(); // Limpiar el panel antes de agregar los nuevos componentes
         listaEnfrentamientos = jornada.getListaEnfrentamientos();
+
+        ArrayList<Enfrentamiento> listaEnfreNJornada = new ArrayList<>();
+
+       /* for (Enfrentamiento e : listaEnfrentamientos)
+        {
+            if(e.get)
+        }*/
+
         // Establecer el layout del panel
         vCompeti.getpVisualizar().setLayout(new GridLayout(listaEnfrentamientos.size(), 1));
         System.out.println("\n*****************************************" +
