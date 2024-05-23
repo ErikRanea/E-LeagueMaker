@@ -1,17 +1,26 @@
 -- Definir paquete Crud_Juegos
-CREATE OR REPLACE PACKAGE crud_Juegos AS 
+ CREATE OR REPLACE PACKAGE crud_Juegos AS 
     TYPE tipo_cursor IS REF CURSOR;
+    
     PROCEDURE insertar_juego(p_nombre IN juegos.nombre%TYPE, p_desarrolladora 
     IN juegos.desarrolladora%TYPE, p_fecha_lanzamiento 
     IN juegos.fecha_lanzamiento%TYPE);
+    
     PROCEDURE borrar_juego(p_cod IN juegos.cod%TYPE);
+    
     PROCEDURE modificar_juego(p_cod IN juegos.cod%TYPE, p_nombre 
     IN juegos.nombre%TYPE, p_desarrolladora IN juegos.desarrolladora%TYPE, 
     p_fecha_lanzamiento IN juegos.fecha_lanzamiento%TYPE);
+    
     FUNCTION consultar_juego_nombre(p_nombre IN juegos.nombre%TYPE)
     RETURN tipo_cursor;
+    
     FUNCTION consultar_juego_cod(p_cod IN juegos.cod%TYPE)
     RETURN tipo_cursor;
+    
+    FUNCTION consultar_todos_juegos
+    RETURN tipo_cursor;
+    
 END crud_Juegos;
 /
 -- Cuerpo del paquete Crud_Juegos
@@ -74,6 +83,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Juegos IS
         raise;
     END consultar_juego_nombre;
     
+    -- Consultar juegos por nombre
     FUNCTION consultar_juego_cod(p_cod IN juegos.cod%TYPE) 
     RETURN tipo_cursor
     IS
@@ -89,6 +99,21 @@ CREATE OR REPLACE PACKAGE BODY crud_Juegos IS
         raise;
     END consultar_juego_cod;
     
+    -- Consultra todos los juegos
+    FUNCTION consultar_todos_juegos
+    RETURN tipo_cursor
+    IS
+        v_cursor tipo_cursor;
+    BEGIN
+        OPEN v_cursor FOR
+            SELECT *
+            FROM juegos;
+        RETURN v_cursor;
+    EXCEPTION
+        WHEN others THEN
+        raise;
+    END consultar_todos_juegos;
+    
 END crud_Juegos;
 /
 --------------------------------------------------------------------------------
@@ -96,14 +121,29 @@ END crud_Juegos;
 -- Definir paquete Crud_Equipos
 CREATE OR REPLACE PACKAGE crud_Equipos AS 
     TYPE tipo_cursor IS REF CURSOR;
+    
     PROCEDURE insertar_equipo(p_nombre IN equipos.nombre%TYPE, p_fecha_fundacion
     IN equipos.fecha_fundacion%TYPE);
+    
     PROCEDURE borrar_equipo(p_cod IN equipos.cod%TYPE);
+    
     PROCEDURE modificar_equipo(p_cod IN equipos.cod%TYPE, p_nombre IN 
     equipos.nombre%TYPE, p_fecha_fundacion IN equipos.fecha_fundacion%TYPE);
+    
     FUNCTION consultar_equipo_cod(p_cod IN equipos.cod%TYPE) RETURN tipo_cursor;
+    
     FUNCTION consultar_equipo_nombre(p_nombre IN equipos.nombre%TYPE)
     RETURN tipo_cursor;
+    
+    FUNCTION consultar_todos_equipos
+    RETURN tipo_cursor;
+    
+    FUNCTION equipos_en_competicion (p_cod_Competi IN 
+    Puntos_equipos.cod_competicion%TYPE) RETURN tipo_cursor;
+    
+    FUNCTION equipos_sin_competicion (p_cod_Competi IN 
+    Puntos_equipos.cod_competicion%TYPE) RETURN tipo_cursor;
+    
 END crud_Equipos;
 /
 -- Cuerpo del paquete Crud_Equipos
@@ -162,6 +202,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Equipos IS
         raise;
     END consultar_equipo_cod;
     
+    -- Consultar todos equipos por nombre
     FUNCTION consultar_equipo_nombre(p_nombre IN equipos.nombre%TYPE) 
     RETURN tipo_cursor
     IS
@@ -177,6 +218,59 @@ CREATE OR REPLACE PACKAGE BODY crud_Equipos IS
         raise;
     END consultar_equipo_nombre;
     
+    -- Consultar todos los equipos
+    FUNCTION consultar_todos_equipos
+    RETURN tipo_cursor
+    IS
+        v_cursor tipo_cursor;
+    BEGIN
+        OPEN v_cursor FOR
+            SELECT *
+            FROM equipos;
+        RETURN v_cursor;
+    EXCEPTION
+        WHEN others THEN
+        raise;
+    END consultar_todos_equipos;
+    
+    -- Consultar equipos inscritos
+    FUNCTION equipos_en_competicion(p_cod_Competi IN 
+    Puntos_equipos.cod_competicion%TYPE) 
+    RETURN tipo_cursor
+    IS
+        v_cursor tipo_cursor;
+    BEGIN
+        OPEN v_cursor FOR
+            SELECT *
+            FROM equipos
+            WHERE cod = (SELECT cod_equipo
+                        FROM puntos_equipos
+                        WHERE cod_competicion = p_cod_Competi);
+        RETURN v_cursor;
+    EXCEPTION
+        WHEN others THEN
+        raise;
+    END equipos_en_competicion;
+    
+     -- Consultar equipos no inscritos
+    FUNCTION equipos_sin_competicion(p_cod_Competi IN 
+    Puntos_equipos.cod_competicion%TYPE) 
+    RETURN tipo_cursor
+    IS
+        v_cursor tipo_cursor;
+    BEGIN
+        OPEN v_cursor FOR
+            SELECT *
+            FROM equipos
+            WHERE cod != (SELECT cod_equipo
+                        FROM puntos_equipos
+                        WHERE cod_competicion = p_cod_Competi);
+        RETURN v_cursor;
+    EXCEPTION
+        WHEN others THEN
+        raise;
+    END equipos_sin_competicion;
+    
 END crud_Equipos;
 /
 --------------------------------------------------------------------------------
@@ -184,17 +278,24 @@ END crud_Equipos;
 -- Definir paquete Crud_Patrocinadores
 CREATE OR REPLACE PACKAGE crud_Patrocinadores AS 
     TYPE tipo_cursor IS REF CURSOR;
+    
     PROCEDURE insertar_Patrocinadores(p_nombre IN patrocinadores.nombre%TYPE, 
     p_cod_equipo IN patrocinadores.cod_equipo%TYPE);
+    
     PROCEDURE borrar_Patrocinadores(p_cod IN 
     patrocinadores.cod_patrocinador%TYPE);
+    
     PROCEDURE modificar_Patrocinadores(p_cod IN 
     patrocinadores.cod_patrocinador%TYPE, p_nombre IN
     patrocinadores.nombre%TYPE,p_cod_equipo IN patrocinadores.cod_equipo%type);
+    
     FUNCTION consultar_Patrocinadores_cod(p_cod IN 
     patrocinadores.cod_patrocinador%TYPE) RETURN tipo_cursor;
-    FUNCTION consultar_Patrocinadores_nombre(p_nombre IN 
+    
+    FUNCTION consultar_Patro_nombre(p_nombre IN 
     patrocinadores.nombre%TYPE) RETURN tipo_cursor;
+    
+    FUNCTION consultar_todos_patros RETURN tipo_cursor;
 END crud_Patrocinadores;
 /
 -- Cuerpo del paquete Crud_Patrocinadores
@@ -258,7 +359,8 @@ CREATE OR REPLACE PACKAGE BODY crud_Patrocinadores IS
         raise;
     END consultar_Patrocinadores_cod;
     
-    FUNCTION consultar_Patrocinadores_nombre(p_nombre IN 
+    -- Consultar Patrocinadores por nombre
+    FUNCTION consultar_Patro_nombre(p_nombre IN 
     patrocinadores.nombre%TYPE) 
     RETURN tipo_cursor
     IS
@@ -272,7 +374,22 @@ CREATE OR REPLACE PACKAGE BODY crud_Patrocinadores IS
     EXCEPTION
         WHEN others THEN
         raise;
-    END consultar_Patrocinadores_nombre;
+    END consultar_Patro_nombre;
+    
+    -- Consultar todos los patrocinadores
+    FUNCTION consultar_todos_patros 
+    RETURN tipo_cursor
+    IS
+        v_cursor tipo_cursor;
+    BEGIN
+        OPEN v_cursor FOR
+            SELECT cod_patrocinador, nombre, cod_equipo
+            FROM Patrocinadores;
+        RETURN v_cursor;
+    EXCEPTION
+        WHEN others THEN
+        raise;
+    END consultar_todos_patros;
     
     
 END crud_Patrocinadores;
@@ -282,21 +399,31 @@ END crud_Patrocinadores;
 -- Definir paquete Crud_Jugadores
 CREATE OR REPLACE PACKAGE crud_Jugadores AS 
     TYPE tipo_cursor IS REF CURSOR;
+    
     PROCEDURE insertar_Jugadores(p_nombre IN jugadores.nombre%TYPE, p_apellido 
     IN jugadores.apellido%TYPE, p_rol IN jugadores.rol%TYPE, p_salario IN 
     jugadores.salario%TYPE, p_nacionalidad IN jugadores.nacionalidad%TYPE, 
     p_fecha_nacimiento IN jugadores.fecha_nacimiento%TYPE, p_nickname IN 
     jugadores.nickname%TYPE, p_cod_equipo IN jugadores.cod_equipo%TYPE);
+    
     PROCEDURE borrar_Jugadores(p_cod IN jugadores.cod%TYPE);
+    
     PROCEDURE modificar_Jugadores(p_cod IN jugadores.cod%TYPE, p_nombre IN 
     jugadores.nombre%TYPE, p_apellido IN jugadores.apellido%TYPE, p_rol IN 
     jugadores.rol%TYPE, p_salario IN jugadores.salario%TYPE, p_nacionalidad IN 
     jugadores.nacionalidad%TYPE, p_fecha_nacimiento IN 
-    jugadores.fecha_nacimiento%TYPE, p_nickname IN jugadores.nickname%TYPE);
+    jugadores.fecha_nacimiento%TYPE, p_nickname IN jugadores.nickname%TYPE, 
+    p_cod_equipo IN jugadores.cod_equipo%TYPE);
+    
     FUNCTION consultar_Jugadores_cod(p_cod IN jugadores.cod%TYPE) 
     RETURN tipo_cursor;
+    
     FUNCTION consultar_Jugadores_nickname(p_nickname IN jugadores.nickname%TYPE) 
     RETURN tipo_cursor;
+    
+    FUNCTION consultar_todos_jugadores 
+    RETURN tipo_cursor;
+    
 END crud_Jugadores;
 /
 -- Cuerpo del paquete Crud_Jugadores
@@ -335,7 +462,8 @@ CREATE OR REPLACE PACKAGE BODY crud_Jugadores IS
     jugadores.nombre%TYPE, p_apellido IN jugadores.apellido%TYPE, p_rol IN 
     jugadores.rol%TYPE, p_salario IN jugadores.salario%TYPE, p_nacionalidad IN 
     jugadores.nacionalidad%TYPE, p_fecha_nacimiento IN 
-    jugadores.fecha_nacimiento%TYPE, p_nickname IN jugadores.nickname%TYPE) 
+    jugadores.fecha_nacimiento%TYPE, p_nickname IN jugadores.nickname%TYPE, 
+    p_cod_equipo IN jugadores.cod_equipo%TYPE) 
     IS
     BEGIN
         UPDATE Jugadores
@@ -345,7 +473,8 @@ CREATE OR REPLACE PACKAGE BODY crud_Jugadores IS
             salario = p_salario,
             nacionalidad = p_nacionalidad,
             fecha_nacimiento = p_fecha_nacimiento,
-            nickname = p_nickname
+            nickname = p_nickname,
+            cod_equipo = p_cod_equipo
         WHERE cod = p_cod;
     EXCEPTION
         WHEN others THEN
@@ -368,6 +497,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Jugadores IS
         raise;
     END consultar_Jugadores_cod;
     
+    -- Consultar jugadores por nickname
     FUNCTION consultar_Jugadores_nickname(p_nickname IN jugadores.nickname%TYPE) 
     RETURN tipo_cursor
     IS
@@ -383,6 +513,21 @@ CREATE OR REPLACE PACKAGE BODY crud_Jugadores IS
         raise;
     END consultar_Jugadores_nickname;
     
+    -- Consultar todos los jugadores
+    FUNCTION consultar_todos_jugadores 
+    RETURN tipo_cursor
+    IS
+        v_cursor tipo_cursor;
+    BEGIN
+        OPEN v_cursor FOR
+            SELECT *
+            FROM jugadores;
+        RETURN v_cursor;
+    EXCEPTION
+        WHEN others THEN
+        raise;
+    END consultar_todos_jugadores;
+    
 END crud_Jugadores;
 /
 --------------------------------------------------------------------------------
@@ -390,17 +535,27 @@ END crud_Jugadores;
 -- Definir paquete Crud_Staffs
 CREATE OR REPLACE PACKAGE crud_Staffs AS 
     TYPE tipo_cursor IS REF CURSOR;
+    
     PROCEDURE insertar_Staffs(p_cod IN STAFFS.cod%TYPE,
     p_nombre IN Staffs.nombre%TYPE, p_apellido IN 
     Staffs.apellido%TYPE, p_puesto IN Staffs.puesto%TYPE, p_salario IN 
     Staffs.salario%TYPE, p_cod_equipo IN Staffs.cod_equipo%TYPE);
+    
     PROCEDURE borrar_Staffs(p_cod IN Staffs.cod%TYPE);
+    
     PROCEDURE modificar_Staffs(p_cod IN Staffs.cod%TYPE, p_nombre IN 
     Staffs.nombre%TYPE, p_apellido IN Staffs.apellido%TYPE, p_puesto IN 
-    Staffs.puesto%TYPE, p_salario IN Staffs.salario%TYPE);
+    Staffs.puesto%TYPE, p_salario IN Staffs.salario%TYPE, 
+    p_cod_equipo IN Staffs.cod_equipo%TYPE);
+    
     FUNCTION consultar_Staffs_cod(p_cod IN Staffs.cod%TYPE) 
     RETURN tipo_cursor;
-    FUNCTION consultar_Staffs_nombre(p_nombre IN Staffs.nombre%TYPE) RETURN tipo_cursor;
+    
+    FUNCTION consultar_Staffs_nombre(p_nombre IN Staffs.nombre%TYPE) 
+    RETURN tipo_cursor;
+    
+    FUNCTION consultar_todos_staffs
+    RETURN tipo_cursor;
 END crud_Staffs;
 /
 -- Cuerpo del paquete Crud_Staffs
@@ -434,14 +589,16 @@ CREATE OR REPLACE PACKAGE BODY crud_Staffs IS
     -- Modificar Staffs
     PROCEDURE modificar_Staffs(p_cod IN Staffs.cod%TYPE, p_nombre IN 
     Staffs.nombre%TYPE, p_apellido IN Staffs.apellido%TYPE, p_puesto IN 
-    Staffs.puesto%TYPE,  p_salario IN Staffs.salario%TYPE) 
+    Staffs.puesto%TYPE,  p_salario IN Staffs.salario%TYPE, 
+    p_cod_equipo IN staffs.cod_equipo%TYPE) 
     IS
     BEGIN
         UPDATE Staffs
         SET nombre = p_nombre,
             apellido = p_apellido,
             puesto = p_puesto,
-            salario = p_salario
+            salario = p_salario,
+            cod_equipo = p_cod_equipo
         WHERE cod = p_cod;
     EXCEPTION
         WHEN others THEN
@@ -464,6 +621,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Staffs IS
         raise;
     END consultar_Staffs_cod;
     
+    -- Consultar staffs por nombre
     FUNCTION consultar_Staffs_nombre(p_nombre IN Staffs.nombre%TYPE) 
     RETURN tipo_cursor
     IS
@@ -478,6 +636,21 @@ CREATE OR REPLACE PACKAGE BODY crud_Staffs IS
         WHEN others THEN
         raise;
     END consultar_Staffs_nombre;
+    
+    -- Consultar todos los staffs
+    FUNCTION consultar_todos_staffs
+    RETURN tipo_cursor
+    IS
+        v_cursor tipo_cursor;
+    BEGIN
+        OPEN v_cursor FOR
+            SELECT *
+            FROM Staffs;
+        RETURN v_cursor;
+    EXCEPTION
+        WHEN others THEN
+        raise;
+    END consultar_todos_staffs;
     
 END crud_Staffs;
 /
@@ -502,7 +675,7 @@ CREATE OR REPLACE PACKAGE crud_Competiciones AS
         p_nombre IN Competiciones.nombre%TYPE,
         p_fecha_inicio IN Competiciones.fecha_inicio%TYPE,
         p_fecha_fin IN Competiciones.fecha_fin%TYPE,
-        p_estado_abierto IN Competiciones.estado_abierto%TYPE
+        p_cod_juego IN Competiciones.cod_juego%TYPE
     );
    
     FUNCTION consultar_Competiciones(p_cod IN Competiciones.cod%TYPE)
@@ -512,6 +685,9 @@ CREATE OR REPLACE PACKAGE crud_Competiciones AS
         RETURN tipo_cursor;
         
     FUNCTION competiciones_cerradas
+    RETURN tipo_cursor;
+    
+    FUNCTION competiciones_abiertas
     RETURN tipo_cursor;
     
 END crud_Competiciones;
@@ -556,7 +732,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Competiciones IS
         p_nombre IN Competiciones.nombre%TYPE,
         p_fecha_inicio IN Competiciones.fecha_inicio%TYPE,
         p_fecha_fin IN Competiciones.fecha_fin%TYPE,
-        p_estado_abierto IN Competiciones.estado_abierto%TYPE
+        p_cod_juego IN Competiciones.cod_juego%TYPE
     )
     IS
     BEGIN
@@ -564,7 +740,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Competiciones IS
         SET nombre = p_nombre,
             fecha_inicio = p_fecha_inicio,
             fecha_fin = p_fecha_fin,
-            estado_abierto = p_estado_abierto
+            cod_juego = p_cod_juego
         WHERE cod = p_cod;
     EXCEPTION
         WHEN others THEN
@@ -589,6 +765,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Competiciones IS
             ' || SQLERRM);
     END consultar_Competiciones;
    
+   -- Consultar todas las competiciones
     FUNCTION todas_Competiciones
     RETURN tipo_cursor
     IS
@@ -603,6 +780,7 @@ CREATE OR REPLACE PACKAGE BODY crud_Competiciones IS
             || SQLERRM);
     END todas_Competiciones;
     
+     -- Consultar todas las competiciones cerradas
     FUNCTION competiciones_cerradas
     RETURN tipo_cursor
     IS
@@ -618,7 +796,21 @@ CREATE OR REPLACE PACKAGE BODY crud_Competiciones IS
             || SQLERRM);
     END competiciones_cerradas;
     
-    
+    -- Consultar todas las competiciones abiertas
+    FUNCTION competiciones_abiertas
+    RETURN tipo_cursor
+    IS
+        v_cursor tipo_cursor;
+    BEGIN
+        OPEN v_cursor FOR
+            SELECT * FROM Competiciones
+            WHERE estado_abierto = 1;
+        RETURN v_cursor;
+    EXCEPTION
+        WHEN others THEN
+            RAISE_APPLICATION_ERROR(-20005, 'Error en todas_Competiciones: '
+            || SQLERRM);
+    END competiciones_abiertas;
     
    
 END crud_Competiciones;
@@ -784,13 +976,20 @@ END crud_Enfrentamientos;
 -- Definir paquete Crud_Usuarios
 CREATE OR REPLACE PACKAGE crud_Usuarios AS 
     TYPE tipo_cursor IS REF CURSOR;
+    
     PROCEDURE insertar_Usuarios(p_nickname IN Usuarios.nickname%TYPE, 
     p_password IN Usuarios.password%TYPE, p_es_admin IN Usuarios.es_admin%TYPE);
+    
     PROCEDURE borrar_Usuarios(p_cod_usuarios IN Usuarios.cod_usuario%TYPE);
+    
     PROCEDURE modificar_Usuarios(p_cod_usuarios IN Usuarios.cod_usuario%TYPE, 
     p_nickname IN Usuarios.nickname%TYPE, p_password IN Usuarios.password%TYPE, 
     p_es_admin IN Usuarios.es_admin%TYPE);
+    
     FUNCTION consultar_Usuarios(p_nickname IN Usuarios.nickname%TYPE) 
+    RETURN tipo_cursor;
+    
+    FUNCTION consultar_todos_usuarios 
     RETURN tipo_cursor;
 END crud_Usuarios;
 /
@@ -852,6 +1051,21 @@ CREATE OR REPLACE PACKAGE BODY crud_Usuarios IS
         raise;
     END consultar_Usuarios;
     
+     -- Consultar todos los Usuarios
+    FUNCTION consultar_todos_usuarios 
+    RETURN tipo_cursor
+    IS
+        v_cursor tipo_cursor;
+    BEGIN
+        OPEN v_cursor FOR
+            SELECT *
+            FROM Usuarios;
+        RETURN v_cursor;
+    EXCEPTION
+        WHEN others THEN
+        raise;
+    END consultar_todos_usuarios;
+    
 END crud_Usuarios;
 /
 --------------------------------------------------------------------------------
@@ -859,20 +1073,25 @@ END crud_Usuarios;
 -- Definir paquete Crud_Puntos_equipos
 CREATE OR REPLACE PACKAGE crud_Puntos_equipos AS 
     TYPE tipo_cursor IS REF CURSOR;
+    
     PROCEDURE insertar_Puntos_equipos(p_cod_equipo IN 
     Puntos_equipos.cod_equipo%TYPE, p_cod_competicion IN 
     Puntos_equipos.cod_competicion%TYPE, p_puntos IN 
     Puntos_equipos.puntos%TYPE);
+    
     PROCEDURE borrar_Puntos_equipos(p_cod_equipo IN 
     Puntos_equipos.cod_equipo%TYPE, p_cod_competicion IN 
     Puntos_equipos.cod_competicion%TYPE);
+    
     PROCEDURE modificar_Puntos_equipos(p_cod_equipo IN 
     Puntos_equipos.cod_equipo%TYPE, p_cod_competicion IN 
     Puntos_equipos.cod_competicion%TYPE, p_puntos IN 
     Puntos_equipos.puntos%TYPE);
+    
     FUNCTION consultar_Puntos_equipos(p_cod_equipo IN 
     Puntos_equipos.cod_equipo%TYPE, p_cod_competicion IN 
     Puntos_equipos.cod_competicion%TYPE) RETURN tipo_cursor;
+    
 END crud_Puntos_equipos;
 /
 -- Cuerpo del paquete Crud_Puntos_equipos

@@ -104,13 +104,14 @@ public class ControladorPrincipal {
         return cbd.consultarTablaJornadas(codCompeticion);
     }
 
-
+    public Jornada buscarJornada(int cod) throws Exception{ return cbd.buscarJornada(cod);}
 
     //Enfrentamientos
     public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(int codJornada)throws Exception
     {
         return cbd.consultarEnfrentamientosSinResultado(codJornada);
     }
+    public boolean actualizarResultados(int cod) throws Exception{return cbd.actualizarResultados(cod);}
 
 
 

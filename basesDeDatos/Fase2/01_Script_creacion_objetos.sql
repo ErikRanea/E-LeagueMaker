@@ -107,7 +107,7 @@ CREATE TABLE Jugadores (
 
 
 CREATE TABLE Staffs (
-    Cod NUMBER(10) ,
+    Cod NUMBER(10) GENERATED ALWAYS AS IDENTITY,
     Nombre VARCHAR2(100),
     Apellido VARCHAR2(100),
     Puesto VARCHAR2(50),
@@ -181,7 +181,6 @@ CREATE OR REPLACE VIEW Resultados_Jornadas AS
 SELECT
     jorn.Cod_competicion,
 
-      -- C�digo del equipo visitante
     enf.Cod_Jornada,
     enf.Cod AS Cod_Enfrentamiento,
     jorn.N_Jornada,
@@ -197,12 +196,11 @@ FROM
     JOIN Jornadas jorn ON enf.Cod_Jornada = jorn.Cod
 ORDER BY
 
-    jorn.N_Jornada,  -- Ordenar por n�mero de jornada
+    jorn.N_Jornada,  -- Ordenar por nï¿½mero de jornada
 
     jorn.N_Jornada,
 
     enf.Cod;
-
     
 -- Ordenar por c�digo de enfrentamiento
 

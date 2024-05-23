@@ -169,6 +169,7 @@ public class ControladorBD {
     {
         return ctJornadas.consultarTablaJornadas(codCompeticion);
     }
+    public Jornada buscarJornada(int cod) throws Exception{ return ctJornadas.buscarJornada(cod);}
 
     //Enfrentamientos
     public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(int codJornada)throws Exception
@@ -176,4 +177,5 @@ public class ControladorBD {
         return ctEnfrentamientos.consultarEnfrentamientosSinResultado(codJornada);
     }
 
+    public boolean actualizarResultados(int cod) throws Exception{return ctEnfrentamientos.actualizarResultados(cod);}
 }

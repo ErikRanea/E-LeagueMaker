@@ -264,7 +264,7 @@ BEGIN
     
 END abrir_cerrar_competicion;
 --***********************Fin abrir cerrar competiciones*************************
-
+/
 --******************************************************************************
 CREATE OR REPLACE PROCEDURE CONSULTAR_ENFRENTAMIENTOS_SIN_RESULTADOS
 (
@@ -274,25 +274,79 @@ CREATE OR REPLACE PROCEDURE CONSULTAR_ENFRENTAMIENTOS_SIN_RESULTADOS
 AS
 
 BEGIN
-     OPEN p_enfrentamientos FOR
-        SELECT Cod,
-               Hora,
-               Cod_Jornada,
-               cod_equipo_visitante,
-               cod_equipo_local
+     OPEN c_enfrentamientos FOR
+        SELECT *
         FROM ENFRENTAMIENTOS 
-        WHERE cod_enfrentamiento IS NULL;
+        WHERE gana_local IS NOT NULL
+        AND cod_jornada = p_cod_jornada;
 END;
-
+/
 --******************************************************************************
 
 CREATE OR REPLACE PROCEDURE insertar_resultado
 (
-    p_cod_competicion IN COMPETICIONES.cod%TYPE,
-    p_cod_jornada IN 
+    p_cod_enfrentamiento IN ENFRENTAMIENTOS.cod%TYPE,
+    p_v_gana_local IN ENFRENTAMIENTOS.gana_local%type
 )
 AS
 
 BEGIN
-
+    UPDATE ENFRENTAMIENTOS
+    SET
+        gana_local = p_v_gana_local
+    WHERE cod = p_cod_enfrentamiento;
 END;
+--******************************************************************************
+/
+--******************************************************************************
+CREATE OR REPLACE PROCEDURE consultar_ultima_jornada
+(
+    c_ultima_jornada OUT SYS_REFCURSOR
+)
+AS
+
+BEGIN
+     OPEN c_ultima_jornada FOR
+      SELECT 
+        cod,
+        n_jornada,
+        fecha,
+        cod_competicion
+    FROM 
+        (SELECT 
+            cod,
+            n_jornada,
+            fecha,
+            cod_competicion
+        FROM 
+            jornadas
+        ORDER BY n_jornada DESC)
+    WHERE ROWNUM = 1;
+END;
+
+/
+--******************************************************************************
+
+CREATE OR REPLACE PROCEDURE con_enfre_ulti_jornada
+(
+    c_ultima_jornada OUT SYS_REFCURSOR
+)
+AS
+    v_cod_jornada jornadas.cod%TYPE;
+BEGIN
+    SELECT cod
+    INTO v_cod_jornada
+    FROM jornadas
+    WHERE ROWNUM = 1
+    ORDER BY n_jornada DESC;
+
+    OPEN c_ultima_jornada FOR
+    SELECT 
+        cod,
+        cod_equipo_local,
+        cod_equipo_visitante
+    FROM enfrentamientos
+    WHERE cod_jornada = v_cod_jornada;
+END;
+/
+--******************************************************************************

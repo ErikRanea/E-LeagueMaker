@@ -271,7 +271,7 @@ public class ControladorTCompeticiones {
     public ArrayList<Competicion> pedirCompeticionesCerradas()throws Exception
     {
         try {
-            System.out.println("\nPidiendo Competiciones cerradas");
+            System.out.println("\nPidiendo Competiciones cerradas\n");
             con = cbd.abrirConexion();
             String llamada = "{ ? = call crud_Competiciones.Competiciones_cerradas }";
             CallableStatement cs = con.prepareCall(llamada);
@@ -325,8 +325,8 @@ public class ControladorTCompeticiones {
 
             cs.execute();
 
+            System.out.println("\nCalendario generado\n");
 
-            respuesta = "Calendario generado";
 
             cs.close();
         } catch (SQLException e) {
