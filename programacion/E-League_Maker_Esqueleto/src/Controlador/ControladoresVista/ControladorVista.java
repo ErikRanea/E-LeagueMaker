@@ -164,7 +164,10 @@ public class ControladorVista {
     {
         return cp.consultarEnfrentamientosSinResultado(codJornada);
     }
-    public boolean actualizarResultados(int cod) throws Exception{return cp.actualizarResultados(cod);}
+    public boolean actualizarResultados(int cod,int resultado) throws Exception
+    {
+        return cp.actualizarResultados(cod,resultado);
+    }
 
 
 

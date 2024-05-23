@@ -161,7 +161,7 @@ public class ControladorVentanaCompeticion {
         }
     }
 
-  public class BGenerarCalendario implements ActionListener {
+    public class BGenerarCalendario implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
@@ -248,13 +248,23 @@ public class ControladorVentanaCompeticion {
                 public void actionPerformed(ActionEvent e) {
                     try
                     {
-                        cv.actualizarResultados(enfrentamiento.getCod());
+                        cv.actualizarResultados(enfrentamiento.getCod(),1);
                     }
                     catch (Exception ex){}
 
                 }
             });
             JButton visitanteButton = new JButton("Gana Visitante");
+            visitanteButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try
+                    {
+                        cv.actualizarResultados(enfrentamiento.getCod(),0);
+                    }
+                    catch (Exception ex){}
+                }
+            });
 
             enfrentamientoPanel.add(label);
             enfrentamientoPanel.add(localButton);

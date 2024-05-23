@@ -177,5 +177,8 @@ public class ControladorBD {
         return ctEnfrentamientos.consultarEnfrentamientosSinResultado(codJornada);
     }
 
-    public boolean actualizarResultados(int cod) throws Exception{return ctEnfrentamientos.actualizarResultados(cod);}
+    public boolean actualizarResultados(int cod,int resultado) throws Exception
+    {
+        return ctEnfrentamientos.actualizarResultados(cod,resultado);
+    }
 }

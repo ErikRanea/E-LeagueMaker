@@ -77,16 +77,17 @@ public class ControladorTEnfrentamientos {
         return listaEnfrentamientos;
     }
 
-    public boolean actualizarResultados(int cod) throws Exception
+    public boolean actualizarResultados(int cod,int resultado) throws Exception
     {
         boolean okey = false;
         try {
             listaEnfrentamientos = new ArrayList<>();
             con = cbd.abrirConexion();
-            String llamada = "{ call  insertar_resultado(?) }";
+            String llamada = "{ call  insertar_resultado(?,?) }";
             CallableStatement cs = con.prepareCall(llamada);
 
             cs.setInt(1,cod);
+            cs.setInt(2,resultado);
             cs.execute();
 
             System.out.println("Se ha insertado correctamente el resultado del enfrentamiento "+cod);
@@ -106,7 +107,6 @@ public class ControladorTEnfrentamientos {
         }
         return okey;
     }
-
 
 
 }
