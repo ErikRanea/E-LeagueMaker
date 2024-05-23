@@ -9,9 +9,8 @@ public class VentanaCarga extends JDialog {
 
     public VentanaCarga(Frame parent) {
         super(parent, "Barra de carga", true);
-        progressBar = new JProgressBar(0, 100);
-        progressBar.setStringPainted(true);
-        progressBar.setIndeterminate(false);
+        progressBar = new JProgressBar();
+        progressBar.setIndeterminate(true); // Indeterminate for unknown duration
 
         ponerIconoPrograma();
         getContentPane().setLayout(new BorderLayout());
@@ -21,52 +20,21 @@ public class VentanaCarga extends JDialog {
         setLocationRelativeTo(parent);
     }
 
-    public void iniciarBarra(int milisegundos) {
-        SwingWorker<Void, Integer> worker = new SwingWorker<Void, Integer>() {
-            @Override
-            protected Void doInBackground() throws Exception {
-                int delay = milisegundos / 100;
-                for (int i = 0; i <= 100; i++) {
-                    publish(i);
-                    Thread.sleep(delay);
-                }
-                return null;
-            }
+    public void iniciarBarra() {
+        SwingUtilities.invokeLater(() -> {
+            setVisible(true);
+        });
+    }
 
-            @Override
-            protected void process(java.util.List<Integer> chunks) {
-                for (Integer value : chunks) {
-                    progressBar.setValue(value);
-                }
-            }
-
-            @Override
-            protected void done() {
-                setVisible(false);
-                dispose();
-            }
-        };
-
-        worker.execute();
-        setVisible(true);
+    public void detenerBarra() {
+        SwingUtilities.invokeLater(() -> {
+            setVisible(false);
+            dispose();
+        });
     }
 
     public void ponerIconoPrograma() {
         ImageIcon icono = new ImageIcon("./src/Img/Logo_mas_cerca.jpg");
         super.setIconImage(icono.getImage());
-    }
-
-    public void iniciarCarga() {
-        SwingUtilities.invokeLater(() -> {
-            progressBar.setValue(0);
-            setVisible(true);
-        });
-    }
-
-    public void detenerCarga() {
-        SwingUtilities.invokeLater(() -> {
-            setVisible(false);
-            dispose();
-        });
     }
 }

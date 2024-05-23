@@ -50,9 +50,13 @@ public class ControladorVista {
 
     public void mostrarVentanaLogin(){cvLogin.crearMostrar();}
     public void mostrarVentanaSeleccion(){cvSeleccion.crearMostrar();}
-    public void mostrarVentanaCarga(int milisegundos,JFrame ventanaPadre)
-    {
-        cvCarga.crearMostrar(milisegundos,ventanaPadre);
+
+
+    public void mostrarVentanaCarga(int milisegundos, JFrame ventanaPadre) {
+        cvCarga.crearMostrar(milisegundos, ventanaPadre);
+    }
+    public void ocultarVentanaCarga() {
+        cvCarga.ocultarVentanaCarga();
     }
 
     public void crearControladoresVista()

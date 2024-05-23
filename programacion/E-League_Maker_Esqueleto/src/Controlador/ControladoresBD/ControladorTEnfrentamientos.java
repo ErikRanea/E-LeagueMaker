@@ -30,6 +30,7 @@ public class ControladorTEnfrentamientos {
     public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(int codJornada)throws Exception
     {
         try {
+            listaEnfrentamientos = new ArrayList<>();
             con = cbd.abrirConexion();
             String llamada = "{ call  CONSULTAR_ENFRENTAMIENTOS_SIN_RESULTADOS(?,?) }";
             CallableStatement cs = con.prepareCall(llamada);

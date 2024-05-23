@@ -1,7 +1,3 @@
-/**
- * Esta clase en encarga de to.do el aspecto lógico de la ventana carga
- * @author Erik
- */
 package Controlador.ControladoresVista;
 
 import Vista.VentanaCarga;
@@ -11,37 +7,30 @@ import javax.swing.*;
 public class ControladorVentanaCarga {
 
     private ControladorVista cv;
+    private VentanaCarga ventanaCarga;
 
-    private VentanaCarga vCarga;
-    private JFrame ventanaPadre;
-
-
-    public ControladorVentanaCarga(ControladorVista cv)
-    {
+    public ControladorVentanaCarga(ControladorVista cv) {
         this.cv = cv;
     }
 
-
-    public void crearMostrar(int milisegundos,JFrame ventanaPadre)
-    {
-        vCarga = new VentanaCarga(ventanaPadre);
-        mostrarVentanaCarga(milisegundos);
-
-    }
-
-
-    public void mostrarVentanaCarga(int milisegundos)
-    {
-        if (vCarga == null) {
-            vCarga = new VentanaCarga(ventanaPadre);
+    public void crearMostrar(int milisegundos, JFrame ventanaPadre) {
+        if (ventanaCarga == null || !ventanaCarga.isShowing()) {
+            ventanaCarga = new VentanaCarga(ventanaPadre);
         }
-        vCarga.iniciarBarra(milisegundos);
+
+        ventanaCarga.iniciarBarra();
+
+        // Stop the loading screen after the specified milliseconds
+        Timer timer = new Timer(milisegundos, e -> ocultarVentanaCarga());
+        timer.setRepeats(false);
+        timer.start();
     }
 
-    public void ocultarVentanaCarga()
-    {
-        if (vCarga != null) {
-            vCarga.detenerCarga();
+
+
+    public void ocultarVentanaCarga() {
+        if (ventanaCarga != null) {
+            ventanaCarga.detenerBarra();
         }
     }
 }
