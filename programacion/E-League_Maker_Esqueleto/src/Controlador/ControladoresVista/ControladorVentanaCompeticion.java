@@ -36,7 +36,7 @@ public class ControladorVentanaCompeticion {
             vCompeti.addBBuscarAL(new BBuscar());
             vCompeti.addBLogOutAL(new BLogOut());
             vCompeti.addBInsertarResultAL(new BIntroResult());
-        //    vCompeti.addBGenerarCalendarioAL(new BGenerarCalendario());
+            vCompeti.addBGenerarCalendarioAL(new BGenerarCalendario());
             vCompeti.addCBCompeticionAL(new CBCompeticion());
             vCompeti.addCBJornadaAL(new CBJornadas());
             vCompeti.setVisible(true);
@@ -161,7 +161,7 @@ public class ControladorVentanaCompeticion {
         }
     }
 
-  /*  public class BGenerarCalendario implements ActionListener {
+  public class BGenerarCalendario implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
@@ -173,10 +173,10 @@ public class ControladorVentanaCompeticion {
                     }
                 }, 6000);
             } catch (Exception ex) {
-                System.out.println("Ha sucedido el siguiente error:\n\n" + ex.getMessage());
+                System.out.println("Ha sucedido el siguiente error generando el calendario:\n\n" + ex.getMessage());
             }
         }
-    }*/
+    }
 
 
 
@@ -243,6 +243,17 @@ public class ControladorVentanaCompeticion {
             JPanel enfrentamientoPanel = new JPanel(new FlowLayout());
             JLabel label = new JLabel(enfrentamiento.getEquipoLocal().getNombre() + " vs " + enfrentamiento.getEquipoVisitante().getNombre());
             JButton localButton = new JButton("Gana Local");
+            localButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try
+                    {
+                        cv.actualizarResultados(enfrentamiento.getCod());
+                    }
+                    catch (Exception ex){}
+
+                }
+            });
             JButton visitanteButton = new JButton("Gana Visitante");
 
             enfrentamientoPanel.add(label);

@@ -111,6 +111,7 @@ public class ControladorPrincipal {
     {
         return cbd.consultarEnfrentamientosSinResultado(codJornada);
     }
+    public boolean actualizarResultados(int cod) throws Exception{return cbd.actualizarResultados(cod);}
 
 
 
