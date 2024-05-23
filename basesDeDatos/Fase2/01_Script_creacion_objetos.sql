@@ -80,10 +80,13 @@ CREATE TABLE Enfrentamientos (
     Cod_Equipo_Visitante NUMBER(10),
     Cod_Equipo_Local NUMBER(10),
     CONSTRAINT Enfren_Cod_PK PRIMARY KEY (Cod),
-    CONSTRAINT Enfren_Cod_Jornada_FK FOREIGN KEY (Cod_Jornada) REFERENCES Jornadas(Cod),
+    CONSTRAINT Enfren_Cod_Jornada_FK FOREIGN KEY (Cod_Jornada) 
+                                        REFERENCES Jornadas(Cod),
     CONSTRAINT Enfren_Gana_local_CK CHECK (Gana_local IN (0, 1)),
-    CONSTRAINT Enfren_Cod_Equipo_Visitante_FK FOREIGN KEY (Cod_Equipo_Visitante) REFERENCES Equipos(Cod),
-    CONSTRAINT Enfren_Cod_Equipo_Local_FK FOREIGN KEY (Cod_Equipo_Local) REFERENCES Equipos(Cod)
+    CONSTRAINT Enfren_Cod_Equipo_Visitante_FK FOREIGN KEY (Cod_Equipo_Visitante)
+                                                REFERENCES Equipos(Cod),
+    CONSTRAINT Enfren_Cod_Equipo_Local_FK FOREIGN KEY (Cod_Equipo_Local) 
+                                            REFERENCES Equipos(Cod)
 );
 
 
@@ -98,7 +101,8 @@ CREATE TABLE Jugadores (
     Nickname VARCHAR2(100),
     Cod_Equipo NUMBER(10),
     CONSTRAINT Jugad_Cod_PK PRIMARY KEY (Cod),
-    CONSTRAINT Jugad_Cod_Equipo_FK FOREIGN KEY (Cod_Equipo) REFERENCES Equipos(Cod)
+    CONSTRAINT Jugad_Cod_Equipo_FK FOREIGN KEY (Cod_Equipo)
+                                    REFERENCES Equipos(Cod)
 );
 
 
@@ -110,7 +114,8 @@ CREATE TABLE Staffs (
     Salario NUMBER,
     Cod_Equipo NUMBER(10),
     CONSTRAINT Staff_Cod_PK PRIMARY KEY (Cod),
-    CONSTRAINT Staff_Cod_Equipo_FK FOREIGN KEY (Cod_Equipo) REFERENCES Equipos(Cod),
+    CONSTRAINT Staff_Cod_Equipo_FK FOREIGN KEY (Cod_Equipo) 
+                                    REFERENCES Equipos(Cod),
     CONSTRAINT Staff_Puesto_CK CHECK (Puesto IN 
                                     ('Entrenador', 'Entrenador asistente'))
 );
@@ -129,16 +134,20 @@ CREATE TABLE Puntos_Equipos (
     Cod_Competicion NUMBER(4),
     Cod_Equipo NUMBER(10),
     Puntos NUMBER,
-    CONSTRAINT Punt_Equip_Cod_Equipo_FK FOREIGN KEY (Cod_Equipo) REFERENCES Equipos(Cod),
-    CONSTRAINT Punt_Equip_Cod_Competicion_FK FOREIGN KEY (Cod_Competicion) REFERENCES Competiciones(Cod),
-    CONSTRAINT Punt_Equip_Puntos_Equipos_PK PRIMARY KEY (Cod_Competicion, Cod_Equipo)
+    CONSTRAINT Punt_Equip_Cod_Equipo_FK FOREIGN KEY (Cod_Equipo) 
+                                        REFERENCES Equipos(Cod),
+    CONSTRAINT Punt_Equip_Cod_Competicion_FK FOREIGN KEY (Cod_Competicion)
+                                                REFERENCES Competiciones(Cod),
+    CONSTRAINT Punt_Equip_Puntos_Equipos_PK PRIMARY KEY (Cod_Competicion, 
+                                                        Cod_Equipo)
 );
 
 CREATE TABLE Patrocinadores (
     Cod_Patrocinador NUMBER(10) GENERATED ALWAYS AS IDENTITY,
     Nombre VARCHAR2(50),
     Cod_Equipo NUMBER(10),
-    CONSTRAINT Patro_Cod_Euqipo_FK FOREIGN KEY (Cod_Equipo) REFERENCES Equipos(Cod),
+    CONSTRAINT Patro_Cod_Euqipo_FK FOREIGN KEY (Cod_Equipo)
+                                    REFERENCES Equipos(Cod),
     CONSTRAINT Patro_Cod_Patrocinador_PK PRIMARY KEY (Cod_Patrocinador)
 );
 
@@ -152,7 +161,8 @@ SELECT
     cf.Cod_competicion,
     cf.cod_equipo,
     e.nombre,
-    ROW_NUMBER() OVER (PARTITION BY cf.Cod_Competicion ORDER BY cf.Puntos DESC) AS Posicion,
+    ROW_NUMBER() OVER (PARTITION BY cf.Cod_Competicion ORDER BY cf.Puntos DESC)
+                AS Posicion,
     cf.Puntos
 FROM
     PUNTOS_EQUIPOS cf
@@ -171,7 +181,6 @@ CREATE OR REPLACE VIEW Resultados_Jornadas AS
 SELECT
     jorn.Cod_competicion,
 
-      -- Cï¿½digo del equipo visitante
     enf.Cod_Jornada,
     enf.Cod AS Cod_Enfrentamiento,
     jorn.N_Jornada,
