@@ -106,18 +106,25 @@ public class VentanaCompeticion extends JFrame{
 
     public void verPanelBotonesLateralIzq()
     {
-        bCalendario.setVisible(false);
-        if(pBotones.isVisible())
-        {
-            pBotones.setVisible(false);
-        }
-        else
+        if(!pBotones.isVisible())
         {
             pBotones.setVisible(true);
         }
+
+    }
+    public void quitarPanelBotonesLateralIzq()
+    {
+        if(pBotones.isVisible())
+            pBotones.setVisible(false);
     }
 
+    public JPanel getpBotones() {
+        return pBotones;
+    }
 
+    public void setpBotones(JPanel pBotones) {
+        this.pBotones = pBotones;
+    }
 
     public void mostrarMensaje(String mensaje){JOptionPane.showMessageDialog(this,mensaje);}
 

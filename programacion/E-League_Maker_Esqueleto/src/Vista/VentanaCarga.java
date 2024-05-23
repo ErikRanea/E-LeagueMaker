@@ -5,7 +5,6 @@ import java.awt.*;
 
 public class VentanaCarga extends JDialog {
 
-
     private JProgressBar progressBar;
 
     public VentanaCarga(Frame parent) {
@@ -23,29 +22,51 @@ public class VentanaCarga extends JDialog {
     }
 
     public void iniciarBarra(int milisegundos) {
-        Runnable runnable = () -> {
-            int delay = milisegundos / 100;
-            for (int i = 0; i <= 100; i++) {
-                progressBar.setValue(i);
-                try {
+        SwingWorker<Void, Integer> worker = new SwingWorker<Void, Integer>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                int delay = milisegundos / 100;
+                for (int i = 0; i <= 100; i++) {
+                    publish(i);
                     Thread.sleep(delay);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void process(java.util.List<Integer> chunks) {
+                for (Integer value : chunks) {
+                    progressBar.setValue(value);
                 }
             }
-            setVisible(false);
-            dispose();
+
+            @Override
+            protected void done() {
+                setVisible(false);
+                dispose();
+            }
         };
 
-        Thread thread = new Thread(runnable);
-        thread.start();
+        worker.execute();
         setVisible(true);
     }
 
-    public void ponerIconoPrograma()
-    {
+    public void ponerIconoPrograma() {
         ImageIcon icono = new ImageIcon("./src/Img/Logo_mas_cerca.jpg");
         super.setIconImage(icono.getImage());
     }
 
+    public void iniciarCarga() {
+        SwingUtilities.invokeLater(() -> {
+            progressBar.setValue(0);
+            setVisible(true);
+        });
+    }
+
+    public void detenerCarga() {
+        SwingUtilities.invokeLater(() -> {
+            setVisible(false);
+            dispose();
+        });
+    }
 }

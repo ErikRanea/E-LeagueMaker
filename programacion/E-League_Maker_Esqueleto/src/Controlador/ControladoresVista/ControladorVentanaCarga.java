@@ -13,6 +13,7 @@ public class ControladorVentanaCarga {
     private ControladorVista cv;
 
     private VentanaCarga vCarga;
+    private JFrame ventanaPadre;
 
 
     public ControladorVentanaCarga(ControladorVista cv)
@@ -24,12 +25,23 @@ public class ControladorVentanaCarga {
     public void crearMostrar(int milisegundos,JFrame ventanaPadre)
     {
         vCarga = new VentanaCarga(ventanaPadre);
-        vCarga.iniciarBarra(milisegundos);
-        vCarga.dispose();
+        mostrarVentanaCarga(milisegundos);
+
     }
 
 
+    public void mostrarVentanaCarga(int milisegundos)
+    {
+        if (vCarga == null) {
+            vCarga = new VentanaCarga(ventanaPadre);
+        }
+        vCarga.iniciarBarra(milisegundos);
+    }
 
-
-
+    public void ocultarVentanaCarga()
+    {
+        if (vCarga != null) {
+            vCarga.detenerCarga();
+        }
+    }
 }

@@ -101,55 +101,24 @@ public class ControladorVentanaCompeticion {
     }
 
     /**
-     * En esta interfaz, debido al gran volumen de carga de datos. Se genera una ventana de carga de datos.
-     * Al generar error de asincronia, se decide hacer un segundo hilo de ejecución para que trabajen a la vez.
-     * Por una parte la ventana de carga. Y por otro lado el controlador de la base de datos.
+
+     *
+     * Esta interfaz se va a encargar de llamar al metedo que carga los datos.
      * @author Erik
      */
     public class BIntroResult implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e) {
-            // Muestra la ventana de carga
-            cv.mostrarVentanaCarga(15000, vCompeti);
-
-            // Ejecuta la tarea en segundo plano
-            SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
-                @Override
-                protected Void doInBackground()  {
-                    try
-                    {
-                        // Realiza las consultas a la base de datos
-                        listaCompetis = cv.pedirCompeticionesCerradas();
-                        rellenarCBCompeticiones();
-                        listaJornadas = cv.consultarTablaJornadas(competicion.getCod());
-                        
-                    }
-                    catch (Exception ex)
-                    {
-                        System.out.println("Ha salido el siguento error en el segundo hilo: \n "+
-                                ex.getMessage());
-                    }
-
-                    return null;
-                }
-
-                @Override
-                protected void done() {
-                    try {
-                        // Oculta la ventana de carga después de que se completan las consultas
-
-
-                        // Rellena los combobox y realiza otras operaciones de interfaz de usuario
-                        rellenarCBJornadas();
-                        vCompeti.verPanelBotonesLateralIzq();
-                    } catch (Exception ex) {
-                        System.out.println("\nHa sucedido el siguiente error:\n\n" + ex.getMessage());
-                    }
-                }
-            };
-
-            // Ejecuta el worker
-            worker.execute();
+        public void actionPerformed(ActionEvent e)
+        {
+            if(vCompeti.getpBotones().isVisible())
+            {
+                cargarDatosDeManeraAsincrona();
+                vCompeti.verPanelBotonesLateralIzq();
+            }
+            else
+            {
+                vCompeti.quitarPanelBotonesLateralIzq();
+            }
         }
     }
 
@@ -160,7 +129,7 @@ public class ControladorVentanaCompeticion {
         {
             try
             {
-               mostrarEnfrentamientos();
+                mostrarEnfrentamientos();
 
 
             }
@@ -238,6 +207,213 @@ public class ControladorVentanaCompeticion {
         }
     }
 
+
+    /**
+     * En este metodo, debido al gran volumen de carga de datos. Se genera una ventana de carga de datos.
+     *Al generar error de asincronia, se decide hacer un segundo hilo de ejecución para que trabajen a la vez.
+     * erik tonto
+     * Por una parte la ventana de carga. Y por otro lado el controlador de la base de datos.
+     */
+/*    public void cargaDeDatosenLaVentana()
+    {
+        // Muestra la ventana de carga
+        cv.mostrarVentanaCarga(30000, vCompeti);
+
+        // Ejecuta la tarea en segundo plano
+        SwingWorker<Void, Void> worker = new SwingWorker<Void,Void>() {
+
+
+            @Override
+            protected Void doInBackground()  {
+                try
+                {
+                    // Realiza las consultas a la base de datos
+                    listaCompetis = cv.pedirCompeticionesCerradas();
+
+
+                }
+                catch (Exception ex)
+                {
+                    System.out.println("Ha salido el siguento error en el segundo hilo: \n "+
+                            ex.getMessage());
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    // Oculta la ventana de carga después de que se completan las consultas
+                    vCompeti.verPanelBotonesLateralIzq();
+                    cargarDatosComboBox();
+                } catch (Exception ex) {
+                    System.out.println("\nHa sucedido el siguiente error:\n\n" + ex.getMessage());
+                }
+            }
+        };
+
+        // Ejecuta el worker
+        worker.execute();
+
+
+
+
+    }*/
+
+    public void cargarDatosComboBox()
+    {
+
+        rellenarCBCompeticiones();
+        rellenarCBJornadas();
+
+        // Ejecuta la tarea en segundo plano
+        SwingWorker<Void, Void> worker = new SwingWorker<Void,Void>() {
+
+
+            @Override
+            protected Void doInBackground()  {
+                try
+                {
+                    // Realiza las consultas a la base de datos
+                    // Muestra la ventana de carga
+                    cv.mostrarVentanaCarga(5000, vCompeti);
+
+                }
+                catch (Exception ex)
+                {
+                    System.out.println("Ha salido el siguento error en el segundo hilo: \n "+
+                            ex.getMessage());
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    System.out.println("La carga de los combo box ha terminado");
+                } catch (Exception ex) {
+                    System.out.println("\nHa sucedido el siguiente error:\n\n" + ex.getMessage());
+                }
+            }
+        };
+
+        // Ejecuta el worker
+        worker.execute();
+    }
+
+
+    public void cargarDatosDeManeraAsincrona()
+    {
+        cargarCompeticiones();
+        cargarJornadasEnfrentamientos();
+        cargarDatosComboBox();
+    }
+
+
+
+    public void cargarCompeticiones()
+    {
+        try
+        {
+            // En el Hilo principal hago la consulta de competiciones
+            listaCompetis = cv.pedirCompeticionesCerradas();
+
+
+            // Crear hilo en segundo plano
+            SwingWorker<Void, Void> worker = new SwingWorker<Void,Void>() {
+
+
+                @Override
+                protected Void doInBackground()  {
+                    try
+                    {
+                        //En segundo muestra la ventana de carga
+                        cv.mostrarVentanaCarga(5000, vCompeti);
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                        System.out.println("Ha salido el siguento error en el segundo hilo: \n "+
+                                ex.getMessage());
+                    }
+
+                    return null;
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        // Oculta la ventana de carga después de que se completan las consultas
+                        System.out.println("Carga de competiciones hecha");
+                    } catch (Exception ex) {
+                        System.out.println("\nHa sucedido el siguiente error:\n\n" + ex.getMessage());
+                    }
+                }
+            };
+
+            // Ejecuta el worker
+            worker.execute();
+        }
+        catch (Exception ex)
+        {
+            System.out.println("\nHa sucedido un error en el proceso de cargarCompeticiones\n" +ex.getMessage());
+        }
+
+    }
+
+    public void cargarJornadasEnfrentamientos()
+    {
+        try
+        {
+            // En el Hilo principal hago la consulta de competiciones
+            listaJornadas = cv.consultarTablaJornadas(listaCompetis.get(0).getCod());
+
+
+            // Crear hilo en segundo plano
+            SwingWorker<Void, Void> worker = new SwingWorker<Void,Void>() {
+
+
+                @Override
+                protected Void doInBackground()  {
+                    try
+                    {
+                        //En segundo muestra la ventana de carga
+                        cv.mostrarVentanaCarga(10000, vCompeti);
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                        System.out.println("Ha salido el siguento error en el segundo hilo cargar jornadas: \n "+
+                                ex.getMessage());
+                    }
+
+                    return null;
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        // Oculta la ventana de carga después de que se completan las consultas
+                        System.out.println( "Carga de jornadas hechas");
+                    } catch (Exception ex) {
+                        System.out.println("\nHa sucedido el siguiente error en el done al cargar el panel lateral:\n\n" + ex.getMessage());
+                    }
+                }
+            };
+
+            // Ejecuta el worker
+            worker.execute();
+        }
+        catch (Exception ex)
+        {
+            System.out.println("\nHa sucedido un error en el proceso de cargarCompeticiones\n" +ex.getMessage());
+        }
+
+    }
 
 
     public void rellenarCBCompeticiones()
@@ -331,4 +507,15 @@ public class ControladorVentanaCompeticion {
 
 
 
+
+
 }
+
+
+
+
+
+
+
+
+
