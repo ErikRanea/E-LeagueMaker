@@ -40,7 +40,7 @@ public class Jornada {
     }
 
     public void setCompeticion(Modelo.Competicion competicion) {
-        competicion = competicion;
+        this.competicion = competicion;
     }
 
     public ArrayList<Enfrentamiento> getListaEnfrentamientos() {

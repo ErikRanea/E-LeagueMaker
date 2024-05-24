@@ -229,6 +229,7 @@ public class ControladorTCompeticiones {
 
 
         try {
+            listaCompeticiones.clear();
             con = cbd.abrirConexion();
             String llamada = "{ ? = call crud_Competiciones.todas_Competiciones }";
             CallableStatement cs = con.prepareCall(llamada);
@@ -271,6 +272,7 @@ public class ControladorTCompeticiones {
     public ArrayList<Competicion> pedirCompeticionesCerradas()throws Exception
     {
         try {
+            listaCompeticiones.clear();
             System.out.println("\nPidiendo Competiciones cerradas\n");
             con = cbd.abrirConexion();
             String llamada = "{ ? = call crud_Competiciones.Competiciones_cerradas }";
@@ -294,6 +296,7 @@ public class ControladorTCompeticiones {
                 competi.setEstadoAbierto(rs.getBoolean("estado_abierto"));
                 competi.setJuego(cbd.buscarJuego(rs.getInt("cod_juego")));
                 listaCompeticiones.add(competi);
+                System.out.println(competi.getNombre()+" está siendo añadida a la lista de competiciones cerradas...");
             }
 
             rs.close();
@@ -310,7 +313,7 @@ public class ControladorTCompeticiones {
                 }
             }
         }
-
+        System.out.println("Enviando listas de competiciones cerradas con "+listaCompeticiones.size()+" elementos");
         return listaCompeticiones;
     }
 

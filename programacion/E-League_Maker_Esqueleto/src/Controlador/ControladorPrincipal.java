@@ -99,17 +99,17 @@ public class ControladorPrincipal {
 
 
     //Jornadas
-    public ArrayList<Jornada> consultarTablaJornadas(int codCompeticion)throws Exception
+    public ArrayList<Jornada> consultarTablaJornadas(Competicion competicion)throws Exception
     {
-        return cbd.consultarTablaJornadas(codCompeticion);
+        return cbd.consultarTablaJornadas(competicion);
     }
 
     public Jornada buscarJornada(int cod) throws Exception{ return cbd.buscarJornada(cod);}
 
     //Enfrentamientos
-    public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(int codJornada)throws Exception
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(Jornada jornada)throws Exception
     {
-        return cbd.consultarEnfrentamientosSinResultado(codJornada);
+        return cbd.consultarEnfrentamientosSinResultado(jornada);
     }
     public boolean actualizarResultados(int cod,int resultado) throws Exception
     {

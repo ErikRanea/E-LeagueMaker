@@ -27,15 +27,16 @@ public class ControladorTEnfrentamientos {
 
     public ControladorTEnfrentamientos(ControladorBD cbd){this.cbd = cbd;listaEnfrentamientos = new ArrayList<>();}
 
-    public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(int codJornada)throws Exception
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(Jornada jornada)throws Exception
     {
         try {
             listaEnfrentamientos = new ArrayList<>();
             con = cbd.abrirConexion();
+            System.out.println("\nConsultando enfrentamientos sin resultado de la jornada con cod "+jornada.getCod());
             String llamada = "{ call  CONSULTAR_ENFRENTAMIENTOS_SIN_RESULTADOS(?,?) }";
             CallableStatement cs = con.prepareCall(llamada);
 
-            cs.setInt(1,codJornada);
+            cs.setInt(1,jornada.getCod());
             cs.registerOutParameter(2, OracleTypes.CURSOR);
             cs.execute();
 
@@ -53,11 +54,13 @@ public class ControladorTEnfrentamientos {
                     enfre.setHora(hora);
                 }
                 enfre.setEquipoVisitante(cbd.buscarEquipo(rs.getInt("cod_equipo_visitante")));
-                enfre.setJornada(cbd.buscarJornada(rs.getInt("cod_jornada")));
+                enfre.setJornada(jornada);
+            //    System.out.println("\nEnfrentamiento con cod "+enfre.getCod()+" es de la jornada "+
+              //          jornada.getCod());
                 listaEnfrentamientos.add(enfre);
             }
-            System.out.println("En tabla enfrentamientos devuelve "+listaEnfrentamientos.size()+
-                    " elementos");
+            System.out.println("\nEn tabla enfrentamientos devuelve "+listaEnfrentamientos.size()+
+                    " elementos\n");
 
             rs.close();
             cs.close();
@@ -73,7 +76,7 @@ public class ControladorTEnfrentamientos {
                 }
             }
         }
-        System.out.println("Lista enfrentamientos en envío\nNumero de elementos "+listaEnfrentamientos.size());
+        System.out.println("\nLista enfrentamientos en envío\nNumero de elementos "+listaEnfrentamientos.size());
         return listaEnfrentamientos;
     }
 
@@ -81,7 +84,7 @@ public class ControladorTEnfrentamientos {
     {
         boolean okey = false;
         try {
-            listaEnfrentamientos = new ArrayList<>();
+
             con = cbd.abrirConexion();
             String llamada = "{ call  insertar_resultado(?,?) }";
             CallableStatement cs = con.prepareCall(llamada);
@@ -90,7 +93,7 @@ public class ControladorTEnfrentamientos {
             cs.setInt(2,resultado);
             cs.execute();
 
-            System.out.println("Se ha insertado correctamente el resultado del enfrentamiento "+cod);
+            System.out.println("\nSe ha insertado correctamente el resultado del enfrentamiento "+cod);
             cs.close();
             okey = false;
         } catch (SQLException e) {

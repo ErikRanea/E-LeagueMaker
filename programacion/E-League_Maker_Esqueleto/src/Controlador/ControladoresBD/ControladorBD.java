@@ -165,16 +165,16 @@ public class ControladorBD {
 
 
     //Jornadas
-    public ArrayList<Jornada> consultarTablaJornadas(int codCompeticion)throws Exception
+    public ArrayList<Jornada> consultarTablaJornadas(Competicion competicion)throws Exception
     {
-        return ctJornadas.consultarTablaJornadas(codCompeticion);
+        return ctJornadas.consultarTablaJornadas(competicion);
     }
     public Jornada buscarJornada(int cod) throws Exception{ return ctJornadas.buscarJornada(cod);}
 
     //Enfrentamientos
-    public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(int codJornada)throws Exception
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(Jornada jornada)throws Exception
     {
-        return ctEnfrentamientos.consultarEnfrentamientosSinResultado(codJornada);
+        return ctEnfrentamientos.consultarEnfrentamientosSinResultado(jornada);
     }
 
     public boolean actualizarResultados(int cod,int resultado) throws Exception

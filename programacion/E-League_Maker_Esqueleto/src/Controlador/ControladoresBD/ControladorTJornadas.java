@@ -41,15 +41,17 @@ public class ControladorTJornadas {
     }
 
 
-    public ArrayList<Jornada> consultarTablaJornadas(int codCompeticion)throws Exception
+    public ArrayList<Jornada> consultarTablaJornadas(Competicion competicion)throws Exception
     {
         try {
+            listaJornadas.clear();
             con = cbd.abrirConexion();
+            System.out.println("\nConsultado tabla de jornadas");
             String llamada = "{ ? = call crud_Jornadas.consultar_Jornadas(?) }";
             CallableStatement cs = con.prepareCall(llamada);
 
             cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
-            cs.setInt(2,codCompeticion);
+            cs.setInt(2,competicion.getCod());
 
             cs.execute();
 
@@ -59,18 +61,22 @@ public class ControladorTJornadas {
                 Jornada jor = new Jornada();
                 jor.setCod(rs.getInt("cod"));
                 jor.setnJornada(rs.getInt("n_jornada"));
-                jor.setCompeticion(cbd.buscarCompeticion(rs.getInt("cod_competicion")));
-                jor.setListaEnfrentamientos(cbd.consultarEnfrentamientosSinResultado(jor.getCod()));
+                jor.setCompeticion(competicion);
+                if (cbd.consultarEnfrentamientosSinResultado(jor) != null)
+                {
+                    jor.setListaEnfrentamientos(cbd.consultarEnfrentamientosSinResultado(jor));
+                }
+                //todo hacer el procedimiento de consulta de resultado
+
                 listaJornadas.add(jor);
-                jornada = jor;
             }
-            System.out.println("El tamaño de las listas de las jornadas es "+ jornada.getListaEnfrentamientos().size());
+
 
             rs.close();
             cs.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("Error al consultar las competiciones", e);
+            throw new Exception("\nError al consultar las competiciones"+e.getMessage() ,e);
         } finally {
             if (con != null) {
                 try {
@@ -107,12 +113,12 @@ public class ControladorTJornadas {
                 jor.setCompeticion(cbd.buscarCompeticion(rs.getInt("cod_competicion")));
 
             }
-
+            System.out.println("\n"+jornada.getCod()+"Jornada encontrada, sin lista enfrentamientos");
             rs.close();
             cs.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("Error al buscar la jornada\n\n", e);
+            throw new Exception("\nError al buscar la jornada\n\n", e);
         } finally {
             if (con != null) {
                 try {

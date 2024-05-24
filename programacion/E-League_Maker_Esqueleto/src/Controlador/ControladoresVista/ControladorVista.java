@@ -151,18 +151,18 @@ public class ControladorVista {
     public String insertarUsuario(Usuario usuario) throws Exception{return cp.insertarUsuario(usuario);}
 
     //Jornadas
-    public ArrayList<Jornada> consultarTablaJornadas(int codCompeticion)throws Exception
+    public ArrayList<Jornada> consultarTablaJornadas(Competicion competicion)throws Exception
     {
-        return cp.consultarTablaJornadas(codCompeticion);
+        return cp.consultarTablaJornadas(competicion);
     }
     public Jornada buscarJornada(int cod) throws Exception{ return cp.buscarJornada(cod);}
 
 
 
     //Enfrentamientos
-    public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(int codJornada)throws Exception
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(Jornada jornada)throws Exception
     {
-        return cp.consultarEnfrentamientosSinResultado(codJornada);
+        return cp.consultarEnfrentamientosSinResultado(jornada);
     }
     public boolean actualizarResultados(int cod,int resultado) throws Exception
     {

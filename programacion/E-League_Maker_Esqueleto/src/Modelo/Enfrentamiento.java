@@ -70,6 +70,6 @@ public class Enfrentamiento {
     }
 
     public void setJornada(Modelo.Jornada jornada) {
-        jornada = jornada;
+        this.jornada = jornada;
     }
 }
