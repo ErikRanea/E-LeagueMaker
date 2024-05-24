@@ -32,7 +32,7 @@ public class VentanaCompeticion extends JFrame{
     private JButton bBuscar;
     private JButton bInsertar;
     private JButton bCalendario;
-
+    private JLabel labelJornada;
 
 
     public VentanaCompeticion()
@@ -144,5 +144,11 @@ public class VentanaCompeticion extends JFrame{
     public JButton getbCalendario()
     {return bCalendario;}
 
+    public JLabel getLabelJornada() {
+        return labelJornada;
+    }
 
+    public void setLabelJornada(JLabel labelJornada) {
+        this.labelJornada = labelJornada;
+    }
 }

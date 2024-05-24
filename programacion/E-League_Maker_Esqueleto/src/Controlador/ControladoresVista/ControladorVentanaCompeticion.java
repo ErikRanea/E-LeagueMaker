@@ -1,6 +1,7 @@
 package Controlador.ControladoresVista;
 
 import Controlador.ControladoresVista.ControladorVista;
+import Modelo.Clasificacion;
 import Modelo.Competicion;
 import Modelo.Enfrentamiento;
 import Modelo.Jornada;
@@ -15,6 +16,9 @@ import java.util.ArrayList;
 public class ControladorVentanaCompeticion {
 
     private ControladorVista cv;
+    private ControladorPanelVerClasificaciones cpClasifi;
+    private ControladorPanelVerTodosResultados cpVerResult;
+
     private VentanaCompeticion vCompeti;
     private ArrayList<Competicion> listaCompetis;
     private ArrayList<Jornada> listaJornadas;
@@ -24,6 +28,10 @@ public class ControladorVentanaCompeticion {
     private Enfrentamiento enfrentamiento;
     private boolean hayJornadas;
 
+
+
+
+
     boolean bSeleccionado = false;
 
     public ControladorVentanaCompeticion(ControladorVista cv) {
@@ -31,6 +39,7 @@ public class ControladorVentanaCompeticion {
         listaCompetis = new ArrayList<>();
         listaJornadas = new ArrayList<>();
         listaEnfrentamientos = new ArrayList<>();
+
     }
 
     public void crearMostrar() {
@@ -42,7 +51,11 @@ public class ControladorVentanaCompeticion {
             vCompeti.addBGenerarCalendarioAL(new BGenerarCalendario());
             vCompeti.addCBCompeticionAL(new CBCompeticion());
             vCompeti.addCBJornadaAL(new CBJornadas());
+
+            vCompeti.addBVerClasifiAL(new BVerClasificaciones());
+
             vCompeti.setVisible(true);
+            crearControladorPanelClasificacion();
         } catch (Exception ex) {
             System.out.println("\n" + ex.getMessage());
         }
@@ -61,7 +74,10 @@ public class ControladorVentanaCompeticion {
         }
     }
 
-    private void mostrarVentanaCargaYRealizarTarea(Runnable tarea, int duracionCarga) {
+
+
+
+    public void mostrarVentanaCargaYRealizarTarea(Runnable tarea, int duracionCarga) {
         cv.mostrarVentanaCarga(duracionCarga, vCompeti);
 
         SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
@@ -94,12 +110,16 @@ public class ControladorVentanaCompeticion {
     }
 
     public void cargarDatosPVisualizarAsinc() {
-        mostrarVentanaCargaYRealizarTarea(() -> {
-            cargarCompeticiones();
-            cargarJornadasEnfrentamientos();
-            cargarDatosComboBox();
-            mostrarEnfrentamientos();
-        }, 30000);
+        mostrarVentanaCargaYRealizarTarea(new Runnable() {
+            @Override
+            public void run() {
+                cargarCompeticiones();
+                cargarJornadasEnfrentamientos();
+                cargarDatosComboBox();
+                mostrarEnfrentamientos();
+            }
+        },30000);
+
     }
 
     public class BLogOut implements ActionListener {
@@ -297,4 +317,138 @@ public class ControladorVentanaCompeticion {
             System.out.println("\nHa salido un error en vaciarCB\n " + ex.getMessage());
         }
     }
+
+
+
+
+
+    //BOTON VER CLASIFICACION
+    public class BVerCompeti implements  ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            crearControladorPanelClasificacion();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+    //Clasificaciones
+
+    public void crearControladorPanelClasificacion()
+    {
+        cpClasifi = new ControladorPanelVerClasificaciones(this,vCompeti);
+
+
+    }
+    public class BVerClasificaciones implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            cpClasifi.iniciarComponentes();
+        }
+    }
+    public ArrayList<Clasificacion> obtenerClasificacion(Competicion competicion) throws Exception
+    {
+        return  cv.obtenerClasificacion(competicion);
+    }
+
+
+
+    //Resultados
+
+    public void crearControladorPanelVerResultados()
+    {
+        cpVerResult = new ControladorPanelVerTodosResultados(this,vCompeti);
+    }
+
+    public class BVerResultadosJornadas implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            cpVerResult.iniciarComponentes();
+        }
+    }
+
+
+
+
+    //Getter y setter
+
+
+    public ArrayList<Competicion> getListaCompetis() {
+        return listaCompetis;
+    }
+
+    public void setListaCompetis(ArrayList<Competicion> listaCompetis) {
+        this.listaCompetis = listaCompetis;
+    }
+
+    public ArrayList<Jornada> getListaJornadas() {
+        return listaJornadas;
+    }
+
+    public void setListaJornadas(ArrayList<Jornada> listaJornadas) {
+        this.listaJornadas = listaJornadas;
+    }
+
+    public ArrayList<Enfrentamiento> getListaEnfrentamientos() {
+        return listaEnfrentamientos;
+    }
+
+    public void setListaEnfrentamientos(ArrayList<Enfrentamiento> listaEnfrentamientos) {
+        this.listaEnfrentamientos = listaEnfrentamientos;
+    }
+
+    public Competicion getCompeticion() {
+        return competicion;
+    }
+
+    public void setCompeticion(Competicion competicion) {
+        this.competicion = competicion;
+    }
+
+    public Jornada getJornada() {
+        return jornada;
+    }
+
+    public void setJornada(Jornada jornada) {
+        this.jornada = jornada;
+    }
+
+    //Jornadas
+    public ArrayList<Jornada> consultarTablaJornadas(Competicion competicion)throws Exception
+    {
+        return cv.consultarTablaJornadas(competicion);
+    }
+    public Jornada buscarJornada(int cod) throws Exception{ return cv.buscarJornada(cod);}
+
+
+
+    //Enfrentamientos
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(Jornada jornada)throws Exception
+    {
+        return cv.consultarEnfrentamientosSinResultado(jornada);
+    }
+
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosConResultado(Jornada jornada)throws Exception
+    {
+        return cv.consultarEnfrentamientosConResultado(jornada);
+    }
+
+    public boolean actualizarResultados(int cod,int resultado) throws Exception
+    {
+        return cv.actualizarResultados(cod,resultado);
+    }
+
+
 }

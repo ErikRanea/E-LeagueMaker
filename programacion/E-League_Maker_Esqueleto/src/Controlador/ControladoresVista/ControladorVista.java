@@ -164,11 +164,21 @@ public class ControladorVista {
     {
         return cp.consultarEnfrentamientosSinResultado(jornada);
     }
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosConResultado(Jornada jornada)throws Exception
+    {
+        return cp.consultarEnfrentamientosConResultado(jornada);
+    }
     public boolean actualizarResultados(int cod,int resultado) throws Exception
     {
         return cp.actualizarResultados(cod,resultado);
     }
 
+
+    //Clasificaciones
+    public ArrayList<Clasificacion> obtenerClasificacion(Competicion competicion) throws Exception
+    {
+        return  cp.obtenerClasificacion(competicion);
+    }
 
 
 }

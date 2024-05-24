@@ -80,6 +80,60 @@ public class ControladorTEnfrentamientos {
         return listaEnfrentamientos;
     }
 
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosConResultado(Jornada jornada)throws Exception
+    {
+        try {
+            listaEnfrentamientos = new ArrayList<>();
+            con = cbd.abrirConexion();
+            System.out.println("\nConsultando enfrentamientos sin resultado de la jornada con cod "+jornada.getCod());
+            String llamada = "{ call  CONSULTAR_ENFRENTAMIENTOS_con_RESULTADOS(?,?) }";
+            CallableStatement cs = con.prepareCall(llamada);
+
+            cs.setInt(1,jornada.getCod());
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
+            cs.execute();
+
+            ResultSet rs = (ResultSet) cs.getObject(2);
+
+
+            while (rs.next()) {
+                Enfrentamiento enfre = new Enfrentamiento();
+                enfre.setCod(rs.getInt("cod"));
+                enfre.setEquipoLocal(cbd.buscarEquipo(rs.getInt("cod_equipo_local")));
+                // Convertir Date a LocalDateTime
+                Timestamp timestamp = rs.getTimestamp("hora");
+                if (timestamp != null) {
+                    LocalDateTime hora = timestamp.toLocalDateTime();
+                    enfre.setHora(hora);
+                }
+                enfre.setEquipoVisitante(cbd.buscarEquipo(rs.getInt("cod_equipo_visitante")));
+                enfre.setJornada(jornada);
+                //    System.out.println("\nEnfrentamiento con cod "+enfre.getCod()+" es de la jornada "+
+                //          jornada.getCod());
+                listaEnfrentamientos.add(enfre);
+            }
+            System.out.println("\nEn tabla enfrentamientos devuelve "+listaEnfrentamientos.size()+
+                    " elementos\n");
+
+            rs.close();
+            cs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error al consultar los enfrentamientos vacíos\n"+e.getMessage(), e);
+        } finally {
+            if (con != null) {
+                try {
+                    cbd.cerrarConexion(con);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        System.out.println("\nLista enfrentamientos en envío\nNumero de elementos "+listaEnfrentamientos.size());
+        return listaEnfrentamientos;
+    }
+
+
     public boolean actualizarResultados(int cod,int resultado) throws Exception
     {
         boolean okey = false;

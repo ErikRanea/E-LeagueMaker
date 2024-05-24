@@ -9,6 +9,7 @@
 package Controlador.ControladoresBD;
 
 import Controlador.ControladorPrincipal;
+import Controlador.ControladoresVista.ControladorPanelVerClasificaciones;
 import Modelo.*;
 
 import java.sql.Connection;
@@ -32,6 +33,7 @@ public class ControladorBD {
 
     private ControladorTJornadas ctJornadas;
     private ControladorTEnfrentamientos ctEnfrentamientos;
+    private ControladorTClasificaciones ctClasificaciones;
 
     public ControladorBD(ControladorPrincipal cp)
     {
@@ -83,6 +85,7 @@ public class ControladorBD {
         ctUsuarios = new ControladorTUsuarios(this);
         ctJornadas = new ControladorTJornadas(this);
         ctEnfrentamientos = new ControladorTEnfrentamientos(this);
+        ctClasificaciones = new ControladorTClasificaciones(this);
     }
 
 
@@ -176,9 +179,21 @@ public class ControladorBD {
     {
         return ctEnfrentamientos.consultarEnfrentamientosSinResultado(jornada);
     }
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosConResultado(Jornada jornada)throws Exception
+    {
+        return ctEnfrentamientos.consultarEnfrentamientosConResultado(jornada);
+    }
+
 
     public boolean actualizarResultados(int cod,int resultado) throws Exception
     {
         return ctEnfrentamientos.actualizarResultados(cod,resultado);
     }
+
+    //Clasificaciones
+    public ArrayList<Clasificacion> obtenerClasificacion(Competicion competicion) throws Exception
+    {
+        return  ctClasificaciones.obtenerClasificacion(competicion);
+    }
+
 }

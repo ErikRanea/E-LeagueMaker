@@ -111,9 +111,19 @@ public class ControladorPrincipal {
     {
         return cbd.consultarEnfrentamientosSinResultado(jornada);
     }
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosConResultado(Jornada jornada)throws Exception
+    {
+        return cbd.consultarEnfrentamientosConResultado(jornada);
+    }
     public boolean actualizarResultados(int cod,int resultado) throws Exception
     {
         return cbd.actualizarResultados(cod,resultado);
+    }
+
+    //Clasificaciones
+    public ArrayList<Clasificacion> obtenerClasificacion(Competicion competicion) throws Exception
+    {
+        return  cbd.obtenerClasificacion(competicion);
     }
 
 
