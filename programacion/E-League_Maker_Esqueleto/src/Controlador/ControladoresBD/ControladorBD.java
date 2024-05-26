@@ -224,13 +224,6 @@ public class ControladorBD {
     }
 
 
-    // Puntos_equipos
-    public void inscribirEquipo(int codCompeti, int codEquipo) throws Exception {
-        ctPuntos.inscribirEquipo(codCompeti, codEquipo);
-    }
-    public void rescindirEquipo(int codCompeti, int codEquipo) throws Exception {
-        ctPuntos.rescindirEquipo(codCompeti, codEquipo);
-    }
 
 
 
@@ -248,10 +241,7 @@ public class ControladorBD {
         return ctClasificaciones.obtenerClasificacion(codCompeticion);
     }
 
-    public boolean actualizarResultados(int cod,int resultado) throws Exception
-    {
-        return ctEnfrentamientos.actualizarResultados(cod,resultado);
-    }
+
 
     /**
      * Exportar ClasificacionesXML
@@ -334,6 +324,53 @@ public class ControladorBD {
                 break;
         }
     }
+
+
+    //Jornadas
+    public ArrayList<Jornada> consultarTablaJornadas(Competicion competicion)throws Exception
+    {
+        return ctJornadas.consultarTablaJornadas(competicion);
+    }
+    public Jornada buscarJornada(int cod) throws Exception{ return ctJornadas.buscarJornada(cod);}
+
+    public ArrayList<Jornada> consultarTablaJornadasConResultado(Competicion competicion)throws Exception
+    {
+        return ctJornadas.consultarTablaJornadasConResultado(competicion);
+    }
+
+    //Enfrentamientos
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(Jornada jornada)throws Exception
+    {
+        return ctEnfrentamientos.consultarEnfrentamientosSinResultado(jornada);
+    }
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosConResultado(Jornada jornada)throws Exception
+    {
+        return ctEnfrentamientos.consultarEnfrentamientosConResultado(jornada);
+    }
+
+
+    public boolean actualizarResultados(int cod,int resultado) throws Exception
+    {
+        return ctEnfrentamientos.actualizarResultados(cod,resultado);
+    }
+
+    //Clasificaciones
+    public ArrayList<Clasificacion> obtenerClasificacion(Competicion competicion) throws Exception
+    {
+        return  ctClasificaciones.obtenerClasificacion(competicion);
+    }
+
+
+
+    // Puntos_equipos
+    public void inscribirEquipo(int codCompeti, int codEquipo) throws Exception {
+        ctPuntos.inscribirEquipo(codCompeti, codEquipo);
+    }
+    public void rescindirEquipo(int codCompeti, int codEquipo) throws Exception {
+        ctPuntos.rescindirEquipo(codCompeti, codEquipo);
+    }
+
+
 
 
 }

@@ -27,6 +27,39 @@ public class ControladorTEnfrentamientos {
 
     public ControladorTEnfrentamientos(ControladorBD cbd){this.cbd = cbd;}
 
+
+
+    public boolean actualizarResultados(int cod,int resultado) throws Exception
+    {
+        boolean okey = false;
+        try {
+            listaEnfrentamientos = new ArrayList<>();
+            con = cbd.abrirConexion();
+            String llamada = "{ call  insertar_resultado(?,?) }";
+            CallableStatement cs = con.prepareCall(llamada);
+
+            cs.setInt(1,cod);
+            cs.setInt(2,resultado);
+            cs.execute();
+
+            System.out.println("Se ha insertado correctamente el resultado del enfrentamiento "+cod);
+            cs.close();
+            okey = false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error al insertar resultado \n"+e.getMessage(), e);
+        } finally {
+            if (con != null) {
+                try {
+                    cbd.cerrarConexion(con);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return okey;
+    }
+
     public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(Jornada jornada)throws Exception
     {
         try {
@@ -132,38 +165,6 @@ public class ControladorTEnfrentamientos {
         System.out.println("\nLista enfrentamientos en envío\nNumero de elementos "+listaEnfrentamientos.size());
         return listaEnfrentamientos;
     }
-
-    public boolean actualizarResultados(int cod,int resultado) throws Exception
-    {
-        boolean okey = false;
-        try {
-            listaEnfrentamientos = new ArrayList<>();
-            con = cbd.abrirConexion();
-            String llamada = "{ call  insertar_resultado(?,?) }";
-            CallableStatement cs = con.prepareCall(llamada);
-
-            cs.setInt(1,cod);
-            cs.setInt(2,resultado);
-            cs.execute();
-
-            System.out.println("Se ha insertado correctamente el resultado del enfrentamiento "+cod);
-            cs.close();
-            okey = false;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new Exception("Error al insertar resultado \n"+e.getMessage(), e);
-        } finally {
-            if (con != null) {
-                try {
-                    cbd.cerrarConexion(con);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return okey;
-    }
-
 
 
 }
