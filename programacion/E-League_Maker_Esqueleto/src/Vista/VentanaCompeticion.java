@@ -5,10 +5,15 @@
  */
 package Vista;
 
+import org.imgscalr.Scalr;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-//import org.imgscalr.Scalr;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 
 
 public class VentanaCompeticion extends JFrame{
@@ -24,6 +29,10 @@ public class VentanaCompeticion extends JFrame{
     private JButton bInsertarResult;
     private JButton bVerClasificaciones;
     private JButton bVerTodosLosResultados;
+    private JButton bBuscar;
+    private JButton bInsertar;
+    private JButton bCalendario;
+    private JLabel labelJornada;
 
 
     public VentanaCompeticion()
@@ -31,6 +40,7 @@ public class VentanaCompeticion extends JFrame{
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setContentPane(pPrincipal);
         setLocationRelativeTo(null);
+        setResizable(false); //Este parametro no permite redimensionar la ventana
         iniciarComponentes();
 
 
@@ -38,11 +48,31 @@ public class VentanaCompeticion extends JFrame{
     }
 
 
-     public void iniciarComponentes()
+    public void iniciarComponentes()
     {
         pBotones.setVisible(false);
         ponerIconoPrograma();
+        // cargarGifCarga();
     }
+
+
+  /*  public void cargarGifCarga()
+    {
+        try {
+
+            BufferedImage imagenOriginal = ImageIO.read(new File("./src/Img/cargando.gif"));
+
+            BufferedImage bufferedImage = Scalr.resize(imagenOriginal, 100,100);
+
+            ImageIcon iconoEscalado = new ImageIcon(bufferedImage);
+
+            lCarga.setIcon(iconoEscalado);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+*/
 
     /**
      * Este metodo se encarga de ponerle la imagen de marca a la aplicación
@@ -60,6 +90,14 @@ public class VentanaCompeticion extends JFrame{
     public void addBInsertarResultAL(ActionListener listener){bInsertarResult.addActionListener(listener);}
     public void addBVerClasifiAL(ActionListener listener){bVerClasificaciones.addActionListener(listener);}
     public void addVerResultadosAL(ActionListener listener){bVerTodosLosResultados.addActionListener(listener);}
+    public void addBInsertarAL(ActionListener listener){bInsertar.addActionListener(listener);}
+    public void addBBuscarAL(ActionListener listener){bBuscar.addActionListener(listener);}
+    public void addBGenerarCalendarioAL(ActionListener listener){bCalendario.addActionListener(listener);}
+    public void addCBCompeticionAL(ActionListener listener){cbCompeticiones.addActionListener(listener);}
+    public void addCBJornadaAL(ActionListener listener){cbJornadas.addActionListener(listener);}
+
+
+
 
 
     /**
@@ -68,38 +106,51 @@ public class VentanaCompeticion extends JFrame{
 
     public void verPanelBotonesLateralIzq()
     {
-        if(pBotones.isVisible())
-        {
-            pBotones.setVisible(false);
-        }
-        else
+        if(!pBotones.isVisible())
         {
             pBotones.setVisible(true);
+            labelJornada.setVisible(true);
+            cbJornadas.setVisible(true);
         }
+
+    }
+    public void quitarPanelBotonesLateralIzq()
+    {
+        if(pBotones.isVisible())
+            pBotones.setVisible(false);
     }
 
+    public JPanel getpBotones() {
+        return pBotones;
+    }
+
+    public void setpBotones(JPanel pBotones) {
+        this.pBotones = pBotones;
+    }
+
+    public void mostrarMensaje(String mensaje){JOptionPane.showMessageDialog(this,mensaje);}
 
     public JComboBox getCbCompeticiones() {
         return cbCompeticiones;
     }
-
-    public void setCbCompeticiones(JComboBox cbCompeticiones) {
-        this.cbCompeticiones = cbCompeticiones;
-    }
-
     public JComboBox getCbJornadas() {
         return cbJornadas;
     }
-
-    public void setCbJornadas(JComboBox cbJornadas) {
-        this.cbJornadas = cbJornadas;
-    }
-
     public JPanel getpVisualizar() {
         return pVisualizar;
     }
 
     public void setpVisualizar(JPanel pVisualizar) {
         this.pVisualizar = pVisualizar;
+    }
+    public JButton getbCalendario()
+    {return bCalendario;}
+
+    public JLabel getLabelJornada() {
+        return labelJornada;
+    }
+
+    public void setLabelJornada(JLabel labelJornada) {
+        this.labelJornada = labelJornada;
     }
 }
