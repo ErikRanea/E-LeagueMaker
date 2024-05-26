@@ -1,22 +1,20 @@
 package Modelo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Jornada {
     private int cod;
     private int nJornada;
     private Competicion competicion;
-    private ArrayList<Enfrentamiento> listaEnfrentamientos;
+    private List<Enfrentamiento> listaEnfrentamientos;
 
     // Constructor
-    public Jornada(int cod, int nJornada, Competicion competicion, ArrayList<Enfrentamiento> listaEnfrentamientos) {
+    public Jornada(int cod, int nJornada, Competicion competicion, List<Enfrentamiento> listaEnfrentamientos) {
         this.cod = cod;
         this.nJornada = nJornada;
         this.competicion = competicion;
         this.listaEnfrentamientos = listaEnfrentamientos;
     }
-    public Jornada(){listaEnfrentamientos = new ArrayList<>();}
 
     // Getters & Setters
     public int getCod() {
@@ -40,14 +38,14 @@ public class Jornada {
     }
 
     public void setCompeticion(Modelo.Competicion competicion) {
-        this.competicion = competicion;
+        competicion = competicion;
     }
 
-    public ArrayList<Enfrentamiento> getListaEnfrentamientos() {
+    public List<Enfrentamiento> getListaEnfrentamientos() {
         return listaEnfrentamientos;
     }
 
-    public void setListaEnfrentamientos(ArrayList<Enfrentamiento> listaEnfrentamientos) {
+    public void setListaEnfrentamientos(List<Enfrentamiento> listaEnfrentamientos) {
         this.listaEnfrentamientos = listaEnfrentamientos;
     }
 }
