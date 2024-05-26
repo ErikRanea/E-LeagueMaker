@@ -193,3 +193,4 @@ public class ControladorPrincipal {
         cbd.rescindirEquipo(codCompeti, codEquipo);
     }
 }
+}

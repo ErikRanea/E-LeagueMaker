@@ -21,6 +21,7 @@ public class Enfrentamiento {
         this.jornada = jornada;
     }
 
+    public En
 
     // Getters & Setters
     public int getCod() {

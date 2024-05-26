@@ -42,6 +42,9 @@ public class ControladorBD {
 
     private ControladorTPuntosEquipos ctPuntos;
 
+    private ControladorTEnfrentamientos ctEnfrentamientos;
+    private ControladorTJornadas ctJornadas;
+
 
 
 
@@ -232,13 +235,6 @@ public class ControladorBD {
 
 
 
-    /** Metodo en el cual pasa los datos necesario para borrar elementos de la tabla
-     *
-     * @param opcion es un int para saber a que tabla pertenece el elemento a eliminar
-     * @param cod es el codigo del objeto que se va a eliminar
-     * @author Oskar
-     * @version 2.0 16/05/2024
-     */
    
 
 
