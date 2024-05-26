@@ -90,6 +90,56 @@ public class ControladorTJornadas {
         return listaJornadas;
     }
 
+    public ArrayList<Jornada> consultarTablaJornadasConResultado(Competicion competicion)throws Exception
+    {
+        try {
+            listaJornadas.clear();
+            con = cbd.abrirConexion();
+            System.out.println("\nConsultado tabla de jornadas");
+            String llamada = "{ ? = call crud_Jornadas.consultar_Jornadas(?) }";
+            CallableStatement cs = con.prepareCall(llamada);
+
+            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+            cs.setInt(2,competicion.getCod());
+
+            cs.execute();
+
+            ResultSet rs = (ResultSet) cs.getObject(1);
+
+            while (rs.next()) {
+                Jornada jor = new Jornada();
+                jor.setCod(rs.getInt("cod"));
+                jor.setnJornada(rs.getInt("n_jornada"));
+                jor.setCompeticion(competicion);
+                if (cbd.consultarEnfrentamientosConResultado(jor) != null)
+                {
+                    jor.setListaEnfrentamientos(cbd.consultarEnfrentamientosConResultado(jor));
+                }
+
+
+                listaJornadas.add(jor);
+            }
+
+
+            rs.close();
+            cs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("\nError al consultar las competiciones"+e.getMessage() ,e);
+        } finally {
+            if (con != null) {
+                try {
+                    cbd.cerrarConexion(con);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return listaJornadas;
+    }
+
+
     public Jornada buscarJornada(int cod) throws Exception
     {
         con = cbd.abrirConexion();

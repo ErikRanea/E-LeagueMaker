@@ -44,6 +44,15 @@ public class Enfrentamiento {
     public boolean isGanaLocal() {
         return ganaLocal;
     }
+    public int getGanaLocal()
+    {
+        int n ;
+        if(ganaLocal)
+            n = 1;
+        else
+            n = 0;
+        return n;
+    }
 
     public void setGanaLocal(boolean ganaLocal) {
         this.ganaLocal = ganaLocal;

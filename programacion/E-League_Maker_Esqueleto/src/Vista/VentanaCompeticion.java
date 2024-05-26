@@ -109,6 +109,8 @@ public class VentanaCompeticion extends JFrame{
         if(!pBotones.isVisible())
         {
             pBotones.setVisible(true);
+            labelJornada.setVisible(true);
+            cbJornadas.setVisible(true);
         }
 
     }

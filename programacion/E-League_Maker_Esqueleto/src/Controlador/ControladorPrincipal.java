@@ -103,6 +103,10 @@ public class ControladorPrincipal {
     {
         return cbd.consultarTablaJornadas(competicion);
     }
+    public ArrayList<Jornada> consultarTablaJornadasConResultado(Competicion competicion)throws Exception
+    {
+        return cbd.consultarTablaJornadasConResultado(competicion);
+    }
 
     public Jornada buscarJornada(int cod) throws Exception{ return cbd.buscarJornada(cod);}
 

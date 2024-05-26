@@ -53,9 +53,11 @@ public class ControladorVentanaCompeticion {
             vCompeti.addCBJornadaAL(new CBJornadas());
 
             vCompeti.addBVerClasifiAL(new BVerClasificaciones());
+            vCompeti.addVerResultadosAL(new BVerResultadosJornadas() );
 
             vCompeti.setVisible(true);
             crearControladorPanelClasificacion();
+            crearControladorPanelVerResultados();
         } catch (Exception ex) {
             System.out.println("\n" + ex.getMessage());
         }
@@ -429,6 +431,10 @@ public class ControladorVentanaCompeticion {
     public ArrayList<Jornada> consultarTablaJornadas(Competicion competicion)throws Exception
     {
         return cv.consultarTablaJornadas(competicion);
+    }
+    public ArrayList<Jornada> consultarTablaJornadasConResultado(Competicion competicion)throws Exception
+    {
+        return cv.consultarTablaJornadasConResultado(competicion);
     }
     public Jornada buscarJornada(int cod) throws Exception{ return cv.buscarJornada(cod);}
 

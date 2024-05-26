@@ -78,7 +78,7 @@ public class ControladorPanelVerTodosResultados {
 
     public void buscarCompeticion(Competicion competicion) {
         try {
-            listaJornadas = cCompeti.consultarTablaJornadas(competicion);
+            listaJornadas = cCompeti.consultarTablaJornadasConResultado(competicion);
             listaEnfrentamientos = new ArrayList<>();
             for (Jornada jornada : listaJornadas) {
                 listaEnfrentamientos.addAll(jornada.getListaEnfrentamientos());
@@ -101,7 +101,19 @@ public class ControladorPanelVerTodosResultados {
             DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 
             for (Enfrentamiento enfrentamiento : jornada.getListaEnfrentamientos()) {
-                String ganador = (enfrentamiento.isGanaLocal() == false) ? "No decidido" : (enfrentamiento.isGanaLocal() ? enfrentamiento.getEquipoLocal().getNombre() : enfrentamiento.getEquipoVisitante().getNombre());
+                String ganador = "";
+                if(enfrentamiento.getGanaLocal() == 0)
+                {
+                    ganador = enfrentamiento.getEquipoVisitante().getNombre();
+                }
+                else if(enfrentamiento.getGanaLocal() == 1)
+                {
+                    ganador = enfrentamiento.getEquipoLocal().getNombre();
+                }
+                else
+                {
+                    ganador = "No decidido ";
+                }
                 Object[] rowData = {enfrentamiento.getEquipoLocal().getNombre(), enfrentamiento.getEquipoVisitante().getNombre(), ganador};
                 tableModel.addRow(rowData);
             }
@@ -129,7 +141,7 @@ public class ControladorPanelVerTodosResultados {
     {
 
         try {
-            if (!cCompeti.getListaCompetis().isEmpty()) {
+            if (!cCompeti.getListaJornadas().isEmpty()) {
                 listaJornadas = cCompeti.consultarTablaJornadas(cCompeti.getListaCompetis().get(0));
                 System.out.println("Carga de jornadas hecha");
             } else {

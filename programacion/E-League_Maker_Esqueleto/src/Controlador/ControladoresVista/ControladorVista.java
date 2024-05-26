@@ -155,6 +155,10 @@ public class ControladorVista {
     {
         return cp.consultarTablaJornadas(competicion);
     }
+    public ArrayList<Jornada> consultarTablaJornadasConResultado(Competicion competicion)throws Exception
+    {
+        return cp.consultarTablaJornadasConResultado(competicion);
+    }
     public Jornada buscarJornada(int cod) throws Exception{ return cp.buscarJornada(cod);}
 
 
