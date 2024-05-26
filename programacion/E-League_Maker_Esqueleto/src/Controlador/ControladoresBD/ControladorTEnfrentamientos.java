@@ -166,5 +166,55 @@ public class ControladorTEnfrentamientos {
         return listaEnfrentamientos;
     }
 
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosConResultados(int codJornada) throws Exception {
+        ArrayList<Enfrentamiento> listaEnfrentamientos = new ArrayList<>();
+        try {
+            con = cbd.abrirConexion();
+
+            String llamada = "{ call con_enfre_ulti_jornada(?) }";
+            CallableStatement cs = con.prepareCall(llamada);
+            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+            //cs.setInt(2, codJornada);
+            cs.execute();
+
+            ResultSet rs = (ResultSet) cs.getObject(1);
+
+            while (rs.next()) {
+                Enfrentamiento enfrentamiento = new Enfrentamiento();
+                enfrentamiento.setCod(rs.getInt("cod"));
+                enfrentamiento.setEquipoLocal(cbd.buscarEquipo(rs.getInt("cod_equipo_local")));
+                enfrentamiento.setEquipoVisitante(cbd.buscarEquipo(rs.getInt("cod_equipo_visitante")));
+
+                // Convertir Date a LocalDateTime
+                Timestamp timestamp = rs.getTimestamp("hora");
+                if (timestamp != null) {
+                    LocalDateTime hora = timestamp.toLocalDateTime();
+                    enfrentamiento.setHora(hora);
+                }
+
+
+
+
+                listaEnfrentamientos.add(enfrentamiento);
+            }
+
+            rs.close();
+            cs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error al consultar los enfrentamientos", e);
+        } finally {
+            if (con != null) {
+                try {
+                    cbd.cerrarConexion(con);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return listaEnfrentamientos;
+    }
+
 
 }

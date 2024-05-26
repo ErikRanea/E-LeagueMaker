@@ -288,6 +288,11 @@ public class ControladorVista {
     public ArrayList<Clasificacion> obtenerClasificacion(int codCompeticion) throws Exception {
         return cp.obtenerClasificacion(codCompeticion);
     }
+    public ArrayList<Clasificacion> obtenerClasificacion(Competicion competicion) throws Exception
+    {
+        return  cp.obtenerClasificacion(competicion);
+    }
+
 
     /**
      * Exportar CLASIFICACION XML
@@ -295,4 +300,30 @@ public class ControladorVista {
     public String exportarClasificacionXML() throws Exception {
         return cp.exportarClasificacionXML();
     }
+
+
+
+    //Jornadas
+    public ArrayList<Jornada> consultarTablaJornadas(Competicion competicion)throws Exception
+    {
+        return cp.consultarTablaJornadas(competicion);
+    }
+    public Jornada buscarJornada(int cod) throws Exception{ return cp.buscarJornada(cod);}
+
+    public ArrayList<Jornada> consultarTablaJornadasConResultado(Competicion competicion)throws Exception
+    {
+        return cp.consultarTablaJornadasConResultado(competicion);
+    }
+
+
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(Jornada jornada)throws Exception
+    {
+        return cp.consultarEnfrentamientosSinResultado(jornada);
+    }
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosConResultado(Jornada jornada)throws Exception
+    {
+        return cp.consultarEnfrentamientosConResultado(jornada);
+    }
+
+
 }

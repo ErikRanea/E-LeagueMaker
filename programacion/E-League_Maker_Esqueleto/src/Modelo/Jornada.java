@@ -16,9 +16,8 @@ public class Jornada {
         this.competicion = competicion;
         this.listaEnfrentamientos = listaEnfrentamientos;
     }
-
     public Jornada(){listaEnfrentamientos = new ArrayList<>();}
-    }
+
     // Getters & Setters
     public int getCod() {
         return cod;
@@ -41,14 +40,14 @@ public class Jornada {
     }
 
     public void setCompeticion(Modelo.Competicion competicion) {
-        competicion = competicion;
+        this.competicion = competicion;
     }
 
-    public List<Enfrentamiento> getListaEnfrentamientos() {
+    public ArrayList<Enfrentamiento> getListaEnfrentamientos() {
         return listaEnfrentamientos;
     }
 
-    public void setListaEnfrentamientos(List<Enfrentamiento> listaEnfrentamientos) {
+    public void setListaEnfrentamientos(ArrayList<Enfrentamiento> listaEnfrentamientos) {
         this.listaEnfrentamientos = listaEnfrentamientos;
     }
 }

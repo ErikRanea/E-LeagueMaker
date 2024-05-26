@@ -240,6 +240,11 @@ public class ControladorBD {
     {
         return ctClasificaciones.obtenerClasificacion(codCompeticion);
     }
+    public ArrayList<Clasificacion> obtenerClasificacion(Competicion competicion) throws Exception
+    {
+        return  ctClasificaciones.obtenerClasificacion(competicion);
+    }
+
 
 
 
@@ -353,14 +358,6 @@ public class ControladorBD {
     {
         return ctEnfrentamientos.actualizarResultados(cod,resultado);
     }
-
-    //Clasificaciones
-    public ArrayList<Clasificacion> obtenerClasificacion(Competicion competicion) throws Exception
-    {
-        return  ctClasificaciones.obtenerClasificacion(competicion);
-    }
-
-
 
     // Puntos_equipos
     public void inscribirEquipo(int codCompeti, int codEquipo) throws Exception {

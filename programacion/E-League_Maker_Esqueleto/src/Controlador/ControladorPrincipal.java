@@ -157,6 +157,11 @@ public class ControladorPrincipal {
     public ArrayList<Clasificacion> obtenerClasificacion(int codCompeticion) throws Exception {
         return cbd.obtenerClasificacion(codCompeticion);
     }
+    public ArrayList<Clasificacion> obtenerClasificacion(Competicion competicion) throws Exception
+    {
+        return  cbd.obtenerClasificacion(competicion);
+    }
+
     public boolean actualizarResultados(int cod, int resultado) throws Exception {
         return cbd.actualizarResultados(cod, resultado);
     }
@@ -187,5 +192,28 @@ public class ControladorPrincipal {
     }
     public void rescindirEquipo(int codCompeti, int codEquipo) throws Exception {
         cbd.rescindirEquipo(codCompeti, codEquipo);
+    }
+
+
+    //Jornadas
+    public ArrayList<Jornada> consultarTablaJornadas(Competicion competicion)throws Exception
+    {
+        return cbd.consultarTablaJornadas(competicion);
+    }
+    public Jornada buscarJornada(int cod) throws Exception{ return cbd.buscarJornada(cod);}
+
+    public ArrayList<Jornada> consultarTablaJornadasConResultado(Competicion competicion)throws Exception
+    {
+        return cbd.consultarTablaJornadasConResultado(competicion);
+    }
+
+    //Enfrentamientos
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(Jornada jornada)throws Exception
+    {
+        return cbd.consultarEnfrentamientosSinResultado(jornada);
+    }
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosConResultado(Jornada jornada)throws Exception
+    {
+        return cbd.consultarEnfrentamientosConResultado(jornada);
     }
 }
