@@ -9,11 +9,19 @@
 package Controlador.ControladoresBD;
 
 import Controlador.ControladorPrincipal;
+import Controlador.ControladoresVista.ControladorVentanaUsuario;
 import Modelo.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.FileWriter;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +38,12 @@ public class ControladorBD {
     private ControladorTStaffs ctStaffs;
     private ControladorTCompeticiones ctCompeticiones;
     private ControladorTUsuarios ctUsuarios;
+    private ControladorTClasificaciones ctClasificaciones;
+
     private ControladorTPuntosEquipos ctPuntos;
+
+
+
 
 
     public ControladorBD(ControladorPrincipal cp)
@@ -81,7 +94,11 @@ public class ControladorBD {
         ctStaffs = new ControladorTStaffs(this);
         ctCompeticiones = new ControladorTCompeticiones(this);
         ctUsuarios = new ControladorTUsuarios(this);
+        ctJornadas = new ControladorTJornadas(this);
+        ctEnfrentamientos = new ControladorTEnfrentamientos(this);
+        ctClasificaciones = new ControladorTClasificaciones(this);
         ctPuntos = new ControladorTPuntosEquipos(this);
+
     }
 
 
@@ -214,6 +231,7 @@ public class ControladorBD {
 
 
 
+
     /** Metodo en el cual pasa los datos necesario para borrar elementos de la tabla
      *
      * @param opcion es un int para saber a que tabla pertenece el elemento a eliminar
@@ -221,7 +239,80 @@ public class ControladorBD {
      * @author Oskar
      * @version 2.0 16/05/2024
      */
-    public void borrarDeTabla (int opcion, int cod) throws Exception {
+   
+
+
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosConResultados(int codJornada) throws Exception
+    {
+        return ctEnfrentamientos.consultarEnfrentamientosConResultados(codJornada);
+    }
+
+    public ArrayList<Clasificacion> obtenerClasificacion(int codCompeticion) throws Exception
+    {
+        return ctClasificaciones.obtenerClasificacion(codCompeticion);
+    }
+
+    public boolean actualizarResultados(int cod,int resultado) throws Exception
+    {
+        return ctEnfrentamientos.actualizarResultados(cod,resultado);
+    }
+
+    /**
+     * Exportar ClasificacionesXML
+     */
+
+    public String exportarClasificacionXML() throws Exception {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String xmlResult = "";
+
+        try {
+            con = abrirConexion();
+            String sql = "SELECT * FROM CLASIFICACION";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            xmlResult = resultSetToXML(rs);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error al exportar datos en formato XML: " + e.getMessage());
+        } finally {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (con != null) cerrarConexion(con);
+        }
+
+        return xmlResult;
+    }
+
+    private String resultSetToXML(ResultSet rs) throws SQLException {
+        StringBuilder xmlBuilder = new StringBuilder();
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int columnCount = rsmd.getColumnCount();
+
+        xmlBuilder.append("<Resultados>\n");
+        while (rs.next()) {
+            xmlBuilder.append("  <Fila>\n");
+            for (int i = 1; i <= columnCount; i++) {
+                String columnName = rsmd.getColumnName(i);
+                String columnValue = rs.getString(i);
+                xmlBuilder.append("    <").append(columnName).append(">")
+                        .append(columnValue != null ? columnValue : "")
+                        .append("</").append(columnName).append(">\n");
+            }
+            xmlBuilder.append("  </Fila>\n");
+        }
+        xmlBuilder.append("</Resultados>");
+
+        return xmlBuilder.toString();
+
+
+
+    }
+  
+   public void borrarDeTabla (int opcion, int cod) throws Exception {
         switch (opcion)
         {
             case 1: // Jugadores
@@ -250,3 +341,4 @@ public class ControladorBD {
 
 
 }
+

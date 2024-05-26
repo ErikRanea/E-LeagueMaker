@@ -122,6 +122,7 @@ public class ControladorPrincipal {
     public List buscarJugadores() throws Exception {
         return cbd.buscarJugadores();
     }
+
     public List buscarJuegos() throws Exception {
         return cbd.buscarJuegos();
     }
@@ -139,7 +140,36 @@ public class ControladorPrincipal {
     }
     public List buscarUsuarios() throws Exception {
         return cbd.buscarUsuarios();
+
+
+  
+  
+  
+      
+      
+      
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosConResultados(int codJornada) throws Exception{
+        return cbd.consultarEnfrentamientosConResultados(codJornada);
     }
+
+    public ArrayList<Clasificacion> obtenerClasificacion(int codCompeticion) throws Exception
+    {
+        return cbd.obtenerClasificacion(codCompeticion);
+    }
+    public boolean actualizarResultados(int cod,int resultado) throws Exception
+    {
+        return cbd.actualizarResultados(cod,resultado);
+
+    }
+
+    /**
+     * Exportar CLASIFICACIONES XML
+     */
+    public String exportarClasificacionXML() throws Exception {
+        return cbd.exportarClasificacionXML();
+    }
+
+
 
 
     public List buscarCompeticionesAbiertas() throws Exception {

@@ -22,6 +22,7 @@ public class ControladorVista {
      *
      */
     private ControladorPrincipal cp;
+    private ControladorVentanaUsuario cvUsuario;
 
     /**
      * Los siguientes atributos serán objetos de cada uno de los controladores de la vista
@@ -49,14 +50,34 @@ public class ControladorVista {
 
     public void mostrarVentanaLogin(){cvLogin.crearMostrar();}
     public void mostrarVentanaSeleccion(){cvSeleccion.crearMostrar();}
+    public void mostrarVentanaCarga(int milisegundos, JFrame ventanaPadre) {
+    cvCarga.crearMostrar(milisegundos, ventanaPadre);
+    }
+    public void mostrarVentanaUsuario(){cvUsuario.crearMostrar();}
+
+    public void ocultarVentanaCarga() {
+        cvCarga.ocultarVentanaCarga();
+    }
 
     public void mostrarVentanaInscripcion(){cvInscripcion.crearMostrarInscripcion();}
+
+
+
+
     public void crearControladoresVista()
     {
         cvLogin = new ControladorVentanaLogin(this);
         cvCompeti = new ControladorVentanaCompeticion(this);
         cvSeleccion = new ControladorVentanaSeleccion(this);
         cvInscripcion = new ControladorVentanaInscripcion(this);
+        cvUsuario = new ControladorVentanaUsuario(this);
+        cvCarga = new ControladorVentanaCarga(this);
+    }
+
+
+
+
+
 
     }
 
@@ -182,13 +203,23 @@ public class ControladorVista {
     public List buscarCompeticionesAbiertas() throws Exception {
         return cp.buscarCompeticionesAbiertas();
     }
+
+
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosConResultados(int codJornada) throws Exception{
+        return cp.consultarEnfrentamientosConResultados(codJornada);
+    }
+
+
+    public boolean actualizarResultados(int cod,int resultado) throws Exception
+    {
+        return cp.actualizarResultados(cod,resultado);
+
+    }
     public List buscarEquiposInscribir(int cod) throws Exception {
-        return cp.buscarEquiposInscribir(cod);
+    return cp.buscarEquiposInscribir(cod);
     }
     public List buscarEquiposRescindir(int cod) throws Exception {
         return cp.buscarEquiposRescindir(cod);
-    }
-
     public void modificarCompeticionEstado(int cod, int estado) throws Exception {
         cp.modificarCompeticionEstado (cod, estado);
     }
@@ -200,4 +231,16 @@ public class ControladorVista {
         cp.rescindirEquipo(codCompeti, codEquipo);
     }
 
+
+    public ArrayList<Clasificacion> obtenerClasificacion(int codCompeticion) throws Exception
+    {
+        return cp.obtenerClasificacion(codCompeticion);
+    }
+
+    /**
+     * Exportar CLASIFICACION XML
+     */
+    public String exportarClasificacionXML() throws Exception {
+        return cp.exportarClasificacionXML();
+    }
 }
