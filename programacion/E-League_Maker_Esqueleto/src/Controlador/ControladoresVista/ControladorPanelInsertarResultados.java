@@ -1,4 +1,4 @@
-/*package Controlador.ControladoresVista;
+package Controlador.ControladoresVista;
 
 import Vista.VentanaCompeticion;
 
@@ -35,4 +35,3 @@ public class ControladorPanelInsertarResultados {
     }
 
 }
-*/

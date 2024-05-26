@@ -324,6 +324,18 @@ public class ControladorVentanaCompeticion {
 
 
 
+    //BOTON VER CLASIFICACION
+    public class BVerCompeti implements  ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            crearControladorPanelClasificacion();
+        }
+    }
+
+
+
 
 
 
@@ -443,11 +455,6 @@ public class ControladorVentanaCompeticion {
     {
         return cv.actualizarResultados(cod,resultado);
     }
-
-
-
-
-
 
 
 }
