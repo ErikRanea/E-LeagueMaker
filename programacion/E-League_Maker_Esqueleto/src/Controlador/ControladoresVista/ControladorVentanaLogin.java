@@ -80,6 +80,10 @@ public class ControladorVentanaLogin {
                         vLogin.dispose();
                         cv.mostrarVentanaSeleccion();
                     }
+                    if (!usuario.isAdmin()){
+                        vLogin.dispose();
+                        cv.mostrarVentanaUsuario();
+                    }
                 }
                 else
                 {

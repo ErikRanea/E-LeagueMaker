@@ -111,10 +111,28 @@ public class ControladorPrincipal {
     {
         return cbd.consultarEnfrentamientosSinResultado(codJornada);
     }
+
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosConResultados(int codJornada) throws Exception{
+        return cbd.consultarEnfrentamientosConResultados(codJornada);
+    }
+
+    public ArrayList<Clasificacion> obtenerClasificacion(int codCompeticion) throws Exception
+    {
+        return cbd.obtenerClasificacion(codCompeticion);
+    }
     public boolean actualizarResultados(int cod,int resultado) throws Exception
     {
         return cbd.actualizarResultados(cod,resultado);
     }
+
+    /**
+     * Exportar CLASIFICACIONES XML
+     */
+    public String exportarClasificacionXML() throws Exception {
+        return cbd.exportarClasificacionXML();
+    }
+
+
 
 
 
