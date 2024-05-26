@@ -418,4 +418,35 @@ public class ControladorTCompeticiones {
             System.out.println("Competicion abierta!");
     }
 
+    public String generarCalendario() throws Exception
+    {
+        String respuesta = "";
+        try {
+            con = cbd.abrirConexion();
+            String llamada = "{ call generar_calendario }";
+            CallableStatement cs = con.prepareCall(llamada);
+
+            cs.execute();
+
+            System.out.println("\nCalendario generado\n");
+
+
+            cs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error generar el calendario", e);
+        } finally {
+            if (con != null) {
+                try {
+                    cbd.cerrarConexion(con);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return respuesta;
+    }
+
+
 }

@@ -368,6 +368,11 @@ public class ControladorBD {
     }
 
 
+    public String generarCalendario() throws Exception
+    {
+        return ctCompeticiones.generarCalendario();
+    }
+
 
 
 }

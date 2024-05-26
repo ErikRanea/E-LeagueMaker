@@ -216,4 +216,11 @@ public class ControladorPrincipal {
     {
         return cbd.consultarEnfrentamientosConResultado(jornada);
     }
+
+
+    public String generarCalendario() throws Exception
+    {
+        return cbd.generarCalendario();
+    }
+
 }
