@@ -21,6 +21,7 @@ public class ControladorVista {
      *
      */
     private ControladorPrincipal cp;
+    private ControladorVentanaUsuario cvUsuario;
 
     /**
      * Los siguientes atributos serán objetos de cada uno de los controladores de la vista
@@ -55,6 +56,8 @@ public class ControladorVista {
     public void mostrarVentanaCarga(int milisegundos, JFrame ventanaPadre) {
         cvCarga.crearMostrar(milisegundos, ventanaPadre);
     }
+    public void mostrarVentanaUsuario(){cvUsuario.crearMostrar();}
+
     public void ocultarVentanaCarga() {
         cvCarga.ocultarVentanaCarga();
     }
@@ -64,6 +67,7 @@ public class ControladorVista {
         cvLogin = new ControladorVentanaLogin(this);
         cvCompeti = new ControladorVentanaCompeticion(this);
         cvSeleccion = new ControladorVentanaSeleccion(this);
+        cvUsuario = new ControladorVentanaUsuario(this);
         cvCarga = new ControladorVentanaCarga(this);
     }
 
@@ -164,6 +168,12 @@ public class ControladorVista {
     {
         return cp.consultarEnfrentamientosSinResultado(codJornada);
     }
+
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosConResultados(int codJornada) throws Exception{
+        return cp.consultarEnfrentamientosConResultados(codJornada);
+    }
+
+
     public boolean actualizarResultados(int cod,int resultado) throws Exception
     {
         return cp.actualizarResultados(cod,resultado);
@@ -171,4 +181,16 @@ public class ControladorVista {
 
 
 
+
+    public ArrayList<Clasificacion> obtenerClasificacion(int codCompeticion) throws Exception
+    {
+        return cp.obtenerClasificacion(codCompeticion);
+    }
+
+    /**
+     * Exportar CLASIFICACION XML
+     */
+    public String exportarClasificacionXML() throws Exception {
+        return cp.exportarClasificacionXML();
+    }
 }
