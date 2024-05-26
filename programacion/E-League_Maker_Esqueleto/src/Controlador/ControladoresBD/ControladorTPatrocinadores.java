@@ -8,6 +8,8 @@ package Controlador.ControladoresBD;
 import Modelo.Patrocinador;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ControladorTPatrocinadores {
 
@@ -22,11 +24,13 @@ public class ControladorTPatrocinadores {
      * @param patrocinador
      */
     private Patrocinador patrocinador;
+    private List<Patrocinador> listaPatrocinador;
 
 
     public ControladorTPatrocinadores(ControladorBD cbd)
     {
         this.cbd = cbd;
+        listaPatrocinador = new ArrayList<>();
     }
 
 
@@ -130,7 +134,7 @@ public class ControladorTPatrocinadores {
      * @return String
      * @throws Exception
      */
-    public String borrarPatrocinador() throws Exception {
+    public void borrarPatrocinador(int cod) throws Exception {
         con = cbd.abrirConexion();
         System.out.println("\nBorrando patrocinador con nombre "+patrocinador.getNombre());
         try {
@@ -138,7 +142,7 @@ public class ControladorTPatrocinadores {
             CallableStatement cs = con.prepareCall(llamada);
 
 
-            cs.setInt(1, patrocinador.getCod());
+            cs.setInt(1, cod);
 
             cs.execute();
             cs.close();
@@ -155,7 +159,7 @@ public class ControladorTPatrocinadores {
                 }
             }
         }
-        return "patrocinador borrado";
+        System.out.println("Patrocinador borrado");
     }
 
     /**
@@ -170,7 +174,7 @@ public class ControladorTPatrocinadores {
      * @throws Exception
      */
 
-    public String modificarPatrocinador(Patrocinador patrocinador) throws Exception
+    public void modificarPatrocinador(Patrocinador patrocinador) throws Exception
     {
         con = cbd.abrirConexion();
         System.out.println("\nModificando patrocinador con nombre " + patrocinador.getNombre());
@@ -187,7 +191,7 @@ public class ControladorTPatrocinadores {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("Error al modificar patrocinador", e);
+            throw new Exception("Error al modificar el patrocinador", e);
         } finally {
             if (con != null) {
                 try {
@@ -197,7 +201,7 @@ public class ControladorTPatrocinadores {
                 }
             }
         }
-        return "Patrocinador modificado!";
+        System.out.println("Patrocinador modificado!");
     }
 
     /**
@@ -208,7 +212,7 @@ public class ControladorTPatrocinadores {
      * @return
      * @throws Exception
      */
-    public String insertarEPatrocinador(Patrocinador patrocinador) throws Exception {
+    public void insertarPatrocinador(Patrocinador patrocinador) throws Exception {
         con = cbd.abrirConexion();
         System.out.println("\nInsertando patrocinador con nombre" + patrocinador.getNombre());
         try {
@@ -224,7 +228,7 @@ public class ControladorTPatrocinadores {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("Error al inserta Patrocinador", e);
+            throw new Exception("Error al insertar el Patrocinador", e);
         } finally {
             if (con != null) {
                 try {
@@ -234,10 +238,48 @@ public class ControladorTPatrocinadores {
                 }
             }
         }
-        return "Patrocinador insertado";
+        System.out.println("Patrocinador insertado");
     }
 
+    public List buscarPatrocinadores() throws Exception {
+        con = cbd.abrirConexion();
+        System.out.println("\nBuscando todos los patrocinadores");
+        try {
+            listaPatrocinador.clear();
+            String llamada = "{ ? = call crud_Patrocinadores.consultar_todos_patros() }";
+            CallableStatement cs = con.prepareCall(llamada);
 
+            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+
+            cs.execute();
+
+            ResultSet rs = (ResultSet) cs.getObject(1);
+
+            while (rs.next()) {
+                patrocinador = new Patrocinador();
+                patrocinador.setCod(rs.getInt("cod_Patrocinador"));
+                patrocinador.setNombre(rs.getString("nombre"));
+                patrocinador.setEquipo(cbd.buscarEquipo(rs.getInt("cod_equipo")));
+                listaPatrocinador.add(patrocinador);
+            }
+
+            rs.close();
+            cs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error al consultar el patrocinador", e);
+        } finally {
+            if (con != null) {
+                try {
+                    cbd.cerrarConexion(con);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return listaPatrocinador;
+    }
 
 
 

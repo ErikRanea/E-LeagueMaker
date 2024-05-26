@@ -8,6 +8,8 @@ package Controlador.ControladoresBD;
 import Modelo.Usuario;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ControladorTUsuarios {
 
@@ -23,12 +25,14 @@ public class ControladorTUsuarios {
      * @param usuario
      */
     private Usuario usuario;
+    private List<Usuario> listaUsuario;
 
 
 
     public ControladorTUsuarios(ControladorBD cbd)
     {
         this.cbd = cbd;
+        listaUsuario = new ArrayList<>();
     }
 
     /**
@@ -88,7 +92,7 @@ public class ControladorTUsuarios {
      * @return String
      * @throws Exception
      */
-    public String borrarUsuario() throws Exception {
+    public void borrarUsuario(int cod) throws Exception {
         con = cbd.abrirConexion();
         System.out.println("\nBorrando Usuario con nombre "+usuario.getNickname());
         try {
@@ -96,7 +100,7 @@ public class ControladorTUsuarios {
             CallableStatement cs = con.prepareCall(llamada);
 
 
-            cs.setInt(1, usuario.getCod());
+            cs.setInt(1, cod);
 
             cs.execute();
             cs.close();
@@ -113,7 +117,7 @@ public class ControladorTUsuarios {
                 }
             }
         }
-        return "Usuario borrado";
+        System.out.println("Usuario borrado");
     }
 
     /**
@@ -128,7 +132,7 @@ public class ControladorTUsuarios {
      * @throws Exception
      */
 
-    public String modificarUsuario(Usuario usuario) throws Exception
+    public void modificarUsuario(Usuario usuario) throws Exception
     {
         con = cbd.abrirConexion();
         System.out.println("\nModificando usuario con nombre " + usuario.getNickname());
@@ -140,14 +144,14 @@ public class ControladorTUsuarios {
             cs.setInt(1,usuario.getCod());
             cs.setString(2, usuario.getNickname());
             cs.setString(3,usuario.getPassword());
-            cs.setInt(4,usuario.isEstadoAbiertoInt());
+            cs.setInt(4,usuario.isAdminInt());
 
             cs.execute();
             cs.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("Error al modificar usuario", e);
+            throw new Exception("Error al modificar el usuario", e);
         } finally {
             if (con != null) {
                 try {
@@ -157,7 +161,7 @@ public class ControladorTUsuarios {
                 }
             }
         }
-        return "Usuario modificado!";
+        System.out.println("Usuario modificado!");
     }
 
     /**
@@ -168,7 +172,7 @@ public class ControladorTUsuarios {
      * @return
      * @throws Exception
      */
-    public String insertarUsuario(Usuario usuario) throws Exception {
+    public void insertarUsuario(Usuario usuario) throws Exception {
         con = cbd.abrirConexion();
         System.out.println("\nInsertando usuario con nombre" + usuario.getNickname());
         try {
@@ -179,13 +183,13 @@ public class ControladorTUsuarios {
 
             cs.setString(1, usuario.getNickname());
             cs.setString(2,usuario.getPassword());
-            cs.setInt(3,usuario.isEstadoAbiertoInt());
+            cs.setInt(3,usuario.isAdminInt());
 
             cs.execute();
             cs.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("Error al inserta usuario", e);
+            throw new Exception("Error al insertar el usuario", e);
         } finally {
             if (con != null) {
                 try {
@@ -195,9 +199,48 @@ public class ControladorTUsuarios {
                 }
             }
         }
-        return "Usuario insertado";
+        System.out.println("Usuario insertado");
     }
 
+    public List buscarUsuarios() throws Exception {
+        con = cbd.abrirConexion();
+        System.out.println("\nBuscando todos los usuario");
+        try {
+            listaUsuario.clear();
+            String llamada = "{ ? = call crud_Usuarios.consultar_todos_usuarios }";
+            CallableStatement cs = con.prepareCall(llamada);
 
+            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+
+            cs.execute();
+
+            ResultSet rs = (ResultSet) cs.getObject(1);
+            System.out.println("\n Buscando");
+            while (rs.next()) {
+                usuario = new Usuario();
+                usuario.setCod(rs.getInt("cod_usuario"));
+                usuario.setNickname(rs.getString("nickname"));
+                usuario.setPassword(rs.getString("password"));
+                usuario.setAdmin(rs.getBoolean("es_admin"));
+                listaUsuario.add(usuario);
+            }
+
+            rs.close();
+            cs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error al consultar el usuario", e);
+        } finally {
+            if (con != null) {
+                try {
+                    cbd.cerrarConexion(con);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return listaUsuario;
+    }
 
 }

@@ -44,7 +44,7 @@ public class Usuario {
         return admin;
     }
 
-    public int isEstadoAbiertoInt()
+    public int isAdminInt()
     {
         int abierto = 0;
         if(isAdmin())
@@ -53,5 +53,13 @@ public class Usuario {
     }
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    // To String
+    @Override
+    public String toString() {
+        return "USUARIO:" +
+                "Nickname:'" + nickname + '\'' +
+                ", Contraseña:'" + password + '\'';
     }
 }

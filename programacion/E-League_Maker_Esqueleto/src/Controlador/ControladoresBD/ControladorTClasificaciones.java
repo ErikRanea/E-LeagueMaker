@@ -1,6 +1,8 @@
+
 package Controlador.ControladoresBD;
 
 import Modelo.Clasificacion;
+import Modelo.Competicion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,7 +30,50 @@ public class ControladorTClasificaciones {
      * @author Rodrigo
      */
 
-    public ArrayList<Clasificacion> obtenerClasificacion(int codCompeticion) throws Exception
+    public ArrayList<Clasificacion> obtenerClasificacion(Competicion competicion) throws Exception
+    {
+
+        con = cbd.abrirConexion();
+        System.out.println("\nBuscando clasificacion de "+ competicion.getNombre());
+        ArrayList<Clasificacion> clasificaciones = new ArrayList<>();
+        try {
+            String sql = " SELECT * FROM Clasificacion WHERE cod_competicion = ? ";
+
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1,competicion.getCod());
+            ResultSet rs = statement.executeQuery();
+
+
+
+            while (rs.next()) {
+                Clasificacion clasificacion = new Clasificacion();
+                clasificacion.setPosicion(rs.getInt("posicion"));
+                clasificacion.setEquipo(cbd.buscarEquipo(rs.getInt("cod_equipo")));
+                clasificacion.setCompeticion(competicion);
+                clasificacion.setPuntos(rs.getInt("puntos"));
+                clasificaciones.add(clasificacion);
+
+            }
+
+            rs.close();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error al consultar el competicion", e);
+        } finally {
+            if (con != null) {
+                try {
+                    cbd.cerrarConexion(con);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return clasificaciones;
+    }
+  
+  public ArrayList<Clasificacion> obtenerClasificacion(int codCompeticion) throws Exception
     {
 
         con = cbd.abrirConexion();
@@ -69,7 +114,6 @@ public class ControladorTClasificaciones {
 
         return clasificaciones;
     }
-
 
 
 

@@ -7,7 +7,6 @@ package Controlador.ControladoresBD;
 
 import Modelo.Competicion;
 import Modelo.Enfrentamiento;
-import Modelo.Equipo;
 import Modelo.Jornada;
 
 import java.sql.CallableStatement;
@@ -37,7 +36,7 @@ public class ControladorTJornadas {
 
     public ControladorTJornadas(ControladorBD cbd)
     {
-        this.cbd = cbd;listaJornadas = new ArrayList<>();
+        this.cbd = cbd;
     }
 
 
@@ -56,15 +55,15 @@ public class ControladorTJornadas {
             ResultSet rs = (ResultSet) cs.getObject(1);
 
             while (rs.next()) {
-                Jornada jor = new Jornada();
-                jor.setCod(rs.getInt("cod"));
-                jor.setnJornada(rs.getInt("n_jornada"));
-                jor.setCompeticion(cbd.buscarCompeticion(rs.getInt("cod_competicion")));
-                jor.setListaEnfrentamientos(cbd.consultarEnfrentamientosSinResultado(jor.getCod()));
-                listaJornadas.add(jor);
-                jornada = jor;
+                Competicion competi = new Competicion();
+                competi.setCod(rs.getInt("cod"));
+                competi.setNombre(rs.getString("nombre"));
+                competi.setFechaInicio(rs.getDate("fecha_inicio").toLocalDate());
+                competi.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
+                competi.setEstadoAbierto(rs.getBoolean("estado_abierto"));
+                competi.setJuego(cbd.buscarJuego(rs.getInt("cod_juego")));
+               // listaJornadas.add(competi);
             }
-            System.out.println("El tamaño de las listas de las jornadas es "+ jornada.getListaEnfrentamientos().size());
 
             rs.close();
             cs.close();
@@ -84,47 +83,6 @@ public class ControladorTJornadas {
         return listaJornadas;
     }
 
-    public Jornada buscarJornada(int cod) throws Exception
-    {
-        con = cbd.abrirConexion();
-        System.out.println("\nBuscando Jornada con código "+cod);
-        jornada = new Jornada();
-        try {
-            String llamada = "{ ? = call crud_jornadas.buscar_jornada(?) }";
-            CallableStatement cs = con.prepareCall(llamada);
-
-            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
-            cs.setInt(2, cod);
-
-            cs.execute();
-
-            ResultSet rs = (ResultSet) cs.getObject(1);
-
-            if (rs.next()) {
-                Jornada jor = new Jornada();
-                jor.setCod(rs.getInt("cod"));
-                jor.setnJornada(rs.getInt("n_jornada"));
-                jor.setCompeticion(cbd.buscarCompeticion(rs.getInt("cod_competicion")));
-
-            }
-
-            rs.close();
-            cs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new Exception("Error al buscar la jornada\n\n", e);
-        } finally {
-            if (con != null) {
-                try {
-                    cbd.cerrarConexion(con);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        return jornada;
-    }
 }
 
 

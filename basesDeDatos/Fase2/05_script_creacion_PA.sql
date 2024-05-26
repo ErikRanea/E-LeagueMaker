@@ -1,5 +1,6 @@
 --SCRIPT PARA GENERAR LOS PROCEDIMIENTOS ALMACENADOS
 --***************** PA Resetear secuencias de jornadas y enfrentamientos********
+SET SERVEROUTPUT ON;
 CREATE OR REPLACE PROCEDURE reset_seq_jornadas_enfrentamientos
 AS
 BEGIN
@@ -64,9 +65,13 @@ CREATE OR REPLACE PROCEDURE generar_calendario  AS
     
     todas_jornadas_hechas NUMBER := 0;
 BEGIN
+
     RESET_SEQ_JORNADAS_ENFRENTAMIENTOS;
     DELETE ENFRENTAMIENTOS;
     DELETE JORNADAS;
+    
+
+        
     
     OPEN c_cod_competi;
    ---ABRIR CURSOR COMPETICIONES 
@@ -77,6 +82,13 @@ BEGIN
         FETCH c_cod_competi INTO v_cod_competicion; --Recorremos y asignamos 
     
         EXIT WHEN c_cod_competi%NOTFOUND;
+        
+        
+        UPDATE PUNTOS_EQUIPOS 
+        SET 
+        puntos = 0
+        WHERE cod_competicion = v_cod_competicion;
+        
         
           --Conseguir Fecha de Inicio;
         SELECT fecha_inicio INTO v_fecha_inicio
@@ -277,10 +289,44 @@ BEGIN
      OPEN c_enfrentamientos FOR
         SELECT *
         FROM ENFRENTAMIENTOS 
-        WHERE gana_local IS NOT NULL
+        WHERE gana_local IS NULL
         AND cod_jornada = p_cod_jornada;
 END;
 /
+
+DECLARE
+    p_cod_jornada JORNADAS.cod%TYPE := 3; -- Sustituye 1 por el valor deseado
+    c_enfrentamientos SYS_REFCURSOR;
+    v_enfrentamiento ENFRENTAMIENTOS%ROWTYPE;
+BEGIN
+    -- Llamar al procedimiento almacenado
+    CONSULTAR_ENFRENTAMIENTOS_SIN_RESULTADOS(p_cod_jornada, c_enfrentamientos);
+
+    -- Procesar el cursor de salida
+    LOOP
+        FETCH c_enfrentamientos INTO v_enfrentamiento;
+        EXIT WHEN c_enfrentamientos%NOTFOUND;
+        
+        -- Aquí puedes procesar cada registro. Por ejemplo, imprimir los valores:
+        DBMS_OUTPUT.PUT_LINE('Cod: ' || v_enfrentamiento.cod || 
+                             ', Local: ' || v_enfrentamiento.cod_equipo_local || 
+                             ', Visitante: ' || v_enfrentamiento.cod_equipo_visitante || 
+                             ', Cod Jornada: ' || v_enfrentamiento.cod_jornada);
+    END LOOP;
+
+    -- Cerrar el cursor
+    CLOSE c_enfrentamientos;
+EXCEPTION
+    WHEN OTHERS THEN
+        IF c_enfrentamientos%ISOPEN THEN
+            CLOSE c_enfrentamientos;
+        END IF;
+        RAISE;
+END;
+/
+
+
+
 --******************************************************************************
 
 CREATE OR REPLACE PROCEDURE insertar_resultado
@@ -327,11 +373,9 @@ END;
 /
 --******************************************************************************
 
-CREATE OR REPLACE PROCEDURE con_enfre_ulti_jornada
-(
+CREATE OR REPLACE PROCEDURE con_enfre_ulti_jornada (
     c_ultima_jornada OUT SYS_REFCURSOR
-)
-AS
+) AS
     v_cod_jornada jornadas.cod%TYPE;
 BEGIN
     SELECT cod
@@ -344,9 +388,33 @@ BEGIN
     SELECT 
         cod,
         cod_equipo_local,
-        cod_equipo_visitante
+        cod_equipo_visitante,
+        hora,
+        gana_local 
     FROM enfrentamientos
     WHERE cod_jornada = v_cod_jornada;
 END;
-/
 --******************************************************************************
+/
+CREATE OR REPLACE PROCEDURE CONSULTAR_ENFRENTAMIENTOS_CON_RESULTADOS
+(
+    p_cod_jornada IN JORNADAS.cod%TYPE,
+    c_enfrentamientos OUT SYS_REFCURSOR
+)
+AS
+
+BEGIN
+     OPEN c_enfrentamientos FOR
+        SELECT *
+        FROM ENFRENTAMIENTOS 
+        WHERE gana_local IS NOT NULL
+        AND cod_jornada = p_cod_jornada;
+END;
+/
+
+
+
+
+
+
+

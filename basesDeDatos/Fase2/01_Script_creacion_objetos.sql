@@ -173,6 +173,7 @@ ORDER BY
     
     
 
+
 ---2. Vista para enfrentamientos p
 
 -- competiciones, juegos, equipos

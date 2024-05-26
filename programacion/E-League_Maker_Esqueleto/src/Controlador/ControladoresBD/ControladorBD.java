@@ -23,6 +23,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.FileWriter;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ControladorBD {
 
@@ -39,8 +40,11 @@ public class ControladorBD {
     private ControladorTUsuarios ctUsuarios;
     private ControladorTClasificaciones ctClasificaciones;
 
-    private ControladorTJornadas ctJornadas;
-    private ControladorTEnfrentamientos ctEnfrentamientos;
+    private ControladorTPuntosEquipos ctPuntos;
+
+
+
+
 
     public ControladorBD(ControladorPrincipal cp)
     {
@@ -93,99 +97,150 @@ public class ControladorBD {
         ctJornadas = new ControladorTJornadas(this);
         ctEnfrentamientos = new ControladorTEnfrentamientos(this);
         ctClasificaciones = new ControladorTClasificaciones(this);
+        ctPuntos = new ControladorTPuntosEquipos(this);
+
     }
 
 
 
-
+    // Juegos
     public Juego buscarJuego(String nombre) throws Exception { return ctJuegos.buscarJuego(nombre);}
     public Juego buscarJuego(int cod) throws Exception{return ctJuegos.buscarJuego(cod);}
-    public String insertarJuego(Juego juego) throws Exception { return ctJuegos.insertarJuego(juego);}
-    public String borrarJuego() throws Exception{ return ctJuegos.borrarJuego();}
-    public String modificarJuego(Juego juego) throws Exception{return ctJuegos.modificarJuego(juego);}
+    public void insertarJuego (Juego je) throws Exception {
+        ctJuegos.insertarJuego(je);
+    }
+    public void modificarJuego (Juego je) throws Exception {
+        ctJuegos.modificarJuego(je);
+    }
+    public List buscarJuegos() throws Exception {
+        return ctJuegos.buscarJuegos();
+    }
+
 
 
 
     //Equipos
     public Equipo buscarEquipo(int cod) throws Exception{return ctEquipos.buscarEquipo(cod);}
     public Equipo buscarEquipo(String nombre) throws Exception{return ctEquipos.buscarEquipo(nombre);}
-    public String borrarEquipo() throws Exception {return ctEquipos.borrarEquipo();}
-    public String modificarEquipo(Equipo equipo) throws Exception{return ctEquipos.modificarEquipo(equipo);}
-    public String insertarEquipo(Equipo equipo) throws Exception{return ctEquipos.insertarEquipo(equipo);}
+    public void modificarEquipo (Equipo e) throws Exception {
+        ctEquipos.modificarEquipo(e);
+    }
+    public void insertarEquipo (Equipo e) throws Exception {
+        ctEquipos.insertarEquipo(e);
+    }
+    public List buscarEquipos() throws Exception {
+        return ctEquipos.buscarEquipos();
+    }
+    public List buscarEquiposInscribir(int cod) throws Exception {
+        return ctEquipos.buscarEquiposInscribir(cod);
+    }
+    public List buscarEquiposRescindir(int cod) throws Exception {
+        return ctEquipos.buscarEquiposRescindir(cod);
+    }
+
 
 
     //Patrocinadores
-    public String insertarEPatrocinador(Patrocinador patrocinador) throws Exception
-    { return ctPatrocinadores.insertarEPatrocinador(patrocinador);}
+    public void insertarPatrocinador (Patrocinador p) throws Exception {
+        ctPatrocinadores.insertarPatrocinador(p);
+    }
     public Patrocinador buscarPatrocinador(String nombre) throws Exception
     {return ctPatrocinadores.buscarPatrocinador(nombre);}
     public Patrocinador buscarPatrocinador(int cod) throws Exception
     {return ctPatrocinadores.buscarPatrocinador(cod);}
-    public String borrarPatrocinador() throws Exception
-    {
-        return ctPatrocinadores.borrarPatrocinador();
+    public void modificarPatrocinador (Patrocinador p) throws Exception {
+        ctPatrocinadores.modificarPatrocinador(p);
     }
-    public String modificarPatrocinador(Patrocinador patrocinador) throws Exception
-    {
-        return ctPatrocinadores.modificarPatrocinador(patrocinador);
+    public List buscarPatrocinadores() throws Exception {
+        return ctPatrocinadores.buscarPatrocinadores();
     }
 
 
     //Jugadores
     public Jugador buscarJugador(String nickname) throws Exception{return ctJugadores.buscarJugador(nickname);}
     public Jugador buscarJugador(int cod) throws Exception{return ctJugadores.buscarJugador(cod);}
-    public String borrarJugador() throws Exception{return ctJugadores.borrarJugador();}
-    public String modificarJugador(Jugador jugador) throws Exception{return ctJugadores.modificarJugador(jugador);}
-    public String insertarJugador(Jugador jugador) throws Exception{return ctJugadores.insertarJugador(jugador);}
+    public void modificarJugador (Jugador jd) throws Exception {
+        ctJugadores.modificarJugador(jd);
+    }
+    public void insertarJugador (Jugador jd) throws Exception {
+        ctJugadores.insertarJugador(jd);
+    }
+    public List buscarJugadores() throws Exception {
+        return ctJugadores.buscarJugadores();
+    }
 
 
     //Staff
     public Staff buscarStaff(String nombre) throws Exception{return ctStaffs.buscarStaff(nombre);}
     public Staff buscarStaff(int cod) throws Exception{return ctStaffs.buscarStaff(cod);}
-    public String borrarStaff() throws Exception{return ctStaffs.borrarStaff();}
-    public String modificarStaff(Staff staff) throws Exception{return ctStaffs.modificarStaff(staff);}
-    public String insertarJStaff(Staff staff) throws Exception{return ctStaffs.insertarJStaff(staff);}
+    public void modificarStaff (Staff s) throws Exception {
+        ctStaffs.modificarStaff(s);
+    }
+    public void insertarStaff (Staff s) throws Exception {
+        ctStaffs.insertarStaff(s);
+    }
+    public List buscarStaffs() throws Exception {
+        return ctStaffs.buscarStaffs();
+    }
+
 
     //Competiciones
     public Competicion buscarCompeticion(int cod) throws Exception
     {return ctCompeticiones.buscarCompeticion(cod);}
-    public String borrarCompeticion() throws Exception
-    {return ctCompeticiones.borrarCompeticion();}
-    public String modificarCompeticion(Competicion competicion) throws Exception
-    {return ctCompeticiones.modificarCompeticion(competicion);}
-    public String insertarCompeticion(Competicion competicion) throws Exception
-    {return ctCompeticiones.insertarCompeticion(competicion);}
-    public ArrayList<Competicion> pedirListaCompeticiones() throws Exception
+    public void modificarCompeticion (Competicion c) throws Exception {
+        ctCompeticiones.modificarCompeticion(c);
+    }
+    public void insertarCompeticion (Competicion c) throws Exception {
+        ctCompeticiones.insertarCompeticion(c);
+    }
+    public List<Competicion> pedirListaCompeticiones() throws Exception
     {return ctCompeticiones.pedirListaCompeticiones();}
     public ArrayList<Competicion> pedirCompeticionesCerradas()throws Exception
     {return ctCompeticiones.pedirCompeticionesCerradas();}
-    public String generarCalendario() throws Exception
-    {
-        return ctCompeticiones.generarCalendario();
+    public List buscarCompeticiones() throws Exception {
+        return ctCompeticiones.pedirListaCompeticiones();
     }
-
+    public List buscarCompeticionesAbiertas() throws Exception {
+        return ctCompeticiones.pedirCompeticionesAbiertas();
+    }
+    public void modificarCompeticionEstado(int cod, int estado) throws Exception {
+        ctCompeticiones.modificarCompeticionEstado (cod, estado);
+    }
 
 
     //Usuario
-
     public Usuario buscarUsuario(String nickname) throws Exception{return ctUsuarios.buscarUsuario(nickname);}
-    public String borrarUsuario() throws Exception{return ctUsuarios.borrarUsuario();}
-    public String modificarUsuario(Usuario usuario) throws Exception{return ctUsuarios.modificarUsuario(usuario);}
-    public String insertarUsuario(Usuario usuario) throws Exception{return ctUsuarios.insertarUsuario(usuario);}
-
-
-    //Jornadas
-    public ArrayList<Jornada> consultarTablaJornadas(int codCompeticion)throws Exception
-    {
-        return ctJornadas.consultarTablaJornadas(codCompeticion);
+    public void modificarUsuario (Usuario u) throws Exception {
+        ctUsuarios.modificarUsuario(u);
     }
-    public Jornada buscarJornada(int cod) throws Exception{ return ctJornadas.buscarJornada(cod);}
-
-    //Enfrentamientos
-    public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(int codJornada)throws Exception
-    {
-        return ctEnfrentamientos.consultarEnfrentamientosSinResultado(codJornada);
+    public void insertarUsuario (Usuario u) throws Exception {
+        ctUsuarios.insertarUsuario(u);
     }
+    public List buscarUsuarios() throws Exception {
+        return ctUsuarios.buscarUsuarios();
+    }
+
+
+    // Puntos_equipos
+    public void inscribirEquipo(int codCompeti, int codEquipo) throws Exception {
+        ctPuntos.inscribirEquipo(codCompeti, codEquipo);
+    }
+    public void rescindirEquipo(int codCompeti, int codEquipo) throws Exception {
+        ctPuntos.rescindirEquipo(codCompeti, codEquipo);
+    }
+
+
+
+
+    /** Metodo en el cual pasa los datos necesario para borrar elementos de la tabla
+     *
+     * @param opcion es un int para saber a que tabla pertenece el elemento a eliminar
+     * @param cod es el codigo del objeto que se va a eliminar
+     * @author Oskar
+     * @version 2.0 16/05/2024
+     */
+   
+
 
     public ArrayList<Enfrentamiento> consultarEnfrentamientosConResultados(int codJornada) throws Exception
     {
@@ -256,5 +311,34 @@ public class ControladorBD {
 
 
     }
+  
+   public void borrarDeTabla (int opcion, int cod) throws Exception {
+        switch (opcion)
+        {
+            case 1: // Jugadores
+                 ctJugadores.borrarJugador(cod);
+                break;
+            case 2: // Juegos
+                 ctJuegos.borrarJuego(cod);
+                break;
+            case 3: // Equipos
+                 ctEquipos.borrarEquipo(cod);
+                break;
+            case 4: // Staffs
+                 ctStaffs.borrarStaff(cod);
+                break;
+            case 5: // Patrocinadores
+                 ctPatrocinadores.borrarPatrocinador(cod);
+                break;
+            case 6: // Competiciones
+                 ctCompeticiones.borrarCompeticion(cod);
+                break;
+            case 7: // Usuarios
+                ctUsuarios.borrarUsuario(cod);
+                break;
+        }
+    }
+
+
 }
 
