@@ -19,8 +19,6 @@ public class ControladorPanelVerTodosResultados {
     private VentanaCompeticion vCompeti;
     private JPanel pVisualizar;
 
-
-
     private ArrayList<Enfrentamiento> listaEnfrentamientos;
     private ArrayList<Jornada> listaJornadas;
     private Competicion competicion;
@@ -28,6 +26,8 @@ public class ControladorPanelVerTodosResultados {
     public ControladorPanelVerTodosResultados(ControladorVentanaCompeticion cCompeti, VentanaCompeticion vCompeti) {
         this.cCompeti = cCompeti;
         this.vCompeti = vCompeti;
+        listaEnfrentamientos = new ArrayList<>();
+        listaJornadas = new ArrayList<>();
     }
 
     public void iniciarComponentes() {
@@ -60,15 +60,12 @@ public class ControladorPanelVerTodosResultados {
     }
 
     public void cargarDatosclasificacionPVisualizarAsinc() {
-        cCompeti.mostrarVentanaCargaYRealizarTarea(new Runnable() {
-            @Override
-            public void run() {
-                cCompeti.cargarCompeticiones();
-                cargarCBCompeticiones();
-                cargarJornadasEnfrentamientosConresultados();
-                buscarCompeticion(cCompeti.getCompeticion());
-                generarTablasPorJornada();
-            }
+        cCompeti.mostrarVentanaCargaYRealizarTarea(() -> {
+            cCompeti.cargarCompeticiones();
+            cargarCBCompeticiones();
+            cargarJornadasEnfrentamientosConresultados();
+            buscarCompeticion(cCompeti.getCompeticion());
+            generarTablasPorJornada();
         }, 30000);
     }
 
@@ -101,18 +98,13 @@ public class ControladorPanelVerTodosResultados {
             DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 
             for (Enfrentamiento enfrentamiento : jornada.getListaEnfrentamientos()) {
-                String ganador = "";
-                if(enfrentamiento.getGanaLocal() == 0)
-                {
+                String ganador;
+                if (enfrentamiento.getGanaLocal() == 0) {
                     ganador = enfrentamiento.getEquipoVisitante().getNombre();
-                }
-                else if(enfrentamiento.getGanaLocal() == 1)
-                {
+                } else if (enfrentamiento.getGanaLocal() == 1) {
                     ganador = enfrentamiento.getEquipoLocal().getNombre();
-                }
-                else
-                {
-                    ganador = "No decidido ";
+                } else {
+                    ganador = "No decidido";
                 }
                 Object[] rowData = {enfrentamiento.getEquipoLocal().getNombre(), enfrentamiento.getEquipoVisitante().getNombre(), ganador};
                 tableModel.addRow(rowData);
@@ -135,21 +127,16 @@ public class ControladorPanelVerTodosResultados {
         pVisualizar.repaint();
     }
 
-
-
-    public void cargarJornadasEnfrentamientosConresultados()
-    {
-
+    public void cargarJornadasEnfrentamientosConresultados() {
         try {
             if (!cCompeti.getListaJornadas().isEmpty()) {
-                listaJornadas = cCompeti.consultarTablaJornadas(cCompeti.getListaCompetis().get(0));
+                listaJornadas = cCompeti.consultarTablaJornadasConResultado(cCompeti.getListaCompetis().get(0));
                 System.out.println("Carga de jornadas hecha");
             } else {
                 listaJornadas.clear();
             }
         } catch (Exception ex) {
             System.out.println("\nHa sucedido un error en el proceso de cargarJornadasEnfrentamientos en el ControladorVentanaCompeticion\n" + ex.getMessage());
-     }
+        }
     }
-
 }

@@ -20,24 +20,18 @@ public class ControladorPanelVerClasificaciones {
 
     private ArrayList<Clasificacion> clasificaciones;
 
-    public ControladorPanelVerClasificaciones(ControladorVentanaCompeticion cCompeti,VentanaCompeticion vCompeti)
-    {
+    public ControladorPanelVerClasificaciones(ControladorVentanaCompeticion cCompeti, VentanaCompeticion vCompeti) {
         this.cCompeti = cCompeti;
         this.vCompeti = vCompeti;
-
     }
 
-    public void iniciarComponentes()
-    {
-
+    public void iniciarComponentes() {
         if (!vCompeti.getpBotones().isVisible()) {
             cargarDatosclasificacionPVisualizarAsinc();
             vCompeti.verPanelBotonesLateralIzq();
         } else {
             vCompeti.quitarPanelBotonesLateralIzq();
         }
-
-
 
         vCompeti.getbCalendario().setVisible(false);
         vCompeti.getCbJornadas().setVisible(false);
@@ -47,9 +41,7 @@ public class ControladorPanelVerClasificaciones {
 
         pVisualizar = vCompeti.getpVisualizar();
         vaciarPVisualizar();
-
     }
-
 
     public class BBuscar implements ActionListener {
         @Override
@@ -62,48 +54,33 @@ public class ControladorPanelVerClasificaciones {
         }
     }
 
-
-
     public void cargarDatosclasificacionPVisualizarAsinc() {
-        cCompeti.mostrarVentanaCargaYRealizarTarea(new Runnable() {
-            @Override
-            public void run() {
-                cCompeti.cargarCompeticiones();
-                cargarCBCompeticiones();
-                buscarCompeticion(cCompeti.getCompeticion());
-                generarTablaClasificacion();
-            }
-        },30000);
-
+        cCompeti.mostrarVentanaCargaYRealizarTarea(() -> {
+            cCompeti.cargarCompeticiones();
+            cargarCBCompeticiones();
+            buscarCompeticion(cCompeti.getCompeticion());
+            generarTablaClasificacion();
+        }, 30000);
     }
 
-
-    public void cargarCBCompeticiones()
-    {
+    public void cargarCBCompeticiones() {
         cCompeti.rellenarCBCompeticiones();
     }
 
-    public void buscarCompeticion(Competicion competicion)
-    {
-        try
-        {
+    public void buscarCompeticion(Competicion competicion) {
+        try {
             clasificaciones = cCompeti.obtenerClasificacion(competicion);
-        }
-        catch (Exception ex)
-        {
-            System.out.println("\nHa salido un error en buscarCompeticion controladorPanelVerClasificaciones \n"+
-                    ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("\nHa salido un error en buscarCompeticion controladorPanelVerClasificaciones \n" + ex.getMessage());
         }
     }
-
 
     public void generarTablaClasificacion() {
         String[] columnNames = {"Posición", "Equipo", "Puntos"};
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 
-        for(Clasificacion c : clasificaciones){
-            Object[] rowData = {c.getPosicion(), c.getEquipo().getNombre(),
-                    c.getPuntos()};
+        for (Clasificacion c : clasificaciones) {
+            Object[] rowData = {c.getPosicion(), c.getEquipo().getNombre(), c.getPuntos()};
             tableModel.addRow(rowData);
         }
 
@@ -117,13 +94,9 @@ public class ControladorPanelVerClasificaciones {
         pVisualizar.repaint();
     }
 
-    public void vaciarPVisualizar()
-    {
+    public void vaciarPVisualizar() {
         pVisualizar.removeAll();
         pVisualizar.revalidate();
         pVisualizar.repaint();
     }
-
-
-
 }
