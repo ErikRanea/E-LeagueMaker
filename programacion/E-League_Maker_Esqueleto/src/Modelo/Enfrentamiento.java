@@ -1,18 +1,19 @@
 package Modelo;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
 public class Enfrentamiento {
     private int cod;
-    private LocalTime hora;
+    private LocalDateTime hora;
     private boolean ganaLocal;
     private Equipo equipoLocal;
     private Equipo equipoVisitante;
     private Jornada jornada;
 
     // Constructor
-    public Enfrentamiento(int cod, LocalTime hora, boolean ganaLocal, Equipo equipoLocal, Equipo equipoVisitante, Jornada jornada) {
+    public Enfrentamiento(int cod, LocalDateTime hora, boolean ganaLocal, Equipo equipoLocal, Equipo equipoVisitante, Jornada jornada) {
         this.cod = cod;
         this.hora = hora;
         this.ganaLocal = ganaLocal;
@@ -20,8 +21,8 @@ public class Enfrentamiento {
         this.equipoVisitante = equipoVisitante;
         this.jornada = jornada;
     }
+    public Enfrentamiento(){}
 
-    public En
 
     // Getters & Setters
     public int getCod() {
@@ -32,16 +33,25 @@ public class Enfrentamiento {
         this.cod = cod;
     }
 
-    public LocalTime getHora() {
+    public LocalDateTime getHora() {
         return hora;
     }
 
-    public void setHora(LocalTime hora) {
+    public void setHora(LocalDateTime hora) {
         this.hora = hora;
     }
 
     public boolean isGanaLocal() {
         return ganaLocal;
+    }
+    public int getGanaLocal()
+    {
+        int n ;
+        if(ganaLocal)
+            n = 1;
+        else
+            n = 0;
+        return n;
     }
 
     public void setGanaLocal(boolean ganaLocal) {
@@ -69,6 +79,6 @@ public class Enfrentamiento {
     }
 
     public void setJornada(Modelo.Jornada jornada) {
-        jornada = jornada;
+        this.jornada = jornada;
     }
 }
