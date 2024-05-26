@@ -48,11 +48,11 @@ public class VentanaCompeticion extends JFrame{
     }
 
 
-    public void iniciarComponentes()
+     public void iniciarComponentes()
     {
         pBotones.setVisible(false);
         ponerIconoPrograma();
-        // cargarGifCarga();
+       // cargarGifCarga();
     }
 
 
