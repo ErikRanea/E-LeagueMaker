@@ -17,6 +17,7 @@ public class ControladorVentanaCompeticion {
     private ControladorVista cv;
     private ControladorPanelVerClasificaciones cpClasifi;
     private ControladorPanelVerTodosResultados cpVerResult;
+    private ControladorPanelInsertarResultados cpInsert;
 
     private VentanaCompeticion vCompeti;
     private ArrayList<Competicion> listaCompetis;
@@ -39,19 +40,19 @@ public class ControladorVentanaCompeticion {
     public void crearMostrar() {
         try {
             vCompeti = new VentanaCompeticion();
-            vCompeti.addBBuscarAL(new BBuscar());
+
             vCompeti.addBLogOutAL(new BLogOut());
             vCompeti.addBInsertarResultAL(new BIntroResult());
-            vCompeti.addBGenerarCalendarioAL(new BGenerarCalendario());
-            vCompeti.addCBCompeticionAL(new CBCompeticion());
-            vCompeti.addCBJornadaAL(new CBJornadas());
-
             vCompeti.addBVerClasifiAL(new BVerClasificaciones());
             vCompeti.addVerResultadosAL(new BVerResultadosJornadas());
+
+            vCompeti.addCBCompeticionAL(new CBCompeticion());
+            vCompeti.addCBJornadaAL(new CBJornadas());
 
             vCompeti.setVisible(true);
             crearControladorPanelClasificacion();
             crearControladorPanelVerResultados();
+            crearControladorPanelInsertarResultados();
         } catch (Exception ex) {
             System.out.println("\n" + ex.getMessage());
         }
@@ -60,12 +61,37 @@ public class ControladorVentanaCompeticion {
     public class BIntroResult implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (!vCompeti.getpBotones().isVisible()) {
-                cargarDatosDeManeraAsincrona();
-                vCompeti.verPanelBotonesLateralIzq();
-            } else {
-                vaciarCB();
-                vCompeti.quitarPanelBotonesLateralIzq();
+            cpInsert.iniciarComponentes();
+        }
+    }
+
+    public class BLogOut implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            vCompeti.dispose();
+            cv.mostrarVentanaLogin();
+        }
+    }
+
+    public class CBCompeticion implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                competicion = listaCompetis.get(vCompeti.getCbCompeticiones().getSelectedIndex());
+                cargarJornadasEnfrentamientos();
+            } catch (Exception ex) {
+                System.out.println("Ha salido el siguiente error en el ActionListener de la ComboBox de competicion\n" + ex.getMessage());
+            }
+        }
+    }
+
+    public class CBJornadas implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                jornada = listaJornadas.get(vCompeti.getCbJornadas().getSelectedIndex());
+            } catch (Exception ex) {
+                System.out.println("Ha salido el siguiente error en el ActionListener de la ComboBox de jornadas\n" + ex.getMessage());
             }
         }
     }
@@ -94,81 +120,12 @@ public class ControladorVentanaCompeticion {
         worker.execute();
     }
 
-    public void cargarDatosDeManeraAsincrona() {
-        mostrarVentanaCargaYRealizarTarea(() -> {
-            cargarCompeticiones();
-            cargarJornadasEnfrentamientos();
-            cargarDatosComboBox();
-        }, 30000);
-    }
-
-    public void cargarDatosPVisualizarAsinc() {
-        mostrarVentanaCargaYRealizarTarea(() -> {
-            cargarCompeticiones();
-            cargarJornadasEnfrentamientos();
-            cargarDatosComboBox();
-            mostrarEnfrentamientos();
-        }, 30000);
-    }
-
-    public class BLogOut implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            vCompeti.dispose();
-            cv.mostrarVentanaLogin();
-        }
-    }
-
-    public class BBuscar implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            try {
-                cargarDatosPVisualizarAsinc();
-            } catch (Exception ex) {
-                System.out.println("Ha sucedido el siguiente error en BBuscar\n\n" + ex.getMessage());
-            }
-        }
-    }
-
-    public class CBCompeticion implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            try {
-                competicion = listaCompetis.get(vCompeti.getCbCompeticiones().getSelectedIndex());
-            } catch (Exception ex) {
-                System.out.println("Ha salido el siguiente error en el ActionListener de la ComboBox de competicion\n" + ex.getMessage());
-            }
-        }
-    }
-
-    public class CBJornadas implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            try {
-                jornada = listaJornadas.get(vCompeti.getCbJornadas().getSelectedIndex());
-            } catch (Exception ex) {
-                System.out.println("Ha salido el siguiente error en el ActionListener de la ComboBox de jornadas\n" + ex.getMessage());
-            }
-        }
-    }
-
-    public class BGenerarCalendario implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            try {
-                cv.generarCalendario();
-                mostrarVentanaCargaYRealizarTarea(ControladorVentanaCompeticion.this::rellenarCBJornadas, 6000);
-            } catch (Exception ex) {
-                System.out.println("Ha sucedido el siguiente error generando el calendario:\n\n" + ex.getMessage());
-            }
-        }
-    }
-
     public void cargarCompeticiones() {
         try {
             vaciarCB();
             listaCompetis = cv.pedirCompeticionesCerradas();
             System.out.println("Carga de competiciones hecha");
+            rellenarCBCompeticiones();
         } catch (Exception ex) {
             System.out.println("\nHa sucedido un error en el proceso de cargarCompeticiones\n" + ex.getMessage());
         }
@@ -176,22 +133,18 @@ public class ControladorVentanaCompeticion {
 
     public void cargarJornadasEnfrentamientos() {
         try {
-            if (!listaCompetis.isEmpty()) {
-                listaJornadas = cv.consultarTablaJornadas(listaCompetis.get(0));
+            if (competicion != null) {
+                listaJornadas = cv.consultarTablaJornadas(competicion);
                 System.out.println("Carga de jornadas hecha");
+                rellenarCBJornadas();
             } else {
+                System.out.println("No hay competicion seleccionada.");
                 listaJornadas.clear();
+                vaciarCBJornadas();
             }
         } catch (Exception ex) {
-            System.out.println("\nHa sucedido un error en el proceso de cargarJornadasEnfrentamientos en el ControladorVentanaCompeticion\n" + ex.getMessage());
+            System.out.println("\nHa sucedido un error en el proceso de cargarJornadasEnfrentamientos\n" + ex.getMessage());
         }
-    }
-
-    public void cargarDatosComboBox() {
-        vaciarCBCompeticiones();
-        vaciarCBJornadas();
-        rellenarCBCompeticiones();
-        rellenarCBJornadas();
     }
 
     public void vaciarCBCompeticiones() {
@@ -209,6 +162,7 @@ public class ControladorVentanaCompeticion {
             }
             if (!listaCompetis.isEmpty()) {
                 competicion = listaCompetis.get(0);
+                cargarJornadasEnfrentamientos();
             }
         } catch (Exception ex) {
             System.out.println("\nHa salido el siguiente error:\n" + ex.getMessage());
@@ -235,64 +189,6 @@ public class ControladorVentanaCompeticion {
         }
     }
 
-    public void mostrarEnfrentamientos() {
-        bSeleccionado = false;
-
-        vCompeti.getpVisualizar().removeAll();
-        listaEnfrentamientos = jornada != null ? jornada.getListaEnfrentamientos() : new ArrayList<>();
-        vCompeti.getpVisualizar().setLayout(new GridLayout(listaEnfrentamientos.size(), 1));
-        System.out.println("\n*****************************************\nCantidadDeEnfrentamientos:\n" + listaEnfrentamientos.size());
-
-        for (Enfrentamiento enfrentamiento : listaEnfrentamientos) {
-            JPanel enfrentamientoPanel = new JPanel(new FlowLayout());
-            JLabel label = new JLabel(enfrentamiento.getEquipoLocal().getNombre() + " vs " + enfrentamiento.getEquipoVisitante().getNombre());
-            JButton localButton = new JButton("Gana Local");
-            localButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        cv.actualizarResultados(enfrentamiento.getCod(), 1);
-                        enfrentamientoPanel.setVisible(false);
-                        vCompeti.getpVisualizar().remove(enfrentamientoPanel);
-                        vCompeti.repaint();
-                        vCompeti.revalidate();
-                    } catch (Exception ex) {
-                        System.out.println("\nError en el AL de localButton \n" + ex.getMessage());
-                    }
-                }
-            });
-
-            JButton visitanteButton = new JButton("Gana Visitante");
-            visitanteButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        cv.actualizarResultados(enfrentamiento.getCod(), 0);
-                        enfrentamientoPanel.setVisible(false);
-                        vCompeti.getpVisualizar().remove(enfrentamientoPanel);
-                        vCompeti.repaint();
-                        vCompeti.revalidate();
-                    } catch (Exception ex) {
-                        System.out.println("\nError en el AL de visitanteButton \n" + ex.getMessage());
-                    }
-                }
-            });
-
-            enfrentamientoPanel.add(label);
-            enfrentamientoPanel.add(localButton);
-            enfrentamientoPanel.add(visitanteButton);
-            vCompeti.getpVisualizar().add(enfrentamientoPanel);
-
-            System.out.println("Añadido panel " + enfrentamiento.getEquipoLocal().getNombre() + " vs " + enfrentamiento.getEquipoVisitante().getNombre());
-        }
-
-        vCompeti.getpVisualizar().setVisible(true);
-        vCompeti.repaint();
-        vCompeti.revalidate();
-
-        System.out.println("Terminado pVisualizar con enfrentamientos.");
-    }
-
     public void vaciarCB() {
         try {
             listaCompetis.clear();
@@ -303,6 +199,10 @@ public class ControladorVentanaCompeticion {
         } catch (Exception ex) {
             System.out.println("\nHa salido un error en vaciarCB\n " + ex.getMessage());
         }
+    }
+
+    public void crearControladorPanelInsertarResultados() {
+        cpInsert = new ControladorPanelInsertarResultados(this, vCompeti);
     }
 
     public void crearControladorPanelClasificacion() {
@@ -371,10 +271,6 @@ public class ControladorVentanaCompeticion {
         this.jornada = jornada;
     }
 
-    public ArrayList<Jornada> consultarTablaJornadas(Competicion competicion) throws Exception {
-        return cv.consultarTablaJornadas(competicion);
-    }
-
     public ArrayList<Jornada> consultarTablaJornadasConResultado(Competicion competicion) throws Exception {
         return cv.consultarTablaJornadasConResultado(competicion);
     }
@@ -395,16 +291,15 @@ public class ControladorVentanaCompeticion {
         return cv.actualizarResultados(cod, resultado);
     }
 
-
     public ArrayList<Competicion> pedirCompeticionesCerradas() throws Exception {
         return cv.pedirCompeticionesCerradas();
     }
 
-    //Jornadas
-    public ArrayList<Jornada> consultarTablaJornadas(Competicion competicion)throws Exception
-    {
+    public ArrayList<Jornada> consultarTablaJornadas(Competicion competicion) throws Exception {
         return cv.consultarTablaJornadas(competicion);
     }
 
-
+    public String generarCalendario() throws Exception {
+        return cv.generarCalendario();
+    }
 }

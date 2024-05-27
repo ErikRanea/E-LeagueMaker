@@ -37,6 +37,7 @@ public class ControladorTJornadas {
     public ControladorTJornadas(ControladorBD cbd)
     {
         this.cbd = cbd;
+        listaJornadas = new ArrayList<>();
     }
 
 

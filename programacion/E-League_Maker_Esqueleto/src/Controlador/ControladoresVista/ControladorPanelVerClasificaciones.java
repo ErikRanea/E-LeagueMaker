@@ -47,12 +47,17 @@ public class ControladorPanelVerClasificaciones {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                cargarDatosclasificacionPVisualizarAsinc();
+                cCompeti.cargarCompeticiones();
+                cargarCBCompeticiones();
+                buscarCompeticion(cCompeti.getCompeticion());
+                generarTablaClasificacion();
             } catch (Exception ex) {
                 System.out.println("Ha sucedido el siguiente error en BBuscar\n\n" + ex.getMessage());
             }
         }
     }
+
+
 
     public void cargarDatosclasificacionPVisualizarAsinc() {
         cCompeti.mostrarVentanaCargaYRealizarTarea(() -> {
@@ -60,7 +65,7 @@ public class ControladorPanelVerClasificaciones {
             cargarCBCompeticiones();
             buscarCompeticion(cCompeti.getCompeticion());
             generarTablaClasificacion();
-        }, 30000);
+        }, 10000);
     }
 
     public void cargarCBCompeticiones() {

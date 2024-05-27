@@ -52,7 +52,11 @@ public class ControladorPanelVerTodosResultados {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                cargarDatosclasificacionPVisualizarAsinc();
+                cCompeti.cargarCompeticiones();
+                cargarCBCompeticiones();
+                cargarJornadasEnfrentamientosConresultados();
+                buscarCompeticion(cCompeti.getCompeticion());
+                generarTablasPorJornada();
             } catch (Exception ex) {
                 System.out.println("Ha sucedido el siguiente error en BBuscar\n\n" + ex.getMessage());
             }
