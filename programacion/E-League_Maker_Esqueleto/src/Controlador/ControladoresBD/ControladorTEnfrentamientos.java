@@ -10,7 +10,7 @@ package Controlador.ControladoresBD;
 import Modelo.Competicion;
 import Modelo.Enfrentamiento;
 import Modelo.Jornada;
-import oracle.jdbc.OracleTypes;
+import oracle.jdbc.internal.OracleTypes;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -25,7 +25,40 @@ public class ControladorTEnfrentamientos {
     private Enfrentamiento enfrentamiento;
     private ArrayList<Enfrentamiento> listaEnfrentamientos;
 
-    public ControladorTEnfrentamientos(ControladorBD cbd){this.cbd = cbd;listaEnfrentamientos = new ArrayList<>();}
+    public ControladorTEnfrentamientos(ControladorBD cbd){this.cbd = cbd;}
+
+
+
+    public boolean actualizarResultados(int cod,int resultado) throws Exception
+    {
+        boolean okey = false;
+        try {
+            listaEnfrentamientos = new ArrayList<>();
+            con = cbd.abrirConexion();
+            String llamada = "{ call  insertar_resultado(?,?) }";
+            CallableStatement cs = con.prepareCall(llamada);
+
+            cs.setInt(1,cod);
+            cs.setInt(2,resultado);
+            cs.execute();
+
+            System.out.println("Se ha insertado correctamente el resultado del enfrentamiento "+cod);
+            cs.close();
+            okey = false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error al insertar resultado \n"+e.getMessage(), e);
+        } finally {
+            if (con != null) {
+                try {
+                    cbd.cerrarConexion(con);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return okey;
+    }
 
     public ArrayList<Enfrentamiento> consultarEnfrentamientosSinResultado(Jornada jornada)throws Exception
     {
@@ -55,8 +88,8 @@ public class ControladorTEnfrentamientos {
                 }
                 enfre.setEquipoVisitante(cbd.buscarEquipo(rs.getInt("cod_equipo_visitante")));
                 enfre.setJornada(jornada);
-            //    System.out.println("\nEnfrentamiento con cod "+enfre.getCod()+" es de la jornada "+
-              //          jornada.getCod());
+                //    System.out.println("\nEnfrentamiento con cod "+enfre.getCod()+" es de la jornada "+
+                //          jornada.getCod());
                 listaEnfrentamientos.add(enfre);
             }
             System.out.println("\nEn tabla enfrentamientos devuelve "+listaEnfrentamientos.size()+
@@ -133,26 +166,43 @@ public class ControladorTEnfrentamientos {
         return listaEnfrentamientos;
     }
 
-
-    public boolean actualizarResultados(int cod,int resultado) throws Exception
-    {
-        boolean okey = false;
+    public ArrayList<Enfrentamiento> consultarEnfrentamientosConResultados(int codJornada) throws Exception {
+        ArrayList<Enfrentamiento> listaEnfrentamientos = new ArrayList<>();
         try {
-
             con = cbd.abrirConexion();
-            String llamada = "{ call  insertar_resultado(?,?) }";
-            CallableStatement cs = con.prepareCall(llamada);
 
-            cs.setInt(1,cod);
-            cs.setInt(2,resultado);
+            String llamada = "{ call con_enfre_ulti_jornada(?) }";
+            CallableStatement cs = con.prepareCall(llamada);
+            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+            //cs.setInt(2, codJornada);
             cs.execute();
 
-            System.out.println("\nSe ha insertado correctamente el resultado del enfrentamiento "+cod);
+            ResultSet rs = (ResultSet) cs.getObject(1);
+
+            while (rs.next()) {
+                Enfrentamiento enfrentamiento = new Enfrentamiento();
+                enfrentamiento.setCod(rs.getInt("cod"));
+                enfrentamiento.setEquipoLocal(cbd.buscarEquipo(rs.getInt("cod_equipo_local")));
+                enfrentamiento.setEquipoVisitante(cbd.buscarEquipo(rs.getInt("cod_equipo_visitante")));
+
+                // Convertir Date a LocalDateTime
+                Timestamp timestamp = rs.getTimestamp("hora");
+                if (timestamp != null) {
+                    LocalDateTime hora = timestamp.toLocalDateTime();
+                    enfrentamiento.setHora(hora);
+                }
+
+
+
+
+                listaEnfrentamientos.add(enfrentamiento);
+            }
+
+            rs.close();
             cs.close();
-            okey = false;
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("Error al insertar resultado \n"+e.getMessage(), e);
+            throw new Exception("Error al consultar los enfrentamientos", e);
         } finally {
             if (con != null) {
                 try {
@@ -162,7 +212,8 @@ public class ControladorTEnfrentamientos {
                 }
             }
         }
-        return okey;
+
+        return listaEnfrentamientos;
     }
 
 

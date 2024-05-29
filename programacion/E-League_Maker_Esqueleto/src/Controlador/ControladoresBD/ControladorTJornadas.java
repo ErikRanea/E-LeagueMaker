@@ -7,7 +7,6 @@ package Controlador.ControladoresBD;
 
 import Modelo.Competicion;
 import Modelo.Enfrentamiento;
-import Modelo.Equipo;
 import Modelo.Jornada;
 
 import java.sql.CallableStatement;
@@ -37,9 +36,53 @@ public class ControladorTJornadas {
 
     public ControladorTJornadas(ControladorBD cbd)
     {
-        this.cbd = cbd;listaJornadas = new ArrayList<>();
+        this.cbd = cbd;
+        listaJornadas = new ArrayList<>();
     }
 
+
+    public ArrayList<Jornada> consultarTablaJornadas(int codCompeticion)throws Exception
+    {
+        try {
+            con = cbd.abrirConexion();
+            String llamada = "{ ? = call crud_Jornadas.consultar_Jornadas(?) }";
+            CallableStatement cs = con.prepareCall(llamada);
+
+            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+            cs.setInt(2,codCompeticion);
+
+            cs.execute();
+
+            ResultSet rs = (ResultSet) cs.getObject(1);
+
+            while (rs.next()) {
+                Competicion competi = new Competicion();
+                competi.setCod(rs.getInt("cod"));
+                competi.setNombre(rs.getString("nombre"));
+                competi.setFechaInicio(rs.getDate("fecha_inicio").toLocalDate());
+                competi.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
+                competi.setEstadoAbierto(rs.getBoolean("estado_abierto"));
+                competi.setJuego(cbd.buscarJuego(rs.getInt("cod_juego")));
+               // listaJornadas.add(competi);
+            }
+
+            rs.close();
+            cs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error al consultar las competiciones", e);
+        } finally {
+            if (con != null) {
+                try {
+                    cbd.cerrarConexion(con);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return listaJornadas;
+    }
 
     public ArrayList<Jornada> consultarTablaJornadas(Competicion competicion)throws Exception
     {
@@ -181,6 +224,8 @@ public class ControladorTJornadas {
 
         return jornada;
     }
+
+
 }
 
 

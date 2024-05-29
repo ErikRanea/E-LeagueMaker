@@ -8,6 +8,8 @@ package Controlador.ControladoresBD;
 import Modelo.Juego;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ControladorTJuegos {
 
@@ -24,11 +26,12 @@ public class ControladorTJuegos {
      * @param juego
      */
     private Juego juego;
+    private List<Juego> listaJuegos;
 
     public ControladorTJuegos(ControladorBD cbd)
     {
         this.cbd = cbd;
-
+        listaJuegos = new ArrayList<>();
     }
 
     /**
@@ -133,7 +136,7 @@ public class ControladorTJuegos {
      * @return String
      * @throws Exception
      */
-    public String borrarJuego() throws Exception {
+    public void borrarJuego(int cod) throws Exception {
         con = cbd.abrirConexion();
         System.out.println("\nBorrando Juego con nombre "+juego.getNombre());
         try {
@@ -141,7 +144,7 @@ public class ControladorTJuegos {
             CallableStatement cs = con.prepareCall(llamada);
 
 
-            cs.setInt(1, juego.getCod());
+            cs.setInt(1, cod);
 
             cs.execute();
             cs.close();
@@ -158,7 +161,7 @@ public class ControladorTJuegos {
                 }
             }
         }
-        return "Juego borrado";
+        System.out.println("Juego borrado");
     }
 
     /**
@@ -173,7 +176,7 @@ public class ControladorTJuegos {
      * @throws Exception
      */
 
-    public String modificarJuego(Juego juego) throws Exception
+    public void modificarJuego(Juego juego) throws Exception
     {
         con = cbd.abrirConexion();
         System.out.println("\nModificando juego con nombre " + juego.getNombre());
@@ -192,7 +195,7 @@ public class ControladorTJuegos {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("Error al modificar juego", e);
+            throw new Exception("Error al modificar el juego", e);
         } finally {
             if (con != null) {
                 try {
@@ -202,7 +205,7 @@ public class ControladorTJuegos {
                 }
             }
         }
-        return "Juego modificado!";
+        System.out.println("Juego modificado!");
     }
 
     /**
@@ -213,7 +216,7 @@ public class ControladorTJuegos {
      * @return
      * @throws Exception
      */
-    public String insertarJuego(Juego juego) throws Exception {
+    public void insertarJuego(Juego juego) throws Exception {
         con = cbd.abrirConexion();
         System.out.println("\nInsertando juego con nombre" + juego.getNombre());
         try {
@@ -230,7 +233,7 @@ public class ControladorTJuegos {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("Error al inserta juego", e);
+            throw new Exception("Error al insertar el juego", e);
         } finally {
             if (con != null) {
                 try {
@@ -240,9 +243,50 @@ public class ControladorTJuegos {
                 }
             }
         }
-        return "Juego insertado";
+        System.out.println("Juego insertado");
     }
 
+    public List buscarJuegos() throws Exception {
+        con = cbd.abrirConexion();
+        System.out.println("\nBuscando todos los juegos");
+        try {
+            listaJuegos.clear();
+            String llamada = "{ ? = call crud_Juegos.consultar_todos_juegos() }";
+            CallableStatement cs = con.prepareCall(llamada);
+
+            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+
+            cs.execute();
+
+            ResultSet rs = (ResultSet) cs.getObject(1);
+
+            while (rs.next()) {
+                juego = new Juego();
+                juego.setCod(rs.getInt("cod"));
+                juego.setNombre(rs.getString("nombre"));
+                juego.setDesarrolladora(rs.getString("desarrolladora"));
+                juego.setFechaLanzamiento(rs.getDate("fecha_lanzamiento").toLocalDate());
+                listaJuegos.add(juego);
+            }
+
+            rs.close();
+            cs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error al consultar el juego", e);
+        } finally {
+            if (con != null) {
+                try {
+                    cbd.cerrarConexion(con);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return listaJuegos;
+
+    }
 
 
 }

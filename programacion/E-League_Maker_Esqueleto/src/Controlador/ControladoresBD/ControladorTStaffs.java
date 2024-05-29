@@ -7,6 +7,8 @@ package Controlador.ControladoresBD;
 import Modelo.Staff;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ControladorTStaffs {
@@ -24,11 +26,13 @@ public class ControladorTStaffs {
      * @param staff
      */
     private Staff staff;
+    private List<Staff> listaStaffs;
 
 
     public ControladorTStaffs(ControladorBD cbd)
     {
         this.cbd = cbd;
+        listaStaffs = new ArrayList<>();
     }
 
 
@@ -141,7 +145,7 @@ public class ControladorTStaffs {
      * @return String
      * @throws Exception
      */
-    public String borrarStaff() throws Exception {
+    public void borrarStaff(int cod) throws Exception {
         con = cbd.abrirConexion();
         System.out.println("\nBorrando staff con nombre "+staff.getNombre());
         try {
@@ -149,7 +153,7 @@ public class ControladorTStaffs {
             CallableStatement cs = con.prepareCall(llamada);
 
 
-            cs.setInt(1, staff.getCod());
+            cs.setInt(1, cod);
 
             cs.execute();
             cs.close();
@@ -166,7 +170,7 @@ public class ControladorTStaffs {
                 }
             }
         }
-        return "Staff borrado!";
+        System.out.println("Staff borrado!");
     }
 
     /**
@@ -181,7 +185,7 @@ public class ControladorTStaffs {
      * @throws Exception
      */
 
-    public String modificarStaff(Staff staff) throws Exception
+    public void modificarStaff(Staff staff) throws Exception
     {
         con = cbd.abrirConexion();
         System.out.println("\nModificando staff con nombre " + staff.getNombre());
@@ -195,6 +199,7 @@ public class ControladorTStaffs {
             cs.setString(3,staff.getApellido());
             cs.setString(4,staff.getPuesto());
             cs.setInt(5,staff.getSalario());
+            cs.setInt(6, staff.getEquipo().getCod());
 
 
 
@@ -205,7 +210,7 @@ public class ControladorTStaffs {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("Error al modificar staff", e);
+            throw new Exception("Error al modificar el staff", e);
         } finally {
             if (con != null) {
                 try {
@@ -215,7 +220,7 @@ public class ControladorTStaffs {
                 }
             }
         }
-        return "Staff modificado!";
+        System.out.println("Staff modificado!");
     }
 
     /**
@@ -226,20 +231,19 @@ public class ControladorTStaffs {
      * @return string
      * @throws Exception
      */
-    public String insertarJStaff(Staff staff) throws Exception {
+    public void insertarStaff(Staff staff) throws Exception {
         con = cbd.abrirConexion();
         System.out.println("\nInsertando Staff con nickname" + staff.getNombre() );
         try {
-            String llamada = "{ call crud_Staffs.insertar_Staffs(?,?,?,?,?,?)}";
+            String llamada = "{ call crud_Staffs.insertar_Staffs(?,?,?,?,?)}";
             CallableStatement cs = con.prepareCall(llamada);
 
             this.staff = staff;
-            cs.setInt(1,staff.getCod());
-            cs.setString(2, staff.getNombre());
-            cs.setString(3,staff.getApellido());
-            cs.setString(4,staff.getPuesto());
-            cs.setInt(5,staff.getSalario());
-            cs.setInt(6,staff.getEquipo().getCod());
+            cs.setString(1, staff.getNombre());
+            cs.setString(2,staff.getApellido());
+            cs.setString(3,staff.getPuesto());
+            cs.setInt(4,staff.getSalario());
+            cs.setInt(5,staff.getEquipo().getCod());
 
 
             cs.execute();
@@ -247,7 +251,7 @@ public class ControladorTStaffs {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("Error al inserta staff", e);
+            throw new Exception("Error al insertar el staff", e);
         } finally {
             if (con != null) {
                 try {
@@ -257,10 +261,51 @@ public class ControladorTStaffs {
                 }
             }
         }
-        return "Staff insertado!";
+        System.out.println("Staff insertado!");
     }
 
+    public List buscarStaffs() throws Exception {
+        con = cbd.abrirConexion();
+        System.out.println("\nBuscando todos los miembros del staff");
+        try {
+            listaStaffs.clear();
+            String llamada = "{ ? = call crud_Staffs.consultar_todos_staffs() }";
+            CallableStatement cs = con.prepareCall(llamada);
 
+            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+
+            cs.execute();
+
+            ResultSet rs = (ResultSet) cs.getObject(1);
+
+            while (rs.next()) {
+                staff =new Staff();
+                staff.setCod(rs.getInt("cod"));
+                staff.setNombre(rs.getString("nombre"));
+                staff.setApellido((rs.getString("apellido")));
+                staff.setPuesto(rs.getString("puesto"));
+                staff.setSalario(rs.getInt("salario"));
+                staff.setEquipo(cbd.buscarEquipo(rs.getInt("cod_equipo")));
+                listaStaffs.add(staff);
+            }
+
+            rs.close();
+            cs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error al consultar el staff", e);
+        } finally {
+            if (con != null) {
+                try {
+                    cbd.cerrarConexion(con);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return listaStaffs;
+    }
 
 
 
