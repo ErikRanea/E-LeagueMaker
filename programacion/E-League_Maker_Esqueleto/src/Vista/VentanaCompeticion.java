@@ -37,7 +37,7 @@ public class VentanaCompeticion extends JFrame{
 
     public VentanaCompeticion()
     {
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setSize(1920,1080);
         setContentPane(pPrincipal);
         setLocationRelativeTo(null);
         setResizable(false); //Este parametro no permite redimensionar la ventana

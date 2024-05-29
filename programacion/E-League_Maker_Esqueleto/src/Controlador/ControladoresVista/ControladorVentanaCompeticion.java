@@ -1,3 +1,8 @@
+/**
+ * Esta clase se encarga de controlar to-do el apartado lógico de la ventana competición
+ * @author Erik
+ * @version 4.0
+ */
 package Controlador.ControladoresVista;
 
 import Modelo.Clasificacion;
@@ -14,22 +19,59 @@ import java.util.ArrayList;
 
 public class ControladorVentanaCompeticion {
 
+    /**
+     * Enlace con el controlador superior
+     */
     private ControladorVista cv;
+
+    /**
+     * Controlador encargado de mostrar las clasificaciones
+     */
     private ControladorPanelVerClasificaciones cpClasifi;
+
+    /**
+     * Controlador encargado de mostrar las clasificaciones
+     */
     private ControladorPanelVerTodosResultados cpVerResult;
+
+    /**
+     * Controlador engardo de insertar los resultados
+     */
     private ControladorPanelInsertarResultados cpInsert;
 
+
+    /**
+     * Instancia de la VentanaCompeticion
+     */
     private VentanaCompeticion vCompeti;
+
+    /**
+     * Lista de competiciones que llamaremos desde los diferentes controladores
+     */
     private ArrayList<Competicion> listaCompetis;
+    /**
+     * Lista de Jornadas que llamaremos desde los diferentes controladores
+     */
     private ArrayList<Jornada> listaJornadas;
+
+    /**
+     * Lista de enfrentamientos donde introduciremos los enfrentamientos de la jornada seleccionada
+     */
     private ArrayList<Enfrentamiento> listaEnfrentamientos;
+    /**
+     * Instancia de un objeto Competicion
+     */
     private Competicion competicion;
+    /**
+     * Instancia de un objeto Jornada
+     */
     private Jornada jornada;
-    private Enfrentamiento enfrentamiento;
-    private boolean hayJornadas;
 
-    boolean bSeleccionado = false;
 
+    /**
+     * Constructor que inicializa el ControladorVista
+     * @param cv
+     */
     public ControladorVentanaCompeticion(ControladorVista cv) {
         this.cv = cv;
         listaCompetis = new ArrayList<>();
@@ -37,6 +79,11 @@ public class ControladorVentanaCompeticion {
         listaEnfrentamientos = new ArrayList<>();
     }
 
+    /**
+     * Este metodo se encarga de crear la VentanaCompeticion, cargarle sus ActionListeners y mostrarlo.
+     * A su vez carga los diferentes controladores que controlan cada una de las acciones diferentes de la ventana.
+     *
+     */
     public void crearMostrar() {
         try {
             vCompeti = new VentanaCompeticion();
@@ -58,6 +105,9 @@ public class ControladorVentanaCompeticion {
         }
     }
 
+    /**
+     * Interfaz encargada de iniciar el controlador de los inserts
+     */
     public class BIntroResult implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -177,10 +227,9 @@ public class ControladorVentanaCompeticion {
                 }
                 if (!listaJornadas.isEmpty()) {
                     jornada = listaJornadas.get(0);
-                    hayJornadas = true;
                     vCompeti.getbCalendario().setVisible(false);
                 } else {
-                    hayJornadas = false;
+
                     vCompeti.getbCalendario().setVisible(true);
                 }
             }
